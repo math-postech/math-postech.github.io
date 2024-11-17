@@ -5,5 +5,5 @@ This page are infomations for academic announcements and research activities in 
 To see the official webpage of the department, please visit [here](http://math.postech.ac.kr/).
 
 
-[](colloquium/readme.md)
+[Math Colloquium](colloquium/readme.md)
 [](colloquium/readme.md ':include')
