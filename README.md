@@ -4,6 +4,7 @@ This page are infomations for academic announcements and research activities in 
 
 To see the official webpage of the department, please visit [here](http://math.postech.ac.kr/).
 
+<span style="color:red">**The page may experience slight update delays. For the most up-to-date information, please refer to [the github repository](https://github.com/math-postech/math-postech.github.io)**</span>
 
 # Postech Math Colloquiums
 
