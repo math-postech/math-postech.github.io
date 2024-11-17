@@ -13,6 +13,8 @@ To see the official webpage of the department, please visit [here](http://math.p
 
 - Contact: Mathematics department office. (054)279-3812
 
+- Time: 15:00-17:00, Fridays
+
 
 ## 2024 Fall POSTECH Colloquium
 | Date       | Speaker                         | Title                                                                 |
