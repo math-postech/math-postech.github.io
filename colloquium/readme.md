@@ -2,7 +2,7 @@
 
 # Postech Math Colloquiums
 
-<span style="color:red">**The page may experience slight update delays. For the most up-to-date information, please refer to [the github repository](https://github.com/math-postech/math-postech.github.io/colloquium/)**</span>
+<span style="color:red">**The page may experience slight update delays. For the most up-to-date information, please refer to [the github repository](https://github.com/math-postech/math-postech.github.io/tree/main/colloquium)**</span>
 
 - Colloquium Chair: [Qirui Li](http://qirui.li) 
 
