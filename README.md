@@ -6,11 +6,19 @@ To see the official webpage of the department, please visit [here](http://math.p
 
 Please click the following links for relavent seminars.
 
+
+## 2024 Fall
+
 [Math Colloquium](colloquium/readme.md)
+[Postech PMI Number Theory Seminar](https://buciumas.github.io/postech-number-theory-seminar/index.html)
 [](colloquium/readme.md ':include')
 
+## 2025 Spring
 
-[Postech PMI Number Theory Seminar](https://buciumas.github.io/postech-number-theory-seminar/index.html)
+[Workshop on Relative Langlands](https://buciumas.github.io/postech-relative-langlands-workshop/index) Feb 08 - Feb 12
+
+
+
 
 
 If you would like to put your seminar information here, please contact [Qirui Li](http://qirui.li).
