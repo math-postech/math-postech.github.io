@@ -71,14 +71,14 @@ In Docsify, the `>` symbols leak into the equation content. Let's verify VitePre
 
 ---
 
-## Test Case 7: Alternative Delimiters `\[...\]`
+## Test Case 7: Alternative Delimiters `\[...\]`(not work ), but try test with `$$` and see if the matrix work. I am testing editing
 
-> \[
+> $$
 > A = \begin{pmatrix}
 > 1 & 2 \\
 > 3 & 4
 > \end{pmatrix}
-> \]
+> $$
 
 **Expected**: Matrix displays correctly.
 
