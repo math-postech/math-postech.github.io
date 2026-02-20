@@ -8,17 +8,17 @@
 - **Category**: Major required
 - **Grading Scale**: G (Letter Grade)
 
-### Instructor
+### Instructor and Schedule
 
-- **Name**: Qirui Li
-- **Department**: Department of Mathematics
-- **Email**: qiruili@postech.ac.kr
-- **Office Hours**: TBD
+ **Note**: This course has **3 sections** taught by different instructors:
+ - **Section 01** (Li Qirui <qiruili@postech.ac.kr>): MON, WED 12:30-13:45 @ MathBldg[402]
+ - **Section 02** (Kim Younjin <younjinkim@postech.ac.kr>): TUE, THU 12:30-13:45 @ MathBldg[206]
+ - **Section 03** (Yu Seungook <yso1460@postech.ac.kr>): TUE, THU 15:30-16:45 @ MathBldg[402]
 
-### Schedule
+ All sections share the same syllabus and exam schedule. Tutorial sessions: THU 18:00-18:50.
 
-- **Lectures**: MON, WED 12:30-13:45 @ MathBldg[402] Lecture Room
-- **Recitations**: THU 18:00-18:50 @ MathBldg[206], [402], [104] Lecture Rooms
+Tutorials (please write with respect to each sections:)
+- **Recitations**: THU 18:00-18:50 @ different sections have different locations
 
 ---
 
@@ -78,14 +78,6 @@ The textbook is only for the reference, we will follow our lecture notes in this
 | May 25 | *Holiday — Buddha's Birthday* |
 | Jun 08 (Mon) | **Final Exam** 18:00–22:00 |
 
-### Weekly Schedule (26 sessions × 75 min)
-
-> **Note**: This course has **3 sections** taught by different instructors:
-> - **Section 01** (Li Qirui): MON, WED 12:30-13:45 @ MathBldg[402]
-> - **Section 02** (Kim Younjin): TUE, THU 12:30-13:45 @ MathBldg[206]
-> - **Section 03** (Yu Seungook): TUE, THU 15:30-16:45 @ MathBldg[402]
->
-> All sections share the same syllabus and exam schedule. Tutorial sessions: THU 18:00-18:50.
 
 #### Pre-Midterm: Chapters 1–3 (13 sessions)
 
