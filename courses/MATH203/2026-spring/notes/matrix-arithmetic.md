@@ -20,6 +20,8 @@ This week introduces the foundational concepts of matrix computation. We develop
 
 The product $AB = C$ can be understood in three distinct but equivalent ways:
 
+#### (x) Please add a direct computation formula and example!!!!
+
 #### (a) Column View
 
 > [!PROP]
@@ -39,14 +41,16 @@ $$C = A\begin{pmatrix}
 A\mathbf{b}_1 & A\mathbf{b}_2 & \cdots & A\mathbf{b}_n \\
 | & | &  & |
 \end{pmatrix}$$
-
+Please add here the exact explaination of Ab_1 means!!!! by expand writing b_1 as coefficients and A as columns!!! A = (|a_1|,|a_2..
 > [!EXA]
 > **Computing one column at a time**
 >
 > Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 5 & 7 \\ 6 & 8 \end{pmatrix}$.
 >
+>  In this examples, b1= , b2=
+>
 > The first column of $C = AB$ is:
-> $$A\begin{pmatrix} 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\begin{pmatrix} 5 \\ 6 \end{pmatrix} = 5\begin{pmatrix} 1 \\ 3 \end{pmatrix} + 6\begin{pmatrix} 2 \\ 4 \end{pmatrix} = \begin{pmatrix} 17 \\ 39 \end{pmatrix}$$
+> $$Ab1=A\begin{pmatrix} 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\begin{pmatrix} 5 \\ 6 \end{pmatrix} = 5\begin{pmatrix} 1 \\ 3 \end{pmatrix} + 6\begin{pmatrix} 2 \\ 4 \end{pmatrix} = \begin{pmatrix} 17 \\ 39 \end{pmatrix}$$
 >
 > This is a **linear combination** of the columns of $A$ with weights $5$ and $6$.
 
@@ -60,7 +64,7 @@ A\mathbf{b}_1 & A\mathbf{b}_2 & \cdots & A\mathbf{b}_n \\
 > The $i$-th row of $C$ is a linear combination of the rows of $B$, with coefficients from the $i$-th row of $A$.
 
 If $\mathbf{a}_i^T$ is the $i$-th row of $A$, then:
-$$\begin{pmatrix}
+$$C=\begin{pmatrix}
 - \mathbf{a}_1^T - \\
 - \mathbf{a}_2^T - \\
 \vdots \\
@@ -86,6 +90,8 @@ $$\begin{pmatrix}
 
 #### (c) Sum-of-Rank-One View
 
+YOU have to write more specificaalyyy!!!1
+
 > [!PROP]
 > **Sum-of-Rank-One Decomposition**
 >
@@ -107,7 +113,7 @@ Each term $\mathbf{a}_k \mathbf{b}_k^T$ is a **rank-one matrix** (outer product 
 ---
 
 ### The Ingredient Table Metaphor
-
+You have to be more specific here!!!
 > [!RMK]
 > **Interpreting $C = AB$ as a production process**
 >
