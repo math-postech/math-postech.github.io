@@ -115,7 +115,7 @@ Students with more than 25% unexcused absences from lectures will receive an aut
 ## 8. Course Plan
 
 ```
-The material refers to the website notes:
+The material refers to the website https://math-postech.github.io/#/courses/MATH203/2026-spring/readme
 • Week 01 (02-23 -- 02-26): Ch1 §1.1-1.2 — Matrix Arithmetic
 • Week 02 (03-02 -- 03-05): Ch1 §1.3 — Row reduction, Cross-Filling method
 • Week 03 (03-09 -- 03-12): Ch1 §1.3-1.4, Ch2 §2.1 — Solving Systems, Subspaces
