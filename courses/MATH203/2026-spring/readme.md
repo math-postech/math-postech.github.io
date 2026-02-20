@@ -143,12 +143,15 @@ There are **4 homework assignments** worth **10% of your final grade** (2.5% eac
 
 ## Lecture Notes
 
-Lecture notes will be added here as topics are covered.
+Lecture notes are organized by topic and will be added throughout the semester.
 
-<!-- Example structure:
-- [Systems of Linear Equations](notes/systems-of-linear-equations.md)
-- [Vector Spaces](notes/vector-spaces.md)
-- [Eigenvalues and Eigenvectors](notes/eigenvalues-eigenvectors.md)
+### Chapter 1: Matrix Computation Strategies
+
+- [Week 1: Matrix Arithmetic](notes/matrix-arithmetic.md) — Three views of $AB=C$, row/column operations, inverses
+
+<!-- Upcoming notes:
+- [Week 2-3: Cross-Filling Method](notes/cross-filling-method.md)
+- [Week 3-4: Solving Linear Systems](notes/solving-linear-systems.md)
 -->
 
 ---
