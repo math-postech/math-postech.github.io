@@ -113,9 +113,9 @@ Row operations correspond to **redefining raw materials**.
 >
 > When the material changes, the demand coefficient must change in the **opposite direction** to maintain the same total amount.
 >
-> **Example**: $r_2 \cdot x_2 = \frac{r_2}{2} \cdot (2x_2)$
+> **Example**: $4 \cdot x_2 = 2 \cdot (2x_2)$
 >
-> If material $x_2 \to 2x_2$ (doubles), then demand $r_2 \to \frac{r_2}{2}$ (halves).
+> If material $x_2 \to 2x_2$ (doubles), then demand coefficient $4 \to 2$ (halves).
 
 #### Type 1: Row Multiplication
 
@@ -134,19 +134,23 @@ Row operations correspond to **redefining raw materials**.
 > \text{Cow 🐄} & 2 & 1
 > \end{array}$$
 >
-> **Material redefinition**: $x_3 \to 2x_3$ (bean becomes "double bean" - new unit is twice the old unit)
+> **Material redefinition**: $x_3 \to 2x_3$ (one "double bean" unit = two old bean units)
+>
+> The new unit is **larger**, so we need **fewer** of them.
 >
 > **What happens to demand?** Original equation for Set 2:
 > $$2 \cdot \text{🍃} + 1 \cdot \text{🍋} + 4 \cdot \text{🫘} + 1 \cdot \text{🐄}$$
 >
-> With new material $2\text{🫘}$ (one "double bean" = two old beans):
+> With new material where $(2\text{🫘})$ is the new unit:
 > $$2 \cdot \text{🍃} + 1 \cdot \text{🍋} + r_3 \cdot (2\text{🫘}) + 1 \cdot \text{🐄}$$
 >
-> For this to equal the original, we need: $r_3 \cdot (2\text{🫘}) = 4 \cdot \text{🫘}$
+> For this to equal the original total:
+> $$r_3 \cdot (2\text{🫘}) = 4 \cdot \text{🫘}$$
+> $$r_3 = 2$$
 >
-> Therefore: $r_3 = 2$
+> So we need 2 units of the new "double bean" (which equals 4 old beans). The demand coefficient decreased from 4 to 2.
 >
-> **Updated table** (row 3 **multiplied by 2**, inverse of material change):
+> **Updated table** (row 3 **divided by 2**):
 > $$\begin{array}{c|cc}
 >  & \text{Set 1 🍱} & \text{Set 2 🍜} \\
 > \hline
@@ -156,27 +160,27 @@ Row operations correspond to **redefining raw materials**.
 > \text{Cow 🐄} & 2 & 1
 > \end{array}$$
 >
-> **Matrix notation**: Perform $r_3 \to 2r_3$ (multiply row by 2, not divide!):
+> **Matrix notation**: Perform $r_3 \to \frac{1}{2}r_3$:
 > $$\begin{pmatrix}
 > 2 & 2 \\
 > 1 & 1 \\
 > 0 & 4 \\
 > 2 & 1
-> \end{pmatrix} \xrightarrow{r_3 \to 2r_3} \begin{pmatrix}
+> \end{pmatrix} \xrightarrow{r_3 \to \frac{1}{2}r_3} \begin{pmatrix}
 > 2 & 2 \\
 > 1 & 1 \\
 > 0 & 2 \\
 > 2 & 1
 > \end{pmatrix}$$
 >
-> **Key**: Material doubles → Row halves in value (but we write this as "multiply row by 2" because $\frac{4}{2} = 2$)
+> **Key**: Material $\times 2$ → Row $\times \frac{1}{2}$ (contravariant!)
 
 > [!RMK]
 > **Why contravariant?** Because:
 > $$\text{demand} \times \text{material} = \text{constant}$$
 > If material increases by factor $k$, demand decreases by factor $\frac{1}{k}$.
 >
-> The row operation "$r_i \to kr_i$" actually represents material changing to "$\frac{1}{k}$ of old material".
+> **Notation**: The row operation "$r_i \to \frac{1}{k}r_i$" corresponds to material changing by factor $k$.
 
 #### Type 2: Row Switching
 
@@ -221,7 +225,7 @@ Row operations correspond to **redefining raw materials**.
 > **What happens to demand?** Original equation for Set 1:
 > $$2 \cdot \text{🍃} + 1 \cdot \text{🍋} + 0 \cdot \text{🫘} + 2 \cdot \text{🐄}$$
 >
-> With new bundled material $(🍋 + 2🍃)$:
+> With new bundled material $(\text{🍋} + 2\text{🍃})$:
 > $$r_1 \cdot \text{🍃} + 1 \cdot (\text{🍋} + 2\text{🍃}) + 0 \cdot \text{🫘} + 2 \cdot \text{🐄}$$
 > $$= r_1 \cdot \text{🍃} + 1 \cdot \text{🍋} + 2 \cdot \text{🍃} + 0 \cdot \text{🫘} + 2 \cdot \text{🐄}$$
 > $$= (r_1 + 2) \cdot \text{🍃} + 1 \cdot \text{🍋} + 0 \cdot \text{🫘} + 2 \cdot \text{🐄}$$
@@ -253,15 +257,15 @@ Row operations correspond to **redefining raw materials**.
 > 2 & 1
 > \end{pmatrix}$$
 >
-> **Key**: Lemon becomes $(🍋 + 2🍃)$ → Leaf demand **subtracts** $2 \times$ lemon demand (inverse!)
+> **Key**: Lemon becomes $(🍋 + 2🍃)$ → Leaf demand **subtracts** $2 \times$ lemon demand (contravariant!)
 
 > [!RMK]
 > **Summary of contravariant logic for rows**:
 >
-> - Material $x_i \to kx_i$ → Row operation $r_i \to kr_i$ (reciprocal scaling)
+> - Material $x_i \to kx_i$ → Row operation $r_i \to \frac{1}{k}r_i$ (reciprocal scaling)
 > - Material $x_i \to x_i + kx_j$ → Row operation $r_j \to r_j - kr_i$ (opposite sign!)
 >
-> This is because the equation is: $r_i x_i + r_j x_j = \text{constant}$
+> This is because: $r_i x_i + r_j x_j = \text{constant}$
 
 ---
 
@@ -310,7 +314,7 @@ Column operations correspond to **redefining products**.
 >
 > **Covariant logic**: Making twice the product requires twice the ingredients!
 >
-> **Updated table** (column 1 **multiplied by 2**, same as product change):
+> **Updated table** (column 1 **multiplied by 2**, same direction):
 > $$\begin{array}{c|cc}
 >  & \text{Double Set 1 🍱🍱} & \text{Set 2 🍜} \\
 > \hline
@@ -333,7 +337,7 @@ Column operations correspond to **redefining products**.
 > 4 & 1
 > \end{pmatrix}$$
 >
-> **Key**: Product doubles → Column doubles (same direction!)
+> **Key**: Product $\times 2$ → Column $\times 2$ (same direction!)
 
 #### Type 2: Column Switching
 
@@ -417,7 +421,7 @@ Column operations correspond to **redefining products**.
 > - Product $y_j \to ky_j$ → Column operation $c_j \to kc_j$ (same scaling)
 > - Product $y_j \to y_j + ky_i$ → Column operation $c_j \to c_j + kc_i$ (same sign!)
 >
-> This is because the equation is: $y_j = c_j$ (product equals its recipe)
+> This is because: $y_j = c_j$ (product equals its recipe)
 
 > [!attention]
 > **THE KEY DISTINCTION**
@@ -426,14 +430,28 @@ Column operations correspond to **redefining products**.
 > |--|---------------------|----------------------|
 > | **Relationship** | Multiplication: demand × material | Equation: product = recipe |
 > | **Logic** | **Contravariant** (inverse) | **Covariant** (direct) |
-> | **Scaling** | Material $\times k$ → Row $\times k$ (reciprocal) | Product $\times k$ → Column $\times k$ (same) |
-> | **Addition** | Material $x_i \to x_i + kx_j$ → Row $r_j \to r_j - kr_i$ (opposite!) | Product $y_j \to y_j + ky_i$ → Column $c_j \to c_j + kc_i$ (same!) |
+> | **Scaling** | Material $\times k$ → Row $\times \frac{1}{k}$ | Product $\times k$ → Column $\times k$ |
+> | **Addition** | Material $x_i \to x_i + kx_j$ → Row $r_j \to r_j - kr_i$ | Product $y_j \to y_j + ky_i$ → Column $c_j \to c_j + kc_i$ |
 >
 > **Rows work backwards. Columns work forwards.**
 
 ---
 
 ### Simultaneous Operations Preserve Equations
+
+> [!RMK]
+> **Change of Perspective**
+>
+> In the previous sections, we traced **how row/column operations arise from redefining materials/products**. This helps us understand:
+> - **Why** rows are contravariant (multiplication relationship)
+> - **Why** columns are covariant (equation relationship)
+> - **Why** updating semi-finished products is complex (affects both A's columns and B's rows with different logic)
+>
+> **From this point forward**, we **forget about materials/products** and focus only on:
+> - **What**: Matrices $A$, $B$, $C$
+> - **How**: Simultaneous operations keep equations valid
+>
+> This simplifies our work: we only track matrix changes, not material redefinitions.
 
 Now we state the fundamental propositions:
 
@@ -442,7 +460,9 @@ Now we state the fundamental propositions:
 >
 > In the equation $C = AB$, if we perform the **same row operation** on both $A$ and $C$ simultaneously, the equality remains valid.
 
-**Why?** Raw materials appear in the **rows** of both $A$ and $C$. When we redefine raw materials, both must update.
+**Why?** Raw materials appear in the **rows** of both $A$ and $C$. When we redefine raw materials, both must update. Matrix $B$ doesn't reference raw materials, so it doesn't change.
+
+**But from now on**, we don't need to think about "why" - we just use the fact that **simultaneous row operations on $A$ and $C$ preserve the equation**.
 
 > [!EXA]
 > **Example 1.7**: Consider
@@ -458,7 +478,9 @@ Now we state the fundamental propositions:
 >
 > In the equation $C = AB$, if we perform the **same column operation** on both $B$ and $C$ simultaneously, the equality remains valid.
 
-**Why?** Final products appear in the **columns** of both $B$ and $C$. When we redefine final products, both must update.
+**Why?** Final products appear in the **columns** of both $B$ and $C$. When we redefine final products, both must update. Matrix $A$ doesn't reference final products, so it doesn't change.
+
+**But from now on**, we don't need to think about products - we just use the fact that **simultaneous column operations on $B$ and $C$ preserve the equation**.
 
 > [!EXA]
 > **Example 1.8**: Consider
@@ -468,6 +490,15 @@ Now we state the fundamental propositions:
 > $$\underbrace{\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}}_{A} \underbrace{\begin{pmatrix} 6 & 1 \\ 3 & 3 \end{pmatrix}}_{B'} = \underbrace{\begin{pmatrix} 6 & 1 \\ 6 & 6 \end{pmatrix}}_{C'}$$
 >
 > Still valid! ✓
+
+> [!RMK]
+> **Why we don't discuss updating semi-finished products**:
+>
+> Semi-finished products appear in:
+> - **Columns of $A$** (as outputs) → would need column operations (covariant)
+> - **Rows of $B$** (as inputs) → would need row operations (contravariant)
+>
+> Updating semi-finished would require **two different types of operations with opposite logic**. This is significantly more complex than the cases we've discussed. We avoid this complication.
 
 ---
 
@@ -540,7 +571,7 @@ $$(AB)(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = AIA^{-1} = AA^{-1} = I$$
 By Proposition 1.4, this proves $(AB)^{-1} = B^{-1}A^{-1}$. □
 
 > [!RMK]
-> **Note the order reversal**: $(AB)^{-1} = B^{-1}A^{-1}$, not $A^{-1}B^{-1}$.
+> **Order reversal**: $(AB)^{-1} = B^{-1}A^{-1}$, not $A^{-1}B^{-1}$.
 >
 > **Intuition**: Socks then shoes → undo by removing shoes first, then socks.
 
@@ -721,7 +752,7 @@ Alternatively, use column operations on $IA^{-1} = A^{-1}$.
 > **Key Takeaways**:
 >
 > 1. **Row operations**: **Contravariant** (inverse logic) because demand × material = constant
->    - Material $\times k$ → Row $\times k$ (reciprocal)
+>    - Material $\times k$ → Row $\times \frac{1}{k}$ (reciprocal)
 >    - Material $x_i \to x_i + kx_j$ → Row $r_j \to r_j - kr_i$ (opposite sign!)
 >
 > 2. **Column operations**: **Covariant** (direct logic) because product = recipe
@@ -729,8 +760,9 @@ Alternatively, use column operations on $IA^{-1} = A^{-1}$.
 >    - Product $y_j \to y_j + ky_i$ → Column $c_j \to c_j + kc_i$ (same sign!)
 >
 > 3. **Equation $C = AB$ is invariant** under:
->    - Simultaneous row ops on $A$ and $C$
->    - Simultaneous column ops on $B$ and $C$
+>    - Simultaneous row ops on $A$ and $C$ (Prop 1.1)
+>    - Simultaneous column ops on $B$ and $C$ (Prop 1.2)
+>    - (Semi-finished updates avoided due to mixed logic)
 >
 > 4. **Left inverse = right inverse** for square matrices (Prop 1.4)
 >
