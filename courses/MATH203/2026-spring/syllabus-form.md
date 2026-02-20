@@ -47,7 +47,7 @@ Office Hours: MON 13:00-13:50
 ## 3. Course Objectives
 
 ```
-This course develops linear algebra through a non-standard pedagogical approach centered on the cross-filling method (rank-one decomposition) rather than traditional Gaussian elimination.
+This course develops linear algebra through a simplified approach emphasising applications to machine learning and statistics centered on the cross-filling method (rank-one decomposition) that simplifies traditional Gaussian elimination with boarder applications to other application areas.
 
 Covered topics include:
 • Matrix computation strategies: Cross-filling, sum ↔ product equivalence
@@ -56,6 +56,10 @@ Covered topics include:
 • Determinants: Axiomatic properties, Laplace expansion, Cayley-Hamilton theorem
 • Eigenvalues and spectral decomposition: Lagrange interpolation approach to diagonalization
 • Normal matrices and applications: Hermitian/unitary matrices, positive definiteness, singular value decomposition (SVD)
+
+Applications include:
+• Multi-variable Linear Regression and Data Analysis
+• Differential Equations
 
 Pedagogical note: This curriculum uses cross-filling and Lagrange interpolation as primary computational methods, offering alternative and often more elegant techniques than traditional approaches.
 ```
@@ -111,8 +115,9 @@ Students with more than 25% unexcused absences from lectures will receive an aut
 ## 8. Course Plan
 
 ```
+The material refers to the website notes:
 • Week 01 (02-23 -- 02-26): Ch1 §1.1-1.2 — Matrix Arithmetic
-• Week 02 (03-02 -- 03-05): Ch1 §1.3 — Cross-Filling (03-02 Holiday)
+• Week 02 (03-02 -- 03-05): Ch1 §1.3 — Row reduction, Cross-Filling method
 • Week 03 (03-09 -- 03-12): Ch1 §1.3-1.4, Ch2 §2.1 — Solving Systems, Subspaces
 • Week 04 (03-16 -- 03-19): Ch2 §2.1-2.2 — Vector Spaces
 • Week 05 (03-23 -- 03-26): Ch2 §2.3-2.4 — Four Subspaces, Basis & Dimension
@@ -145,10 +150,7 @@ Students with more than 25% unexcused absences from lectures will receive an aut
 
 ```
 Teaching Method:
-This course uses a non-standard pedagogical approach:
-• Cross-filling (rank-one decomposition) replaces Gaussian elimination
-• Lagrange interpolation for spectral decomposition instead of traditional eigenvector solving
-• Projection theory as a major chapter (AB-BA theorems, compatible families)
+This course teaches in person.
 
 Homework:
 4 assignments distributed throughout the semester:
@@ -162,7 +164,7 @@ Homework problems are provided as separate PDF files.
 Tutorial Sessions:
 • Time: THU 18:00-18:50
 • Locations: MathBldg [206], [402], [104]
-• Purpose: Reinforce lecture content, practice cross-filling and computational methods
+• Purpose: Reinforce lecture content
 
 Coordination:
 This course has 3 sections taught by different instructors (Li Qirui, Kim Younjin, Yu Seungook). All sections share the same syllabus and exam schedule.
@@ -192,7 +194,7 @@ Please contact Center for Students with Disabilities (279-2434) for additional a
 ### Course Objectives (shortened for form if needed)
 
 ```
-This course develops linear algebra through cross-filling method (rank-one decomposition) and Lagrange interpolation approach. Topics: matrix computation, vector spaces, projections, determinants, eigenvalues, spectral decomposition, normal matrices, and SVD.
+This course develops linear algebra through rank-one decomposition, projection and Lagrange interpolation approach. Topics: matrix computation, vector spaces, projections, determinants, eigenvalues, spectral decomposition, normal matrices, and SVD.
 ```
 
 ### Grading (single line)
