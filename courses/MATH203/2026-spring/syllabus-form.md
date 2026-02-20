@@ -52,7 +52,7 @@ This course develops linear algebra through a simplified approach emphasising ap
 Covered topics include:
 • Matrix computation strategies: Cross-filling, sum ↔ product equivalence
 • Vector spaces and subspaces: Null space, column space, the four fundamental subspaces
-• Projection theory: Oblique and orthogonal projections, compatible families, spectral projections
+• Projection theory: Oblique and orthogonal projections, compatible families, spectral decompositions
 • Determinants: Axiomatic properties, Laplace expansion, Cayley-Hamilton theorem
 • Eigenvalues and spectral decomposition: Lagrange interpolation approach to diagonalization
 • Normal matrices and applications: Hermitian/unitary matrices, positive definiteness, singular value decomposition (SVD)
@@ -154,7 +154,7 @@ This course teaches in person.
 
 Homework:
 4 assignments distributed throughout the semester:
-• HW1 (Week 3): Ch1 — Matrix computation, cross-filling, solving systems
+• HW1 (Week 3): Ch1 — Matrix computation, cross-filling, solving linear systems
 • HW2 (Week 6): Ch2-3 — Subspaces, basis & dimension, projections
 • HW3 (Week 10): Ch4 — Determinants, Cayley-Hamilton theorem
 • HW4 (Week 13): Ch5-6 — Spectral decomposition, normal matrices, SVD
