@@ -147,11 +147,12 @@ Lecture notes are organized by topic and will be added throughout the semester.
 
 ### Chapter 1: Matrix Computation Strategies
 
-- [Week 1: Matrix Arithmetic](notes/matrix-arithmetic.md) — Three views of $AB=C$, row/column operations, inverses
+- [Week 1: Matrix Arithmetic](./notes/matrix-arithmetic.md) — Three views of $AB=C$, row/column operations, inverses
 
-<!-- Upcoming notes:
-- [Week 2-3: Cross-Filling Method](notes/cross-filling-method.md)
-- [Week 3-4: Solving Linear Systems](notes/solving-linear-systems.md)
+<!-- 
+Upcoming notes:
+ [Week 2-3: Cross-Filling Method](notes/cross-filling-method.md)
+ [Week 3-4: Solving Linear Systems](notes/solving-linear-systems.md)
 -->
 
 ---
