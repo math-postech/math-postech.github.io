@@ -1,122 +1,14 @@
-# Week 2: Matrix Equations and Row Operations
+# Lecture 2: Row and Column Operations
 
-> **Learning Objectives:**
-> - Understand how changes in ingredient definitions propagate to matrices
-> - Master row and column operations from the ingredient table perspective
-> - Use inverse matrices as notational convenience
-> - Solve matrix equations using row operations
-> - Find matrix inverses without explicit computation
+> **Topics**: §1.2–1.3 — Row/Column Operations, Matrix Inverses, Solving Matrix Equations
 
 ---
 
-## §2.1 Review: The Ingredient Table Interpretation of AB=C
+## §1.2 Row and Column Operations
 
-### 2.1.1 The Three Concepts
+### Review: The Ingredient Table Interpretation
 
-In the real world, we have **three things**:
-
-1. **原材料 (Raw Materials/Ingredients)** - Basic ingredients like coffee beans, milk, tea leaves
-2. **中间产物 (Semi-finished Products)** - Intermediate products like espresso shots, milk foam
-3. **最终产品 (Final Products)** - Final products like latte, cappuccino
-
-And we have **two production relationships**:
-
-- How to make semi-finished products from raw materials
-- How to make final products from semi-finished products
-
-**Composition** gives us a third relationship:
-- How to make final products from raw materials (by composing the above two)
-
-### 2.1.2 Matrix Representation
-
-We represent these relationships as **recipe tables**:
-
-**Matrix A**: Semi-finished ← Raw Materials
-
-| | Espresso | Milk Foam |
-|---------|----------|-----------|
-| Coffee beans | 2 | 0 |
-| Milk | 0 | 1 |
-
-Rows represent **raw materials**, columns represent **semi-finished products**.
-
-**Matrix B**: Final Products ← Semi-finished
-
-| | Latte | Cappuccino |
-|-----------|-------|------------|
-| Espresso | 1 | 1 |
-| Milk Foam | 2 | 3 |
-
-Rows represent **semi-finished products**, columns represent **final products**.
-
-**Matrix C = AB**: Final Products ← Raw Materials
-
-The product C tells us how to make final products directly from raw materials.
-
-### 2.1.3 What Each Matrix "Knows About"
-
-This is crucial for understanding transformations:
-
-```
-                原材料    中间产物    最终产品
-A矩阵 (rows)      ✓         ✓          ✗
-A矩阵 (cols)
-
-B矩阵 (rows)      ✗         ✓          ✓
-B矩阵 (cols)
-
-C矩阵 (rows)      ✓         ✗          ✓
-C矩阵 (cols)
-```
-
-More precisely:
-
-| Matrix | Rows represent | Columns represent |
-|--------|----------------|-------------------|
-| A | Raw materials | Semi-finished products |
-| B | Semi-finished products | Final products |
-| C | Raw materials | Final products |
-
-> [!ATTENTION]
-> **Key Insight:** When we change the definition of a concept (raw material, semi-finished, or final product), **all matrices that reference that concept must update their representation**.
-
----
-
-## §2.2 How Concept Redefinition Affects Matrices
-
-### 2.2.1 The Fundamental Principle
-
-**We are NOT changing the matrices A, B, C directly.**
-
-What we're changing are the **upstream concepts** (raw materials, semi-finished products, final products). The matrices are **forced to update** their representations to reflect the new definitions.
-
-**The production relationships (the facts) never change** - only our way of describing them changes.
-
-> [!TIP]
-> **Analogy:** It's like switching from meters to centimeters in physics. All the numbers in formulas change, but the physical laws remain the same.
-
-### 2.2.2 Case 1: Redefining Raw Materials → Row Operations on A and C
-
-**Example:** Replace "coffee beans" with "double coffee beans" (咖啡豆 → 双倍咖啡豆)
-
-**What changed in the real world?**
-- The definition of "1 unit of coffee beans"
-- Now "1 unit" = 2 old units
-
-**Which matrices must update?**
-- Matrix A: uses raw materials in its **rows** ✓
-- Matrix B: doesn't use raw materials ✗
-- Matrix C: uses raw materials in its **rows** ✓
-
-**How do they update?**
-- The row for coffee beans in both A and C must be multiplied by 2
-- This is called a **row operation**
-
-**Why do A and C change simultaneously?**
-- Because they both reference the **same upstream concept** (raw materials)
-- When the upstream changes, all downstream representations must sync
-
----
+Recall from Week 1 that the matrix product $C = AB$ represents composition of recipe tables:
 
 ```mermaid
 ---
@@ -130,519 +22,386 @@ config:
     secondaryColor: '#006100'
     tertiaryColor: '#fff'
 ---
-graph TB
-    RM[原材料 Raw Materials<br/>咖啡豆 → 双倍咖啡豆]
-    A[Matrix A<br/>行必须更新]
-    B[Matrix B<br/>不受影响]
-    C[Matrix C<br/>行必须更新]
-
-    RM -->|引用 Raw Materials in rows| A
-    RM -->|引用 Raw Materials in rows| C
-    RM -.->|不引用| B
-
-    style RM fill:#BB2528,stroke:#7C0000,color:#fff
-    style A fill:#F8B229,stroke:#7C0000,color:#000
-    style C fill:#F8B229,stroke:#7C0000,color:#000
-    style B fill:#ccc,stroke:#999,color:#000
+graph LR
+    RM[Raw Materials] -->|A| SP[Semi-finished Products]
+    SP -->|B| FP[Final Products]
+    RM -->|C = AB| FP
 ```
+
+**Matrix $A$**: Semi-finished ← Raw materials (rows = raw materials, columns = semi-finished)
+**Matrix $B$**: Final products ← Semi-finished (rows = semi-finished, columns = final products)
+**Matrix $C = AB$**: Final products ← Raw materials (rows = raw materials, columns = final products)
+
+**Key observation**:
+
+| Concept | Appears in Matrix $A$ | Appears in Matrix $B$ | Appears in Matrix $C$ |
+|---------|----------------------|----------------------|----------------------|
+| Raw materials | rows | ✗ | rows |
+| Semi-finished products | columns | rows | ✗ |
+| Final products | ✗ | columns | columns |
+
+When we **redefine** one of these three concepts (change the unit, repackage, etc.), all matrices that reference this concept must update their representation. But the underlying production relationships remain unchanged.
 
 ---
 
-> [!ATTENTION]
-> **Proposition 2.1 (Row Operation Invariance):**
+### The Three Types of Row Operations
+
+Before studying how operations affect equations, we define the three types of **invertible** row operations:
+
+> [!RMK]
+> **Row operations are table updates when we redefine raw materials.**
+>
+> When we change what "1 unit of material" means, we must update all tables that reference this material.
+
+**Row Multiplication**: Replace row $i$ with $k \cdot$ row $i$ (where $k \neq 0$).
+
+**Example**: Coffee beans → Double coffee beans. If we use 2 "new units", the demand becomes $\frac{1}{2}$ of the old demand. The row gets multiplied by 2.
+
+**Row Switching**: Swap row $i$ and row $j$.
+
+**Example**: Reorder ingredients in the table. The table expresses the same facts.
+
+**Row Addition**: Replace row $i$ with row $i$ + $k \times$ row $j$.
+
+**Example**: Each lemon comes with 2 free tea leaves (lemon → lemon + 2 tea). When using 1 lemon (includes 2 free tea), we need 2 fewer tea leaves. Tea row gets subtracted by $2 \times$ lemon row.
+
+> [!RMK]
+> **Column operations** (column multiplication, switching, addition) work the same way but apply to **redefining products** instead of materials.
+
+---
+
+### Simultaneous Row Operations Preserve Equations
+
+> [!PROP]
+> **Proposition 1.1 (Row Operation Invariance)**
 >
 > In the equation $C = AB$, if we perform the **same row operation** on both $A$ and $C$ simultaneously, the equality remains valid.
+
+**Why?** Raw materials appear in the rows of both $A$ and $C$. When we redefine raw materials, both $A$ and $C$ must update their representations to reflect the new definition. Since the underlying production relationship hasn't changed, the equation $C = AB$ remains true.
+
+**Note**: Matrix $B$ does not change, because it doesn't reference raw materials at all.
+
+> [!EXA]
+> **Example 1.1**: Consider the equation
 >
-> **Why?** Because we're just updating the representation to reflect redefined raw materials. The underlying production relationship hasn't changed.
+> $$\begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 2 & 3 \end{pmatrix} = \begin{pmatrix} 2 & 2 \\ 2 & 3 \end{pmatrix}$$
+>
+> Redefine row 1 materials by multiplying by 2 (coffee beans → double coffee beans). Perform $r_1 \to 2r_1$ on both left factor and product:
+>
+> $$\begin{pmatrix} 4 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 2 & 3 \end{pmatrix} = \begin{pmatrix} 4 & 4 \\ 2 & 3 \end{pmatrix}$$
+>
+> The equation still holds! The middle factor (matrix $B$) remains unchanged.
 
-**Example:**
-
-Original equation:
-```math
-\begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 2 & 3 \end{bmatrix} = \begin{bmatrix} 2 & 2 \\ 2 & 3 \end{bmatrix}
-```
-
-After redefining coffee beans (row 1) as double coffee beans, multiply row 1 by 2 in both A and C:
-
-```math
-\begin{bmatrix} 4 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 2 & 3 \end{bmatrix} = \begin{bmatrix} 4 & 4 \\ 2 & 3 \end{bmatrix}
-```
-
-The equation **still holds**!
-
-### 2.2.3 Case 2: Redefining Final Products → Column Operations on B and C
-
-**Example:** Replace "latte" with "double latte" (拿铁 → 双份拿铁)
-
-**What changed in the real world?**
-- The definition of "1 cup of latte"
-- Now "1 cup" = 2 old cups
-
-**Which matrices must update?**
-- Matrix A: doesn't use final products ✗
-- Matrix B: uses final products in its **columns** ✓
-- Matrix C: uses final products in its **columns** ✓
-
-**How do they update?**
-- The column for latte in both B and C must be multiplied by 2
-- This is called a **column operation**
-
----
-
-```mermaid
----
-config:
-  theme: 'base'
-  themeVariables:
-    primaryColor: '#BB2528'
-    primaryTextColor: '#fff'
-    primaryBorderColor: '#7C0000'
-    lineColor: '#F8B229'
-    secondaryColor: '#006100'
-    tertiaryColor: '#fff'
----
-graph TB
-    FP[最终产品 Final Products<br/>拿铁 → 双份拿铁]
-    A[Matrix A<br/>不受影响]
-    B[Matrix B<br/>列必须更新]
-    C[Matrix C<br/>列必须更新]
-
-    FP -.->|不引用| A
-    FP -->|引用 Final Products in cols| B
-    FP -->|引用 Final Products in cols| C
-
-    style FP fill:#BB2528,stroke:#7C0000,color:#fff
-    style B fill:#F8B229,stroke:#7C0000,color:#000
-    style C fill:#F8B229,stroke:#7C0000,color:#000
-    style A fill:#ccc,stroke:#999,color:#000
-```
-
----
-
-> [!ATTENTION]
-> **Proposition 2.2 (Column Operation Invariance):**
+> [!PROP]
+> **Proposition 1.2 (Column Operation Invariance)**
 >
 > In the equation $C = AB$, if we perform the **same column operation** on both $B$ and $C$ simultaneously, the equality remains valid.
+
+**Why?** Final products appear in the columns of both $B$ and $C$. When we redefine final products, both must update. Matrix $A$ doesn't change because it doesn't reference final products.
+
+> [!RMK]
+> **What about redefining semi-finished products?**
 >
-> **Why?** Because we're just updating the representation to reflect redefined final products. The underlying production relationship hasn't changed.
-
-### 2.2.4 Case 3: Redefining Semi-finished Products (Not Discussed)
-
-**Example:** Replace "espresso" with "double espresso"
-
-**Which matrices must update?**
-- Matrix A: uses semi-finished in **columns** → column operations
-- Matrix B: uses semi-finished in **rows** → row operations
-- Matrix C: doesn't use semi-finished ✗
-
-This case is **more complex** because it involves **different types of operations** on A and B. We won't discuss it in this course.
-
-### 2.2.5 Summary: Tracing Changes to Their Source
-
-| Upstream Concept | Position in A | Position in B | Position in C | Who Changes | Operation Type |
-|-----------------|---------------|---------------|---------------|-------------|----------------|
-| Raw Materials | Rows | ✗ | Rows | **A and C** | Same row operations |
-| Final Products | ✗ | Columns | Columns | **B and C** | Same column operations |
-| Semi-finished | Columns | Rows | ✗ | **A and B** | Different ops (complex) |
-
-> [!TIP]
-> **The Golden Rule:** Any simultaneous change in multiple matrices must trace back to a single upstream concept being redefined.
+> Semi-finished products appear in:
+> - Columns of $A$ (as outputs)
+> - Rows of $B$ (as inputs)
+>
+> This would require **column operations on $A$** and **row operations on $B$** simultaneously. While this is theoretically valid, it's more complex than the previous two cases. We won't use this in this course.
 
 ---
 
-## §2.3 The Three Types of Row/Column Operations
+## §1.3 Matrix Inverses
 
-Before we proceed, let's catalog the three types of **invertible** operations we can perform on rows (or columns).
+### Definition
 
-### 2.3.1 Row Multiplication (行乘法)
+For an $n \times n$ square matrix $A$, we ask: is there a matrix that "undoes" the transformation represented by $A$?
 
-**Real-world meaning:** Split an ingredient into $n$ equal portions.
+> [!attention]
+> **Definition 1.1 (Matrix Inverse)**
+>
+> An $n \times n$ matrix $A$ is called **invertible** if there exists an $n \times n$ matrix $B$ such that
+>
+> $$AB = BA = I_n$$
+>
+> where $I_n$ is the $n \times n$ identity matrix. We call $B$ the **inverse** of $A$ and denote it $A^{-1}$.
 
-**Example:** Coffee beans → Double coffee beans (咖啡豆 → 双倍咖啡豆)
+**Interpretation**: If $A$ is the recipe "raw materials → products", then $A^{-1}$ is the recipe "products → raw materials" (reverse synthesis).
 
-If we use 2 "new units" of coffee beans, the demand is 1/2 of the old demand.
+> [!EXA]
+> **Example 1.2**: Consider the recipe table
+>
+> $$A = \begin{pmatrix} 0 & 2 \\ 1 & 0 \end{pmatrix} = \begin{array}{c|cc} & \text{Coffee} & \text{Milk} \\ \hline \text{Beans} & 0 & 2 \\ \text{Cow} & 1 & 0 \end{array}$$
+>
+> Coffee needs 0 cows + 2 beans. Milk needs 1 cow + 0 beans.
+>
+> The inverse recipe (products → materials) would be:
+>
+> $$A^{-1} = \begin{pmatrix} 0 & 1 \\ \frac{1}{2} & 0 \end{pmatrix} = \begin{array}{c|cc} & \text{Beans} & \text{Cow} \\ \hline \text{Coffee} & 0 & 1 \\ \text{Milk} & \frac{1}{2} & 0 \end{array}$$
+>
+> Beans = $0 \times$ coffee + $1 \times$ milk. Cow = $\frac{1}{2} \times$ coffee + $0 \times$ milk.
+>
+> **Verification**:
+> $$\begin{pmatrix} 0 & 2 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ \frac{1}{2} & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$$
 
-**Operation:** Multiply a row by a nonzero number $k \neq 0$.
-
-**Table notation:**
-```
-Before:  Coffee beans  [0  2  0  2]
-After:   Double beans  [0  1  0  1]   (row × 2)
-```
-
-### 2.3.2 Row Switching (行置换)
-
-**Real-world meaning:** Reorder the ingredients in the table.
-
-**Example:** Swap the positions of coffee beans and lemon (咖啡豆 ↔ 柠檬)
-
-The table still expresses the same facts, just in a different order.
-
-**Operation:** Swap two rows.
-
-### 2.3.3 Row Addition (行加法)
-
-**Real-world meaning:** One ingredient comes bundled with another.
-
-**Example:** Every lemon comes with 2 free tea leaves (柠檬 → 柠檬 + 2茶叶)
-
-Now when you use 1 lemon (which includes 2 free tea leaves), you need 2 fewer tea leaves from your original stock.
-
-**Operation:** Replace row $i$ with row $i$ + $k$ × row $j$.
-
-**Table notation:**
-```
-Before:
-  Lemon     [0  0  1  2]
-  Tea leaf  [0  0  2  4]
-
-After (lemon → lemon + 2·tea leaf):
-  Lemon+2Tea  [0  0  1  2]
-  Tea leaf    [0  0  0  0]   (tea row - 2×lemon row)
-```
-
-> [!NOTE]
-> **Column operations** (column multiplication, column switching, column addition) work the same way but apply to products instead of ingredients. We won't repeat the details here.
-
-> [!TIP]
-> **Important:** Row operations are how we **update tables** when we redefine ingredients. Any invertible ingredient transformation can be achieved by combining these three operations.
+> [!RMK]
+> **Why introduce inverses?**
+>
+> The inverse is **notational convenience**. When solving matrix equations using row operations, we want to track the invariant "$B$ doesn't change." Writing $B = A^{-1}C$ allows us to express this invariant more compactly:
+>
+> - Instead of tracking: $A_0, C_0 \to A_1, C_1 \to A_2, C_2 \to \cdots$ with $B$ constant
+> - We track: $A_0^{-1}C_0 = A_1^{-1}C_1 = A_2^{-1}C_2 = \cdots = B$
+>
+> This makes the invariance explicit in our notation.
 
 ---
 
-## §2.4 Introducing Matrix Inverses (As Notational Convenience)
+### Properties of Inverses
 
-### 2.4.1 The Problem: Solving for B in AB = C
-
-**Setup:** Given matrices $A$ and $C$, find matrix $B$ such that $AB = C$.
-
-**Strategy from §2.2:** Perform row operations on both $A$ and $C$ simultaneously.
-- The equation remains valid (Proposition 2.1)
-- $B$ remains unchanged
-- Goal: simplify $A$ to make $B$ easier to find
-
-**Notational problem:**
-We need to track changes in both $A$ and $C$ simultaneously:
-
-```
-Original:        A₀ · B = C₀
-After step 1:    A₁ · B = C₁
-After step 2:    A₂ · B = C₂
-...
-After step n:    Aₙ · B = Cₙ
-```
-
-This is **cumbersome** - we're writing two matrices at each step!
-
-### 2.4.2 The Solution: Introduce A⁻¹
-
-**Key observation:** If we could write $B = A^{-1}C$ for some matrix $A^{-1}$, then:
-- We only need to track the **single expression** $A^{-1}C$
-- We don't need to explicitly write $B$ anymore
-- The invariance "$B$ doesn't change" becomes "$A^{-1}C$ before = $A^{-1}C$ after"
-
-**This is why we define:**
-
-> [!ATTENTION]
-> **Definition 2.1 (Matrix Inverse):**
+> [!PROP]
+> **Proposition 1.3 (Inverse is Unique)**
 >
-> For an $n \times n$ matrix $A$, if there exists an $n \times n$ matrix $A^{-1}$ such that
+> If $A$ has an inverse, it is unique.
+
+**Proof**: Suppose $B$ and $C$ both satisfy $AB = BA = I$ and $AC = CA = I$. Then:
+$$B = BI = B(AC) = (BA)C = IC = C$$
+Therefore $B = C$. □
+
+> [!PROP]
+> **Proposition 1.4 (Product of Invertible Matrices)**
 >
-> $$AA^{-1} = A^{-1}A = I_n$$
+> If $A$ and $B$ are invertible, then $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
+
+**Proof**: We verify that $B^{-1}A^{-1}$ satisfies the definition:
+$$(AB)(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = AIA^{-1} = AA^{-1} = I$$
+$$(B^{-1}A^{-1})(AB) = B^{-1}(A^{-1}A)B = B^{-1}IB = B^{-1}B = I$$
+Therefore $(AB)^{-1} = B^{-1}A^{-1}$. □
+
+> [!RMK]
+> **Note the order reversal**: $(AB)^{-1} = B^{-1}A^{-1}$, not $A^{-1}B^{-1}$.
 >
-> where $I_n$ is the $n \times n$ identity matrix, then we call $A^{-1}$ the **inverse matrix** of $A$.
-
-**Why this definition?**
-- If $AB = C$, multiply both sides by $A^{-1}$ on the left:
-  $$A^{-1}(AB) = A^{-1}C$$
-  $$(A^{-1}A)B = A^{-1}C$$
-  $$I_n B = A^{-1}C$$
-  $$B = A^{-1}C$$
-
-**Now the invariance becomes:**
-
-When we perform row operations on both "$A$" and "$C$" in the equation $AB = C$:
-- Old way: Track $A_0 \to A_1 \to \cdots$ and $C_0 \to C_1 \to \cdots$, knowing $B$ stays constant
-- New way: Track $A_0^{-1}C_0 \to A_1^{-1}C_1 \to \cdots$, knowing this **value** stays constant
-
-**The invariant:**
-
-$$A_0^{-1}C_0 = A_1^{-1}C_1 = A_2^{-1}C_2 = \cdots = B$$
-
-This is **much cleaner notation**!
-
-### 2.4.3 Why This Is Just Notational Convenience
-
-> [!NOTE]
-> **Important philosophical point:** We're not introducing inverses because they're "fundamental objects." We're introducing them because they make our **notation more convenient**.
->
-> The **real concept** is: "performing row operations on A and C simultaneously keeps the equation valid."
->
-> The **notational trick** is: writing $B = A^{-1}C$ so we can express this invariance more compactly.
-
-### 2.4.4 Systematizing Invariants as a Derivation Tool
-
-This "invariant under operations" perspective is powerful:
-
-**Before:** We think of row operations as "ways to simplify matrices"
-
-**After:** We think of equations as **invariants under certain transformations**
-
-This becomes a systematic tool for deriving equalities:
-
-```
-Start with:    B = A⁻¹C
-Perform row operations on "A" and "C"
-End with:      B = (I)⁻¹C' = C'
-Conclusion:    B = C' (the transformed C)
-```
-
-**And this is exactly how we solve matrix equations!**
+> **Intuition**: If you put on socks then shoes, to undo this you must remove shoes first, then socks.
 
 ---
 
-## §2.5 Solving Matrix Equations Using Row Operations
+## §1.4 Solving Matrix Equations Using Row Operations
 
-### 2.5.1 The Setup: Don't Compute A⁻¹ Explicitly
+### The Problem
 
-**Naive approach (笨办法):**
-1. Given $AB = C$, want to find $B$
-2. First, compute $A^{-1}$ explicitly
-3. Then, compute $B = A^{-1}C$
+**Given**: Matrices $A$ and $C$ satisfying $AB = C$
+**Find**: Matrix $B$
 
-**Why this is bad:**
-- Computing $A^{-1}$ explicitly is tedious
-- We then have to do another matrix multiplication
-- We're doing twice the work!
+**Naive approach** (don't do this):
+1. Compute $A^{-1}$ explicitly
+2. Compute $B = A^{-1}C$
 
-**Better approach:**
+This is wasteful - we're doing twice the work!
 
-> [!TIP]
-> If an equation is already in the form $B = A^{-1}C$, don't compute $A^{-1}$ explicitly. Instead, **perform row operations** to transform $A^{-1}$ into $I$, and simultaneously transform $C$ accordingly.
+**Better approach**: Use row operations to transform $A$ into $I$ while simultaneously transforming $C$.
 
-### 2.5.2 The Method
+### The Method
 
-**Goal:** Solve $AB = C$ for $B$.
+**Key idea**: If $AB = C$, then $B = A^{-1}C$. Instead of computing $A^{-1}$ explicitly, we perform row operations on "$A$" in "$A^{-1}C$" to turn it into $I$.
 
-**Rewrite:** $B = A^{-1}C$
+**Setup**: From $AB = C$, multiply both sides by $A^{-1}$ on the left:
+$$B = A^{-1}C$$
 
-**Idea:** Perform row operations on "$A$" in "$A^{-1}$" to turn it into $I$.
+Now we perform row operations on both "$A$" and "$C$" simultaneously (which doesn't change the value of $A^{-1}C$ by Proposition 1.1). Our goal is to transform "$A$" into $I$:
 
-**How?** We perform row operations on both sides of an equality:
+$$B = A^{-1}C \xrightarrow{\text{row ops}} (A')^{-1}C' \xrightarrow{\text{row ops}} \cdots \xrightarrow{\text{row ops}} I^{-1}C'' = C''$$
 
-**Step 1:** Write the equation with an identity matrix:
-$$A^{-1} \cdot I = A^{-1}$$
+When "$A$" becomes $I$, we have $B = I^{-1}C'' = C''$ (the transformed $C$).
 
-Wait, this doesn't help - we still don't know $A^{-1}$!
+> [!EXA]
+> **Example 1.3**: Solve $AB = C$ for $B$ where
+>
+> $$A = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}, \quad C = \begin{pmatrix} 5 & 8 \\ 3 & 5 \end{pmatrix}$$
+>
+> **Solution**:
+>
+> Rewrite as $B = A^{-1}C$:
+> $$B = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 5 & 8 \\ 3 & 5 \end{pmatrix}$$
+>
+> **Step 1**: Perform $r_1 \leftrightarrow r_2$ (swap rows) on both "$A$" and "$C$":
+> $$B = \begin{pmatrix} 1 & 1 \\ 2 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 3 & 5 \\ 5 & 8 \end{pmatrix}$$
+>
+> **Step 2**: Perform $r_2 \to r_2 - 2r_1$ on both:
+> $$B = \begin{pmatrix} 1 & 1 \\ 0 & -1 \end{pmatrix}^{-1} \begin{pmatrix} 3 & 5 \\ -1 & -2 \end{pmatrix}$$
+>
+> **Step 3**: Perform $r_2 \to (-1) \cdot r_2$ on both:
+> $$B = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 3 & 5 \\ 1 & 2 \end{pmatrix}$$
+>
+> **Step 4**: Perform $r_1 \to r_1 - r_2$ on both:
+> $$B = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 2 & 3 \\ 1 & 2 \end{pmatrix} = I^{-1} \begin{pmatrix} 2 & 3 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 2 & 3 \\ 1 & 2 \end{pmatrix}$$
+>
+> Therefore:
+> $$B = \begin{pmatrix} 2 & 3 \\ 1 & 2 \end{pmatrix}$$
+>
+> **Verification**:
+> $$\begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 2 & 3 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 5 & 8 \\ 3 & 5 \end{pmatrix} \quad \checkmark$$
 
-**Step 2:** Think differently. We want to turn $A$ into $I$. From the equation $AB = C$:
-
-$$AB = C$$
-
-Perform row operations on $A$ and $C$ simultaneously:
-
-$$(\text{row ops on } A) \cdot B = (\text{row ops on } C)$$
-
-**Goal:** Make the left side become $I \cdot B = B$
-
-**Practical notation:** Write as an augmented matrix:
-
-$$\left[ A \mid C \right]$$
-
-Perform row operations to transform it into:
-
-$$\left[ I \mid C' \right]$$
-
-Then $B = C'$.
-
-**Example:**
-
-Solve $AB = C$ where
-
-$$A = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}, \quad C = \begin{bmatrix} 5 & 8 \\ 3 & 5 \end{bmatrix}$$
-
-**Solution:**
-
-Write augmented matrix:
-$$\left[ \begin{array}{cc|cc} 2 & 1 & 5 & 8 \\ 1 & 1 & 3 & 5 \end{array} \right]$$
-
-Row operation: $r_1 \leftrightarrow r_2$ (swap rows)
-
-$$\left[ \begin{array}{cc|cc} 1 & 1 & 3 & 5 \\ 2 & 1 & 5 & 8 \end{array} \right]$$
-
-Row operation: $r_2 - 2r_1$
-
-$$\left[ \begin{array}{cc|cc} 1 & 1 & 3 & 5 \\ 0 & -1 & -1 & -2 \end{array} \right]$$
-
-Row operation: $r_2 \times (-1)$
-
-$$\left[ \begin{array}{cc|cc} 1 & 1 & 3 & 5 \\ 0 & 1 & 1 & 2 \end{array} \right]$$
-
-Row operation: $r_1 - r_2$
-
-$$\left[ \begin{array}{cc|cc} 1 & 0 & 2 & 3 \\ 0 & 1 & 1 & 2 \end{array} \right]$$
-
-Therefore:
-$$B = \begin{bmatrix} 2 & 3 \\ 1 & 2 \end{bmatrix}$$
-
-**Verification:**
-$$\begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 2 & 3 \\ 1 & 2 \end{bmatrix} = \begin{bmatrix} 5 & 8 \\ 3 & 5 \end{bmatrix} \quad \checkmark$$
+> [!RMK]
+> **The invariant principle**: Throughout the row operations, the value $A^{-1}C$ never changes. We're just transforming how "$A$" is represented until it becomes $I$.
+>
+> This is the power of using equation-based thinking instead of "doing operations to matrices."
 
 ---
 
-## §2.6 Finding Matrix Inverses
+## §1.5 Finding Matrix Inverses
 
-### 2.6.1 The Inverse Problem
+### The Method
 
-**Goal:** Given an $n \times n$ matrix $A$, find $A^{-1}$ such that $AA^{-1} = I$.
+Finding $A^{-1}$ is a special case of solving $AB = C$: set $B = A^{-1}$ and $C = I$.
 
-**Observation:** This is just a special case of $AB = C$!
-- Let $B = A^{-1}$
-- Let $C = I$
-- Solve for $B$
+From $AA^{-1} = I$, we can write:
+$$A^{-1} = A^{-1}I$$
 
-### 2.6.2 The Method (Row Operation Approach)
+Now perform row operations on both "$A$" and "$I$" simultaneously to transform "$A$" into $I$:
 
-From the equation $AA^{-1} = I$, we want to solve for $A^{-1}$.
+$$A^{-1}I \xrightarrow{\text{row ops}} (A')^{-1}I' \xrightarrow{\text{row ops}} \cdots \xrightarrow{\text{row ops}} I^{-1}I'' = I''$$
 
-**Setup augmented matrix:**
-$$\left[ A \mid I \right]$$
+When "$A$" becomes $I$, we have $A^{-1} = I''$ (the transformed identity matrix).
 
-**Perform row operations** to transform into:
-$$\left[ I \mid A^{-1} \right]$$
+> [!EXA]
+> **Example 1.4**: Find the inverse of $A = \begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}$.
+>
+> **Solution**:
+>
+> Setup the equation $A^{-1} = A^{-1}I$:
+> $$\begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}^{-1} = \begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}^{-1} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$$
+>
+> **Step 1**: Perform $r_2 \to r_2 - r_1$ on both "$A$" and "$I$":
+> $$\begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 1 & 0 \\ -1 & 1 \end{pmatrix}$$
+>
+> **Step 2**: Perform $r_1 \leftrightarrow r_2$ (swap) on both:
+> $$\begin{pmatrix} 1 & 1 \\ 2 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 1 \\ 2 & 1 \end{pmatrix}^{-1} \begin{pmatrix} -1 & 1 \\ 1 & 0 \end{pmatrix}$$
+>
+> **Step 3**: Perform $r_2 \to r_2 - 2r_1$ on both:
+> $$\begin{pmatrix} 1 & 1 \\ 0 & -1 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 1 \\ 0 & -1 \end{pmatrix}^{-1} \begin{pmatrix} -1 & 1 \\ 3 & -2 \end{pmatrix}$$
+>
+> **Step 4**: Perform $r_2 \to (-1) \cdot r_2$ on both:
+> $$\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}^{-1} \begin{pmatrix} -1 & 1 \\ -3 & 2 \end{pmatrix}$$
+>
+> **Step 5**: Perform $r_1 \to r_1 - r_2$ on both:
+> $$\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix}$$
+>
+> Therefore:
+> $$A^{-1} = I^{-1} \begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix} = \begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix}$$
+>
+> **Verification**:
+> $$\begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix} \begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \quad \checkmark$$
 
-The right side is the inverse!
+> [!RMK]
+> **Alternative: Column operations**
+>
+> We can also use column operations. From $A^{-1}A = I$, we write:
+> $$IA^{-1} = A^{-1}$$
+>
+> Then perform column operations on both "$A$" and "$I$" to transform "$A$" into $I$. When "$A$" becomes $I$, the transformed "$I$" is $A^{-1}$.
 
-**Why does this work?**
-
-We're performing row operations on "$A$" and "$I$" in the equation $AA^{-1} = I$.
-- When $A$ becomes $I$, the equation becomes $I \cdot ? = I'$ (transformed $I$)
-- This means $? = I'$
-- But $? = A^{-1}$, so $A^{-1} = I'$ (the transformed identity matrix)
-
-**Example:**
-
-Find the inverse of $A = \begin{bmatrix} 2 & 1 \\ 3 & 2 \end{bmatrix}$.
-
-**Solution:**
-
-Write augmented matrix:
-$$\left[ \begin{array}{cc|cc} 2 & 1 & 1 & 0 \\ 3 & 2 & 0 & 1 \end{array} \right]$$
-
-Row operation: $r_1 \times \frac{1}{2}$
-
-$$\left[ \begin{array}{cc|cc} 1 & 1/2 & 1/2 & 0 \\ 3 & 2 & 0 & 1 \end{array} \right]$$
-
-Row operation: $r_2 - 3r_1$
-
-$$\left[ \begin{array}{cc|cc} 1 & 1/2 & 1/2 & 0 \\ 0 & 1/2 & -3/2 & 1 \end{array} \right]$$
-
-Row operation: $r_2 \times 2$
-
-$$\left[ \begin{array}{cc|cc} 1 & 1/2 & 1/2 & 0 \\ 0 & 1 & -3 & 2 \end{array} \right]$$
-
-Row operation: $r_1 - \frac{1}{2}r_2$
-
-$$\left[ \begin{array}{cc|cc} 1 & 0 & 2 & -1 \\ 0 & 1 & -3 & 2 \end{array} \right]$$
-
-Therefore:
-$$A^{-1} = \begin{bmatrix} 2 & -1 \\ -3 & 2 \end{bmatrix}$$
-
-**Verification:**
-$$\begin{bmatrix} 2 & 1 \\ 3 & 2 \end{bmatrix} \begin{bmatrix} 2 & -1 \\ -3 & 2 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \quad \checkmark$$
-
-### 2.6.3 Column Operation Approach (Alternative)
-
-We can also use **column operations** instead of row operations.
-
-From $A^{-1}A = I$, we can write:
-$$\left[ I \mid A \right]$$
-
-Perform **column operations** to transform into:
-$$\left[ A^{-1} \mid I \right]$$
-
-The left side is the inverse!
-
-**Example:** (Using the same matrix $A$)
-
-Write augmented matrix:
-$$\left[ \begin{array}{cc|cc} 1 & 0 & 2 & 1 \\ 0 & 1 & 3 & 2 \end{array} \right]$$
-
-Column operation: $c_3 - 2c_1$
-
-$$\left[ \begin{array}{cc|cc} 1 & 0 & 0 & 1 \\ 0 & 1 & 3 & 2 \end{array} \right]$$
-
-Column operation: $c_4 - c_2$
-
-$$\left[ \begin{array}{cc|cc} 1 & 0 & 0 & 1 \\ 0 & 1 & 3 & 1 \end{array} \right]$$
-
-Column operation: $c_3 - 3c_2$
-
-$$\left[ \begin{array}{cc|cc} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & -2 \end{array} \right]$$
-
-Wait, let me recalculate...
-
-Actually, for column operations, we need to be more careful about the setup. Let's stick with the row operation method as the standard approach.
+> [!EXA]
+> **Example 1.5**: Find the inverse of $A = \begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}$ using column operations.
+>
+> **Solution**:
+>
+> Setup the equation $IA^{-1} = A^{-1}$:
+> $$\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}^{-1} = \begin{pmatrix} 2 & 1 \\ 3 & 2 \end{pmatrix}^{-1}$$
+>
+> **Step 1**: Perform $c_1 \to c_1 - c_2$ on both "$I$" and "$A$":
+> $$\begin{pmatrix} 1 & 0 \\ -1 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}^{-1}$$
+>
+> **Step 2**: Perform $c_2 \to c_2 - c_1$ on both:
+> $$\begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}^{-1}$$
+>
+> **Step 3**: Perform $c_1 \to c_1 - c_2$ on both:
+> $$\begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^{-1}$$
+>
+> Therefore:
+> $$A^{-1} = \begin{pmatrix} 2 & -1 \\ -3 & 2 \end{pmatrix}$$
+>
+> Same answer! Both row and column methods work.
 
 ---
 
-## §2.7 Key Takeaways
+## §1.6 When Does an Inverse Exist?
 
-> [!NOTE]
-> **Summary of Main Ideas:**
+> [!RMK]
+> **Not all matrices are invertible**
 >
-> 1. **Row/column operations come from redefining upstream concepts** (ingredients/products)
->    - Redefine ingredients → A and C rows change simultaneously
->    - Redefine products → B and C columns change simultaneously
+> Consider:
+> $$A = \begin{pmatrix} 2 & 1 \\ 4 & 2 \end{pmatrix}$$
 >
-> 2. **The equation $AB = C$ remains valid** under these simultaneous operations
->    - Not because we're "doing the same thing to both sides"
->    - But because the underlying facts haven't changed, only our representation has
+> Notice that row 2 = $2 \times$ row 1. This means the recipe table contains redundant information. Try to find the inverse using row operations:
 >
-> 3. **Inverses are notational convenience** for tracking invariants
->    - Instead of tracking $A_0, C_0, A_1, C_1, \ldots$
->    - We track $A_0^{-1}C_0 = A_1^{-1}C_1 = \cdots = B$
+> $$\begin{pmatrix} 2 & 1 \\ 4 & 2 \end{pmatrix}^{-1} = \begin{pmatrix} 2 & 1 \\ 4 & 2 \end{pmatrix}^{-1} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$$
 >
-> 4. **Don't compute inverses explicitly** when solving equations
->    - Use row operations: $[A \mid C] \to [I \mid B]$
->    - The transformed $C$ is your answer $B$
+> Perform $r_2 \to r_2 - 2r_1$:
+> $$\begin{pmatrix} 2 & 1 \\ 0 & 0 \end{pmatrix}^{-1} = \begin{pmatrix} 2 & 1 \\ 0 & 0 \end{pmatrix}^{-1} \begin{pmatrix} 1 & 0 \\ -2 & 1 \end{pmatrix}$$
 >
-> 5. **To find $A^{-1}$**, use: $[A \mid I] \to [I \mid A^{-1}]$
->    - But only do this when you actually need $A^{-1}$ itself
->    - For solving $AB = C$, just transform $[A \mid C]$ directly!
+> We're stuck! The second row became all zeros. No matter what row operations we perform, we cannot transform "$A$" into $I$. Therefore, this matrix has no inverse.
+
+**Intuitive reason**: If two rows are linearly dependent (one is a multiple of the other), the recipe table doesn't contain full information about all raw materials. We cannot reverse the process.
+
+**Formal criterion** (to be developed in Chapter 2): An $n \times n$ matrix $A$ is invertible if and only if its **rank** equals $n$.
 
 ---
 
 ## Exercises
 
-> [!TIP]
-> **Exercise 2.1:** Consider the equation $AB = C$ where
-> $$A = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}, \quad B = \begin{bmatrix} 3 & 1 \\ 2 & 4 \end{bmatrix}, \quad C = \begin{bmatrix} 7 & 9 \\ 2 & 4 \end{bmatrix}$$
+> [!PROB]
+> **Exercise 1.1**: Consider the equation $AB = C$ where
+> $$A = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}, \quad B = \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix}, \quad C = \begin{pmatrix} 7 & 9 \\ 2 & 4 \end{pmatrix}$$
 >
 > (a) Verify that $AB = C$.
 >
-> (b) If we replace the first ingredient with double the first ingredient (perform $r_1 \times 2$ on both $A$ and $C$), write the new equation. Verify it still holds.
+> (b) Perform the row operation $r_1 \to 2r_1$ on both $A$ and $C$. Write the new equation and verify it still holds.
 >
-> (c) Explain in terms of the ingredient table why $B$ remains unchanged.
+> (c) Explain using the ingredient table why $B$ remains unchanged when we perform row operations on $A$ and $C$.
+
+> [!PROB]
+> **Exercise 1.2**: Solve for $B$ in the equation $AB = C$ where
+> $$A = \begin{pmatrix} 1 & 2 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}, \quad C = \begin{pmatrix} 4 & 7 \\ 3 & 5 \\ 2 & 3 \end{pmatrix}$$
+>
+> Use row operations on $B = A^{-1}C$ to transform "$A$" into $I$.
+
+> [!PROB]
+> **Exercise 1.3**: Find the inverses of the following matrices using row operations on $A^{-1}I$:
+>
+> (a) $A = \begin{pmatrix} 1 & 3 \\ 2 & 5 \end{pmatrix}$
+>
+> (b) $A = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 1 & 1 & 0 \end{pmatrix}$
+
+> [!PROB]
+> **Exercise 1.4**: Try to find the inverse of $A = \begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$ using row operations. What happens? Explain why this matrix does not have an inverse.
+
+> [!PROB]
+> **Exercise 1.5**: Compute the following products using row operations (don't compute $A^{-1}$ explicitly):
+>
+> (a) $\begin{pmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 1 & 2 & 3 \\ 1 & 2 & 1 \\ 0 & 2 & 9 \end{pmatrix}$
+>
+> (b) $\begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}^{-1} \begin{pmatrix} 3 & 5 & 7 \\ 2 & 3 & 4 \end{pmatrix}$
+
+> [!PROB]
+> **Exercise 1.6**: Show that if $A$ and $B$ are invertible $n \times n$ matrices, then:
+>
+> (a) $(A^{-1})^{-1} = A$
+>
+> (b) $(A^T)^{-1} = (A^{-1})^T$ (where $A^T$ denotes the transpose)
+
+---
+
+## Summary
 
 > [!TIP]
-> **Exercise 2.2:** Solve for $B$ in the equation $AB = C$ where
-> $$A = \begin{bmatrix} 1 & 2 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{bmatrix}, \quad C = \begin{bmatrix} 4 & 7 \\ 3 & 5 \\ 2 & 3 \end{bmatrix}$$
+> **Key Takeaways**:
 >
-> Use the augmented matrix method: $[A \mid C] \to [I \mid B]$.
-
-> [!TIP]
-> **Exercise 2.3:** Find the inverse of the following matrices:
+> 1. **Row operations update tables when we redefine raw materials.** Column operations update tables when we redefine products.
 >
-> (a) $\begin{bmatrix} 1 & 3 \\ 2 & 5 \end{bmatrix}$
+> 2. **Equation $C = AB$ is invariant** under simultaneous row operations on $A$ and $C$, or simultaneous column operations on $B$ and $C$.
 >
-> (b) $\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 1 & 1 & 0 \end{bmatrix}$
+> 3. **Inverse $A^{-1}$ is notational convenience** for tracking the invariant "$B$ doesn't change" when solving $AB = C$.
 >
-> Use the augmented matrix method: $[A \mid I] \to [I \mid A^{-1}]$.
-
-> [!TIP]
-> **Exercise 2.4:** Consider matrices
-> $$A = \begin{bmatrix} 2 & 1 \\ 4 & 2 \end{bmatrix}$$
+> 4. **Don't compute inverses explicitly.** Instead, use row operations:
+>    - To solve $AB = C$ for $B$: use row ops on $B = A^{-1}C$ until "$A$" becomes $I$
+>    - To find $A^{-1}$: use row ops on $A^{-1}I$ until "$A$" becomes $I$
 >
-> Try to find the inverse of $A$ using row operations. What happens? Why?
->
-> (This matrix does not have an inverse - we'll explore why in the next chapter.)
+> 5. **Keep equations throughout.** Write $A^{-1}C$ or $A^{-1}I$, then transform using $\xrightarrow{\text{row ops}}$ notation. The value never changes - only the representation changes.
