@@ -162,9 +162,12 @@ Homework:
 Homework problems are provided as separate PDF files.
 
 Tutorial Sessions:
-• Time: THU 18:00-18:50
-• Locations: MathBldg [206], [402], [104]
-• Purpose: Reinforce lecture content
+• Time: THU 18:00-18:50 (all sections)
+• Locations (by section):
+  - Section 01 (Li Qirui): MathBldg [206], [402], [104]
+  - Section 02 (Kim Younjin): Science BldgⅢ [109], [111], [113]
+  - Section 03 (Yu Seungook): Hogil Kim Building [306], [307], [308]
+• Purpose: Reinforce lecture content, practice cross-filling and computational methods
 
 Coordination:
 This course has 3 sections taught by different instructors (Li Qirui, Kim Younjin, Yu Seungook). All sections share the same syllabus and exam schedule.
