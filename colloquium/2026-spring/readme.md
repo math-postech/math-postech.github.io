@@ -22,5 +22,6 @@
 | Apr. 3     | Hyung Tae Choi (Chung-Ang University) | Nonlinear $L_{1}$ Control and Set-invariance-based Approaches |
 | Apr. 24    | Byung Hee An (Kyungpook National University) | Cluster structures of Legendrian cablings (IBS-CGP) |
 | May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces (IBS-CGP) |
+| May 15     | Minsung Kim (POSTECH)           | Rapid mixing of random walks on nilmanifolds |
 | May 22     | Euiyong Park (University of Seoul) | Monoidal categorifications for cluster algebras (Online) |
 | May 29     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
