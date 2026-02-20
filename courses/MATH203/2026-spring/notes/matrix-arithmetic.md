@@ -9,10 +9,6 @@
 
 This week develops the foundational concepts of matrix computation. We will understand the matrix product $AB = C$ from **four complementary perspectives**: entry-by-entry computation, column view, row view, and sum-of-rank-one view. Mastering these multiple interpretations is essential for the entire course.
 
-> [!RMK]
-> **Pedagogical Philosophy**
-> Traditional linear algebra courses teach one way to compute $AB$: the dot product formula. This course teaches **four equivalent ways**. Why? Because different problems require different perspectives. Cross-filling (§1.3) relies on the sum-of-rank-one view. Solving $Ax = b$ uses the column view. Understanding eigenvalues needs the row view. By developing all four perspectives now, we build a flexible foundation for advanced topics.
-
 ---
 
 ## §1.1 Matrix Product $AB = C$
@@ -43,8 +39,8 @@ $$A = \begin{array}{c|ccc}
 1 & 0 & 0
 \end{pmatrix}$$
 
-- **Rows** = raw materials (🍃, 🍋, 🫘, 🐄)
-- **Columns** = beverages (🥛, ☕, 🍵)
+- **Rows** = raw materials (basic ingredients 🍃🍋🫘🐄)
+- **Columns** = beverages (middle products 🥛☕🍵)
 - **Entry $a_{ij}$** = amount of material $i$ needed for beverage $j$
 
 Now the shop creates **meal sets** (final products from beverages):
@@ -70,24 +66,73 @@ $$B = \begin{array}{c|cc}
 
 **Question**: To make meal sets, how many raw materials do I need?
 
-We want a **direct recipe** from raw materials to final products:
+We want a **direct recipe** from raw materials to final products. This operation of **combining two recipe tables** is called **matrix multiplication**: $C = AB$.
 
-$$C = \begin{array}{c|cc}
- & \text{🍱} & \text{🍜} \\
-\hline
-\text{🍃} & ? & ? \\
-\text{🍋} & ? & ? \\
-\text{🫘} & ? & ? \\
-\text{🐄} & ? & ?
-\end{array}$$
+```mermaid
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#BB2528'
+    primaryTextColor: '#fff'
+    primaryBorderColor: '#7C0000'
+    lineColor: '#F8B229'
+    secondaryColor: '#006100'
+    tertiaryColor: '#fff'
+---
+graph LR
+    x[Basic Ingredients] -->|A| Ax[Middle Products]
+    Ax -->|B| BAx[Final Products]
+    x -->|C = AB| BAx
+```
 
-This operation of **combining two recipe tables** is called **matrix multiplication**: $C = AB$.
+**The production pipeline**:
+- Matrix $A$: Basic ingredients → Middle products
+- Matrix $B$: Middle products → Final products
+- Matrix $C = AB$: Basic ingredients → Final products (direct)
 
 > [!RMK]
-> **Why this order?**
-> We write $AB$ (not $BA$) following the convention: left factor = earlier stage, right factor = later stage. The raw materials (rows of $A$) come before beverages (columns of $A$ = rows of $B$), which come before meal sets (columns of $B$).
+> **Why $AB$ not $BA$?**
+> This is Earth's convention: left factor comes first in the production chain, right factor comes later. We write $AB$ meaning "$A$ feeds into $B$". The basic ingredients (rows of $A$) → middle products (columns of $A$ = rows of $B$) → final products (columns of $B$).
+
+---
+
+### Updating the Ingredient Table: Row and Column Operations
+
+What happens when we **update** the ingredient table?
+
+> [!PROP]
+> **Changing basic ingredients = Row operations on $A$ and $C$**
 >
-> This is an arbitrary human convention. Aliens might use a different order. But on Earth, we must all agree, so remember: $AB$ means "$A$ feeds into $B$".
+> Suppose we decide to change our measurement unit for basic ingredients (e.g., from kg to grams). This affects:
+> - Matrix $A$ (rows change: different amounts of basic ingredients)
+> - Matrix $C$ (rows change: direct recipe from basic ingredients also updates)
+> - Matrix $B$ is **unchanged** (middle products → final products relationship stays the same)
+
+> [!PROP]
+> **Changing final products = Column operations on $B$ and $C$**
+>
+> Suppose we add a new meal set (a new final product). This affects:
+> - Matrix $B$ (columns change: new column for the new meal set)
+> - Matrix $C$ (columns change: we need a new direct recipe for the new meal set)
+> - Matrix $A$ is **unchanged** (basic ingredients → middle products relationship stays the same)
+
+**Visual summary**:
+
+In the equation $C = AB$:
+- **Basic ingredients** appear in: rows of $A$, rows of $C$
+- **Middle products** appear in: columns of $A$, rows of $B$
+- **Final products** appear in: columns of $B$, columns of $C$
+
+Therefore:
+- Updating basic ingredients → row operations on $A$ and $C$ simultaneously
+- Updating final products → column operations on $B$ and $C$ simultaneously
+
+> [!RMK]
+> **The key insight**
+> Simultaneous row operations on $A$ and $C$ preserve the equation $C = AB$ because $B$ stays unchanged. Similarly, simultaneous column operations on $B$ and $C$ preserve the equation because $A$ stays unchanged.
+>
+> This observation is the foundation of **row reduction** and **Gaussian elimination**, which we'll develop in Week 2-3 using the **cross-filling method**.
 
 ---
 
@@ -110,8 +155,6 @@ In our example:
 > $$\underbrace{(m \times n)}_{A} \underbrace{(n \times p)}_{B} \longrightarrow \underbrace{(m \times p)}_{C}$$
 
 **Mnemonic**: The "outer" dimensions survive; the "inner" dimension (which must match) disappears.
-
-In our example: $(4 \times 3)(3 \times 2) \to (4 \times 2)$.
 
 ---
 
@@ -198,13 +241,6 @@ $$C = AB = \begin{pmatrix}
 2 & 1
 \end{pmatrix}$$
 
-Each entry is computed as:
-- $c_{11} = (0)(2) + (0)(0) + (2)(1) = 2$
-- $c_{12} = (0)(1) + (0)(2) + (2)(1) = 2$
-- $c_{21} = (0)(2) + (0)(0) + (1)(1) = 1$
-- $c_{22} = (0)(1) + (0)(2) + (1)(1) = 1$ ✓ (matches above)
-- ... and so on for all 8 entries
-
 > [!RMK]
 > **When to use this perspective**
 > Use entry-by-entry computation when you need a **single specific entry** of $C$. If you need the entire matrix or a specific column/row, the next perspectives are more efficient.
@@ -229,8 +265,6 @@ Let's denote:
 Then:
 $$\mathbf{c}_j = A \mathbf{b}_j = b_{1j} \mathbf{a}_1 + b_{2j} \mathbf{a}_2 + \cdots + b_{nj} \mathbf{a}_n$$
 
-This says: "The $j$-th column of $C$ is made by taking $b_{1j}$ copies of the first column of $A$, plus $b_{2j}$ copies of the second column of $A$, and so on."
-
 > [!EXA]
 > **Computing the first column of $C$ (ingredients for meal set 1 🍱)**
 >
@@ -245,8 +279,9 @@ This says: "The $j$-th column of $C$ is made by taking $b_{1j}$ copies of the fi
 | & | & | \\
 \color{red}\mathbf{a}_1 & \color{blue}\mathbf{a}_2 & \color{green}\mathbf{a}_3 \\
 | & | & |
-\end{pmatrix}, \quad
-B = \begin{pmatrix}
+\end{pmatrix}$$
+>
+> $$B = \begin{pmatrix}
 \color{red}2 & 1 \\
 \color{blue}0 & 2 \\
 \color{green}1 & 1
@@ -395,26 +430,9 @@ A **rank-one matrix** has the form $\mathbf{u} \mathbf{v}^T$ where $\mathbf{u}$ 
 12 & 15
 \end{pmatrix}$$
 >
-> Notice: **every row is a multiple of $\mathbf{v}^T = (4, 5)$**, and **every column is a multiple of $\mathbf{u} = (2, 1, 3)^T$**. This is the defining property of rank-one matrices.
+> Notice: **every row is a multiple of $(4, 5)$**, and **every column is a multiple of $(2, 1, 3)^T$**. This is the defining property of rank-one matrices.
 
 **Decomposing $AB$ into rank-one pieces**:
-
-$$A = \begin{pmatrix}
-| & | & & | \\
-\mathbf{a}_1 & \mathbf{a}_2 & \cdots & \mathbf{a}_n \\
-| & | & & |
-\end{pmatrix}, \quad
-B = \begin{pmatrix}
-- \mathbf{b}_1^T - \\
-- \mathbf{b}_2^T - \\
-\vdots \\
-- \mathbf{b}_n^T -
-\end{pmatrix}$$
-
-Then:
-$$AB = \mathbf{a}_1 \mathbf{b}_1^T + \mathbf{a}_2 \mathbf{b}_2^T + \cdots + \mathbf{a}_n \mathbf{b}_n^T$$
-
-Each term $\mathbf{a}_k \mathbf{b}_k^T$ is a rank-one matrix.
 
 > [!EXA]
 > **Decomposing our coffee shop product**
@@ -486,8 +504,6 @@ B = \begin{pmatrix}
 2 & 1
 \end{pmatrix}$$
 
-This matches our previous answer!
-
 > [!RMK]
 > **Why is this perspective important?**
 > The sum-of-rank-one view reveals the **additive structure** of matrices. This is the foundation for:
@@ -513,100 +529,71 @@ All four perspectives give the **same matrix $C$**. They are not four different 
 
 ---
 
-## The Ingredient Table Metaphor (Revisited)
-
-> [!RMK]
-> **Interpreting $C = AB$ as a production pipeline**
->
-> ```mermaid
-> ---
-> config:
->   theme: 'neutral'
-> ---
-> graph LR
->     x[Basic Ingredients] -->|B| Bx[Semi-finished Products]
->     Bx -->|A| ABx[Final Products]
->     x -->|C = AB| ABx
-> ```
->
-> - Matrix $A$: recipe converting **basic ingredients** → **semi-finished products**
-> - Matrix $B$: recipe converting **semi-finished products** → **final products**
-> - Matrix $C = AB$: **combined recipe** converting basic ingredients → final products **directly**
->
-> **Key insight**: Matrix multiplication is **composition of processes**. We skip the intermediate step.
-
----
-
-### Row and Column Operations as Changing Recipes
-
-> [!PROP]
-> **Operations on Matrix Products**
->
-> 1. **Changing basic ingredients** = Performing **row operations** on both $A$ and $C$ (leaves $B$ unchanged)
->    - If we decide to measure flour in grams instead of cups, we modify the ingredient list ($A$) and the final recipe ($C$), but the intermediate step ($B$) is unaffected.
->
-> 2. **Changing final products** = Performing **column operations** on both $B$ and $C$ (leaves $A$ unchanged)
->    - If we add a new meal set (new column to $B$), we must compute a new column for $C$, but $A$ stays the same.
-
-This observation will become precise in §1.2.
-
----
-
 ## Inverse Matrices
 
-### Definition and Basic Properties
+### The Identity Matrix: "Do Nothing" Recipe
+
+Before discussing inverses, we introduce the **identity matrix** — the matrix that represents "doing nothing".
+
+> [!EXA]
+> **What if the ingredient table says "tea = tea"?**
+>
+> Suppose our recipe table says:
+> $$\begin{array}{c|ccc}
+  & \text{🍵} & \text{🥛} & \text{☕} \\
+\hline
+\text{🍵} & 1 & 0 & 0 \\
+\text{🥛} & 0 & 1 & 0 \\
+\text{☕} & 0 & 0 & 1
+\end{array}$$
+>
+> This table says:
+> - 🍵 = 1 × 🍵 + 0 × 🥛 + 0 × ☕ (tea equals tea)
+> - 🥛 = 0 × 🍵 + 1 × 🥛 + 0 × ☕ (milk equals milk)
+> - ☕ = 0 × 🍵 + 0 × 🥛 + 1 × ☕ (coffee equals coffee)
+>
+> This is a **trivial statement** — it says nothing! The ingredients and products are **identical** and in the same order. Only the diagonal has 1's, all other entries are 0.
 
 > [!PROP]
-> **Definition of Matrix Inverse**
-> A square matrix $A$ is **invertible** (or **nonsingular**) if there exists a matrix $A^{-1}$ such that:
-> $$A^{-1}A = I \quad \text{and} \quad AA^{-1} = I$$
-> where $I$ is the identity matrix.
-
-**What is the identity matrix?**
-
-The **identity matrix** $I_n$ is the $n \times n$ matrix with 1's on the diagonal and 0's elsewhere:
-
-$$I_3 = \begin{pmatrix}
+> **Definition of Identity Matrix**
+> An $n \times n$ matrix with 1's on the diagonal and 0's elsewhere is called the **$n$-th order identity matrix**, denoted $I_n$ or simply $I$.
+>
+> $$I_3 = \begin{pmatrix}
 1 & 0 & 0 \\
 0 & 1 & 0 \\
 0 & 0 & 1
 \end{pmatrix}$$
 
-**Property**: $IA = A$ and $AI = A$ for any compatible matrix $A$.
+> [!PROP]
+> **Property of the Identity Matrix**
+> For any $m \times n$ matrix $A$:
+> $$I_m A = A \quad \text{and} \quad A I_n = A$$
+> The identity matrix "does nothing" when multiplied.
 
-In the recipe metaphor: $I$ is the "do nothing" recipe. If you apply the identity transformation, ingredients stay unchanged.
+**Why?**
+- $I_m A = A$: If basic ingredients = middle products (left factor is $I$), then the direct recipe equals the original recipe.
+- $A I_n = A$: If middle products = final products (right factor is $I$), then the direct recipe equals the original recipe.
 
-> [!LEM]
+---
+
+### Definition of Inverse
+
+> [!PROP]
+> **Definition of Matrix Inverse**
+> A square matrix $A$ is **invertible** (or **nonsingular**) if there exists a matrix $A^{-1}$ such that:
+> $$A^{-1}A = I \quad \text{and} \quad AA^{-1} = I$$
+
+**Interpretation**: $A^{-1}$ **reverses** the process of $A$. If $A$ converts basic ingredients to middle products, then $A^{-1}$ converts middle products back to basic ingredients.
+
+> [!PROP]
 > **Only square matrices can have inverses**
 >
-> **Proof**: Suppose $A$ is $m \times n$ and has a left inverse $B$ (so $BA = I_n$) and a right inverse $C$ (so $AC = I_m$).
+> **Intuitive argument**: If $A$ is $m \times n$, a left inverse $B$ would be $n \times m$. For $BA = I_n$ and $AC = I_m$ to both hold, we'd need $m = n$ (the dimensions must match on both sides).
 >
-> From $BA = I_n$, taking traces:
-> $$\text{tr}(BA) = \text{tr}(I_n) = n$$
->
-> From $AC = I_m$, we have $C^T A^T = I_m^T = I_m$. Taking traces:
-> $$\text{tr}(C^T A^T) = \text{tr}(I_m) = m$$
->
-> But the trace is **cyclic**: $\text{tr}(XY) = \text{tr}(YX)$. Therefore:
-> $$\text{tr}(BA) = \text{tr}(AB) = \text{tr}(A^T B^T) = \text{tr}(B^T A^T)$$
->
-> Also, $\text{tr}(C^T A^T) = \text{tr}(A^T C^T) = \text{tr}((CA)^T) = \text{tr}(CA)$, and from $BA = I_n$, left-multiplying by $C$:
-> $$CBA = CI_n = C, \quad \text{but also } CBA = (CB)A$$
->
-> We need a cleaner argument. Actually, let's use this:
->
-> If $BA = I_n$ and $AC = I_m$, then:
-> $$B = BI_m = B(AC) = (BA)C = I_n C = C$$
->
-> So $B = C$. But $B$ is $n \times m$ and $C$ is $m \times n$, so they can only be equal if $n = m$. ∎
-
-**Simpler trace-based proof** (the one in the notes):
-
-If $AB = I_m$ and $BA = I_n$, then $\text{tr}(AB) = m$ and $\text{tr}(BA) = n$. But $\text{tr}(AB) = \text{tr}(BA)$ by the cyclic property, so $m = n$. ∎
+> **Formal proof** (using properties beyond our current scope): This follows from the **rank-nullity theorem** and the fact that invertible matrices must have full rank. We will prove this rigorously in Chapter 2 after developing the theory of vector spaces and dimension.
 
 > [!RMK]
-> **Why is this important?**
-> This proof shows that **inverses are only possible for square matrices**. A non-square matrix might have a left inverse OR a right inverse, but never both. Only square matrices can have $A^{-1}$ satisfying both $A^{-1}A = I$ and $AA^{-1} = I$.
+> **Note**: Some textbooks prove this using the trace (sum of diagonal elements). However, we have not yet introduced the trace, and that proof requires additional theory (trace is well-defined, trace is independent of basis). We defer the full justification until we have the necessary tools.
 
 ---
 
@@ -629,22 +616,29 @@ If $AB = I_m$ and $BA = I_n$, then $\text{tr}(AB) = m$ and $\text{tr}(BA) = n$. 
 
 > [!RMK]
 > **Why "socks and shoes"?**
-> To reverse the process of putting on socks and then shoes, you must:
-> 1. First remove **shoes** (inverse of $B$)
-> 2. Then remove **socks** (inverse of $A$)
+> To reverse putting on socks then shoes:
+> 1. First remove **shoes** ($B^{-1}$)
+> 2. Then remove **socks** ($A^{-1}$)
 >
-> The order reverses! Same with matrix inverses: $(AB)^{-1} = B^{-1}A^{-1}$ (right to left).
+> The order reverses! Same with matrix inverses.
 >
 > ```mermaid
 > ---
 > config:
->   theme: 'neutral'
+>   theme: 'base'
+>   themeVariables:
+>     primaryColor: '#BB2528'
+>     primaryTextColor: '#fff'
+>     primaryBorderColor: '#7C0000'
+>     lineColor: '#F8B229'
+>     secondaryColor: '#006100'
+>     tertiaryColor: '#fff'
 > ---
 > graph LR
->     1[Bare Feet] -->|A: Put on socks| 2[Socks On]
->     2 -->|B: Put on shoes| 3[Shoes On]
->     3 -->|B^-1: Remove shoes| 2
->     2 -->|A^-1: Remove socks| 1
+>     1[Bare Feet] -->|A: Socks| 2[Socks On]
+>     2 -->|B: Shoes| 3[Shoes On]
+>     3 -->|B^-1: Remove Shoes| 2
+>     2 -->|A^-1: Remove Socks| 1
 > ```
 
 ---
@@ -655,154 +649,221 @@ If $AB = I_m$ and $BA = I_n$, then $\text{tr}(AB) = m$ and $\text{tr}(BA) = n$. 
 > **Products unchanged by simultaneous operations**
 >
 > 1. **$A^{-1}B$ is invariant** under the same row operations on $A$ and $B$
->    **Reason**: If we apply a row operation represented by left multiplication by $E$, then:
->    $$(EA)^{-1}(EB) = A^{-1}E^{-1}EB = A^{-1}B$$
+>    **Reason**: $A(A^{-1}B) = B$. If we apply row ops to $A$ and $B$ simultaneously, the equation remains true.
 >
 > 2. **$AB^{-1}$ is invariant** under the same column operations on $A$ and $B$
->    **Reason**: If we apply a column operation represented by right multiplication by $F$, then:
->    $$(AF)(BF)^{-1} = AFF^{-1}B^{-1} = AB^{-1}$$
+>    **Reason**: $(AB^{-1})B = A$. If we apply column ops to $A$ and $B$ simultaneously, the equation remains true.
 
-**Visual representation**:
+**Visual representation** (production pipelines):
 
-- For $A^{-1}B$: both $A$ and $B$ receive inputs from a common source
+- For $A^{-1}B$:
 $$\begin{array}{ccc}
 \text{Output} & \xleftarrow{A} & \text{Intermediate} & \xleftarrow{B} & \text{Input}
 \end{array}$$
-If we change "Intermediate" (apply row ops to $A$ and $B$), the relation from Input to Output is unchanged.
 
-- For $AB^{-1}$: both $A$ and $B$ send outputs to a common destination
+- For $AB^{-1}$:
 $$\begin{array}{ccc}
 \text{Input} & \xrightarrow{B} & \text{Intermediate} & \xrightarrow{A} & \text{Output}
 \end{array}$$
-If we change "Intermediate" (apply column ops), the relation is unchanged.
 
 > [!RMK]
 > **Practical use**
-> When simplifying expressions like $A^{-1}B$ or $BA^{-1}$, we can perform row/column operations on $A$ and $B$ **simultaneously** without changing the result. This avoids computing $A^{-1}$ explicitly.
+> When simplifying $A^{-1}B$, perform row operations on $A$ and $B$ simultaneously — no need to compute $A^{-1}$ explicitly!
 
 ---
 
 ## §1.2 Row and Column Operations
 
-### Two Interpretations of $AB = C$
+We now formalize the observations from §1.1 about updating ingredient tables.
 
-We've seen that $AB = C$ means "$A$ acts on $B$ to produce $C$". But we can interpret the "action" in two symmetric ways.
+### The Identity Matrix as Starting Point
+
+The identity matrix $I$ represents the "neutral" or "do-nothing" transformation. We can think of $I$ as our **starting recipe**, and other matrices as **modifications** of this starting point.
 
 > [!PROP]
-> **$AB = C$ encodes operations in two ways**
+> **Any matrix can be viewed as a transformation of $I$**
 >
-> **Row Perspective** (Left multiplication = row operations):
-> - Start with $IB = B$ (identity does nothing)
-> - Transform $I \to A$ by applying row operations
-> - Apply **the same row operations** to $B \to C$
-> - Result: $AB = C$
-> - **Interpretation**: $A$ is a "recipe" for row operations that transform $B$ into $C$
+> **Row perspective**: If $A$ can be obtained from $I_n$ by a sequence of row operations, then applying those same row operations to any matrix $B$ produces $AB$.
 >
-> **Column Perspective** (Right multiplication = column operations):
-> - Start with $AI = A$ (identity does nothing)
-> - Transform $I \to B$ by applying column operations
-> - Apply **the same column operations** to $A \to C$
-> - Result: $AB = C$
-> - **Interpretation**: $B$ is a "recipe" for column operations that transform $A$ into $C$
+> **Column perspective**: If $B$ can be obtained from $I_n$ by a sequence of column operations, then applying those same column operations to any matrix $A$ produces $AB$.
 
-> [!EXA]
-> **Row operations: transforming $I$ to $A$, and $B$ accordingly**
->
-> Suppose $A = \begin{pmatrix} 1 & 0 \\ 3 & 1 \end{pmatrix}$. How is this obtained from $I$?
->
-> $$I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \xrightarrow{\text{Add } 3R_1 \text{ to } R_2} \begin{pmatrix} 1 & 0 \\ 3 & 1 \end{pmatrix} = A$$
->
-> Now apply the same operation to $B = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$:
->
-> $$B = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix} \xrightarrow{\text{Add } 3R_1 \text{ to } R_2} \begin{pmatrix} 2 & 1 \\ 10 & 6 \end{pmatrix} = C$$
->
-> Verify by direct multiplication:
-> $$AB = \begin{pmatrix} 1 & 0 \\ 3 & 1 \end{pmatrix}\begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 6+4 & 3+3 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 10 & 6 \end{pmatrix}$$ ✓
-
-> [!RMK]
-> **Key insight**
-> Matrices are not just "arrays of numbers"—they are **operators**. Left multiplication performs row operations. Right multiplication performs column operations. The identity matrix $I$ is the "neutral" operator.
+This observation is **fundamental**: it says that matrices **encode operations**.
 
 ---
 
-### Elementary vs. Non-Invertible Operations
+### Left Multiplication = Row Operations
 
-Not all operations are reversible.
+> [!EXA]
+> **Computing a product via row operations**
+>
+> Suppose we want to compute:
+> $$\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix} = \begin{pmatrix} ? & ? \\ ? & ? \\ ? & ? \end{pmatrix}$$
+>
+> **Step 1**: Notice that the left factor can be obtained from $I$ by one row operation:
+> $$I = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \xrightarrow{R_2 \gets R_2 + R_3} \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}$$
+>
+> **Step 2**: We know that $IB = B$:
+> $$\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix}$$
+>
+> **Step 3**: Apply the same row operation ($R_2 \gets R_2 + R_3$) to both sides:
+> - Left side: $I \to \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}$
+> - Right side: $B \to \begin{pmatrix} 1 & 2 \\ 1+2 & 3+1 \\ 2 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 2 & 1 \end{pmatrix}$
+>
+> **Answer**:
+> $$\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 2 & 1 \end{pmatrix}$$
 
 > [!PROP]
-> **Three elementary (invertible) row/column operations**
+> **Left Multiplication Performs Row Operations**
+>
+> If $A$ is obtained from $I_n$ by a sequence of row operations, then for any matrix $B$:
+> $$C = AB \text{ is obtained by applying those same row operations to } B$$
+>
+> **In other words**: Record how $I$ transforms into $A$. Apply that exact same transformation to $B$. The result is $AB$.
+
+> [!RMK]
+> **Key insight**: The matrix $A$ **stores and records** the row operations. We can think of $A$ as a "**container**" or "**recipe**" for row operations.
+
+---
+
+### Right Multiplication = Column Operations
+
+By complete symmetry:
+
+> [!PROP]
+> **Right Multiplication Performs Column Operations**
+>
+> If $B$ is obtained from $I_n$ by a sequence of column operations, then for any matrix $A$:
+> $$C = AB \text{ is obtained by applying those same column operations to } A$$
+>
+> **In other words**: Record how $I$ transforms into $B$. Apply that exact same transformation to $A$. The result is $AB$.
+
+> [!EXA]
+> **Computing via column operations**
+>
+> $$\begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} = ?$$
+>
+> The right factor is obtained from $I_2$ by: $C_1 \gets C_1 + 2C_2$.
+>
+> Starting from:
+> $$\begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix}$$
+>
+> Apply $C_1 \gets C_1 + 2C_2$ to the left factor and product:
+> $$\begin{pmatrix} 1 & 2 \\ 1 & 3 \\ 2 & 1 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1+2(2) & 2 \\ 1+2(3) & 3 \\ 2+2(1) & 1 \end{pmatrix} = \begin{pmatrix} 5 & 2 \\ 7 & 3 \\ 4 & 1 \end{pmatrix}$$
+
+---
+
+### Transformation Matrices: Containers for Operations
+
+We can now formalize the concept of using matrices to **store** operations.
+
+> [!PROP]
+> **Matrices as Operation Containers**
+>
+> - A **row transformation matrix** $E$ stores a row operation. Left-multiplying by $E$ applies that operation:
+>   $$EA \text{ applies the row operation to } A$$
+>
+> - A **column transformation matrix** $F$ stores a column operation. Right-multiplying by $F$ applies that operation:
+>   $$AF \text{ applies the column operation to } A$$
+
+> [!EXA]
+> **Elementary row operations as matrices**
+>
+> | Operation | Matrix $E$ | Effect of $EA$ |
+> |-----------|------------|----------------|
+> | Swap $R_1 \leftrightarrow R_2$ | $\begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$ | Swaps first two rows of $A$ |
+> | Multiply $R_2$ by 5 | $\begin{pmatrix} 1 & 0 & 0 \\ 0 & 5 & 0 \\ 0 & 0 & 1 \end{pmatrix}$ | Multiplies second row of $A$ by 5 |
+> | Add $3R_2$ to $R_1$ | $\begin{pmatrix} 1 & 3 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$ | Adds 3 times second row to first row |
+
+---
+
+### Composition of Operations
+
+What happens when we apply **multiple** row operations?
+
+> [!PROP]
+> **Composition of Transformation Matrices**
+>
+> If $E_1$ and $E_2$ are row transformation matrices, then $E_2 E_1$ represents:
+> 1. First apply $E_1$'s operation
+> 2. Then apply $E_2$'s operation
+>
+> **Reason**:
+> $$A \xrightarrow{E_1} E_1 A \xrightarrow{E_2} E_2(E_1 A) = (E_2 E_1)A$$
+
+> [!RMK]
+> **Order matters!**
+> - **Left multiplication** $E_2 E_1 A$: apply $E_1$ first, then $E_2$
+> - **Right multiplication** $A F_1 F_2$: apply $F_1$ first, then $F_2$
+>
+> The order is opposite! This is because matrix multiplication is read from right to left for transformations.
+
+---
+
+### Types of Row/Column Operations
+
+Not all operations are reversible. We classify them:
+
+> [!PROP]
+> **Elementary (Reversible) Operations**
+>
+> The following three operations are **invertible** (can be undone):
 >
 > 1. **Swap** two rows (or columns)
 >    - **Reverse**: Swap them again
+>    - **Why reversible**: Information preserved
 >
-> 2. **Scale** a row (or column) by a nonzero constant $c \neq 0$
+> 2. **Scale** a row (or column) by nonzero $c \neq 0$
 >    - **Reverse**: Scale by $1/c$
+>    - **Why reversible**: Can recover original by dividing
 >
 > 3. **Add** a multiple of one row (or column) to another
 >    - **Reverse**: Subtract the same multiple
+>    - **Why reversible**: Can undo by opposite operation
 
-These are called **elementary operations** because they can be undone. Each corresponds to multiplying by an **elementary matrix**, which is invertible.
+These correspond to **invertible matrices** (elementary matrices).
 
 > [!PROP]
-> **Three non-invertible operations**
+> **Non-Elementary (Non-Reversible) Operations**
+>
+> The following operations **lose information** and cannot be undone:
 >
 > 1. **Copy** a row (or column)
->    - **Cannot reverse**: Information lost (which was the original?)
+>    - **Why not reversible**: Which was the original?
 >
 > 2. **Delete** a row (or column)
->    - **Cannot reverse**: Information permanently lost
+>    - **Why not reversible**: Information permanently lost
 >
 > 3. **Scale by zero** (multiply a row/column by 0)
->    - **Cannot reverse**: Original values are gone
-
-> [!EXA]
-> **Elementary operations are reversible**
->
-> | Operation | Matrix | Reverse operation | Inverse matrix |
-> |-----------|--------|-------------------|----------------|
-> | Swap $R_1 \leftrightarrow R_2$ | $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ | Swap $R_1 \leftrightarrow R_2$ again | $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ (same!) |
-> | Multiply $R_1$ by 5 | $\begin{pmatrix} 5 & 0 \\ 0 & 1 \end{pmatrix}$ | Multiply $R_1$ by $1/5$ | $\begin{pmatrix} 1/5 & 0 \\ 0 & 1 \end{pmatrix}$ |
-> | Add $3R_2$ to $R_1$ | $\begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$ | Add $-3R_2$ to $R_1$ | $\begin{pmatrix} 1 & -3 \\ 0 & 1 \end{pmatrix}$ |
+>    - **Why not reversible**: Original values gone
 
 > [!RMK]
-> **Why is this important?**
-> - **Gaussian elimination** uses only elementary operations, so it doesn't lose information about solutions
-> - **Invertible matrices** can be built from elementary operations
-> - **Non-invertible operations** destroy information, making a system unsolvable or ambiguous
+> **Why does this matter?**
+> - **Gaussian elimination** uses only elementary operations → preserves information about solutions
+> - **Invertible matrices** correspond to sequences of elementary operations
+> - **Non-elementary operations** change the solution set or destroy solvability
 
 ---
 
-### Finding $A^{-1}$ Without Augmented Matrices
+### Finding $A^{-1}$ Using Row Operations
 
-Traditional textbooks teach computing $A^{-1}$ using the augmented matrix $[A | I]$ and row-reducing to $[I | A^{-1}]$. This course uses a different approach based on the **row/column operation perspective**.
+We can now formalize the process of computing inverses.
 
 > [!PROP]
 > **Row Operation Method for Computing $A^{-1}$**
 >
 > **Procedure**:
 > 1. Write the equation $A^{-1} = A^{-1} \cdot I$
-> 2. Apply elementary row operations to $A$ (on the left) to transform it into $I$
-> 3. Apply **the same row operations** to $I$ (on the right side)
+> 2. Transform $A \to I$ using elementary row operations
+> 3. Apply the **same row operations** to $I$ on the right side
 > 4. When $A$ becomes $I$, cancel $I^{-1} = I$ from the left
 > 5. The result is $A^{-1}$
 >
-> **Why it works**: If $A \to I$ via row operations represented by matrices $E_1, E_2, \ldots, E_k$, then:
-> $$E_k E_{k-1} \cdots E_1 A = I$$
-> So $A^{-1} = E_k E_{k-1} \cdots E_1$. Applying the same operations to $I$ gives:
-> $$E_k E_{k-1} \cdots E_1 I = A^{-1}$$
-
-> [!PROP]
-> **Column Operation Method for Computing $A^{-1}$**
->
-> **Procedure**:
-> 1. Write the equation $A^{-1} = I \cdot A^{-1}$
-> 2. Apply elementary column operations to $A$ (on the right) to transform it into $I$
-> 3. Apply **the same column operations** to $I$ (on the left side)
-> 4. When $A$ becomes $I$, cancel $I^{-1} = I$ from the right
-> 5. The result is $A^{-1}$
+> **Why it works**: If row operations $E_k \cdots E_1$ transform $A \to I$, then:
+> $$E_k \cdots E_1 \cdot A = I \implies A^{-1} = E_k \cdots E_1$$
+> Applying the same operations to $I$ gives $E_k \cdots E_1 \cdot I = A^{-1}$.
 
 > [!EXA]
-> **Computing $A^{-1}$ using row operations (detailed)**
+> **Computing $A^{-1}$ using row operations**
 >
 > Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$. Find $A^{-1}$.
 >
@@ -818,25 +879,30 @@ Traditional textbooks teach computing $A^{-1}$ using the augmented matrix $[A | 
 > **Step 3**: $R_1 \gets R_1 - 2R_2$ (eliminate above pivot)
 > $$\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^{-1} \begin{pmatrix} -2 & 1 \\ 3/2 & -1/2 \end{pmatrix}$$
 >
-> **Step 4**: Cancel $I^{-1} = I$ from the left:
-> $$A^{-1} = \begin{pmatrix} -2 & 1 \\ 3/2 & -1/2 \end{pmatrix} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}$$
+> **Step 4**: Cancel $I^{-1} = I$:
+> $$A^{-1} = \begin{pmatrix} -2 & 1 \\ 3/2 & -1/2 \end{pmatrix}$$
 >
 > **Verification**:
-> $$AA^{-1} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix} = \begin{pmatrix} -2+3 & 1-1 \\ -6+6 & 3-2 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$$ ✓
+> $$AA^{-1} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\begin{pmatrix} -2 & 1 \\ 3/2 & -1/2 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$$ ✓
 
 > [!RMK]
-> **When should you compute $A^{-1}$ explicitly?**
+> **Column operation method**
+> By symmetry, we can also compute $A^{-1}$ using column operations:
+> 1. Write $A^{-1} = I \cdot A^{-1}$
+> 2. Transform $A \to I$ using column operations
+> 3. Apply same operations to $I$ on the left
+> 4. When $A$ becomes $I$, the result is $A^{-1}$
+
+> [!RMK]
+> **When to compute $A^{-1}$ explicitly?**
 >
-> **Compute $A^{-1}$ when**:
-> - The problem explicitly asks for the matrix form of $A^{-1}$
-> - You need to multiply $A^{-1}$ by many different vectors/matrices
+> **DO compute** when:
+> - Problem explicitly asks for $A^{-1}$
+> - You need to multiply $A^{-1}$ by many different vectors
 >
-> **Don't compute $A^{-1}$ when**:
-> - You only need $A^{-1}\mathbf{b}$ for one vector $\mathbf{b}$ → just solve $A\mathbf{x} = \mathbf{b}$
-> - You're simplifying an expression like $A^{-1}BA$ → use row/column operations directly
-> - You're checking invertibility → check $\det(A) \neq 0$ or use row reduction
->
-> **Reason**: Computing $A^{-1}$ requires $O(n^3)$ operations. Solving $A\mathbf{x} = \mathbf{b}$ also takes $O(n^3)$ but with better numerical stability.
+> **DON'T compute** when:
+> - You only need $A^{-1}\mathbf{b}$ once → solve $A\mathbf{x} = \mathbf{b}$ instead
+> - Simplifying expressions like $A^{-1}BA$ → use row/column operations directly
 
 ---
 
@@ -844,67 +910,60 @@ Traditional textbooks teach computing $A^{-1}$ using the augmented matrix $[A | 
 
 This week we established **four perspectives on matrix multiplication $AB = C$**:
 
-| Perspective | Computes | Formula | Key Use |
-|-------------|----------|---------|---------|
-| **Entry-by-entry** | Individual $c_{ij}$ | $c_{ij} = \sum_k a_{ik}b_{kj}$ | Direct computation |
-| **Column view** | Each column of $C$ | $\mathbf{c}_j = A\mathbf{b}_j$ | Linear systems, column space |
-| **Row view** | Each row of $C$ | $\mathbf{c}_i^T = \mathbf{a}_i^T B$ | Row space |
-| **Rank-one sum** | Full matrix | $C = \sum_k \mathbf{a}_k\mathbf{b}_k^T$ | **Cross-filling (§1.3)**, rank, factorization |
+| Perspective | Computes | Key Use |
+|-------------|----------|---------|
+| **Entry-by-entry** | Individual $c_{ij}$ | Direct computation |
+| **Column view** | Each column of $C$ | Linear systems, column space |
+| **Row view** | Each row of $C$ | Row space |
+| **Rank-one sum** | Full matrix | **Cross-filling (§1.3)**, rank |
 
 We also learned:
-- **Inverse matrices** exist only for square matrices
-- **Elementary operations** (swap, scale, add) are reversible
-- **Row operations** = left multiplication, **Column operations** = right multiplication
-- How to find $A^{-1}$ using row or column operations (without augmented matrices)
+- **Ingredient table metaphor**: $A$ = basic → middle, $B$ = middle → final, $C = AB$ = basic → final
+- **Updating tables**: Row ops on $A,C$ or column ops on $B,C$ preserve $C = AB$
+- **Identity matrix**: "Do nothing" transformation
+- **Inverses**: Only square matrices, $(AB)^{-1} = B^{-1}A^{-1}$
+- **Transformation matrices**: $E$ stores operations, $EA$ applies them
+- **Elementary operations** are reversible, non-elementary operations lose information
+- How to compute $A^{-1}$ using row/column operations
 
 > [!RMK]
-> **Next week preview: The Cross-Filling Method**
+> **Next week: The Cross-Filling Method**
 >
-> The **rank-one sum view** ($AB = \sum \mathbf{a}_k \mathbf{b}_k^T$) is the gateway to the **cross-filling method**, the central computational technique of this course.
+> The **rank-one sum view** is the foundation for **cross-filling**, our unified computational technique for:
+> - Decomposing $A = R_1 + R_2 + \cdots + R_r$ (rank-one pieces)
+> - Factorizing $A = UV$
+> - Computing rank
+> - Solving $Ax = b$
 >
-> Cross-filling provides a unified framework for:
-> - Decomposing any matrix $A$ into rank-one pieces: $A = R_1 + R_2 + \cdots + R_r$
-> - Factorizing matrices: $A = UV$ where $U$ collects column vectors, $V$ collects row vectors
-> - Computing rank: rank$(A) = $ number of rank-one pieces
-> - Solving linear systems $Ax = b$ by isolating variables one at a time
->
-> This **single method** replaces traditional Gaussian elimination with a more general, elegant, and powerful technique. We will explore it in depth next week.
+> This replaces traditional Gaussian elimination with a more elegant and general method.
 
 ---
 
 ## Exercises
 
-### Practice Problems
+1. **Entry-by-entry**: Compute $AB$ for $A = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$, $B = \begin{pmatrix} 1 & 4 \\ 2 & 0 \end{pmatrix}$.
 
-1. **Entry-by-entry computation**: Compute $AB$ using the dot product formula for all entries.
-   $$A = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}, \quad B = \begin{pmatrix} 1 & 4 \\ 2 & 0 \end{pmatrix}$$
+2. **Column view**: For the same $A, B$, compute each column of $AB$ as a linear combination.
 
-2. **Column view**: For the same $A$ and $B$, compute each column of $AB$ as a linear combination of columns of $A$.
+3. **Row view**: Compute each row of $AB$ as a linear combination.
 
-3. **Row view**: For the same $A$ and $B$, compute each row of $AB$ as a linear combination of rows of $B$.
+4. **Rank-one sum**: Decompose $AB$ into rank-one pieces.
 
-4. **Rank-one sum**: Decompose $AB$ into a sum of rank-one matrices $\mathbf{a}_k \mathbf{b}_k^T$.
+5. **Row operations**: What matrix $E$ swaps rows 1 and 3 of a $3 \times n$ matrix?
 
-5. **Verifying inverses**: Show that $B = \begin{pmatrix} 2 & -1 \\ 0 & 1/3 \end{pmatrix}$ is the inverse of $A$ from problem 1 by computing both $AB$ and $BA$.
+6. **Computing products**: Use row operations to compute:
+   $$\begin{pmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix}$$
 
-6. **Inverse of a product**: If $A = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ and $B = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, compute $(AB)^{-1}$ using the formula $(AB)^{-1} = B^{-1}A^{-1}$.
+7. **Inverse**: Find $A^{-1}$ using row operations for $A = \begin{pmatrix} 1 & 3 \\ 2 & 5 \end{pmatrix}$.
 
-7. **Computing an inverse**: Find $A^{-1}$ using row operations for:
-   $$A = \begin{pmatrix} 1 & 3 \\ 2 & 5 \end{pmatrix}$$
-   Show all intermediate steps.
+8. **Composition**: If $E_1 = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}$ (add $2R_2$ to $R_1$) and $E_2 = \begin{pmatrix} 1 & 0 \\ 0 & 3 \end{pmatrix}$ (scale $R_2$ by 3), what operation does $E_2E_1$ represent?
 
-8. **Comparing perspectives**: For $A = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$ and $B = \begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix}$:
-   - Compute $c_{22}$ (the (2,2)-entry) using the dot product formula
-   - Compute the second column of $AB$ using the column view
-   - Verify they give the same answer for $c_{22}$
-
-9. **Size compatibility**: Which of the following products are defined? For those that are defined, what is the size of the result?
+9. **Size compatibility**: Which products are defined? What are their sizes?
    - $(3 \times 2)(2 \times 5)$
    - $(4 \times 3)(4 \times 3)$
    - $(5 \times 1)(1 \times 5)$
-   - $(2 \times 2)(2 \times 2)(2 \times 2)$
 
-10. **Conceptual**: Explain in your own words why only square matrices can have inverses. Use the trace argument from the notes.
+10. **Conceptual**: Explain using the ingredient table metaphor why changing basic ingredients requires row operations on both $A$ and $C$.
 
 ---
 
