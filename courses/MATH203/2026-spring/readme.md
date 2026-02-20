@@ -24,17 +24,26 @@
 
 ## Course Objectives
 
-Covered topics include: systems of linear equations, matrices, vector spaces, eigenvalues & eigenvectors, differential equations, and quadratic forms.
+This course develops linear algebra through a **non-standard pedagogical approach** centered on the **cross-filling method** (rank-one decomposition) rather than traditional Gaussian elimination. Topics include:
+
+- **Matrix computation strategies**: Cross-filling, sum ↔ product equivalence (A = ΣRᵢ ⟺ A = UV)
+- **Vector spaces and subspaces**: Null space, column space, the four fundamental subspaces
+- **Projection theory**: Oblique and orthogonal projections, compatible families, spectral projections
+- **Determinants**: Axiomatic properties, Laplace expansion, Cayley-Hamilton theorem
+- **Eigenvalues and spectral decomposition**: Lagrange interpolation approach to diagonalization
+- **Normal matrices and applications**: Hermitian/unitary matrices, positive definiteness, SVD
+
+**Pedagogical note**: This curriculum uses cross-filling and Lagrange interpolation as primary computational methods. Students familiar with traditional row-reduction and eigenvector solving will encounter alternative (and often more elegant) techniques here.
 
 ---
 
 ## Grading
 
-| Component | Weight | Notes |
-|-----------|--------|-------|
-| Quizzes | 20% | Lowest quiz score will be dropped (one quiz only) |
-| Midterm Exam | 35% | Week 08 |
-| Final Exam | 45% | Week 16 |
+| Component | Weight | Date/Notes |
+|-----------|--------|------------|
+| Homework | 10% | Weekly assignments |
+| Midterm Exam | 40% | Mon Apr 13, 18:00-22:00 |
+| Final Exam | 50% | Mon Jun 08, 18:00-22:00 |
 
 ### Attendance Policy
 
@@ -54,87 +63,84 @@ Students with more than **25% unexcused absences** from lectures will receive an
 
 ## Course Plan
 
-| Week | Topics | Sections |
-|------|--------|----------|
-| Week 01 | Systems of linear equations, Gaussian elimination | 1.3, 1.4 |
-| Week 02 | Matrix operations, inverse matrices | 1.5, 1.6 |
-| Week 03 | Matrix algebra, factorization | 2.1, 2.2 |
-| Week 04 | Determinants, Cramer's rule | 2.3, 2.4 |
-| Week 05 | Vector spaces, null space | 2.6, 3.1 |
-| Week 06 | **MIDAUTUMN HOLIDAY** | — |
-| Week 07 | Linear independence, basis and dimension | 3.2, 3.3, 3.4 |
-| Week 08 | **MIDTERM EXAM** | — |
-| Week 09 | Eigenvalues and eigenvectors | 4.2, 4.3 |
-| Week 10 | Diagonalization, differential equations | 4.4, 5.1 |
-| Week 11 | Complex eigenvalues, symmetric matrices | 5.2, 5.3 |
-| Week 12 | Positive definite matrices, similar matrices | 5.4, 5.5 |
-| Week 13 | Complex matrices, inner product spaces | 5.6, 6.1 |
-| Week 14 | Orthogonal projection, **UNIV. FOUNDATION DAY** | 6.2 |
-| Week 15 | Gram-Schmidt process | 6.3 |
-| Week 16 | **FINAL EXAM** | — |
+> **Important**: This course follows a non-standard pedagogical approach. We use **cross-filling** (rank-one decomposition) instead of Gaussian elimination, and **Lagrange interpolation** for spectral decomposition instead of traditional eigenvector solving. See "Pedagogical note" above.
+
+### Semester Calendar
+
+| Date | Event |
+|------|-------|
+| Feb 23 | Semester begins |
+| Mar 02 | *Holiday — Independence Movement Day* |
+| Apr 13 (Mon) | **Midterm Exam** 18:00–22:00 |
+| Apr 13–17 | *Midterm week (no classes)* |
+| May 05 | *Children's Day (does not affect Mon/Wed classes)* |
+| May 25 | *Holiday — Buddha's Birthday* |
+| Jun 08 (Mon) | **Final Exam** 18:00–22:00 |
+
+### Weekly Schedule (26 sessions × 75 min)
+
+#### Pre-Midterm: Chapters 1–3 (13 sessions)
+
+| Week | Dates | Topics | Content |
+|------|-------|--------|---------|
+| **Week 1** | Feb 23, 25 | **Ch1 §1.1–1.2**: Matrix Arithmetic | Three views of AB=C (column, row, sum-of-rank-one). Row/column operations. Inverses. Elementary vs. non-invertible operations. |
+| **Week 2** | ~~Mar 02~~, Mar 04 | **Ch1 §1.3**: Cross-Filling | The core method: rank-one peeling. Sum ↔ product equivalence (A = ΣRᵢ ⟺ A = UV). *Central idea of Chapter 1.* |
+| **Week 3** | Mar 09, 11 | **Ch1 §1.3–1.4, Ch2 §2.1**: Solving Systems, Subspaces | Solving Ax=b via cross-filling. Solvability condition. Matrix as linear combination container. Two languages for subspaces. |
+| **Week 4** | Mar 16, 18 | **Ch2 §2.1–2.2**: Vector Spaces | Null space (3 views), column space (3 views). Subspaces of AB: Col(AB)⊆Col(A), Null(B)⊆Null(AB). |
+| **Week 5** | Mar 23, 25 | **Ch2 §2.3–2.4**: Four Subspaces, Basis & Dimension | Transpose, symmetric matrices. Four fundamental subspaces: Col(Aᵀ)⊥Null(A). Linear independence, span, basis, dimension (via trace). Rank. |
+| **Week 6** | Mar 30, Apr 01 | **Ch2 §2.4–2.5, Ch3 §3.1**: Full Rank & Projections | Full rank ⟺ invertibility. Linear transformations. **Projection defined**: P²=P. The sunlight-and-floor model. Col(P), Null(P). |
+| **Week 7** | Apr 06, 08 | **Ch3 §3.2–3.4**: Projection Theory + Review | AB-BA theorems. Cross-filling projections → rank-1 projections (automatic). Compatible families. The Grand Equivalence. **Midterm review.** |
+
+**Midterm Exam Coverage**: Chapters 1–3 (through §3.4) — cross-filling, subspaces, rank, four fundamental subspaces, projection theory (P²=P, AB-BA theorems, compatible families).
+
+---
+
+#### Post-Midterm: Chapters 3 (finish), 4, 5, 6 (13 sessions)
+
+| Week | Dates | Topics | Content |
+|------|-------|--------|---------|
+| **Week 9** | Apr 20, 22 | **Ch3 §3.5–3.7**: Constructing Projections | Oblique projection construction: P=B(AB)⁻¹A. Orthogonal projection: P=B(BᵀB)⁻¹Bᵀ. Least squares. Diagonal cross-filling → UUᵀ. Orthogonal diagonalization. |
+| **Week 10** | Apr 27, 29 | **Ch4 §4.1–4.3**: Determinants | Geometric motivation. Four axioms (multilinear, alternating, normalized). Laplace expansion, cofactors. Adjugate: A\*A=(det A)I. |
+| **Week 11** | May 04, 06 | **Ch4 §4.4–4.5**: Det Properties & Cayley-Hamilton | det(AB)=det(A)det(B). Inverse formula, Cramer's rule. Annihilating polynomials. **Cayley-Hamilton theorem**: det(tI−A) annihilates A. |
+| **Week 12** | May 11, 13 | **Ch5 §5.1–5.2**: Eigenvalues & Lagrange Interpolation | Characteristic polynomial, principal minors, eigenvalues. **Lagrange interpolation**: fᵢ(xⱼ)=δᵢⱼ. Value-table philosophy: g(A) depends only on g(λ₁),...,g(λₘ). |
+| **Week 13** | May 18, 20 | **Ch5 §5.3–5.4**: Spectral Decomposition | Complex numbers, simple-roots criterion for diagonalizability. **Spectral decomposition**: A=ΣλᵢPᵢ. Spectral formula: g(A)=Σg(λᵢ)Pᵢ. Eigenvectors from Pᵢ. |
+| **Week 14** | ~~May 25~~, May 27 | **Ch5 §5.5–5.6**: Diagonalization & Applications | From spectral decomposition to diagonalization (cross-fill Pᵢ). Applications: Aⁿ=ΣλᵢⁿPᵢ, eᴬ=ΣeᵡⁱPᵢ, linear recurrences, similarity. |
+| **Week 15** | Jun 01, 03 | **Ch6 §6.1–6.5**: Normal Matrices, PD, SVD + Review | Hermitian transpose A\*=Āᵀ. Normal matrices. Nilpotent-normal lemma → normal⟹diagonalizable. Unitary diagonalization. Positive definite matrices (λᵢ>0, MᵀM form, pivots>0). **SVD**: A=Ω₁ΣΩ₂. **Final review.** |
+
+**Final Exam Coverage**: Chapters 1–6 (full course). Emphasis on Ch4–6 for new material.
 
 ---
 
 ## Homework
 
-Homework assignments will be posted here as the semester progresses.
+Weekly homework assignments will be posted here as the semester progresses. Assignments are worth **10% of your final grade**.
 
-### Homework Problems by Section
+### Submission Guidelines
 
-<details>
-<summary>Click to expand full homework problem list</summary>
+- Homework is typically due **one week after assignment**
+- Submit via the course management system (details TBA)
+- Late submissions may incur penalties
 
-**1.3**: 12,13,21,22,23,25,27,28,32
+### Assignments
 
-**1.4**: 2,5,6,7,9,16,17,18,19,20,21,27,28,29,35,36,39,40,45,46,47,48,53,58
+| Week | Due Date | Topics | Assignment |
+|------|----------|--------|------------|
+| Week 1 | TBA | Matrix arithmetic, inverses | TBA |
+| Week 2 | TBA | Cross-filling decomposition | TBA |
+| Week 3 | TBA | Solving linear systems | TBA |
+| Week 4 | TBA | Vector spaces and subspaces | TBA |
+| Week 5 | TBA | Basis, dimension, four subspaces | TBA |
+| Week 6 | TBA | Full rank and projections | TBA |
+| Week 7 | — | *Midterm review (no new homework)* | — |
+| Week 9 | TBA | Constructing projections, least squares | TBA |
+| Week 10 | TBA | Determinants and computation | TBA |
+| Week 11 | TBA | Cayley-Hamilton theorem | TBA |
+| Week 12 | TBA | Eigenvalues and Lagrange interpolation | TBA |
+| Week 13 | TBA | Spectral decomposition | TBA |
+| Week 14 | TBA | Matrix powers and exponentials | TBA |
+| Week 15 | — | *Final review (no new homework)* | — |
 
-**1.5**: 4,7,9,10,11,12,17,18,19,21,23,25,29,31,32,42,44
-
-**1.6**: 1,2,3,4,5,6,7,9,10,11,12,13a,14,16,18,20,21,23,25,28,29,31,32,36,37,38,39,41,49,50,51,52,54,56,57,59,60
-
-**2.1**: 2,3,4,5,6b,7,8,10,11,15,16,17,18,19,20,22,24,25,26,27,28,29
-
-**2.2**: 2,3,4,5,6,8,12,21,26,27,29,30,34,35,36,40,41,43,45,49,54,56
-
-**2.3**: 3,4,7,8,9,15,18,19,20,21,22,23,24,25,26,27,28,29,30,32,33,35,36,37,41,45
-
-**2.4**: 1,2,3,6,8,9,10,13,15,16,17,23,27
-
-**2.6**: 1,2,3,4,5,8,9,11,12,14,18,19,20,21,24,25,26,27,30,31,35,38,42,47,48,50
-
-**3.1**: 2,3,5,6,7,8,9,10(typo: R^2->R^3),11,13,14,15,16,17,18,19,20,24,25,26,27,28,31,33,34,35,36,38,39,40,41,44,45,47
-
-**3.2**: 2,5,7,8,9,10,11,12,17b,19,20,22,25
-
-**3.3**: 1,4,5,6,9,10,11,12,13,14,15,16,17,18,20,21,22,23,26
-
-**3.4**: 1,3,4,6,7,8,9,10,11,12,14,15,16,20,23,28,30,32
-
-**4.2**: 2,3,4,5,7,8,9,13,16,18,19,21,23,26,27,28,29
-
-**4.3**: 1,3-4,11,13,14,20,24,27,35a,b,42
-
-**4.4**: 1,2a,5,7,14,18,20,21,27,29,32,34,35
-
-**5.1**: 1,3,4,6,7,8,9,10,15,16,18,19,20,22,23,24,25,27,28,30,31,38
-
-**5.2**: 1,3,4,5,6,8,9,10,13,14,15,16,17,20,22,23,24,26,27,36,38,39,40,41,42
-
-**5.3**: 1,6,8,9,10,12,20,24,25,27,28
-
-**5.4**: 1,2,5,6,7,9,10,11,14,16,19,21,23,25,30,35,36,37,38,39(typo:36->35),40,41,43
-
-**5.5**: 4,7,9,15,19,20,22,25,26,30,31,32,33,34,35,39,41,42,43,44,50
-
-**5.6**: 1,2,4,8,11,12,16,19,20,23,28,31,32,33,37; **Appendix B**: 2,4,5,6
-
-**6.1**: 2,3,5,8,9,10,11,13,14,15,16,17(pay special attention to whether columns are linearly independent),18,20,21,22
-
-**6.2**: 1,2,3,5,6,7,8,9,10,12,13,14,16,19,21,22,23,24,25,26,27,28,30,31,32,34,36
-
-**6.3**: 1(A is given in (b)),2,3,6,7,9,10,11,14,15,16,18,19,20,22,23
-
-</details>
+*Homework problems will be posted weekly and may include textbook exercises, custom problems, and computational tasks.*
 
 ---
 
