@@ -13,7 +13,7 @@
 - **Name**: Qirui Li
 - **Department**: Department of Mathematics
 - **Email**: qiruili@postech.ac.kr
-- **Office Hours**: MON 13:00-13:50
+- **Office Hours**: TBD
 
 ### Schedule
 
@@ -24,7 +24,7 @@
 
 ## Course Objectives
 
-This course develops linear algebra through a **non-standard pedagogical approach** centered on the **cross-filling method** (rank-one decomposition) rather than traditional Gaussian elimination. Topics include:
+This course develops linear algebra through a **non-standard pedagogical approach** centered on the **cross-filling method** (rank-one decomposition) generalizing traditional Gaussian elimination. Topics include:
 
 - **Matrix computation strategies**: Cross-filling, sum ↔ product equivalence (A = ΣRᵢ ⟺ A = UV)
 - **Vector spaces and subspaces**: Null space, column space, the four fundamental subspaces
@@ -52,6 +52,7 @@ Students with more than **25% unexcused absences** from lectures will receive an
 ---
 
 ## Textbook
+The textbook is only for the reference, we will follow our lecture notes in this website.
 
 **Linear Algebra and its Applications, 4th edition (International Student Edition)**
 - Author: Gilbert Strang
