@@ -1,0 +1,16 @@
+{
+  "name": "blockquote-latex",
+  "version": "1.0.0",
+  "description": "**Issue**: Docsify 在渲染引用块（blockquote）中的 LaTeX 公式时，`>` 符号可能被意外渲染进公式内。",
+  "main": "renderer-comparison.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "markdown-it": "^14.1.1",
+    "marked": "^17.0.3"
+  }
+}
