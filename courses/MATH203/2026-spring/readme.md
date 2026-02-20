@@ -1,4 +1,4 @@
-# MATH203-01: Applied Linear Algebra
+# MATH203: Applied Linear Algebra
 
 ## Course Information
 
