@@ -1,10 +1,11 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import markdownItMathjax3 from 'markdown-it-mathjax3'
 import markdownItPlantuml from 'markdown-it-plantuml'
 import container from 'markdown-it-container'
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: "POSTECH Math (VitePress Test)",
   description: "Testing VitePress as Docsify replacement",
 
@@ -29,14 +30,27 @@ export default defineConfig({
         items: [
           { text: 'Blockquote + Math', link: '/tests/blockquote-math' },
           { text: 'Custom Alerts', link: '/tests/custom-alerts' },
-          { text: 'Diagrams', link: '/tests/diagrams' }
+          { text: 'Diagrams', link: '/tests/diagrams' },
+          { text: 'Commutative Diagrams', link: '/tests/commutative-diagrams' }
         ]
       }
     ],
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/math-postech/math-postech.github.io' }
-    ]
+    ],
+
+    // Edit link - 直接跳转到 GitHub 编辑
+    editLink: {
+      pattern: 'https://github.com/math-postech/math-postech.github.io/edit/main/vitepress-test/docs/:path',
+      text: '在 GitHub 上编辑此页'
+    },
+
+    // Footer with copy source button
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
+    }
   },
 
   // Markdown configuration
@@ -99,8 +113,19 @@ export default defineConfig({
     }
   },
 
-  // Add MathJax script to head
+  // Add MathJax script to head with CD package support
   head: [
+    // MathJax configuration for commutative diagrams
+    ['script', {}, `
+      window.MathJax = {
+        tex: {
+          packages: {'[+]': ['amscd']},  // Enable amscd for commutative diagrams
+          inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+          displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']]
+        },
+        loader: {load: ['[tex]/amscd']}
+      };
+    `],
     ['script', {
       src: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
       async: true
@@ -113,5 +138,10 @@ export default defineConfig({
 
   // Better caching strategy
   cleanUrls: true,  // Remove .html from URLs
-  lastUpdated: true  // Show last updated time
-})
+  lastUpdated: true,  // Show last updated time
+
+  // Mermaid configuration
+  mermaid: {
+    // Refer to https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
+  }
+}))
