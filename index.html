@@ -80,6 +80,36 @@
 \longrightarrow
 
 <!-- Mathjax LaTeX engine -->
+<!-- MathJax configuration: Remove leading '>' from blockquote lines in equations -->
+<!-- Fixes issue: https://github.com/jupyterlab/jupyterlab/issues/16755 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true
+  },
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      // Add a pre-rendering hook to clean up blockquote markers
+      const tex = MathJax.startup.input[0];
+      const originalFindTex = tex.findTeX.bind(tex);
+      tex.findTeX = function(node) {
+        const result = originalFindTex(node);
+        // Clean the math string after TeX finds it
+        result.forEach(match => {
+          if (match.math) {
+            // Remove leading '>' and optional whitespace from each line
+            match.math = match.math.replace(/^>\s*/gm, '');
+          }
+        });
+        return result;
+      };
+    }
+  }
+};
+</script>
 <script src="//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
 <!--  docsify-mermaid plugin -->
