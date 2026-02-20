@@ -17,8 +17,13 @@
 
  All sections share the same syllabus and exam schedule. Tutorial sessions: THU 18:00-18:50.
 
-Tutorials (please write with respect to each sections:)
-- **Recitations**: THU 18:00-18:50 @ different sections have different locations
+### Tutorial Sessions
+
+All tutorial sessions meet on **THU 18:00-18:50**. Locations differ by section:
+
+- **Section 01** (Li Qirui): MathBldg [206], [402], [104]
+- **Section 02** (Kim Younjin): Science BldgⅢ [109], [111], [113]
+- **Section 03** (Yu Seungook): Hogil Kim Building [306], [307], [308]
 
 ---
 
