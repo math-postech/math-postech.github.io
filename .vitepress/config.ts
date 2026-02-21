@@ -46,16 +46,16 @@ export default withMermaid(defineConfig({
       { icon: 'github', link: 'https://github.com/math-postech/math-postech.github.io' }
     ],
 
-    // Edit link - 直接跳转到 GitHub 编辑
+    // Edit link - Jump to GitHub editor
     editLink: {
       pattern: 'https://github.com/math-postech/math-postech.github.io/edit/main/:path',
-      text: '在 GitHub 上编辑此页'
+      text: 'Edit this page on GitHub'
     },
 
-    // Footer with copy source button
+    // Footer navigation
     docFooter: {
-      prev: '上一页',
-      next: '下一页'
+      prev: 'Previous',
+      next: 'Next'
     }
   },
 

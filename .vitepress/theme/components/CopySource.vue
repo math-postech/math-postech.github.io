@@ -1,12 +1,12 @@
 <template>
   <div class="copy-source-buttons">
-    <button @click="copyMarkdownSource" class="copy-btn" title="复制页面源码">
+    <button @click="copyMarkdownSource" class="copy-btn" title="Copy page source">
       <span class="icon">📋</span>
-      <span class="text">复制 Markdown</span>
+      <span class="text">Copy Markdown</span>
     </button>
-    <a :href="githubUrl" target="_blank" class="github-btn" title="在 GitHub 上查看">
+    <a :href="githubUrl" target="_blank" class="github-btn" title="View on GitHub">
       <span class="icon">📄</span>
-      <span class="text">查看源文件</span>
+      <span class="text">View Source</span>
     </a>
   </div>
 </template>
@@ -18,27 +18,27 @@ import { useData } from 'vitepress'
 const { page } = useData()
 
 const githubUrl = computed(() => {
-  const base = 'https://github.com/math-postech/math-postech.github.io/blob/main/vitepress-test/docs'
+  const base = 'https://github.com/math-postech/math-postech.github.io/blob/main'
   return `${base}/${page.value.relativePath}`
 })
 
 const copyMarkdownSource = async () => {
   try {
-    // 从当前页面的相对路径构造原始 Markdown URL
-    const rawUrl = `https://raw.githubusercontent.com/math-postech/math-postech.github.io/main/vitepress-test/docs/${page.value.relativePath}`
+    // Construct raw Markdown URL from current page's relative path
+    const rawUrl = `https://raw.githubusercontent.com/math-postech/math-postech.github.io/main/${page.value.relativePath}`
 
-    // 获取 Markdown 源码
+    // Fetch Markdown source
     const response = await fetch(rawUrl)
     const markdown = await response.text()
 
-    // 复制到剪贴板
+    // Copy to clipboard
     await navigator.clipboard.writeText(markdown)
 
-    // 显示成功消息
-    alert('✅ Markdown 源码已复制到剪贴板！')
+    // Show success message
+    alert('✅ Markdown source copied to clipboard!')
   } catch (error) {
-    console.error('复制失败:', error)
-    alert('❌ 复制失败，请直接访问 GitHub 查看源码')
+    console.error('Copy failed:', error)
+    alert('❌ Copy failed. Please visit GitHub to view source.')
   }
 }
 </script>
