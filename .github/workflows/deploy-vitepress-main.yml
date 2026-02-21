@@ -1,0 +1,45 @@
+name: Deploy VitePress (Main Site)
+
+on:
+  push:
+    branches:
+      - main
+      - vitepress-migration  # For testing before merge
+    paths:
+      - '.vitepress/**'
+      - 'index.md'
+      - 'colloquium/**'
+      - 'courses/**'
+      - 'docs/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-vitepress-main.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build VitePress site
+        run: npm run docs:build
+
+      - name: Deploy to gh-pages branch (root)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.vitepress/dist
+          destination_dir: .  # Deploy to root of gh-pages
+          keep_files: false
+          force_orphan: false
