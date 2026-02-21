@@ -169,6 +169,19 @@ blockquote strong {
   color: inherit !important;
 }
 
+/* Ensure all custom blocks have white text in dark mode */
+.dark .custom-block {
+  color: #ffffff !important;
+}
+
+.dark .custom-block p,
+.dark .custom-block strong,
+.dark .custom-block em,
+.dark .custom-block li,
+.dark .custom-block span {
+  color: #ffffff !important;
+}
+
 /* Cache buster indicator (dev only) */
 .vp-doc::before {
   content: "🔄 VitePress: Auto cache-busting enabled";
