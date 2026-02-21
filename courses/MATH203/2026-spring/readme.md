@@ -22,8 +22,11 @@
 All tutorial sessions meet on **THU 18:00-18:50**. Locations differ by section:
 
 - **Section 01** (Li Qirui): MathBldg [206], [402], [104]
+  *TAs: Tom Huh, Yun Myeongun, Minsu Jeon*
 - **Section 02** (Kim Younjin): Science BldgⅢ [109], [111], [113]
+  *TAs: Kim Seongtae, Chungjae Jang, Yong Seong Kwon*
 - **Section 03** (Yu Seungook): Hogil Kim Building [306], [307], [308]
+  *TAs: Yunjae Oh, Seunghoon Jeong, Hoejin Kim*
 
 ---
 
@@ -124,18 +127,19 @@ There are **4 homework assignments** worth **10% of your final grade** (2.5% eac
 
 ### Submission Guidelines
 
-- Homework is typically due **two weeks after assignment**
-- Submit via the course management system (details TBA)
+- Homework assignments are released on **Thursdays at 00:00 KST** and due **two weeks later on Fridays at 23:59 KST**
+- Preview versions will be shared on the **Monday before release** for instructor review
+- Submit via the course management system (PLMS)
 - Late submissions may incur penalties
 
 ### Assignments
 
-| No. | Assigned | Due Date | Topics | PDF |
-|-----|----------|----------|--------|-----|
-| **HW1** | Week 3 | TBA | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) (TBA) |
-| **HW2** | Week 6 | TBA | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) (TBA) |
-| **HW3** | Week 10 | TBA | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
-| **HW4** | Week 13 | TBA | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
+| No. | Preview (Monday) | Released (Thursday 00:00 KST) | Due Date (Friday 23:59 KST) | Topics | PDF |
+|-----|------------------|-------------------------------|----------------------------|--------|-----|
+| **HW1** | Week 1 (Feb 23) | Week 2 (Mar 5) | Week 4 (Mar 19) | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) (TBA) |
+| **HW2** | Week 4 (Mar 16) | Week 5 (Mar 26) | Week 7 (Apr 9) | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) (TBA) |
+| **HW3** | Week 8 (Apr 20) | Week 9 (Apr 23) | Week 11 (May 7) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
+| **HW4** | Week 11 (May 4) | Week 12 (May 14) | Week 14 (May 28) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
 
 *Homework PDFs will be posted as they become available.*
 
