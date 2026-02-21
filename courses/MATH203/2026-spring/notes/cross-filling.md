@@ -173,21 +173,58 @@ The ratios don't match, so this table **cannot** be written as $\mathbf{u} \math
 
 **Strategy**: Build $C$ by adding simple (rank-one) pieces one at a time.
 
-**Step 1**: Choose a **pivot** entry (any nonzero entry), say $c_{11} = 2$ (🍃 needed for 🍱)
+**Why is it called "十字填充法" (Cross-Filling)?**
 
-**Step 2**: Use row 1 and column 1 to form a rank-one template:
-- Template column: $\begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix}$ (ingredients for Set 1)
-- Template row: $\begin{pmatrix} 2 & 4 \end{pmatrix}$ (🍃 usage across products)
+The Chinese name reveals the visual pattern:
+- **十字 (cross)**: We take a **cross-shaped slice** through the matrix
+- **填充 (filling)**: We use this cross to **fill in** a rank-one pattern
 
-**Step 3**: Build rank-one piece $R_1$ so that $(R_1)_{11} = c_{11}$:
+Let's see how this works:
 
-Divide row by pivot: $\begin{pmatrix} 2 & 4 \end{pmatrix} / 2 = \begin{pmatrix} 1 & 2 \end{pmatrix}$
+**Step 1**: Choose a **pivot** entry (any nonzero entry), say $c_{11} = 2$ (🍃 for 🍱)
+
+**Step 2**: Extract the **cross** through this pivot:
+
+```
+Original matrix C:           The cross through pivot c₁₁:
+
+┌─────────┐                  ┌─────────┐
+│ 2   4  │                   │ ✕ → →  │  ← Row 1 (horizontal bar)
+│ 1   2  │                   │ ↓      │
+│ 3   7  │                   │ ↓      │  ← Column 1 (vertical bar)
+└─────────┘                  └─────────┘
+```
+
+This gives us:
+- **Row 1** (horizontal): $\begin{pmatrix} 2 & 4 \end{pmatrix}$ (🍃 usage: 2 for 🍱, 4 for 🍜)
+- **Column 1** (vertical): $\begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix}$ (ingredients for 🍱: 2🍃, 1🍋, 3🫘)
+
+**Step 3**: Use **multiplication table principle** to fill other entries
+
+**Key idea**: For any entry $(i,j)$ in the rank-one piece, compute:
+$$R_{ij} = \frac{(\text{column entry at row } i) \times (\text{row entry at column } j)}{\text{pivot}}$$
+
+In our example with pivot $c_{11} = 2$:
+
+$$R_{ij} = \frac{(\text{Column 1})_i \times (\text{Row 1})_j}{c_{11}}$$
+
+Let's compute:
+- $R_{11} = \frac{2 \times 2}{2} = 2$ ✓ (matches pivot)
+- $R_{12} = \frac{2 \times 4}{2} = 4$ ✓
+- $R_{21} = \frac{1 \times 2}{2} = 1$ ✓
+- $R_{22} = \frac{1 \times 4}{2} = 2$ ✓
+- $R_{31} = \frac{3 \times 2}{2} = 3$ ✓
+- $R_{32} = \frac{3 \times 4}{2} = 6$ ✓
+
+**In matrix form** (factoring out $1/2$):
 
 $$R_1 = \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix} = \begin{pmatrix}
 \color{red}2 & \color{red}4 \\
 \color{red}1 & \color{red}2 \\
 \color{red}3 & \color{red}6
 \end{pmatrix}$$
+
+**This is the "filling" step**: We used the cross (one row + one column) to **fill in all entries** of a rank-one matrix!
 
 **Step 4**: Compute the **remainder** (what's left after peeling off $R_1$):
 
@@ -238,42 +275,55 @@ This reveals that the table has **two independent patterns** (rank = 2).
 
 ---
 
-### Visual Interpretation: The Cross-Filling Pattern
+### Visual Interpretation: Why "Cross-Filling"?
 
-The name "cross-filling" comes from the visual pattern when peeling off rank-one pieces:
+The name comes from the two-step visual pattern:
 
-**Original table $C$**:
+**Step 1: Extract the CROSS** (十字)
+
 ```
-┌─────────┐
-│ 2   4  │  ← Row 1
-│ 1   2  │
-│ 3   7  │
-└─────────┘
-  ↑
+Original matrix C:           Extract cross through c₁₁ = 2:
+
+┌─────────┐                  ┌─────────┐
+│ 2   4  │                   │ ═══════ │  ← Row 1 (horizontal bar)
+│ 1   2  │          →        │ ║      │
+│ 3   7  │                   │ ║      │  ← Column 1 (vertical bar)
+└─────────┘                  └─────────┘
+```
+
+**Step 2: Use cross to FILL the matrix** (填充)
+
+```
+Multiplication table:        Result R₁:
+
+     1   2  ← Row 1 ÷ pivot   ┌─────────┐
+   ┌─────┐                    │ 2   4  │  = 2×(1,2)
+ 2 │ 2 4 │                    │ 1   2  │  = 1×(1,2)
+ 1 │ 1 2 │                    │ 3   6  │  = 3×(1,2)
+ 3 │ 3 6 │                    └─────────┘
+   └─────┘
+   ↑
 Column 1
 ```
 
-**Choose pivot** $c_{11} = 2$ (marked with ✕):
+**Step 3: Subtract R₁ from C** (剥离)
+
 ```
-┌─────────┐
-│ ✕ → →  │  ← Pivot row spreads right
-│ ↓      │
-│ ↓      │  ← Pivot column extends down
-└─────────┘
+C - R₁ = Remainder:
+
+┌─────────┐     ┌─────────┐     ┌─────────┐
+│ 2   4  │  -  │ 2   4  │  =  │ 0   0  │  ← Cross eliminated!
+│ 1   2  │     │ 1   2  │     │ 0   0  │
+│ 3   7  │     │ 3   6  │     │ 0   1  │
+└─────────┘     └─────────┘     └─────────┘
 ```
 
-**After subtracting $R_1$** (cross region eliminated):
-```
-┌─────────┐
-│ 0   0  │  ← Row 1: filled to zero
-│ 0   0  │  ← Row 2: also zero (inherited from being multiple of row 1)
-│ 0   1  │  ← Row 3: only entry outside the cross survives
-└─────────┘
-  ↑
-Column 1: filled to zero
-```
+**Key insight**:
+- The **cross** (row + column through pivot) provides the template
+- **Filling** creates entries via multiplication: $R_{ij} = \frac{\text{col}_i \times \text{row}_j}{\text{pivot}}$
+- Subtracting $R_1$ **eliminates the cross region** (makes that row and column zero)
 
-The pivot and its **cross** (entire row and column) get "filled in" by the rank-one piece!
+This is why it's called **十字填充法 (Cross-Filling Method)**!
 
 ---
 
