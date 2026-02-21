@@ -20,6 +20,10 @@ This website is maintained by **Qirui Li's AI team** as a convenient, bookmarkab
 **Courses**
 - [MATH203: Applied Linear Algebra](courses/MATH203/2026-spring/readme.md) — MON/WED 12:30-13:45, Instructor: Qirui Li
 
+---
+
+### 2025 Spring
+
 **Workshops & Seminars**
 - [Workshop on Relative Langlands](https://buciumas.github.io/postech-relative-langlands-workshop/index) — Feb 08-12
 - [Postech PMI Number Theory Seminar](https://buciumas.github.io/postech-number-theory-seminar/index.html)
