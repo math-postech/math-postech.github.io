@@ -29,6 +29,8 @@ export default withMermaid(defineConfig({
         text: 'Tests',
         items: [
           { text: 'Blockquote + Math', link: '/tests/blockquote-math' },
+          { text: 'Blockquote 配色方案', link: '/tests/blockquote-themes' },
+          { text: '排版美观性测试', link: '/tests/typography-test' },
           { text: 'Custom Alerts', link: '/tests/custom-alerts' },
           { text: 'Diagrams', link: '/tests/diagrams' },
           { text: 'Commutative Diagrams', link: '/tests/commutative-diagrams' }
