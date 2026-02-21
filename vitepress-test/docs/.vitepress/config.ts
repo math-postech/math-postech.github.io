@@ -30,6 +30,7 @@ export default withMermaid(defineConfig({
         items: [
           { text: 'Blockquote + Math', link: '/tests/blockquote-math' },
           { text: 'Blockquote 配色方案', link: '/tests/blockquote-themes' },
+          { text: 'Blockquote 深色模式配色', link: '/tests/blockquote-dark-themes' },
           { text: '排版美观性测试', link: '/tests/typography-test' },
           { text: 'Custom Alerts', link: '/tests/custom-alerts' },
           { text: 'Diagrams', link: '/tests/diagrams' },
