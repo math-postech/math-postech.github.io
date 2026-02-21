@@ -845,4 +845,6 @@ The cross-filling perspective transforms linear algebra from "solve equations me
 
 ---
 
+<!--
 *Next lecture: [Week 3-4: Solving Linear Systems](solving-linear-systems.md) — Solvability conditions, null space, column space*
+-->
