@@ -153,10 +153,10 @@ Lecture notes are organized by topic and will be added throughout the semester.
 
 - [Lecture 1: Matrix Arithmetic](./notes/matrix-arithmetic.md) — Three views of $AB=C$, ingredient table interpretation
 - [Lecture 2: Matrix Equations and Row Operations](./notes/matrix-equations.md) — Concept redefinition, row/column operations, solving equations, matrix inverses
+- [Lecture 3: Cross-Filling Method](./notes/cross-filling.md) — Rank-one decomposition, cross-filling algorithm, sum ↔ product equivalence (A = ΣRᵢ ⟺ A = UV)
 
 <!--
 Upcoming notes:
- [Week 2-3: Cross-Filling Method](notes/cross-filling-method.md)
  [Week 3-4: Solving Linear Systems](notes/solving-linear-systems.md)
 -->
 

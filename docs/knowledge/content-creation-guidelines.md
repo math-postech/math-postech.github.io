@@ -810,6 +810,7 @@ $$A = \begin{array}{c|cc}
 8. ✅ Forward connection to cross-filling and rank-one decomposition
 9. ✅ Active voice and question-driven narrative
 10. ✅ Would work as standalone reference (no external textbook needed)
+11. ✅ **Link added to course index page** (`courses/MATH203/2026-spring/index.md`)
 
 ### Quality Standards
 
@@ -818,6 +819,30 @@ $$A = \begin{array}{c|cc}
 - **Logical depth**: Every rule derives from fundamental principles (contravariant/covariant logic)
 - **Multiple perspectives**: Every major concept shown from 3+ viewpoints
 - **Forward integration**: Every section connects to course narrative arc
+
+### Post-Creation Checklist
+
+::: attention
+**CRITICAL: Update Course Index Page**
+
+After creating a new lecture note, you MUST update the course index page to add a link to it:
+
+**File to update**: `/courses/MATH203/2026-spring/index.md`
+
+**Location**: Under "## Lecture Notes" → "### Chapter X: ..."
+
+**Format**:
+```markdown
+- [Lecture N: Title](./notes/filename.md) — Brief description
+```
+
+**Example**:
+```markdown
+- [Lecture 3: Cross-Filling Method](./notes/cross-filling.md) — Rank-one decomposition, cross-filling algorithm, sum ↔ product equivalence
+```
+
+**Why this matters**: Students access course content through the index page. A lecture note without a link is invisible to users.
+:::
 
 ---
 
