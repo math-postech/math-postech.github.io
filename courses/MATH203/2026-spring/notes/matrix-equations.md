@@ -6,15 +6,97 @@
 
 ## §1.2 Row and Column Operations
 
-This lecture develops the theory of row and column operations based on the ingredient table interpretation from Lecture 1. The key insight is that rows and columns follow different logical patterns when we redefine materials or products.
+### Review: The Ingredient Table Interpretation
+
+Recall from Lecture 1 that the matrix product $C = AB$ represents composition of recipe tables:
+
+```mermaid
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#BB2528'
+    primaryTextColor: '#fff'
+    primaryBorderColor: '#7C0000'
+    lineColor: '#F8B229'
+    secondaryColor: '#006100'
+    tertiaryColor: '#fff'
+---
+graph LR
+    RM[Raw Materials] -->|A| SP[Semi-finished Products]
+    SP -->|B| FP[Final Products]
+    RM -->|C = AB| FP
+```
+
+**Concrete example** from a coffee shop:
+
+**Matrix $A$** (Semi-finished ← Raw materials):
+
+$$A = \begin{array}{c|ccc}
+ & \text{Milk 🥛} & \text{Coffee ☕} & \text{Tea 🍵} \\
+\hline
+\text{Leaf 🍃} & 0 & 0 & 2 \\
+\text{Lemon 🍋} & 0 & 0 & 1 \\
+\text{Bean 🫘} & 0 & 2 & 0 \\
+\text{Cow 🐄} & 1 & 0 & 0
+\end{array} = \begin{pmatrix}
+0 & 0 & 2 \\
+0 & 0 & 1 \\
+0 & 2 & 0 \\
+1 & 0 & 0
+\end{pmatrix}$$
+
+**Matrix $B$** (Final products ← Semi-finished):
+
+$$B = \begin{array}{c|cc}
+ & \text{Set 1 🍱} & \text{Set 2 🍜} \\
+\hline
+\text{Milk 🥛} & 2 & 1 \\
+\text{Coffee ☕} & 0 & 2 \\
+\text{Tea 🍵} & 1 & 1
+\end{array} = \begin{pmatrix}
+2 & 1 \\
+0 & 2 \\
+1 & 1
+\end{pmatrix}$$
+
+**Matrix $C = AB$** (Final products ← Raw materials):
+
+$$C = AB = \begin{pmatrix}
+0 & 0 & 2 \\
+0 & 0 & 1 \\
+0 & 2 & 0 \\
+1 & 0 & 0
+\end{pmatrix} \begin{pmatrix}
+2 & 1 \\
+0 & 2 \\
+1 & 1
+\end{pmatrix} = \begin{pmatrix}
+2 & 2 \\
+1 & 1 \\
+0 & 4 \\
+2 & 1
+\end{pmatrix}$$
+
+$$C = \begin{array}{c|cc}
+ & \text{Set 1 🍱} & \text{Set 2 🍜} \\
+\hline
+\text{Leaf 🍃} & 2 & 2 \\
+\text{Lemon 🍋} & 1 & 1 \\
+\text{Bean 🫘} & 0 & 4 \\
+\text{Cow 🐄} & 2 & 1
+\end{array}$$
+
+**Key observation - Where each concept appears**:
+
+| Concept | Appears in Matrix $A$ | Appears in Matrix $B$ | Appears in Matrix $C$ |
+|---------|----------------------|----------------------|----------------------|
+| Raw materials 🍃🍋🫘🐄 | **rows** | ✗ | **rows** |
+| Semi-finished 🥛☕🍵 | **columns** | **rows** | ✗ |
+| Final products 🍱🍜 | ✗ | **columns** | **columns** |
 
 ::: remark
-**Quick Review from Lecture 1**: In $C = AB$:
-- **Raw materials** appear in rows of $A$ and $C$
-- **Semi-finished products** appear in columns of $A$ and rows of $B$
-- **Final products** appear in columns of $B$ and $C$
-
-When we redefine one concept, all matrices referencing it must update.
+**The fundamental principle**: When we **redefine** one of these three concepts (change the unit, repackage, bundling), all matrices that reference this concept must update their representation. But the underlying production relationships remain unchanged.
 :::
 
 ---
