@@ -73,7 +73,40 @@ export default withMermaid(defineConfig({
       })
 
       // Custom containers for mathematical blocks
-      // Lemma
+      // Definition (most important - red)
+      md.use(container, 'definition', {
+        render: (tokens, idx) => {
+          if (tokens[idx].nesting === 1) {
+            return '<div class="custom-block definition">\n<p class="custom-block-title">Definition</p>\n'
+          } else {
+            return '</div>\n'
+          }
+        }
+      })
+
+      // Theorem (solemn - black)
+      md.use(container, 'theorem', {
+        render: (tokens, idx) => {
+          if (tokens[idx].nesting === 1) {
+            return '<div class="custom-block theorem">\n<p class="custom-block-title">Theorem</p>\n'
+          } else {
+            return '</div>\n'
+          }
+        }
+      })
+
+      // Proposition (orange)
+      md.use(container, 'proposition', {
+        render: (tokens, idx) => {
+          if (tokens[idx].nesting === 1) {
+            return '<div class="custom-block proposition">\n<p class="custom-block-title">Proposition</p>\n'
+          } else {
+            return '</div>\n'
+          }
+        }
+      })
+
+      // Lemma (purple)
       md.use(container, 'lemma', {
         render: (tokens, idx) => {
           if (tokens[idx].nesting === 1) {
@@ -84,33 +117,55 @@ export default withMermaid(defineConfig({
         }
       })
 
-      // Proposition
-      md.use(container, 'prop', {
+      // Corollary (blue)
+      md.use(container, 'corollary', {
         render: (tokens, idx) => {
           if (tokens[idx].nesting === 1) {
-            return '<div class="custom-block prop">\n<p class="custom-block-title">Proposition</p>\n'
+            return '<div class="custom-block corollary">\n<p class="custom-block-title">Corollary</p>\n'
           } else {
             return '</div>\n'
           }
         }
       })
 
-      // Example
-      md.use(container, 'exa', {
+      // Example (pink)
+      md.use(container, 'example', {
         render: (tokens, idx) => {
           if (tokens[idx].nesting === 1) {
-            return '<div class="custom-block exa">\n<p class="custom-block-title">Example</p>\n'
+            return '<div class="custom-block example">\n<p class="custom-block-title">Example</p>\n'
           } else {
             return '</div>\n'
           }
         }
       })
 
-      // Remark
-      md.use(container, 'rmk', {
+      // Remark (gray)
+      md.use(container, 'remark', {
         render: (tokens, idx) => {
           if (tokens[idx].nesting === 1) {
-            return '<div class="custom-block rmk">\n<p class="custom-block-title">Remark</p>\n'
+            return '<div class="custom-block remark">\n<p class="custom-block-title">Remark</p>\n'
+          } else {
+            return '</div>\n'
+          }
+        }
+      })
+
+      // Problem (amber)
+      md.use(container, 'problem', {
+        render: (tokens, idx) => {
+          if (tokens[idx].nesting === 1) {
+            return '<div class="custom-block problem">\n<p class="custom-block-title">Problem</p>\n'
+          } else {
+            return '</div>\n'
+          }
+        }
+      })
+
+      // Attention (dark red warning)
+      md.use(container, 'attention', {
+        render: (tokens, idx) => {
+          if (tokens[idx].nesting === 1) {
+            return '<div class="custom-block attention">\n<p class="custom-block-title">Attention</p>\n'
           } else {
             return '</div>\n'
           }

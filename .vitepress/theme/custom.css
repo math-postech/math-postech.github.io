@@ -1,66 +1,151 @@
 /**
  * Custom styles for mathematical content blocks
- * Matching Docsify flexible-alerts style
+ * Color scheme designed for optimal readability and hierarchy
  */
 
-/* Lemma - attention style (red/pink) */
+/* Definition - Bright red (most important, attracts attention) */
+.custom-block.definition {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: 4px;
+}
+
+.custom-block.definition .custom-block-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #ef4444;
+}
+
+/* Theorem - Black/dark gray (solemn, authoritative) */
+.custom-block.theorem {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #1f2937;
+  background-color: rgba(31, 41, 55, 0.15);
+  border-radius: 4px;
+}
+
+.custom-block.theorem .custom-block-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+/* Dark mode adjustment for theorem */
+.dark .custom-block.theorem {
+  border-left-color: #9ca3af;
+  background-color: rgba(156, 163, 175, 0.1);
+}
+
+.dark .custom-block.theorem .custom-block-title {
+  color: #e5e7eb;
+}
+
+/* Proposition - Orange */
+.custom-block.proposition {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #f97316;
+  background-color: rgba(249, 115, 22, 0.1);
+  border-radius: 4px;
+}
+
+.custom-block.proposition .custom-block-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #f97316;
+}
+
+/* Lemma - Purple */
 .custom-block.lemma {
   padding: 1rem;
   margin: 1rem 0;
-  border-left: 4px solid #f66;
-  background-color: rgba(255, 102, 102, 0.1);
+  border-left: 4px solid #a855f7;
+  background-color: rgba(168, 85, 247, 0.1);
   border-radius: 4px;
 }
 
 .custom-block.lemma .custom-block-title {
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #f66;
+  color: #a855f7;
 }
 
-/* Proposition - tip style (green) */
-.custom-block.prop {
+/* Corollary - Blue */
+.custom-block.corollary {
   padding: 1rem;
   margin: 1rem 0;
-  border-left: 4px solid #42b983;
-  background-color: rgba(66, 185, 131, 0.1);
+  border-left: 4px solid #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
   border-radius: 4px;
 }
 
-.custom-block.prop .custom-block-title {
+.custom-block.corollary .custom-block-title {
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #42b983;
+  color: #3b82f6;
 }
 
-/* Example - note style (blue) */
-.custom-block.exa {
+/* Example - Pink */
+.custom-block.example {
   padding: 1rem;
   margin: 1rem 0;
-  border-left: 4px solid #10b981;
-  background-color: rgba(16, 185, 129, 0.1);
+  border-left: 4px solid #ec4899;
+  background-color: rgba(236, 72, 153, 0.1);
   border-radius: 4px;
 }
 
-.custom-block.exa .custom-block-title {
+.custom-block.example .custom-block-title {
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #10b981;
+  color: #ec4899;
 }
 
-/* Remark - warning style (orange) */
-.custom-block.rmk {
+/* Remark - Gray */
+.custom-block.remark {
   padding: 1rem;
   margin: 1rem 0;
-  border-left: 4px solid #e7c000;
-  background-color: rgba(231, 192, 0, 0.1);
+  border-left: 4px solid #6b7280;
+  background-color: rgba(107, 114, 128, 0.1);
   border-radius: 4px;
 }
 
-.custom-block.rmk .custom-block-title {
+.custom-block.remark .custom-block-title {
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #e7c000;
+  color: #6b7280;
+}
+
+/* Problem - Amber */
+.custom-block.problem {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #d97706;
+  background-color: rgba(217, 119, 6, 0.1);
+  border-radius: 4px;
+}
+
+.custom-block.problem .custom-block-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #d97706;
+}
+
+/* Attention - Dark red warning (distinct from definition) */
+.custom-block.attention {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #dc2626;
+  background-color: rgba(220, 38, 38, 0.15);
+  border-radius: 4px;
+}
+
+.custom-block.attention .custom-block-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #dc2626;
 }
 
 /* Math display improvements */
