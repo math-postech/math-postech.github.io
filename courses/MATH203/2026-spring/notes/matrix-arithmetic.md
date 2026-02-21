@@ -93,7 +93,6 @@ graph LR
 
 ::: remark
 **Why $AB$ not $BA$?**
-
 This is Earth's convention: left factor comes first in the production chain, right factor comes later. We write $AB$ meaning "$A$ feeds into $B$". The basic ingredients (rows of $A$) → middle products (columns of $A$ = rows of $B$) → final products (columns of $B$).
 :::
 
@@ -134,7 +133,6 @@ Therefore:
 
 ::: remark
 **The key insight**
-
 Simultaneous row operations on $A$ and $C$ preserve the equation $C = AB$ because $B$ stays unchanged. Similarly, simultaneous column operations on $B$ and $C$ preserve the equation because $A$ stays unchanged.
 
 This observation is the foundation of **row reduction** and **Gaussian elimination**, which we'll develop in Week 2-3 using the **cross-filling method**.
@@ -146,7 +144,6 @@ This observation is the foundation of **row reduction** and **Gaussian eliminati
 
 ::: proposition
 **Compatibility Rule for Matrix Multiplication**
-
 The product $AB$ is defined **if and only if**:
 $$\text{number of columns of } A = \text{number of rows of } B$$
 :::
@@ -158,7 +155,6 @@ In our example:
 
 ::: proposition
 **Size of the Product**
-
 If $A$ is $m \times n$ and $B$ is $n \times p$, then $C = AB$ is $m \times p$.
 
 $$\underbrace{(m \times n)}_{A} \underbrace{(n \times p)}_{B} \longrightarrow \underbrace{(m \times p)}_{C}$$
@@ -214,7 +210,6 @@ where $\color{purple}c_{ij} = \color{red}a_{i1}\color{blue}b_{1j} + \color{red}a
 
 Using our coffee shop example:
 $$A = \begin{pmatrix}
-:::
 0 & 0 & 2 \\
 \color{red}0 & \color{red}0 & \color{red}1 \\
 0 & 2 & 0 \\
@@ -225,13 +220,14 @@ B = \begin{pmatrix}
 0 & \color{blue}2 \\
 1 & \color{blue}1
 \end{pmatrix}$$
->
-> Row 2 of $A$: $(0, 0, 1)$ — how much of each beverage uses 🍋
-> Column 2 of $B$: $\begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$ — how much of each beverage needed for 🍜
->
-> $$c_{22} = (0)(1) + (0)(2) + (1)(1) = 0 + 0 + 1 = 1$$
->
-> **Interpretation**: Meal set 2 needs 1 × 🍵, and 🍵 uses 1 × 🍋, so total: **1 lemon**.
+
+Row 2 of $A$: $(0, 0, 1)$ — how much of each beverage uses 🍋
+Column 2 of $B$: $\begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}$ — how much of each beverage needed for 🍜
+
+$$c_{22} = (0)(1) + (0)(2) + (1)(1) = 0 + 0 + 1 = 1$$
+
+**Interpretation**: Meal set 2 needs 1 × 🍵, and 🍵 uses 1 × 🍋, so total: **1 lemon**.
+:::
 
 **Complete computation**:
 
@@ -284,7 +280,6 @@ $$\mathbf{c}_j = A \mathbf{b}_j = b_{1j} \mathbf{a}_1 + b_{2j} \mathbf{a}_2 + \c
 
 Using our coffee shop matrices:
 $$A = \begin{pmatrix}
-:::
 \color{red}0 & \color{blue}0 & \color{green}2 \\
 \color{red}0 & \color{blue}0 & \color{green}1 \\
 \color{red}0 & \color{blue}2 & \color{green}0 \\
@@ -295,34 +290,35 @@ $$A = \begin{pmatrix}
 \color{red}\mathbf{a}_1 & \color{blue}\mathbf{a}_2 & \color{green}\mathbf{a}_3 \\
 | & | & |
 \end{pmatrix}$$
->
-> $$B = \begin{pmatrix}
+
+$$B = \begin{pmatrix}
 \color{red}2 & 1 \\
 \color{blue}0 & 2 \\
 \color{green}1 & 1
 \end{pmatrix}$$
->
-> The first column of $B$ is: $\mathbf{b}_1 = \begin{pmatrix} \color{red}2 \\ \color{blue}0 \\ \color{green}1 \end{pmatrix}$
->
-> This tells us: **Meal set 1** needs $\color{red}2$ × 🥛 + $\color{blue}0$ × ☕ + $\color{green}1$ × 🍵.
->
-> **Step-by-step breakdown**:
->
-> | Beverage | Amount needed | Raw materials for that beverage | Contribution to meal set |
-> |----------|---------------|--------------------------------|-------------------------|
-> | 🥛 (milk) | $\color{red}2$ | $\mathbf{a}_1 = \begin{pmatrix} 0\\0\\0\\1 \end{pmatrix}$ | $\color{red}2 \times \begin{pmatrix} 0\\0\\0\\1 \end{pmatrix} = \begin{pmatrix} 0\\0\\0\\2 \end{pmatrix}$ |
-> | ☕ (coffee) | $\color{blue}0$ | $\mathbf{a}_2 = \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix}$ | $\color{blue}0 \times \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix} = \begin{pmatrix} 0\\0\\0\\0 \end{pmatrix}$ |
-> | 🍵 (tea) | $\color{green}1$ | $\mathbf{a}_3 = \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix}$ | $\color{green}1 \times \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix} = \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix}$ |
-> | **Total** |  |  | $\begin{pmatrix} 2\\1\\0\\2 \end{pmatrix}$ |
->
-> **As a linear combination**:
-> $$\mathbf{c}_1 = A\mathbf{b}_1 = \color{red}2 \begin{pmatrix} 0\\0\\0\\1 \end{pmatrix} + \color{blue}0 \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix} + \color{green}1 \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix} = \begin{pmatrix} 2\\1\\0\\2 \end{pmatrix}$$
->
-> **Interpretation**: Meal set 1 🍱 requires:
-> - 2 × 🍃 (leaf)
-> - 1 × 🍋 (lemon)
-> - 0 × 🫘 (bean)
-> - 2 × 🐄 (cow)
+
+The first column of $B$ is: $\mathbf{b}_1 = \begin{pmatrix} \color{red}2 \\ \color{blue}0 \\ \color{green}1 \end{pmatrix}$
+
+This tells us: **Meal set 1** needs $\color{red}2$ × 🥛 + $\color{blue}0$ × ☕ + $\color{green}1$ × 🍵.
+
+**Step-by-step breakdown**:
+
+| Beverage | Amount needed | Raw materials for that beverage | Contribution to meal set |
+|----------|---------------|--------------------------------|-------------------------|
+| 🥛 (milk) | $\color{red}2$ | $\mathbf{a}_1 = \begin{pmatrix} 0\\0\\0\\1 \end{pmatrix}$ | $\color{red}2 \times \begin{pmatrix} 0\\0\\0\\1 \end{pmatrix} = \begin{pmatrix} 0\\0\\0\\2 \end{pmatrix}$ |
+| ☕ (coffee) | $\color{blue}0$ | $\mathbf{a}_2 = \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix}$ | $\color{blue}0 \times \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix} = \begin{pmatrix} 0\\0\\0\\0 \end{pmatrix}$ |
+| 🍵 (tea) | $\color{green}1$ | $\mathbf{a}_3 = \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix}$ | $\color{green}1 \times \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix} = \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix}$ |
+| **Total** |  |  | $\begin{pmatrix} 2\\1\\0\\2 \end{pmatrix}$ |
+
+**As a linear combination**:
+$$\mathbf{c}_1 = A\mathbf{b}_1 = \color{red}2 \begin{pmatrix} 0\\0\\0\\1 \end{pmatrix} + \color{blue}0 \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix} + \color{green}1 \begin{pmatrix} 2\\1\\0\\0 \end{pmatrix} = \begin{pmatrix} 2\\1\\0\\2 \end{pmatrix}$$
+
+**Interpretation**: Meal set 1 🍱 requires:
+- 2 × 🍃 (leaf)
+- 1 × 🍋 (lemon)
+- 0 × 🫘 (bean)
+- 2 × 🐄 (cow)
+:::
 
 **General formula**:
 
@@ -371,7 +367,6 @@ $$\mathbf{c}_i^T = \mathbf{a}_i^T B = a_{i1} \mathbf{b}_1^T + a_{i2} \mathbf{b}_
 **Computing the first row of $C$ (leaf 🍃 requirements for both meal sets)**
 
 $$A = \begin{pmatrix}
-:::
 \color{red}0 & \color{red}0 & \color{red}2 \\
 0 & 0 & 1 \\
 0 & 2 & 0 \\
@@ -387,14 +382,15 @@ B = \begin{pmatrix}
 \color{green}0 & \color{green}2 \\
 \color{orange}1 & \color{orange}1
 \end{pmatrix}$$
->
-> First row of $A$: $\mathbf{a}_1^T = (\color{red}0, \color{red}0, \color{red}2)$
-> This tells us: leaf 🍃 is used by: $\color{red}0$ × 🥛 + $\color{red}0$ × ☕ + $\color{red}2$ × 🍵
->
-> $$\mathbf{c}_1^T = \color{red}0 \times (\color{blue}2, \color{blue}1) + \color{red}0 \times (\color{green}0, \color{green}2) + \color{red}2 \times (\color{orange}1, \color{orange}1)$$
-> $$= (0, 0) + (0, 0) + (2, 2) = (2, 2)$$
->
-> **Interpretation**: Since only tea uses leaf, and tea is needed $2 \times 1 = 2$ times for each meal set, we need 2 leaves for 🍱 and 2 leaves for 🍜.
+
+First row of $A$: $\mathbf{a}_1^T = (\color{red}0, \color{red}0, \color{red}2)$
+This tells us: leaf 🍃 is used by: $\color{red}0$ × 🥛 + $\color{red}0$ × ☕ + $\color{red}2$ × 🍵
+
+$$\mathbf{c}_1^T = \color{red}0 \times (\color{blue}2, \color{blue}1) + \color{red}0 \times (\color{green}0, \color{green}2) + \color{red}2 \times (\color{orange}1, \color{orange}1)$$
+$$= (0, 0) + (0, 0) + (2, 2) = (2, 2)$$
+
+**Interpretation**: Since only tea uses leaf, and tea is needed $2 \times 1 = 2$ times for each meal set, we need 2 leaves for 🍱 and 2 leaves for 🍜.
+:::
 
 **General formula**:
 
@@ -441,7 +437,6 @@ A **rank-one matrix** has the form $\mathbf{u} \mathbf{v}^T$ where $\mathbf{u}$ 
 $$\mathbf{u} = \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix}, \quad \mathbf{v}^T = \begin{pmatrix} 4 & 5 \end{pmatrix}$$
 
 $$\mathbf{u} \mathbf{v}^T = \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} \begin{pmatrix} 4 & 5 \end{pmatrix} = \begin{pmatrix}
-:::
 2 \cdot 4 & 2 \cdot 5 \\
 1 \cdot 4 & 1 \cdot 5 \\
 3 \cdot 4 & 3 \cdot 5
@@ -450,8 +445,9 @@ $$\mathbf{u} \mathbf{v}^T = \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} \begin{pma
 4 & 5 \\
 12 & 15
 \end{pmatrix}$$
->
-> Notice: **every row is a multiple of $(4, 5)$**, and **every column is a multiple of $(2, 1, 3)^T$**. This is the defining property of rank-one matrices.
+
+Notice: **every row is a multiple of $(4, 5)$**, and **every column is a multiple of $(2, 1, 3)^T$**. This is the defining property of rank-one matrices.
+:::
 
 **Decomposing $AB$ into rank-one pieces**:
 
@@ -459,7 +455,6 @@ $$\mathbf{u} \mathbf{v}^T = \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} \begin{pma
 **Decomposing our coffee shop product**
 
 $$A = \begin{pmatrix}
-:::
 \color{red}0 & \color{blue}0 & \color{green}2 \\
 \color{red}0 & \color{blue}0 & \color{green}1 \\
 \color{red}0 & \color{blue}2 & \color{green}0 \\
@@ -470,41 +465,41 @@ B = \begin{pmatrix}
 \color{blue}0 & \color{blue}2 \\
 \color{green}1 & \color{green}1
 \end{pmatrix}$$
->
-> **Step 1**: Identify columns of $A$ and rows of $B$:
-> $$\mathbf{a}_1 = \begin{pmatrix} \color{red}0\\\color{red}0\\\color{red}0\\\color{red}1 \end{pmatrix}, \quad
+
+**Step 1**: Identify columns of $A$ and rows of $B$:
+$$\mathbf{a}_1 = \begin{pmatrix} \color{red}0\\\color{red}0\\\color{red}0\\\color{red}1 \end{pmatrix}, \quad
 \mathbf{a}_2 = \begin{pmatrix} \color{blue}0\\\color{blue}0\\\color{blue}2\\\color{blue}0 \end{pmatrix}, \quad
 \mathbf{a}_3 = \begin{pmatrix} \color{green}2\\\color{green}1\\\color{green}0\\\color{green}0 \end{pmatrix}$$
->
-> $$\mathbf{b}_1^T = \begin{pmatrix} \color{red}2 & \color{red}1 \end{pmatrix}, \quad
+
+$$\mathbf{b}_1^T = \begin{pmatrix} \color{red}2 & \color{red}1 \end{pmatrix}, \quad
 \mathbf{b}_2^T = \begin{pmatrix} \color{blue}0 & \color{blue}2 \end{pmatrix}, \quad
 \mathbf{b}_3^T = \begin{pmatrix} \color{green}1 & \color{green}1 \end{pmatrix}$$
->
-> **Step 2**: Compute each rank-one piece:
->
-> $$R_1 = \mathbf{a}_1 \mathbf{b}_1^T = \begin{pmatrix} \color{red}0\\\color{red}0\\\color{red}0\\\color{red}1 \end{pmatrix} \begin{pmatrix} \color{red}2 & \color{red}1 \end{pmatrix} = \begin{pmatrix}
+
+**Step 2**: Compute each rank-one piece:
+
+$$R_1 = \mathbf{a}_1 \mathbf{b}_1^T = \begin{pmatrix} \color{red}0\\\color{red}0\\\color{red}0\\\color{red}1 \end{pmatrix} \begin{pmatrix} \color{red}2 & \color{red}1 \end{pmatrix} = \begin{pmatrix}
 0 & 0 \\
 0 & 0 \\
 0 & 0 \\
 \color{red}2 & \color{red}1
 \end{pmatrix}$$
->
-> $$R_2 = \mathbf{a}_2 \mathbf{b}_2^T = \begin{pmatrix} \color{blue}0\\\color{blue}0\\\color{blue}2\\\color{blue}0 \end{pmatrix} \begin{pmatrix} \color{blue}0 & \color{blue}2 \end{pmatrix} = \begin{pmatrix}
+
+$$R_2 = \mathbf{a}_2 \mathbf{b}_2^T = \begin{pmatrix} \color{blue}0\\\color{blue}0\\\color{blue}2\\\color{blue}0 \end{pmatrix} \begin{pmatrix} \color{blue}0 & \color{blue}2 \end{pmatrix} = \begin{pmatrix}
 0 & 0 \\
 0 & 0 \\
 \color{blue}0 & \color{blue}4 \\
 0 & 0
 \end{pmatrix}$$
->
-> $$R_3 = \mathbf{a}_3 \mathbf{b}_3^T = \begin{pmatrix} \color{green}2\\\color{green}1\\\color{green}0\\\color{green}0 \end{pmatrix} \begin{pmatrix} \color{green}1 & \color{green}1 \end{pmatrix} = \begin{pmatrix}
+
+$$R_3 = \mathbf{a}_3 \mathbf{b}_3^T = \begin{pmatrix} \color{green}2\\\color{green}1\\\color{green}0\\\color{green}0 \end{pmatrix} \begin{pmatrix} \color{green}1 & \color{green}1 \end{pmatrix} = \begin{pmatrix}
 \color{green}2 & \color{green}2 \\
 \color{green}1 & \color{green}1 \\
 0 & 0 \\
 0 & 0
 \end{pmatrix}$$
->
-> **Step 3**: Sum the rank-one pieces:
-> $$C = AB = R_1 + R_2 + R_3 = \begin{pmatrix}
+
+**Step 3**: Sum the rank-one pieces:
+$$C = AB = R_1 + R_2 + R_3 = \begin{pmatrix}
 0 & 0 \\
 0 & 0 \\
 0 & 0 \\
@@ -525,6 +520,7 @@ B = \begin{pmatrix}
 0 & 4 \\
 2 & 1
 \end{pmatrix}$$
+:::
 
 ::: remark
 **Why is this perspective important?**
@@ -563,31 +559,31 @@ Before discussing inverses, we introduce the **identity matrix** — the matrix 
 
 Suppose our recipe table says:
 $$\begin{array}{c|ccc}
-:::
   & \text{🍵} & \text{🥛} & \text{☕} \\
 \hline
 \text{🍵} & 1 & 0 & 0 \\
 \text{🥛} & 0 & 1 & 0 \\
 \text{☕} & 0 & 0 & 1
 \end{array}$$
->
-> This table says:
-> - 🍵 = 1 × 🍵 + 0 × 🥛 + 0 × ☕ (tea equals tea)
-> - 🥛 = 0 × 🍵 + 1 × 🥛 + 0 × ☕ (milk equals milk)
-> - ☕ = 0 × 🍵 + 0 × 🥛 + 1 × ☕ (coffee equals coffee)
->
-> This is a **trivial statement** — it says nothing! The ingredients and products are **identical** and in the same order. Only the diagonal has 1's, all other entries are 0.
+
+This table says:
+- 🍵 = 1 × 🍵 + 0 × 🥛 + 0 × ☕ (tea equals tea)
+- 🥛 = 0 × 🍵 + 1 × 🥛 + 0 × ☕ (milk equals milk)
+- ☕ = 0 × 🍵 + 0 × 🥛 + 1 × ☕ (coffee equals coffee)
+
+This is a **trivial statement** — it says nothing! The ingredients and products are **identical** and in the same order. Only the diagonal has 1's, all other entries are 0.
+:::
 
 ::: proposition
 **Definition of Identity Matrix**
 An $n \times n$ matrix with 1's on the diagonal and 0's elsewhere is called the **$n$-th order identity matrix**, denoted $I_n$ or simply $I$.
 
 $$I_3 = \begin{pmatrix}
-:::
 1 & 0 & 0 \\
 0 & 1 & 0 \\
 0 & 0 & 1
 \end{pmatrix}$$
+:::
 
 ::: proposition
 **Property of the Identity Matrix**
