@@ -15,6 +15,143 @@ This course uses a **highly distinctive pedagogical approach** that differs fund
 
 ---
 
+## 📚 Where to Find Source Materials
+
+### CRITICAL: Use the Author's Original Materials
+
+**DO NOT** start from standard textbooks. The author has created **original teaching materials** that embody the unique pedagogical approach.
+
+### Primary Source Repositories
+
+These repositories contain the author's original LaTeX materials from previous teaching:
+
+#### 1. **Linear-Algebra-Notes** Repository
+**Location**: `/home/ubuntu/repositories/Linear-Algebra-Notes/`
+
+**Key directory**: `myoldtextbook/`
+
+This contains the author's **original Chinese-language lecture notes** in LaTeX:
+
+- **ChineseMatrixProduct.tex** — Matrix multiplication with ingredient table metaphor
+- **ChineseRowOperations.tex** — Row/column operations with contravariant/covariant logic
+- **ChineseSolvingEquation.tex** — Solving systems using cross-filling
+- **ChineseLinearEquations.tex** — Linear equations framework
+- **CrossFilling.tex** — The core computational method
+- **Projection.tex** — Projection theory
+- **Diagonalization.tex** — Spectral decomposition approach
+- **LagurangePolynomial.tex** — Lagrange interpolation for eigenvalues
+
+**These are the PRIMARY references** — they contain the original pedagogical innovations that differentiate this course from standard textbooks.
+
+#### 2. **Linear-Algebra-Slides** Repository
+**Location**: `/home/ubuntu/repositories/Linear-Algebra-Slides/`
+
+**Contains**: Lecture slide decks (LaTeX Beamer format) covering all major topics:
+
+- `computationalStrategies.tex` — Cross-filling method
+- `lineartransformation.tex` — Linear transformations
+- `compatibleprojections.tex` — Compatible projection families
+- `SpectralDecomposition.tex` — Spectral decomposition
+- `determinant.tex` — Determinants
+- `nullspace.tex` — Null space and column space
+- `orthogonalprojections.tex` — Orthogonal projections
+- And 50+ more topic-specific slides
+
+**Use these for**: Visual presentation ideas, structured examples, topic flow
+
+#### 3. **Linear-Algebra-Exercises** Repository
+**Location**: `/home/ubuntu/repositories/Linear-Algebra-Exercises/`
+
+**Contains**:
+- Past exam problems (2023 midterm/final)
+- Homework assignments
+- Problem sets aligned with the cross-filling approach
+
+**Use these for**: Creating exercises that match the pedagogical style
+
+### How to Use These Materials
+
+#### Step 1: Read the Relevant LaTeX Source
+
+Before writing a new lecture note section, **read the corresponding `.tex` file** from the repositories above.
+
+**Example**: Before writing about row operations, read:
+```bash
+/home/ubuntu/repositories/Linear-Algebra-Notes/myoldtextbook/ChineseRowOperations.tex
+```
+
+**Pay attention to**:
+- The logical flow (why before what)
+- The metaphors used (ingredient tables, production chains)
+- The level of detail (all intermediate steps shown)
+- The examples chosen (concrete numbers with semantic meaning)
+
+#### Step 2: Extract the Core Logic
+
+From the LaTeX source, extract:
+1. **The motivating question** (why does this matter?)
+2. **The concrete scenario** (ingredient table example)
+3. **The logical derivation** (step-by-step reasoning)
+4. **The general principle** (named after derivation)
+5. **The formal statement** (proposition)
+
+#### Step 3: Adapt to Markdown + MathJax
+
+Convert the LaTeX pedagogical approach to the current Markdown format:
+- Replace LaTeX environments with `::: proposition`, `::: example`, `::: remark`
+- Add emojis to concrete examples (🍃🍋🫘🐄 → 🥛☕🍵 → 🍱🍜)
+- Use Mermaid diagrams for production pipelines
+- Add color coding with `\color{red}`, `\color{blue}`, etc.
+
+#### Step 4: Verify Against Current Notes
+
+Compare your draft against the **existing lecture notes** in this repository:
+- `/courses/MATH203/2026-spring/notes/matrix-arithmetic.md` (excellent example)
+- `/courses/MATH203/2026-spring/notes/matrix-equations.md` (contravariant/covariant logic)
+
+**Ensure consistency in**:
+- Emoji usage (same emojis for same concepts)
+- Metaphor extension (coffee shop throughout)
+- Alert box types (`::: proposition`, `::: remark`, etc.)
+- Forward connections (mention cross-filling)
+
+### What These Materials Are NOT
+
+❌ **These are NOT traditional textbooks**
+
+The materials in `Linear-Algebra-Notes/myoldtextbook/` represent the author's **original pedagogy**:
+- Contravariant/covariant logic (not in any standard textbook)
+- Cross-filling method (instead of Gaussian elimination)
+- Lagrange interpolation for eigenvalues (instead of eigenvector solving)
+- Ingredient table metaphor (extended throughout)
+
+**Do NOT** supplement with content from:
+- Strang's "Linear Algebra and Its Applications"
+- Lay's "Linear Algebra and Its Applications"
+- Anton's "Elementary Linear Algebra"
+- Any other standard textbook
+
+If the author wanted standard textbook content, they would have assigned a standard textbook.
+
+### Quick Reference: Topic to Source File Mapping
+
+| Topic | Primary Source | Secondary Source |
+|-------|---------------|------------------|
+| Matrix multiplication | `ChineseMatrixProduct.tex` | `matrix.tex` (slides) |
+| Row/column operations | `ChineseRowOperations.tex` | `rowoperation.tex` (slides) |
+| Cross-filling method | `CrossFilling.tex` | `computationalStrategies.tex` (slides) |
+| Solving equations | `ChineseSolvingEquation.tex` | — |
+| Projection theory | `Projection.tex` | `projection.tex`, `compatibleprojections.tex` (slides) |
+| Vector spaces | `Maps.tex`, `Transformation.tex` | `vectorspace.tex` (slides) |
+| Basis & dimension | `Basis.tex` | — |
+| Eigenvalues | `Eigentwo.tex`, `MotivationEigen.tex` | `eigenvalues.tex` (slides) |
+| Spectral decomposition | `Diagonalization.tex` | `SpectralDecomposition.tex` (slides) |
+| Lagrange interpolation | `LagurangePolynomial.tex` | `LagurangeInterpolationPolynomial.tex` (exercises) |
+| Determinants | (check myoldtextbook) | `determinant.tex` (slides) |
+| Orthogonality | `Orthogonal.tex` | `orthogonalprojections.tex` (slides) |
+
+---
+
 ## The Author's Unique Pedagogical Philosophy
 
 ### Core Principles
