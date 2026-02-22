@@ -1,4 +1,4 @@
-# Week 2-3: Cross-Filling Method
+# Lecture 3: Cross-Filling Method
 
 > **Topics**: §1.3 — Rank-One Decomposition, Cross-Filling Algorithm, Sum ↔ Product Equivalence
 > **Date**: Mar 2–12, 2026
