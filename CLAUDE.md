@@ -29,6 +29,16 @@ Then open `http://localhost:8000`. No install or build step needed.
 - `colloquium/readme.md` — Semester-specific colloquium schedule (included inline into the homepage via Docsify's `:include` directive).
 - New seminar pages: create a subdirectory with a `readme.md` and link it from the root `README.md`.
 
+## Git Workflow
+
+**IMPORTANT**: When making commits:
+
+1. **Use the `/commit` skill** — This ensures proper git identity (engineer-agent) is applied
+2. **Always push after committing** — User reviews changes on remote, so every commit should be pushed immediately
+3. **Never leave unpushed commits** — Use `git push` right after `git commit`
+
+**Why push every time?** The user monitors progress via GitHub's remote repository, not the local working directory.
+
 ## Deployment
 
 Push to `main` branch. GitHub Pages serves the repo root automatically — no CI/CD workflow needed.
