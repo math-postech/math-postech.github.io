@@ -93,9 +93,9 @@ The textbook is only for the reference, we will follow our lecture notes in this
 |------|-----------------|--------|---------|
 | **Week 1** | 02-23 -- 02-26 | **Ch1 §1.1–1.2**: Matrix Arithmetic | Three views of AB=C (column, row, sum-of-rank-one). Row/column operations. Inverses. Elementary vs. non-invertible operations. |
 | **Week 2** | ~~03-02~~ -- 03-05 | **Ch1 §1.3**: Cross-Filling | *~~03-02 Holiday~~*. The core method: rank-one peeling. Sum ↔ product equivalence (A = ΣRᵢ ⟺ A = UV). *Central idea of Chapter 1.* |
-| **Week 3** | 03-09 -- 03-12 | **Ch1 §1.3–1.4, Ch2 §2.1**: Solving Systems, Subspaces | Solving Ax=b via cross-filling. Solvability condition. Matrix as linear combination container. Two languages for subspaces. **HW1 assigned.** |
+| **Week 3** | 03-09 -- 03-12 | **Ch1 §1.3–1.4, Ch2 §2.1**: Solving Systems, Subspaces | Linear independence, span, basis, dimension (via trace). Rank. Solving Ax=b via cross-filling. Solvability condition. Matrix as linear combination container. Two languages for subspaces. **HW1 assigned.** |
 | **Week 4** | 03-16 -- 03-19 | **Ch2 §2.1–2.2**: Vector Spaces | Null space (3 views), column space (3 views). Subspaces of AB: Col(AB)⊆Col(A), Null(B)⊆Null(AB). |
-| **Week 5** | 03-23 -- 03-26 | **Ch2 §2.3–2.4**: Four Subspaces, Basis & Dimension | Transpose, symmetric matrices. Four fundamental subspaces: Col(Aᵀ)⊥Null(A). Linear independence, span, basis, dimension (via trace). Rank. |
+| **Week 5** | 03-23 -- 03-26 | **Ch2 §2.3–2.4**: Four Subspaces, Basis & Dimension | Transpose, symmetric matrices. Four fundamental subspaces: Col(Aᵀ)⊥Null(A).  |
 | **Week 6** | 03-30 -- 04-02 | **Ch2 §2.4–2.5, Ch3 §3.1**: Full Rank & Projections | Full rank ⟺ invertibility. Linear transformations. **Projection defined**: P²=P. The sunlight-and-floor model. Col(P), Null(P). **HW2 assigned.** |
 | **Week 7** | 04-06 -- 04-09 | **Ch3 §3.2–3.4**: Projection Theory + Review |  Theorems involving AB and BA. Cross-filling projections → rank-1 projections (automatic). Compatible families.  **Midterm review.** |
 | **Week 8** | 04-13 -- 04-16 | **MIDTERM WEEK** | **Midterm Exam: Mon 04-13, 18:00-22:00.** No classes this week. |
