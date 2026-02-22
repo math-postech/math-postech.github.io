@@ -33,6 +33,23 @@ Then open `http://localhost:8000`. No install or build step needed.
 
 Push to `main` branch. GitHub Pages serves the repo root automatically — no CI/CD workflow needed.
 
+## Course Content (MATH203)
+
+This repository includes detailed lecture notes for the MATH203 Linear Algebra course. These notes use a **unique pedagogical approach** (not standard textbook style).
+
+**When creating or editing course notes:**
+
+1. **MUST READ**: `/docs/knowledge/content-creation-guidelines.md` — comprehensive guide covering:
+   - The author's pedagogical philosophy (ingredient table metaphor, contravariant/covariant logic)
+   - Source materials (Linear-Algebra-Notes, Linear-Algebra-Slides, Linear-Algebra-Exercises repositories)
+   - Writing standards, examples, and checklist
+
+2. **Course structure**: `courses/MATH203/2026-spring/`
+   - `notes/*.md` — lecture notes (markdown with MathJax)
+   - `index.md` — course index (must update when adding new notes)
+
+3. **Key principle**: These are NOT standard textbook materials. Follow the guidelines exactly.
+
 ## Notes
 
 - The `index.html` has a block of plugins commented out (KaTeX, some duplicate Mermaid loads). The active LaTeX renderer is MathJax 3 via `docsify-latex`.
