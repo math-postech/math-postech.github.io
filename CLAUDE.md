@@ -8,26 +8,30 @@ Static website for the POSTECH Mathematics Department's academic announcements (
 
 ## Technology
 
-- **Docsify v4** — client-side SPA that renders Markdown files directly in the browser. No build step.
-- All dependencies loaded via CDN in `index.html` (MathJax, Mermaid, PlantUML, docsify-accordion).
-- LaTeX math supported: inline `$...$` or `\(...\)`, display `$$...$$`.
+- **VitePress** — Vue-powered static site generator that builds markdown files into HTML. Previously used Docsify (migrated in Feb 2024).
+- Dependencies managed via npm (see `package.json`).
+- LaTeX math supported via MathJax 3: inline `$...$` or `\(...\)`, display `$$...$$`.
+- Mermaid diagrams, PlantUML, and custom academic containers (definition, theorem, proposition, etc.) configured in `.vitepress/config.ts`.
 
 ## Local Development
 
-Serve with any static file server from the repo root:
+Install dependencies and run dev server:
 
-```
-python3 -m http.server 8000
+```bash
+npm install
+npm run docs:dev
 ```
 
-Then open `http://localhost:8000`. No install or build step needed.
+Then open `http://localhost:5173`. VitePress provides hot module replacement for instant updates.
 
 ## Architecture
 
-- `index.html` — Docsify configuration and CDN script/style loading. This is the only HTML file; all routing is client-side.
-- `README.md` — Site homepage content. Docsify renders this as the landing page.
-- `colloquium/readme.md` — Semester-specific colloquium schedule (included inline into the homepage via Docsify's `:include` directive).
-- New seminar pages: create a subdirectory with a `readme.md` and link it from the root `README.md`.
+- `.vitepress/config.ts` — VitePress configuration including plugins, markdown extensions, and custom containers.
+- `index.md` — Site homepage content (VitePress entry point).
+- `colloquium/*/readme.md` — Semester-specific colloquium schedules.
+- `seminar/*/readme.md` — Seminar pages.
+- `courses/*/readme.md` — Course pages.
+- **When adding new events**: Update `index.md` to add links in the appropriate semester section.
 
 ## Git Workflow
 
@@ -41,7 +45,10 @@ Then open `http://localhost:8000`. No install or build step needed.
 
 ## Deployment
 
-Push to `main` branch. GitHub Pages serves the repo root automatically — no CI/CD workflow needed.
+Push to `main` branch triggers GitHub Actions workflow (`.github/workflows/deploy-vitepress-main.yml`) which:
+1. Builds the VitePress site (`npm run docs:build`)
+2. Deploys to `gh-pages` branch
+3. GitHub Pages serves from `gh-pages` branch
 
 ## Course Content (MATH203)
 
@@ -62,5 +69,5 @@ This repository includes detailed lecture notes for the MATH203 Linear Algebra c
 
 ## Notes
 
-- The `index.html` has a block of plugins commented out (KaTeX, some duplicate Mermaid loads). The active LaTeX renderer is MathJax 3 via `docsify-latex`.
-- Cache-busting meta tags are set in `index.html` to prevent stale content.
+- VitePress automatically handles cache busting with content hashes in built assets.
+- Old Docsify hash URLs (e.g., `/#/colloquium/2026-spring/readme.md`) are automatically redirected to VitePress clean URLs via client-side script in `.vitepress/config.ts`.
