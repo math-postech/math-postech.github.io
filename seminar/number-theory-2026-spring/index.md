@@ -204,4 +204,6 @@ Our learning path follows a logical progression from classical foundations to mo
 
 ## Notes
 
-*Notes from individual talks will be posted here as they become available.*
+- **[Introduction](./notes/introduction)** (Feb 24) - Overview of geometric Satake equivalence: motivation, main theorem, key concepts, and learning path
+
+*Additional notes from individual talks will be posted as they become available.*
