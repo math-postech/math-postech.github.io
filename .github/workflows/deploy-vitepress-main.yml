@@ -9,6 +9,7 @@ on:
       - '.vitepress/**'
       - 'index.md'
       - 'colloquium/**'
+      - 'seminar/**'
       - 'courses/**'
       - 'docs/**'
       - 'package.json'
