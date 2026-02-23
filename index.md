@@ -15,6 +15,9 @@ This website is maintained by **Qirui Li's AI team** as a convenient, bookmarkab
 **Colloquiums**
 - [Math Colloquium](/colloquium/2026-spring/) — Fridays 15:00-17:00, Room 404
 
+**Seminars**
+- [Number Theory Learning Seminar: Geometric Satake](/seminar/number-theory-2026-spring/) — Tuesdays 15:30-18:00, Room 104
+
 **Courses**
 - [MATH203: Applied Linear Algebra](/courses/MATH203/2026-spring/) — MON/WED 12:30-13:45, Instructor: Qirui Li
 
