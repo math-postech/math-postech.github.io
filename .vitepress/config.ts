@@ -18,7 +18,6 @@ export default withMermaid(defineConfig({
     'test/**',      // Test files
     'tests/**',     // Test files
     'vitepress-test/**',  // Old test directory
-    'README.md',    // Old Docsify homepage (replaced by index.md)
     '**/*.new'      // Temporary/backup files
   ],
 
