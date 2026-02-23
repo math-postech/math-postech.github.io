@@ -672,10 +672,22 @@ For large matrices with small rank (e.g., $1000 \times 1000$ matrix of rank 5), 
 ::: definition
 **Definition: Rank of a Matrix**
 
-The **rank** of a matrix $A$, denoted $\operatorname{rank}(A)$ or $\rho(A)$, is the **minimum number of rank-one matrices** needed to express $A$ as a sum:
+The **rank** of a matrix $A$, denoted $\operatorname{rank}(A)$ or $\rho(A)$, is the **number of rank-one matrices produced by the cross-filling algorithm**:
 $$A = R_1 + R_2 + \cdots + R_r$$
 
-Equivalently, it is the **minimum inner dimension** in a factorization $A = UV$.
+Equivalently, it is the **inner dimension** in the factorization $A = UV$ obtained from cross-filling.
+:::
+
+::: warning
+**Is this definition well-defined?**
+
+We've defined rank based on the **cross-filling algorithm**, but there's a subtle issue: cross-filling allows **different pivot choices** at each step.
+
+**Question**: Do different pivot choices always give the **same number** of rank-one pieces?
+
+**Answer preview**: Yes! But we don't know this yet. We'll prove in **Lecture 4** that rank is **well-defined** (independent of pivot choices) by connecting it to a geometric property called **dimension of the column space**.
+
+For now, we'll use cross-filling to compute ranks, understanding that the well-definedness is a theorem we'll prove soon.
 :::
 
 **Immediate consequences** from the cross-filling algorithm:
@@ -819,7 +831,7 @@ $$A = \begin{pmatrix} 2 & 4 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 1 \\ 0.5 \e
 
 Both are valid! They give different $U$ and $V$ matrices, but the same rank (r=1).
 
-**What IS unique?** The **rank** $r$ is always the same regardless of pivot choices. This is a deep theorem we'll prove rigorously in Chapter 2 using the concept of dimension.
+**What IS unique?** The **rank** $r$ is always the same regardless of pivot choices. We'll prove this in **Lecture 4** by showing that rank equals the **dimension of the column space**, a geometric property independent of algorithm choices.
 :::
 
 ---
