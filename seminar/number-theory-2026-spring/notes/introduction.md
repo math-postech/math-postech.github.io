@@ -150,32 +150,69 @@ The group $H$ can be **reconstructed** from the category via the **fiber functor
 
 ## Proof Strategy Overview
 
-The proof of geometric Satake equivalence has several major steps:
+**Critical philosophical point:** The Langlands dual group $G^\vee$ is **not assumed a priori**. It is **reconstructed** from the categorical structure of perverse sheaves via Tannakian formalism. This is an **intrinsic** approach.
 
-### Step 1: Construct the Functor
-Define $V: \text{Rep}(G^\vee_k) \to \text{Perv}_{G[[t]]}(\text{Gr}_G, k)$ by sending representations to perverse sheaves.
+The proof follows the Tannakian reconstruction strategy (Mirković-Vilonen):
 
-### Step 2: Monoidal Structure
-Show that $V$ is compatible with:
-- Tensor product of representations ↔ Convolution of sheaves
-- Commutativity and associativity constraints
+### Step 1: Symmetric Monoidal Structure
+Show that $\text{Perv}_{G[[t]]}(\text{Gr}_G, k)$ is a symmetric monoidal category:
+- Define **convolution product**: $\mathcal{F}_1 \star \mathcal{F}_2 = m_!(\mathcal{F}_1 \boxtimes \mathcal{F}_2)$
+- Prove **associativity** and **commutativity** constraints
+- Identify **unit object**: $\mathbb{1} = \text{IC}_{\text{pt}}$ (IC sheaf of the base point)
 
-### Step 3: Weight Functors
-For each $\lambda \in X_*(T)^+$, define:
-$$w_\lambda: \text{Perv}_{G[[t]]}(\text{Gr}_G, k) \to \text{Vect}_k$$
-$$w_\lambda(\mathcal{F}) = (i_\lambda)^* \mathcal{F}$$
-where $i_\lambda: \{\lambda\} \hookrightarrow \text{Gr}_G$ is the inclusion of the $\lambda$-point.
+**Key geometric input:** The convolution diagram and properties of the multiplication map on $\text{Gr}_G$.
 
-### Step 4: Fiber Functor and Neutrality
-Construct a fiber functor that makes the category neutral Tannakian.
+### Step 2: Construct Fiber Functor
+This is the **most technically challenging step**.
 
-**Key technical challenge:** Prove exactness and compatibility with convolution.
+Define the fiber functor $\omega: \text{Perv}_{G[[t]]}(\text{Gr}_G, k) \to \text{Vect}_k$ by:
+$$\omega(\mathcal{F}) = \mathcal{H}^0(\text{Gr}_G, \mathcal{F})$$
+(the global cohomology in degree 0)
 
-### Step 5: Identify the Group
-Show that the Tannakian group is precisely $G^\vee_k$ by:
-- Computing weight spaces
-- Verifying the root system
-- Checking the Weyl group action
+Must prove:
+- **Exactness**: $\omega$ is an exact functor
+- **Compatibility with $\star$**: $\omega(\mathcal{F}_1 \star \mathcal{F}_2) \simeq \omega(\mathcal{F}_1) \otimes \omega(\mathcal{F}_2)$
+- **Faithfulness**: $\omega$ is faithful
+
+**Key technical tool:** Weight functors and dimension estimates on Schubert varieties.
+
+### Step 3: Prove Neutrality (Tannakian Properties)
+Verify all axioms of a neutral Tannakian category:
+- Abelian category with enough projectives
+- $\text{End}(\mathbb{1}) = k$ (the unit object has endomorphisms = $k$)
+- Every object has a dual
+- **Semisimplicity** (for appropriate coefficients)
+
+The fiber functor $\omega$ makes the category **neutral**.
+
+### Step 4: Tannakian Reconstruction
+By **Tannakian formalism** (Deligne-Milne), a neutral Tannakian category over $k$ is equivalent to $\text{Rep}(H)$ for a unique algebraic group $H$ over $k$.
+
+The group $H$ is reconstructed as:
+$$H = \text{Aut}^\otimes(\omega)$$
+the group of **tensor-preserving automorphisms** of the fiber functor.
+
+At this point we have:
+$$\text{Perv}_{G[[t]]}(\text{Gr}_G, k) \simeq \text{Rep}(H)$$
+but we don't yet know what $H$ is!
+
+### Step 5: Identify $H = G^\vee_k$
+Now comes the identification. We must show the reconstructed group $H$ is precisely the Langlands dual $G^\vee_k$.
+
+**Strategy:**
+1. Define **weight functors**: For each $\lambda \in X_*(T)^+$,
+   $$w_\lambda: \text{Perv}_{G[[t]]}(\text{Gr}_G, k) \to \text{Vect}_k$$
+   $$w_\lambda(\mathcal{F}) = \mathcal{H}^0(\text{Gr}_\lambda, \mathcal{F}|_{\text{Gr}_\lambda})$$
+
+2. Compute **weight spaces**: Show that $w_\lambda$ extracts the $\lambda$-weight space of representations
+
+3. Verify **root system**: The root system of $H$ (computed from weight decomposition) matches the dual root system $\Phi^\vee(G)$
+
+4. Check **Weyl group**: The Weyl group action on $X^*(H)$ matches $W(G)$
+
+5. Conclude: $H \simeq G^\vee_k$
+
+**The dual group emerges from geometry!**
 
 ## Learning Path Overview
 
