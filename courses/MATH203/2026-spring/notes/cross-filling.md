@@ -580,7 +580,80 @@ $$A = R_1 + R_2 + \cdots + R_r$$
 
 where $R_k = \mathbf{u}_k \mathbf{v}_k^T$.
 
-But we can also write this as a **product**:
+But we can also write this as a **product**. Before showing how, let's clarify an important distinction in vector multiplication.
+
+---
+
+### Inner Product vs. Outer Product: Two Ways to Multiply Vectors
+
+When we multiply vectors, the **order of dimensions** matters critically.
+
+::: definition
+**Two Products of Vectors**
+
+Given column vectors $\mathbf{u} \in \mathbb{R}^m$ and $\mathbf{v} \in \mathbb{R}^n$:
+
+**1. Inner product** (row × column): $\mathbf{u}^T \mathbf{v}$ produces a **scalar**
+
+$$\mathbf{u}^T \mathbf{v} = \begin{pmatrix} u_1 & u_2 & \cdots & u_m \end{pmatrix} \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_m \end{pmatrix} = u_1 v_1 + u_2 v_2 + \cdots + u_m v_m$$
+
+- **Dimensions**: $(1 \times m)(m \times 1) = 1 \times 1$ → **single number**
+- **Geometric meaning**: Measures "alignment" or "projection" between vectors
+- **Common name**: Dot product
+
+**2. Outer product** (column × row): $\mathbf{u} \mathbf{v}^T$ produces a **matrix**
+
+$$\mathbf{u} \mathbf{v}^T = \begin{pmatrix} u_1 \\ u_2 \\ \vdots \\ u_m \end{pmatrix} \begin{pmatrix} v_1 & v_2 & \cdots & v_n \end{pmatrix} = \begin{pmatrix}
+u_1 v_1 & u_1 v_2 & \cdots & u_1 v_n \\
+u_2 v_1 & u_2 v_2 & \cdots & u_2 v_n \\
+\vdots & \vdots & \ddots & \vdots \\
+u_m v_1 & u_m v_2 & \cdots & u_m v_n
+\end{pmatrix}$$
+
+- **Dimensions**: $(m \times 1)(1 \times n) = m \times n$ → **matrix**
+- **Structure**: Every row is a multiple of $\mathbf{v}^T$; every column is a multiple of $\mathbf{u}$
+- **Result**: A **rank-one matrix** (exactly what we've been building!)
+:::
+
+::: example
+**Example: Inner vs. Outer Product**
+
+Let $\mathbf{u} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$ and $\mathbf{v} = \begin{pmatrix} 3 \\ 4 \end{pmatrix}$.
+
+**Inner product** (row × column):
+$$\mathbf{u}^T \mathbf{v} = \begin{pmatrix} 2 & 1 \end{pmatrix} \begin{pmatrix} 3 \\ 4 \end{pmatrix} = 2(3) + 1(4) = 10$$
+
+Result: A single number.
+
+**Outer product** (column × row):
+$$\mathbf{u} \mathbf{v}^T = \begin{pmatrix} 2 \\ 1 \end{pmatrix} \begin{pmatrix} 3 & 4 \end{pmatrix} = \begin{pmatrix}
+2 \cdot 3 & 2 \cdot 4 \\
+1 \cdot 3 & 1 \cdot 4
+\end{pmatrix} = \begin{pmatrix}
+6 & 8 \\
+3 & 4
+\end{pmatrix}$$
+
+Result: A $2 \times 2$ rank-one matrix.
+
+Notice: Row 2 = $\frac{1}{2}$ × Row 1, Column 2 = $\frac{4}{3}$ × Column 1. This is the rank-one pattern!
+:::
+
+::: remark
+**Why "inner" and "outer"?**
+
+The terminology comes from tensor analysis:
+- **Inner product** $\mathbf{u}^T \mathbf{v}$: The indices "contract" (sum over), reducing dimensions → smaller object (scalar)
+- **Outer product** $\mathbf{u} \mathbf{v}^T$: The indices "expand" (create grid), increasing dimensions → larger object (matrix)
+
+**Key for this course**: All our rank-one matrices $R_k = \mathbf{u}_k \mathbf{v}_k^T$ are **outer products**, not inner products!
+:::
+
+---
+
+### Converting Sum to Product: The Inner Dimension
+
+Now we can convert between sum and product forms.
 
 ::: proposition
 **Sum ↔ Product Equivalence**
@@ -599,6 +672,58 @@ Recall from Lecture 1, Perspective 3 (sum-of-rank-one view):
 $$UV = \sum_{k=1}^r \mathbf{u}_k \mathbf{v}_k^T$$
 
 where $\mathbf{u}_k$ is column $k$ of $U$ and $\mathbf{v}_k^T$ is row $k$ of $V$.
+
+---
+
+### The Inner Dimension: Where Rank Lives
+
+Notice something special about the dimensions in $A = UV$:
+
+::: definition
+**Inner Dimension of a Matrix Product**
+
+When we write a matrix product $C = AB$ where:
+- $A$ is $m \times r$ (m rows, r columns)
+- $B$ is $r \times n$ (r rows, n columns)
+- $C$ is $m \times n$
+
+The dimension $r$ is called the **inner dimension** of the product — it's the "common dimension" that appears in the middle:
+
+$$C_{m \times n} = A_{m \times \boxed{r}} \cdot B_{\boxed{r} \times n}$$
+
+**Visual pattern**:
+```
+   outer dimension (m)
+        ↓
+    [  m × r  ] · [  r × n  ]  =  [  m × n  ]
+            ↑          ↑                ↑
+      inner dimension (r)      outer dimension (n)
+        (must match!)
+```
+
+The inner dimension must match for matrix multiplication to be valid.
+:::
+
+::: remark
+**Rank appears as the inner dimension**
+
+When we factor $A = UV$ using cross-filling:
+$$A_{m \times n} = U_{m \times r} \cdot V_{r \times n}$$
+
+The **rank** of $A$ appears as the **inner dimension** $r$ of this factorization!
+
+**Why is this profound?**
+- The **outer dimensions** $(m, n)$ are obvious — they're the size of the original matrix $A$
+- The **inner dimension** $r$ is **hidden** — it reveals the number of independent patterns inside $A$
+- Cross-filling **discovers** this hidden dimension by peeling off rank-one layers
+
+**Terminology connection**:
+- Inner **product** $\mathbf{u}^T \mathbf{v}$: vectors contract (reduce dimension)
+- Inner **dimension** $r$ in $A = UV$: the hidden structural complexity
+- Both are "inner" because they're not immediately visible from the outside!
+:::
+
+---
 
 ---
 
@@ -651,18 +776,28 @@ $$UV = \begin{pmatrix}
 So we have factored $A$ as:
 $$A_{3 \times 3} = U_{3 \times 2} \cdot V_{2 \times 3}$$
 
-The rank of $A$ is 2, which appears as the **inner dimension** of the factorization!
+The rank of $A$ is 2, which appears as the **inner dimension** of the factorization (as defined earlier)!
 :::
 
 ::: remark
-**The rank reveals the inner dimension**
+**Data compression via low-rank factorization**
 
 For an $m \times n$ matrix $A$ of rank $r$:
 $$A = U_{m \times r} \cdot V_{r \times n}$$
 
-The factorization is **dimension-reducing**: instead of storing $mn$ entries of $A$, we can store $(m+n)r$ entries of $U$ and $V$ combined.
+The factorization is **dimension-reducing**: instead of storing $mn$ entries of $A$, we can store:
+- $mr$ entries of $U$
+- $rn$ entries of $V$
+- **Total**: $mr + rn = (m+n)r$ entries
 
-For large matrices with small rank (e.g., $1000 \times 1000$ matrix of rank 5), this is a **massive compression**: $10^6$ entries → $2000 \times 5 = 10000$ entries!
+**When is this beneficial?** When $r \ll \min(m,n)$ (rank is much smaller than matrix dimensions).
+
+**Example**: A $1000 \times 1000$ matrix of rank 5:
+- Direct storage: $10^6$ entries
+- Factored storage: $(1000 + 1000) \times 5 = 10{,}000$ entries
+- **Compression ratio**: $100:1$!
+
+This is the basis for **low-rank approximation** methods used in data science, image compression, and recommendation systems.
 :::
 
 ---
@@ -675,7 +810,9 @@ For large matrices with small rank (e.g., $1000 \times 1000$ matrix of rank 5), 
 The **rank** of a matrix $A$, denoted $\operatorname{rank}(A)$ or $\rho(A)$, is the **number of rank-one matrices produced by the cross-filling algorithm**:
 $$A = R_1 + R_2 + \cdots + R_r$$
 
-Equivalently, it is the **inner dimension** in the factorization $A = UV$ obtained from cross-filling.
+Equivalently, the rank is the **inner dimension** $r$ in the factorization $A_{m \times n} = U_{m \times r} V_{r \times n}$ obtained from cross-filling.
+
+This is a **structural invariant** of the matrix — it counts how many independent patterns the matrix contains.
 :::
 
 ::: warning
@@ -727,7 +864,348 @@ Needs 3 rank-one pieces → $\operatorname{rank}(I_3) = 3$ (full rank)
 
 ---
 
-## Application: Solving $Ax = b$ via Cross-Filling
+## Application 1: LU Decomposition via Diagonal Cross-Filling
+
+The cross-filling method is highly flexible — different pivot choices lead to different factorizations. One particularly important variant is **diagonal cross-filling**, which produces the famous **LU decomposition** used throughout numerical linear algebra.
+
+### What is LU Decomposition?
+
+::: definition
+**LU Decomposition**
+
+An **LU decomposition** of a matrix $A$ is a factorization:
+$$A = LU$$
+where:
+- $L$ is **lower triangular** with 1's on the diagonal (called **unit lower triangular**)
+- $U$ is **upper triangular**
+
+**Example**:
+$$\begin{pmatrix}
+4 & 3 & 2 \\
+8 & 9 & 6 \\
+12 & 9 & 14
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+3 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+4 & 3 & 2 \\
+0 & 3 & 2 \\
+0 & 0 & 8
+\end{pmatrix}$$
+
+This is the factorization used by MATLAB, NumPy, and most linear algebra software to solve $Ax = b$ efficiently.
+:::
+
+**Connection to cross-filling**: LU decomposition is obtained by always choosing **diagonal pivots** in cross-filling, proceeding from top-left to bottom-right.
+
+---
+
+### Diagonal Cross-Filling: The Strategy
+
+Instead of arbitrary pivot choices, we follow a systematic pattern:
+
+::: proposition
+**Diagonal Cross-Filling Algorithm**
+
+**Strategy**: Always choose the **next diagonal entry** as pivot, proceeding along the diagonal from $(1,1)$ to $(n,n)$.
+
+**Steps**:
+1. **Iteration $k$**: Choose pivot $a_{kk}$ (the $k$-th diagonal entry of the current remainder matrix)
+2. Extract the **diagonal cross**:
+   - Column $k$ from row $k$ downward: $\begin{pmatrix} a_{kk} \\ a_{k+1,k} \\ \vdots \\ a_{n,k} \end{pmatrix}$
+   - Row $k$ from column $k$ rightward: $\begin{pmatrix} a_{kk} & a_{k,k+1} & \cdots & a_{k,n} \end{pmatrix}$
+3. Form rank-one piece (normalized by pivot):
+   $$R_k = \frac{1}{a_{kk}} \cdot (\text{column } k) \cdot (\text{row } k)$$
+4. Compute remainder: $A_{k+1} = A_k - R_k$
+   - This zeros out row $k$ (from column $k+1$ onward) and column $k$ (from row $k+1$ onward)
+5. Repeat for $k = 1, 2, \ldots, n$
+
+**Result**: $A = R_1 + R_2 + \cdots + R_n$ where each $R_k$ is a rank-one matrix.
+
+We can reorganize this sum as $A = LU$ by proper bookkeeping (explained below).
+:::
+
+::: remark
+**Why diagonal pivots?**
+
+Choosing diagonal pivots creates a special structure:
+- **After iteration $k$**: Rows $1, \ldots, k$ and columns $1, \ldots, k$ are "processed"
+- **Remainder $A_{k+1}$**: Only the bottom-right block $A[k+1:n, k+1:n]$ remains nonzero
+- **Triangular pattern emerges**: This systematic elimination naturally produces triangular matrices $L$ and $U$
+
+This is exactly how **Gaussian elimination** works — it's the same algorithm, viewed through the outer product lens!
+:::
+
+---
+
+### Example: LU via Diagonal Cross-Filling
+
+::: example
+**Example 2.6: 3×3 LU Decomposition**
+
+Decompose:
+$$A = \begin{pmatrix}
+4 & 3 & 2 \\
+8 & 9 & 6 \\
+12 & 9 & 14
+\end{pmatrix}$$
+
+**Iteration 1**: Pivot $a_{11} = 4$
+
+Extract diagonal cross:
+- Column 1 (from row 1 down): $\mathbf{u}_1 = \begin{pmatrix} 4 \\ 8 \\ 12 \end{pmatrix}$
+- Row 1 (from column 1 right): $\mathbf{v}_1^T = \begin{pmatrix} 4 & 3 & 2 \end{pmatrix}$
+
+Normalize by pivot $a_{11} = 4$:
+$$R_1 = \begin{pmatrix} 4 \\ 8 \\ 12 \end{pmatrix} \begin{pmatrix} 1 & 0.75 & 0.5 \end{pmatrix} = \begin{pmatrix}
+4 & 3 & 2 \\
+8 & 6 & 4 \\
+12 & 9 & 6
+\end{pmatrix}$$
+
+Compute remainder:
+$$A_2 = A - R_1 = \begin{pmatrix}
+4 & 3 & 2 \\
+8 & 9 & 6 \\
+12 & 9 & 14
+\end{pmatrix} - \begin{pmatrix}
+4 & 3 & 2 \\
+8 & 6 & 4 \\
+12 & 9 & 6
+\end{pmatrix} = \begin{pmatrix}
+\color{blue}0 & \color{blue}0 & \color{blue}0 \\
+\color{blue}0 & 3 & 2 \\
+\color{blue}0 & 0 & 8
+\end{pmatrix}$$
+
+**Notice**: Row 1 and column 1 are now **completely zero**! ✓
+
+**Iteration 2**: Pivot $(A_2)_{22} = 3$
+
+Extract diagonal cross from $A_2$:
+- Column 2 (from row 2 down): $\mathbf{u}_2 = \begin{pmatrix} 0 \\ 3 \\ 0 \end{pmatrix}$
+- Row 2 (from column 2 right): $\mathbf{v}_2^T = \begin{pmatrix} 0 & 3 & 2 \end{pmatrix}$
+
+Normalize by pivot 3:
+$$R_2 = \begin{pmatrix} 0 \\ 3 \\ 0 \end{pmatrix} \begin{pmatrix} 0 & 1 & \frac{2}{3} \end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 3 & 2 \\
+0 & 0 & 0
+\end{pmatrix}$$
+
+Compute remainder:
+$$A_3 = A_2 - R_2 = \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 3 & 2 \\
+0 & 0 & 8
+\end{pmatrix} - \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 3 & 2 \\
+0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 \\
+\color{blue}0 & \color{blue}0 & \color{blue}0 \\
+0 & \color{blue}0 & 8
+\end{pmatrix}$$
+
+**Iteration 3**: Pivot $(A_3)_{33} = 8$
+
+$$R_3 = \begin{pmatrix} 0 \\ 0 \\ 8 \end{pmatrix} \begin{pmatrix} 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 8
+\end{pmatrix}$$
+
+**Done!** We have:
+$$A = R_1 + R_2 + R_3$$
+
+Now we need to convert this to $LU$ form.
+:::
+
+---
+
+### Converting to LU Form: Normalizing the Outer Products
+
+The rank-one pieces $R_k$ from diagonal cross-filling contain all the information for $L$ and $U$, but they need to be reorganized.
+
+**Key idea**: Each $R_k = \mathbf{u}_k \mathbf{v}_k^T$ contributes:
+- To $L$: The column multipliers (how each row is scaled)
+- To $U$: The row pattern (what gets added to each row)
+
+::: proposition
+**From Diagonal Cross-Filling to LU**
+
+If we perform diagonal cross-filling with pivots $a_{11}, a_{22}, \ldots, a_{nn}$, obtaining:
+$$A = \sum_{k=1}^n \mathbf{u}_k \mathbf{v}_k^T$$
+
+We can extract $L$ and $U$ as follows:
+
+**Building $U$** (upper triangular):
+- Row $k$ of $U$ = $\mathbf{v}_k^T$ (the row vector extracted at iteration $k$)
+$$U = \begin{pmatrix}
+- & \mathbf{v}_1^T & - \\
+- & \mathbf{v}_2^T & - \\
+& \vdots & \\
+- & \mathbf{v}_n^T & -
+\end{pmatrix}$$
+
+**Building $L$** (unit lower triangular):
+- Column $k$ of $L$ = $\mathbf{u}_k / (\mathbf{u}_k)_k$ (normalize so diagonal = 1)
+$$L = \begin{pmatrix}
+| & | & & | \\
+\frac{\mathbf{u}_1}{u_{11}} & \frac{\mathbf{u}_2}{u_{22}} & \cdots & \frac{\mathbf{u}_n}{u_{nn}} \\
+| & | & & |
+\end{pmatrix}$$
+
+where $(\mathbf{u}_k)_k$ denotes the $k$-th entry of vector $\mathbf{u}_k$ (which equals the pivot $a_{kk}$).
+:::
+
+::: remark
+**Why normalize by the diagonal?**
+
+When we extract column $k$ at iteration $k$, it has the form:
+$$\mathbf{u}_k = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ a_{kk} \\ a_{k+1,k} \\ \vdots \\ a_{n,k} \end{pmatrix} \leftarrow \begin{matrix} \text{entries 1 through } k-1 \\ \text{are zero (already processed)} \\ \\ \text{entry } k \text{ is the pivot} \\ \\ \text{entries } k+1 \text{ through } n \end{matrix}$$
+
+To make $L$ **unit lower triangular** (diagonal = 1), we must normalize:
+$$\text{Column } k \text{ of } L = \frac{\mathbf{u}_k}{a_{kk}} = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \\ a_{k+1,k}/a_{kk} \\ \vdots \\ a_{n,k}/a_{kk} \end{pmatrix}$$
+
+Now the diagonal entry is exactly 1! ✓
+
+**Where did the pivot go?** It gets absorbed into $U$: row $k$ of $U$ is $\mathbf{v}_k^T$, which starts with the pivot $a_{kk}$ in position $(k,k)$.
+
+**Outer product reconstruction**: When we compute $LU$, we get:
+$$LU = \sum_{k=1}^n (\text{column } k \text{ of } L) \cdot (\text{row } k \text{ of } U) = \sum_{k=1}^n \frac{\mathbf{u}_k}{a_{kk}} \cdot \mathbf{v}_k^T$$
+
+But $\mathbf{v}_k^T$ was already normalized by $a_{kk}$ during cross-filling! So this reconstructs $R_k$ exactly.
+:::
+
+---
+
+### Example Continued: Extracting $L$ and $U$
+
+::: example
+**Example 2.6 (continued): Building $L$ and $U$**
+
+From our diagonal cross-filling:
+
+**Iteration 1** gave:
+- $\mathbf{u}_1 = \begin{pmatrix} 4 \\ 8 \\ 12 \end{pmatrix}$, $\mathbf{v}_1^T = \begin{pmatrix} 4 & 3 & 2 \end{pmatrix}$
+- Pivot: $a_{11} = 4$
+- Normalized column: $\frac{\mathbf{u}_1}{4} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$
+
+**Iteration 2** gave:
+- $\mathbf{u}_2 = \begin{pmatrix} 0 \\ 3 \\ 0 \end{pmatrix}$, $\mathbf{v}_2^T = \begin{pmatrix} 0 & 3 & 2 \end{pmatrix}$
+- Pivot: $a_{22} = 3$
+- Normalized column: $\frac{\mathbf{u}_2}{3} = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}$
+
+**Iteration 3** gave:
+- $\mathbf{u}_3 = \begin{pmatrix} 0 \\ 0 \\ 8 \end{pmatrix}$, $\mathbf{v}_3^T = \begin{pmatrix} 0 & 0 & 8 \end{pmatrix}$
+- Pivot: $a_{33} = 8$
+- Normalized column: $\frac{\mathbf{u}_3}{8} = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$
+
+**Assemble $L$** (columns are normalized $\mathbf{u}_k$):
+$$L = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+3 & 0 & 1
+\end{pmatrix}$$
+
+**Assemble $U$** (rows are $\mathbf{v}_k^T$):
+$$U = \begin{pmatrix}
+4 & 3 & 2 \\
+0 & 3 & 2 \\
+0 & 0 & 8
+\end{pmatrix}$$
+
+**Verify** $LU = A$:
+$$LU = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+3 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+4 & 3 & 2 \\
+0 & 3 & 2 \\
+0 & 0 & 8
+\end{pmatrix}$$
+
+Using outer product expansion:
+$$LU = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \begin{pmatrix} 4 & 3 & 2 \end{pmatrix} + \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \begin{pmatrix} 0 & 3 & 2 \end{pmatrix} + \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \begin{pmatrix} 0 & 0 & 8 \end{pmatrix}$$
+
+$$= \begin{pmatrix}
+4 & 3 & 2 \\
+8 & 6 & 4 \\
+12 & 9 & 6
+\end{pmatrix} + \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 3 & 2 \\
+0 & 0 & 0
+\end{pmatrix} + \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 8
+\end{pmatrix} = \begin{pmatrix}
+4 & 3 & 2 \\
+8 & 9 & 6 \\
+12 & 9 & 14
+\end{pmatrix} = A \quad ✓$$
+
+Perfect! This is exactly $R_1 + R_2 + R_3$ from our cross-filling.
+:::
+
+---
+
+### When Does LU Decomposition Exist?
+
+Not all matrices have an LU decomposition (without row swaps).
+
+::: remark
+**Existence Condition for LU Decomposition**
+
+LU decomposition (without row permutations) exists if and only if all **leading principal minors** of $A$ are nonzero:
+$$\det(A[1:k, 1:k]) \neq 0 \quad \text{for } k = 1, 2, \ldots, n$$
+
+**Why?** Because we need each diagonal pivot $a_{kk}$ (in the remainder matrix at step $k$) to be nonzero.
+
+**Example of failure**:
+$$A = \begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}$$
+
+Diagonal cross-filling fails immediately at $a_{11} = 0$ (can't use as pivot).
+
+**Solution**: Use **row permutations** (row swaps) to move a nonzero entry to the diagonal. This leads to **PLU decomposition**:
+$$PA = LU$$
+where $P$ is a **permutation matrix** (represents row swaps).
+
+**Every** invertible matrix has a PLU decomposition! This is what MATLAB/NumPy actually compute.
+:::
+
+---
+
+### Summary: LU as Structured Cross-Filling
+
+**Key insights**:
+
+1. **LU decomposition = diagonal cross-filling**: Always choose diagonal entries as pivots, proceeding top-left to bottom-right
+
+2. **Normalization creates unit lower triangular $L$**: Divide each column vector $\mathbf{u}_k$ by its pivot entry to make $L$'s diagonal equal 1
+
+3. **$U$ stores the row information**: Each row of $U$ is the row vector $\mathbf{v}_k^T$ extracted at step $k$, which naturally has upper triangular form (zeros in columns $1$ through $k-1$)
+
+4. **Outer product perspective**:
+   $$A = LU = \sum_{k=1}^n (\text{column } k \text{ of } L) \cdot (\text{row } k \text{ of } U)$$
+
+   Each term is a rank-one outer product $\mathbf{u}_k \mathbf{v}_k^T$ contributing to the full matrix!
+
+5. **Connection to Gaussian elimination**: This is **exactly** the same algorithm as Gaussian elimination, but viewed through the lens of outer products rather than row operations. The outer product view reveals **why** Gaussian elimination works and **what structure** it creates.
+
+This perspective transforms LU from "a mysterious factorization" to "a natural consequence of systematic rank-one peeling."
+
+---
+
+## Application 2: Solving $Ax = b$ via Cross-Filling
 
 Now we can use cross-filling to solve linear systems! The idea: if we know $A = UV$, then solving $Ax = b$ becomes easier.
 
