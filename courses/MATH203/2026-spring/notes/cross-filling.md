@@ -913,8 +913,9 @@ Instead of arbitrary pivot choices, we follow a systematic pattern:
 **Steps**:
 1. **Iteration $k$**: Choose pivot $a_{kk}$ (the $k$-th diagonal entry of the current remainder matrix)
 2. Extract the **diagonal cross**:
-   - Column $k$ from row $k$ downward: $\begin{pmatrix} a_{kk} \\ a_{k+1,k} \\ \vdots \\ a_{n,k} \end{pmatrix}$
-   - Row $k$ from column $k$ rightward: $\begin{pmatrix} a_{kk} & a_{k,k+1} & \cdots & a_{k,n} \end{pmatrix}$
+   - Column $k$: $\begin{pmatrix} 0 \\ \vdots \\ 0 \\ a_{kk} \\ a_{k+1,k} \\ \vdots \\ a_{n,k} \end{pmatrix}$ ← entries $1, \ldots, k-1$ are zero (already processed)
+
+   - Row $k$: $\begin{pmatrix} 0 & \cdots & 0 & a_{kk} & a_{k,k+1} & \cdots & a_{k,n} \end{pmatrix}$ ← entries $1, \ldots, k-1$ are zero
 3. Form rank-one piece (normalized by pivot):
    $$R_k = \frac{1}{a_{kk}} \cdot (\text{column } k) \cdot (\text{row } k)$$
 4. Compute remainder: $A_{k+1} = A_k - R_k$
@@ -1157,29 +1158,12 @@ Perfect! This is exactly $R_1 + R_2 + R_3$ from our cross-filling.
 
 ### When Does LU Decomposition Exist?
 
-Not all matrices have an LU decomposition (without row swaps).
-
 ::: remark
 **Existence Condition for LU Decomposition**
 
-LU decomposition (without row permutations) exists if and only if all **leading principal minors** of $A$ are nonzero:
-$$\det(A[1:k, 1:k]) \neq 0 \quad \text{for } k = 1, 2, \ldots, n$$
+LU decomposition exists if and only if **diagonal cross-filling can proceed without getting stuck** — that is, every diagonal pivot $a_{kk}$ encountered during the algorithm must be nonzero.
 
-**Why?** Because we need each diagonal pivot $a_{kk}$ (in the remainder matrix at step $k$) to be nonzero.
-
-**Example of failure**:
-$$A = \begin{pmatrix}
-0 & 1 \\
-1 & 1
-\end{pmatrix}$$
-
-Diagonal cross-filling fails immediately at $a_{11} = 0$ (can't use as pivot).
-
-**Solution**: Use **row permutations** (row swaps) to move a nonzero entry to the diagonal. This leads to **PLU decomposition**:
-$$PA = LU$$
-where $P$ is a **permutation matrix** (represents row swaps).
-
-**Every** invertible matrix has a PLU decomposition! This is what MATLAB/NumPy actually compute.
+If a diagonal pivot is zero, the algorithm cannot continue, and the matrix does not have an LU decomposition.
 :::
 
 ---
