@@ -31,7 +31,10 @@
 ### Mar. 6 - Minseok Choi (POSTECH)
 **Title:** Learning to Solve PDEs: Scientific Machine Learning from Principles to Practice
 
-**Abstract:** TBA
+**Abstract:** Scientific Machine Learning (SML) is rapidly emerging as a powerful paradigm for addressing complex problems in science and engineering by integrating machine learning with real-world data and the fundamental laws of physics.
+This talk will provide a concise overview of the core concepts and algorithmic foundations of SML. In particular, we will introduce methodologies such as Physics-Informed Neural Networks (PINNs), which embed physical constraints directly into the learning process, and Operator Learning, which aims to learn mappings between function spaces and thereby enables fast and efficient prediction of system responses under varying input conditions.
+We will also discuss recent advancements designed to overcome key limitations of early PINN and operator learning approaches, including issues related to data efficiency, generalization, and computational stability.
+Finally, we will present representative examples illustrating how SML can achieve innovative results in practical applications, often delivering substantial speed-ups compared to traditional numerical simulations.
 
 ---
 
