@@ -18,7 +18,7 @@ This tutorial reinforces **block matrix multiplication** and introduces the **pr
 
 ---
 
-## Topic 1: Block Matrix Multiplication (20 min)
+## Topic 1: Block Matrix Multiplication (15 min)
 
 ### Learning Goal
 
@@ -28,27 +28,7 @@ Students should understand:
 
 ### Suggested Approach
 
-#### Step 1: Motivation via Ingredient Table (5 min)
-
-Start with a concrete scenario extending the coffee shop metaphor:
-
-```markdown
-Suppose our coffee shop expands into two divisions:
-- **Raw Materials Division**: 🍃🍋 (agricultural products)
-- **Dairy Division**: 🫘🐄 (processed products)
-
-We can organize our production table C with **horizontal separation** (grouping raw materials by division):
-
-        Set 1 🍱  Set 2 🍜
-      ┌──────────────────
-🍃🍋  │    ...      ...     ← Raw Materials Division
-      │
-🫘🐄  │    ...      ...     ← Dairy Division
-```
-
-**Key question**: If $C = AB$, can we compute $C$ by treating these blocks as "super-entries"?
-
-#### Step 2: Separation Matching Condition (8 min)
+#### Step 1: Separation Matching Condition (7 min)
 
 Draw the separation diagram on the board:
 
@@ -86,7 +66,7 @@ Compute one block entry together:
 
 $$(AB)_{11} = A_{11}B_{11} + A_{12}B_{21} = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} + \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix}$$
 
-#### Step 3: Connection to Rank-One Sum (7 min)
+#### Step 2: Connection to Rank-One Sum (8 min)
 
 **Critical insight**: Block multiplication is **not a new rule** — it's just the **rank-one sum formula** applied to grouped columns/rows.
 
@@ -265,15 +245,17 @@ Remainder: $D - R_1 - R_2 = \mathbf{0}$
 ::: remark
 **Why this works for diagonal matrices**
 
-Diagonal matrices have a special structure: each nonzero diagonal entry $(i,i)$ contributes exactly one rank-1 piece:
+**Critical emphasis**: The rank we compute here comes **directly from the cross-filling decomposition**. We currently **only accept** rank-1 counts obtained through the cross-filling process as the definition of rank.
+
+Diagonal matrices have a special structure: each nonzero diagonal entry $(i,i)$ contributes exactly one rank-1 piece in the cross-filling:
 
 $$\text{diag}(d_1, d_2, \ldots, d_n) = \sum_{i: d_i \neq 0} d_i \cdot \mathbf{e}_i \mathbf{e}_i^T$$
 
 where $\mathbf{e}_i$ is the $i$-th standard basis vector.
 
-Each $\mathbf{e}_i \mathbf{e}_i^T$ is rank-1, and they don't overlap (different rows and columns), so the count is exact.
+Each $\mathbf{e}_i \mathbf{e}_i^T$ is rank-1, and they don't overlap (different rows and columns), so when we perform cross-filling, we peel off exactly one rank-1 matrix per nonzero diagonal entry.
 
-**General principle**: Rank counts the number of "independent directions" a matrix uses. For diagonal matrices, these are just the nonzero diagonal positions.
+**Important**: While you may know from previous linear algebra courses that "rank = number of linearly independent rows/columns", at this stage in the course, we **only use the cross-filling definition**. The equivalence will be proven in Lecture 4.
 :::
 
 ---
@@ -282,7 +264,7 @@ Each $\mathbf{e}_i \mathbf{e}_i^T$ is rank-1, and they don't overlap (different 
 
 | Topic | Suggested Time | Adjustment Strategy |
 |-------|---------------|---------------------|
-| Block matrix multiplication | 20 min | If running over, skip the full $(AB)$ computation and just show the block structure |
+| Block matrix multiplication | 15 min | If running over, skip the full $(AB)$ computation and just show the block structure |
 | Two formulations ($AB$ vs $BA$) | 10 min | **Essential** — do not skip. This is critical for understanding cross-filling in Lecture 4 |
 | Rank definition | 15 min | If short on time, emphasize the "not yet well-defined" warning and save diagonal example for next tutorial |
 | Questions & wrap-up | 5 min | Reserve for student questions |
@@ -357,8 +339,9 @@ Use these to gauge whether students are ready to move on:
 1. **Block multiplication**: "If $A$ is $3 \times 5$ with column separation $[2 | 3]$, what row separation must $B$ have for block multiplication to work?"
    - Expected answer: $B$ must have row separation $[2 | 3]$ (matching column groups)
 
-2. **Outer vs inner products**: "For $2 \times 3$ matrix $A$ and $3 \times 2$ matrix $B$, which product is a sum of rank-1 matrices: $AB$ or $BA$?"
-   - Expected answer: **Both** (all matrix products are sums of rank-1 matrices), but $AB$ has outer product structure, $BA$ has inner product structure
+2. **Outer vs inner products**: "Given $A = \begin{pmatrix} 1 & 2 & 0 \\ 3 & 1 & 1 \end{pmatrix}$ and $B = \begin{pmatrix} 1 & 0 \\ 2 & 1 \\ 0 & 3 \end{pmatrix}$, write $AB$ as a sum of outer products by decomposing $A$ into its **column vectors** and $B$ into its **row vectors**."
+   - Expected answer: Write $A = [\mathbf{a}_1 \mid \mathbf{a}_2 \mid \mathbf{a}_3]$ where $\mathbf{a}_1 = \begin{pmatrix} 1 \\ 3 \end{pmatrix}$, $\mathbf{a}_2 = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$, $\mathbf{a}_3 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$, and $B = \begin{pmatrix} \mathbf{b}_1^T \\ \mathbf{b}_2^T \\ \mathbf{b}_3^T \end{pmatrix}$ where $\mathbf{b}_1^T = \begin{pmatrix} 1 & 0 \end{pmatrix}$, $\mathbf{b}_2^T = \begin{pmatrix} 2 & 1 \end{pmatrix}$, $\mathbf{b}_3^T = \begin{pmatrix} 0 & 3 \end{pmatrix}$. Then:
+   $$AB = \mathbf{a}_1\mathbf{b}_1^T + \mathbf{a}_2\mathbf{b}_2^T + \mathbf{a}_3\mathbf{b}_3^T = \begin{pmatrix} 1 \\ 3 \end{pmatrix}\begin{pmatrix} 1 & 0 \end{pmatrix} + \begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 2 & 1 \end{pmatrix} + \begin{pmatrix} 0 \\ 1 \end{pmatrix}\begin{pmatrix} 0 & 3 \end{pmatrix}$$
 
 3. **Rank**: "Can a $5 \times 5$ matrix have rank 10?"
    - Expected answer: No — rank cannot exceed the smaller dimension (at most 5 rank-1 pieces for a $5 \times 5$ matrix)
