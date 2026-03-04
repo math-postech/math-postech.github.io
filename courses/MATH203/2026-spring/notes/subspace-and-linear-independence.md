@@ -296,7 +296,7 @@ $$Ax = b \text{ has a solution} \quad \Longleftrightarrow \quad b \in \operatorn
 
 **Why?** Because $Ax$ is a linear combination of columns of $A$, and $\operatorname{Col}(A)$ is exactly the set of all such combinations!
 
-**Column space** captures **which vectors can be reached** by the transformation $x \mapsto Ax$.
+**Column space** captures **which vectors can be produced** by linear combination of columns of $A$
 :::
 
 ---
@@ -593,7 +593,7 @@ $$\mathbf{u}_i[\text{row } p_j] = 0 \quad \text{for all } j < i$$
 **All coefficients zero**, so the columns are **linearly independent**! ✓
 :::
 
-### 5.2 Property 2: $\operatorname{Col}(U) = \operatorname{Col}(A)$ (The "Mother Body" Argument)
+### 5.2 Property 2: $\operatorname{Col}(U) = \operatorname{Col}(A)$
 
 ::: proposition
 **Column spaces are equal**
@@ -610,7 +610,7 @@ $$A\mathbf{x} = UV\mathbf{x} = U(V\mathbf{x})$$
 
 Let $\mathbf{y} = V\mathbf{x}$. Then $A\mathbf{x} = U\mathbf{y} \in \operatorname{Col}(U)$ ✓
 
-**Part 2**: $\operatorname{Col}(U) \subseteq \operatorname{Col}(A)$ — **The Mother Body Argument** 🔬
+**Part 2**: $\operatorname{Col}(U) \subseteq \operatorname{Col}(A)$ 
 
 This is the deeper direction! We need to show **every column of $U$** is a linear combination of **columns of $A$**.
 
@@ -648,15 +648,12 @@ Therefore $\mathbf{u}_i \in \operatorname{Col}(A)$ for all $i$, which means $\op
 :::
 
 ::: tip
-**The "Mother Body" Metaphor** 🧬
-
-Think of $A$ as the **mother body** (母体) that contains all the genetic material.
 
 Cross-filling **peels off** layers ($R_1, R_2, \ldots$), but each peeled piece is made from:
 - **Columns of the current remainder** (which inherit from $A$)
 - **Scaled and combined** from $A$'s columns
 
-**No new material is introduced** — everything comes from the mother body $A$!
+**No new material is introduced** — everything comes from the original $A$!
 
 This is why $\operatorname{Col}(U) \subseteq \operatorname{Col}(A)$: the columns we collect ($\mathbf{u}_1, \ldots, \mathbf{u}_r$) are all **descendants** of $A$'s columns.
 :::
@@ -942,7 +939,7 @@ Subspace
 
 ### Looking Ahead 🔭
 
-**Week 5**:
+**Lecture 5**:
 - **Null space** (the descriptive dual of column space)
 - **Rank-Nullity Theorem**: $\dim(\operatorname{Null}(A)) + \dim(\operatorname{Col}(A)) = n$
 - Applications to solving $Ax = b$
