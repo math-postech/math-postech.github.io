@@ -135,19 +135,19 @@ There are **4 homework assignments** worth **10% of your final grade** (2.5% eac
 
 ### Submission Guidelines
 
-- Homework assignments are released on **Thursdays at 00:00 KST** and due **two weeks later on Fridays at 23:59 KST**
+- Homework assignments are released on **Thursdays at 00:00 KST** and due **two weeks later on Thursdays at 18:00 KST** (before tutorial sessions)
 - Preview versions will be shared on the **Monday before release** for instructor review
-- Submit via the course management system (PLMS)
+- **Submit to your assigned TA** — Each student will be assigned to one TA's tutorial section. Follow your TA's instructions for submission
 - Late submissions may incur penalties
 
 ### Assignments
 
-| No. | Preview (Monday) | Released (Thursday 00:00 KST) | Due Date (Friday 23:59 KST) | Topics | PDF |
+| No. | Preview (Monday) | Released (Thursday 00:00 KST) | Due Date (Thursday 18:00 KST) | Topics | PDF |
 |-----|------------------|-------------------------------|----------------------------|--------|-----|
-| **HW1** | Week 1 (Feb 23) | Week 2 (Mar 5) | Week 4 (Mar 20) | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) |
-| **HW2** | Week 4 (Mar 16) | Week 5 (Mar 26) | Week 7 (Apr 10) | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) (TBA) |
-| **HW3** | Week 8 (Apr 20) | Week 9 (Apr 23) | Week 11 (May 8) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
-| **HW4** | Week 11 (May 4) | Week 12 (May 14) | Week 14 (May 29) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
+| **HW1** | Week 1 (Feb 23) | Week 2 (Mar 5) | Week 4 (Mar 19) | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) |
+| **HW2** | Week 4 (Mar 16) | Week 5 (Mar 26) | Week 7 (Apr 9) | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) (TBA) |
+| **HW3** | Week 8 (Apr 20) | Week 9 (Apr 23) | Week 11 (May 7) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
+| **HW4** | Week 11 (May 4) | Week 12 (May 14) | Week 14 (May 28) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
 
 *Homework PDFs will be posted as they become available.*
 
