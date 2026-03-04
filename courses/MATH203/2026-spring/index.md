@@ -28,6 +28,14 @@ All tutorial sessions meet on **THU 18:00-18:50**. The first tutorial starts 202
 - **Section 03** (Yu Seungook): Hogil Kim Building [306], [307], [308]
   *TAs: Heejin Kim([306]), Yunjae Oh([307]), Seunghoon Jeong([308])*
 
+### Tutorial Lecture Suggestions for TAs
+
+Detailed teaching suggestions to help TAs prepare engaging tutorial sessions aligned with the course's unique pedagogical approach.
+
+| Week | Date | Topics | Link |
+|------|------|--------|------|
+| **Week 2** | Mar 5 | Block Matrix Multiplication and Rank | [View Details](./tutorials/week02-block-matrix-rank.md) |
+
 ---
 
 ## Course Objectives
