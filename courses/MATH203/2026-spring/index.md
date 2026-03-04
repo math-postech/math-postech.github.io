@@ -100,11 +100,11 @@ The textbook is only for the reference, we will follow our lecture notes in this
 | Week | Dates (Mon–Thu) | Topics | Content |
 |------|-----------------|--------|---------|
 | **Week 1** | 02-23 -- 02-26 | **Ch1 §1.1–1.2**: Matrix Arithmetic | Three views of AB=C (column, row, sum-of-rank-one). Row/column operations. Inverses. Elementary vs. non-invertible operations. |
-| **Week 2** | ~~03-02~~ -- 03-05 | **Ch1 §1.3**: Cross-Filling | *~~03-02 Holiday~~*. The core method: rank-one peeling. Sum ↔ product equivalence (A = ΣRᵢ ⟺ A = UV). *Central idea of Chapter 1.* |
-| **Week 3** | 03-09 -- 03-12 | **Ch1 §1.3–1.4, Ch2 §2.1**: Solving Systems, Subspaces | Linear independence, span, basis, dimension (via trace). Rank. Solving Ax=b via cross-filling. Solvability condition. Matrix as linear combination container. Two languages for subspaces. **HW1 assigned.** |
+| **Week 2** | ~~03-02~~ -- 03-05 | **Ch1 §1.3**: Cross-Filling | *~~03-02 Holiday~~*. The core method: rank-one peeling. Sum ↔ product equivalence (A = ΣRᵢ ⟺ A = UV). *Central idea of Chapter 1.* **HW1 assigned.** |
+| **Week 3** | 03-09 -- 03-12 | **Ch1 §1.3–1.4, Ch2 §2.1**: Solving Systems, Subspaces | Linear independence, span, basis, dimension (via trace). Rank. Solving Ax=b via cross-filling. Solvability condition. Matrix as linear combination container. Two languages for subspaces. |
 | **Week 4** | 03-16 -- 03-19 | **Ch2 §2.1–2.2**: Vector Spaces | Null space (3 views), column space (3 views). Subspaces of AB: Col(AB)⊆Col(A), Null(B)⊆Null(AB). |
-| **Week 5** | 03-23 -- 03-26 | **Ch2 §2.3–2.4**: Four Subspaces, Basis & Dimension | Transpose, symmetric matrices. Four fundamental subspaces: Col(Aᵀ)⊥Null(A).  |
-| **Week 6** | 03-30 -- 04-02 | **Ch2 §2.4–2.5, Ch3 §3.1**: Full Rank & Projections | Full rank ⟺ invertibility. Linear transformations. **Projection defined**: P²=P. The sunlight-and-floor model. Col(P), Null(P). **HW2 assigned.** |
+| **Week 5** | 03-23 -- 03-26 | **Ch2 §2.3–2.4**: Four Subspaces, Basis & Dimension | Transpose, symmetric matrices. Four fundamental subspaces: Col(Aᵀ)⊥Null(A). **HW2 assigned.** |
+| **Week 6** | 03-30 -- 04-02 | **Ch2 §2.4–2.5, Ch3 §3.1**: Full Rank & Projections | Full rank ⟺ invertibility. Linear transformations. **Projection defined**: P²=P. The sunlight-and-floor model. Col(P), Null(P). |
 | **Week 7** | 04-06 -- 04-09 | **Ch3 §3.2–3.4**: Projection Theory + Review |  Theorems involving AB and BA. Cross-filling projections → rank-1 projections (automatic). Compatible families.  **Midterm review.** |
 | **Week 8** | 04-13 -- 04-16 | **MIDTERM WEEK** | **Midterm Exam: Mon 04-13, 18:00-22:00.** No classes this week. |
 
@@ -116,11 +116,11 @@ The textbook is only for the reference, we will follow our lecture notes in this
 
 | Week | Dates (Mon–Thu) | Topics | Content |
 |------|-----------------|--------|---------|
-| **Week 9** | 04-20 -- 04-23 | **Ch3 §3.5–3.7**: Constructing Projections | Oblique projection construction: P=B(AB)⁻¹A. Orthogonal projection: P=B(BᵀB)⁻¹Bᵀ. Least squares. Diagonal cross-filling → UUᵀ. Orthogonal diagonalization. |
-| **Week 10** | 04-27 -- 04-30 | **Ch4 §4.1–4.3**: Determinants | Geometric motivation. Four axioms (multilinear, alternating, normalized). Laplace expansion, cofactors. Adjugate: A\*A=(det A)I. **HW3 assigned.** |
+| **Week 9** | 04-20 -- 04-23 | **Ch3 §3.5–3.7**: Constructing Projections | Oblique projection construction: P=B(AB)⁻¹A. Orthogonal projection: P=B(BᵀB)⁻¹Bᵀ. Least squares. Diagonal cross-filling → UUᵀ. Orthogonal diagonalization. **HW3 assigned.** |
+| **Week 10** | 04-27 -- 04-30 | **Ch4 §4.1–4.3**: Determinants | Geometric motivation. Four axioms (multilinear, alternating, normalized). Laplace expansion, cofactors. Adjugate: A\*A=(det A)I. |
 | **Week 11** | 05-04 -- 05-07 | **Ch4 §4.4–4.5**: Det Properties & Cayley-Hamilton | det(AB)=det(A)det(B). Inverse formula, Cramer's rule. Annihilating polynomials. **Cayley-Hamilton theorem**: det(tI−A) annihilates A. *(05-05 Children's Day, does not affect Mon/Wed classes)* |
-| **Week 12** | 05-11 -- 05-14 | **Ch5 §5.1–5.2**: Eigenvalues & Lagrange Interpolation | Characteristic polynomial, principal minors, eigenvalues. **Lagrange interpolation**: fᵢ(xⱼ)=δᵢⱼ. Value-table philosophy: g(A) depends only on g(λ₁),...,g(λₘ). |
-| **Week 13** | 05-18 -- 05-21 | **Ch5 §5.3–5.4**: Spectral Decomposition | Complex numbers, simple-roots criterion for diagonalizability. **Spectral decomposition**: A=ΣλᵢPᵢ. Spectral formula: g(A)=Σg(λᵢ)Pᵢ. Eigenvectors from Pᵢ. **HW4 assigned.** |
+| **Week 12** | 05-11 -- 05-14 | **Ch5 §5.1–5.2**: Eigenvalues & Lagrange Interpolation | Characteristic polynomial, principal minors, eigenvalues. **Lagrange interpolation**: fᵢ(xⱼ)=δᵢⱼ. Value-table philosophy: g(A) depends only on g(λ₁),...,g(λₘ). **HW4 assigned.** |
+| **Week 13** | 05-18 -- 05-21 | **Ch5 §5.3–5.4**: Spectral Decomposition | Complex numbers, simple-roots criterion for diagonalizability. **Spectral decomposition**: A=ΣλᵢPᵢ. Spectral formula: g(A)=Σg(λᵢ)Pᵢ. Eigenvectors from Pᵢ. |
 | **Week 14** | ~~05-25~~ -- 05-28 | **Ch5 §5.5–5.6**: Diagonalization & Applications | *~~05-25 Holiday~~*. From spectral decomposition to diagonalization (cross-fill Pᵢ). Applications: Aⁿ=ΣλᵢⁿPᵢ, eᴬ=ΣeᵡⁱPᵢ, linear recurrences, similarity. |
 | **Week 15** | 06-01 -- 06-04 | **Ch6 §6.1–6.5**: Normal Matrices, PD, SVD + Review | Hermitian transpose A\*=Āᵀ. Normal matrices. Nilpotent-normal lemma → normal⟹diagonalizable. Unitary diagonalization. Positive definite matrices (λᵢ>0, MᵀM form, pivots>0). **SVD**: A=Ω₁ΣΩ₂. **Final review.** |
 | **Week 16** | 06-08 -- 06-11 | **FINAL WEEK** | **Final Exam: Mon 06-08, 18:00-22:00.** |
@@ -144,10 +144,10 @@ There are **4 homework assignments** worth **10% of your final grade** (2.5% eac
 
 | No. | Preview (Monday) | Released (Thursday 00:00 KST) | Due Date (Friday 23:59 KST) | Topics | PDF |
 |-----|------------------|-------------------------------|----------------------------|--------|-----|
-| **HW1** | Week 1 (Feb 23) | Week 2 (Mar 5) | Week 4 (Mar 19) | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) (TBA) |
-| **HW2** | Week 4 (Mar 16) | Week 5 (Mar 26) | Week 7 (Apr 9) | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) (TBA) |
-| **HW3** | Week 8 (Apr 20) | Week 9 (Apr 23) | Week 11 (May 7) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
-| **HW4** | Week 11 (May 4) | Week 12 (May 14) | Week 14 (May 28) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
+| **HW1** | Week 1 (Feb 23) | Week 2 (Mar 5) | Week 4 (Mar 20) | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) (TBA) |
+| **HW2** | Week 4 (Mar 16) | Week 5 (Mar 26) | Week 7 (Apr 10) | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) (TBA) |
+| **HW3** | Week 8 (Apr 20) | Week 9 (Apr 23) | Week 11 (May 8) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
+| **HW4** | Week 11 (May 4) | Week 12 (May 14) | Week 14 (May 29) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
 
 *Homework PDFs will be posted as they become available.*
 
