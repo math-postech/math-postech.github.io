@@ -166,10 +166,11 @@ Lecture notes are organized by topic and will be added throughout the semester.
 ### Chapter 2: Vector Spaces and Subspaces
 
 - [Lecture 4: Subspace and Linear Independence](./notes/subspace-and-linear-independence.md) — Two languages (descriptive vs constructive), subspaces, column space, linear independence, basis, dimension, well-definedness of rank
+- [Lecture 5: Solving Linear Equations and Null Space](./notes/solving-equations-null-space.md) — Cross-filling method for solving $Ax=b$, null space (descriptive ↔ constructive), existence and uniqueness criteria, rank-nullity theorem preview
 
 <!--
 Upcoming notes:
- [Week 4-5: Null Space and Four Fundamental Subspaces](notes/four-fundamental-subspaces.md)
+ [Week 5-6: Four Fundamental Subspaces](notes/four-fundamental-subspaces.md)
 -->
 
 ---
