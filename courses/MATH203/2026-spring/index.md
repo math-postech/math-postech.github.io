@@ -22,9 +22,9 @@
 All tutorial sessions meet on **THU 18:00-18:50**. The first tutorial starts 2026-03-05(Thu). Locations differ by section:
 
 - **Section 01** (Li Qirui): MathBldg [206], [402], [104]
-  *TAs: Tom Huh([104]), Yun Myeongun([402]), Minsu Jeon([206])*
+  *TAs: Lee Minsu([104]), Yun Myeongun([402]), Minsu Jeon([206])*
 - **Section 02** (Kim Younjin): Science BldgⅢ [109], [111], [113]
-  *TAs: Kim Seongtae([109]), Chungjae Jang([111]), Yong Seong Kwon([113])*
+  *TAs: Kwon Jaeyoung([109]), Chungjae Jang([111]), Yong Seong Kwon([113])*
 - **Section 03** (Yu Seungook): Hogil Kim Building [306], [307], [308]
   *TAs: Heejin Kim([306]), Yunjae Oh([307]), Seunghoon Jeong([308])*
 
