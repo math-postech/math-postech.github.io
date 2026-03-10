@@ -5,41 +5,126 @@
 
 ---
 
-## 🎯 Motivation: Two Problems That Need Solving Equations
+## 🎯 Motivation: Why We Need to Solve Equations
 
-In Lecture 4, we learned about the **two languages** for describing subspaces:
+### The Two Languages (Recap from Lecture 4)
 
-| Language | Description | Example |
-|----------|-------------|---------|
-| **Descriptive** | List **constraints** (equations) | $\{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$ |
-| **Constructive** | Provide **recipe** to generate | $\{\text{span}\{\mathbf{v}_1, \mathbf{v}_2, \ldots\}\}$ |
+In Lecture 4, we learned that every subspace can be described in two complementary ways:
 
-We saw that **column space** naturally uses constructive language:
+| Language | How it works | Example |
+|----------|--------------|---------|
+| **Descriptive** | List **equations** (constraints) members must satisfy | $\{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$ |
+| **Constructive** | Provide **recipe** to generate all members | $\text{span}\{\mathbf{v}_1, \mathbf{v}_2, \ldots\}$ |
 
-$$\operatorname{Col}(A) = \{A\mathbf{x} : \mathbf{x} \in \mathbb{R}^n\} = \text{span}\{\text{columns of } A\}$$
+**Each language has strengths and weaknesses:**
 
-**Today's focus**: The **descriptive dual** — subspaces defined by equations.
+| | **Descriptive** | **Constructive** |
+|---|---|---|
+| **Good at** | ✅ **Verification** (checking membership) | ✅ **Generation** (producing members) |
+| **Bad at** | ❌ Generation (hard to find examples) | ❌ Verification (hard to check membership) |
 
-::: warning
-**Two Fundamental Questions**
-
-1. **What is the null space?** The set of all vectors satisfying $A\mathbf{x} = \mathbf{0}$
-   - **Descriptive definition**: Easy to write $\{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$
-   - **Problem**: How do we **generate** or **find** such vectors?
-   - **Need**: Constructive description (basis)
-
-2. **When can we make a product?** Given ingredient requirements $\mathbf{b}$, can we produce it from meals in matrix $A$?
-   - **Question**: Does $A\mathbf{x} = \mathbf{b}$ have a solution?
-   - **If yes**: Is the solution unique? What are all solutions?
-
-**Both questions require SOLVING LINEAR EQUATIONS!**
-:::
-
-Today we'll develop a **native method** using cross-filling to solve $A\mathbf{x} = \mathbf{b}$, which will answer both questions simultaneously.
+**Today's key insight**: **Solving equations helps both languages do what they're bad at!**
 
 ---
 
-## 1. Null Space: The Descriptive Definition
+### Case 1: Column Space (Naturally Constructive)
+
+The column space is **naturally constructive**:
+
+$$\operatorname{Col}(A) = \text{span}\{\text{columns of } A\} = \{A\mathbf{x} : \mathbf{x} \in \mathbb{R}^n\}$$
+
+::: example
+**Example: Column space of meals**
+
+$$A = \begin{array}{c|ccc}
+ & \text{🥛} & \text{☕} & \text{🍵} \\
+\hline
+\text{🍃} & 0 & 0 & 2 \\
+\text{🍋} & 0 & 0 & 1 \\
+\text{🫘} & 0 & 2 & 4 \\
+\text{🐄} & 1 & 0 & 1
+\end{array}$$
+
+**Constructive description**:
+$$\operatorname{Col}(A) = \text{span}\left\{\begin{pmatrix} 0\\0\\0\\1 \end{pmatrix}, \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix}, \begin{pmatrix} 2\\1\\4\\1 \end{pmatrix}\right\}$$
+
+**Generation** (easy ✅): Want a vector in $\operatorname{Col}(A)$? Just pick coefficients:
+$$2\begin{pmatrix} 0\\0\\0\\1 \end{pmatrix} + 3\begin{pmatrix} 0\\0\\2\\0 \end{pmatrix} = \begin{pmatrix} 0\\0\\6\\2 \end{pmatrix} \in \operatorname{Col}(A)$$
+
+**Verification** (hard ❌): Is $\mathbf{b} = \begin{pmatrix} 4\\2\\10\\3 \end{pmatrix}$ in $\operatorname{Col}(A)$?
+
+Can't tell by looking! Need to solve: $A\mathbf{x} = \mathbf{b}$
+- If solution exists → $\mathbf{b} \in \operatorname{Col}(A)$ ✓
+- If no solution → $\mathbf{b} \notin \operatorname{Col}(A)$ ✗
+
+**Solving equations gives constructive description the power to verify!**
+:::
+
+---
+
+### Case 2: Null Space (Naturally Descriptive)
+
+The null space is **naturally descriptive**:
+
+$$\operatorname{Null}(A) = \{\mathbf{x} \in \mathbb{R}^n : A\mathbf{x} = \mathbf{0}\}$$
+
+::: example
+**Example: Null space of the same matrix**
+
+Using the same matrix $A$ from above.
+
+**Descriptive definition**:
+$$\operatorname{Null}(A) = \left\{\mathbf{x} : \begin{pmatrix} 0&0&2\\0&0&1\\0&2&4\\1&0&1 \end{pmatrix}\mathbf{x} = \mathbf{0}\right\}$$
+
+**Verification** (easy ✅): Is $\mathbf{v} = \begin{pmatrix} 0\\1\\-2 \end{pmatrix}$ in $\operatorname{Null}(A)$?
+
+Just compute:
+$$A\begin{pmatrix} 0\\1\\-2 \end{pmatrix} = \begin{pmatrix} -4\\-2\\-6\\0 \end{pmatrix} \neq \mathbf{0}$$
+
+Not in null space! ✗ (Easy to check!)
+
+**Generation** (hard ❌): Give me **any** vector in $\operatorname{Null}(A)$...
+
+Staring at equations doesn't help! Need to **solve** $A\mathbf{x} = \mathbf{0}$ to get:
+$$\operatorname{Null}(A) = \text{span}\left\{\begin{pmatrix} 0\\2\\-1 \end{pmatrix}\right\}$$
+
+Now generation is easy: $t\begin{pmatrix} 0\\2\\-1 \end{pmatrix}$ for any $t \in \mathbb{R}$.
+
+**Solving equations gives descriptive description the power to generate!**
+:::
+
+---
+
+### The Power of Solving Equations: Summary
+
+::: attention
+**Why Solving Equations is the Universal Tool**
+
+| Subspace | Natural form | Natural strength | Natural weakness | Solving equations provides |
+|----------|-------------|------------------|------------------|---------------------------|
+| **Col(A)** | Constructive (span) | ✅ Generation | ❌ Verification | Solve $A\mathbf{x}=\mathbf{b}$ → verify if $\mathbf{b} \in \operatorname{Col}(A)$ |
+| **Null(A)** | Descriptive (equations) | ✅ Verification | ❌ Generation | Solve $A\mathbf{x}=\mathbf{0}$ → get basis → generate all solutions |
+
+**Two roles of solving equations**:
+
+1. **Language conversion**:
+   - Descriptive → Constructive: Solve $A\mathbf{x} = \mathbf{0}$ to get basis for $\operatorname{Null}(A)$
+   - Constructive → Descriptive: Solve left equation $\mathbf{x}^T A = \mathbf{0}$ to describe $\operatorname{Col}(A)$ as $\operatorname{Null}(B)$ (next lecture!)
+
+2. **Complementing each language**:
+   - Constructive needs verification → Solve $A\mathbf{x} = \mathbf{b}$ (existence check)
+   - Descriptive needs generation → Solve $A\mathbf{x} = \mathbf{0}$ (find basis)
+:::
+
+**Today's focus**: Develop a **native cross-filling method** to solve $A\mathbf{x} = \mathbf{b}$, which simultaneously:
+- Gives constructive description of $\operatorname{Null}(A)$ (find basis)
+- Checks existence: Does $\mathbf{b} \in \operatorname{Col}(A)$?
+- Determines uniqueness: Is $\operatorname{Null}(A) = \{\mathbf{0}\}$?
+- Finds all solutions when they exist
+
+---
+
+## 1. Null Space: Starting with the Descriptive Definition
 
 ### 1.1 Definition
 
@@ -50,69 +135,11 @@ For a matrix $A \in \mathbb{R}^{m \times n}$, the **null space** is:
 
 $$\operatorname{Null}(A) = \{\mathbf{x} \in \mathbb{R}^n : A\mathbf{x} = \mathbf{0}\}$$
 
-**Descriptive language**: "All input recipes that produce nothing."
+**Descriptive language**: "All input combinations that produce zero output."
+
+**Coffee shop**: "All meal combinations requiring zero raw materials."
 
 Also called the **kernel**, denoted $\ker(A)$.
-:::
-
-**Physical interpretation** (coffee shop):
-
-If $A$ represents "meals → raw materials", then $\operatorname{Null}(A)$ consists of all **meal combinations** that require **zero raw materials**.
-
-::: example
-**Example 1.1: Null space in the coffee shop**
-
-Suppose we have meals $(\text{🥛}, \text{🍜}, \text{☕})$ with ingredient requirements:
-
-$$A = \begin{array}{c|ccc}
- & \text{🥛} & \text{🍜} & \text{☕} \\
-\hline
-\text{🍃} & 0 & 1 & 0 \\
-\text{🍋} & 0 & 1 & 0 \\
-\text{🫘} & 0 & 2 & 1 \\
-\text{🐄} & 1 & 1 & 0
-\end{array} = \begin{pmatrix}
-0 & 1 & 0 \\
-0 & 1 & 0 \\
-0 & 2 & 1 \\
-1 & 1 & 0
-\end{pmatrix}$$
-
-**Question**: What combinations of $(\text{🥛}, \text{🍜}, \text{☕})$ require zero raw materials?
-
-**Descriptive answer**: $\operatorname{Null}(A) = \{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$
-
-This tells us the **condition**, but doesn't tell us **how to find** such combinations!
-
-For instance, is $\begin{pmatrix} 1 \\ -1 \\ 2 \end{pmatrix}$ in $\operatorname{Null}(A)$?
-
-**Check**:
-$$A\begin{pmatrix} 1 \\ -1 \\ 2 \end{pmatrix} = 1 \cdot \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix} + (-1) \cdot \begin{pmatrix} 1 \\ 1 \\ 2 \\ 1 \end{pmatrix} + 2 \cdot \begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \end{pmatrix} = \begin{pmatrix} -1 \\ -1 \\ 0 \\ 0 \end{pmatrix} \neq \mathbf{0}$$
-
-Not in null space! ✗
-
-**The problem**: Verification is easy, but **finding** vectors in $\operatorname{Null}(A)$ is hard with just the descriptive definition.
-:::
-
-### 1.2 The Need for Constructive Description
-
-From Lecture 4, we know:
-
-| Language | Null Space | Strength | Weakness |
-|----------|------------|----------|----------|
-| **Descriptive** | $\{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$ | Easy to **verify** membership | Hard to **generate** members |
-| **Constructive** | $\text{span}\{\mathbf{v}_1, \ldots, \mathbf{v}_k\}$ | Easy to **generate** members | Need to **find** the basis $\{\mathbf{v}_i\}$ |
-
-::: attention
-**The Central Problem**
-
-**How do we convert from descriptive to constructive?**
-
-$$\{\mathbf{x} : A\mathbf{x} = \mathbf{0}\} \quad \xrightarrow{\text{???}} \quad \text{span}\{\mathbf{v}_1, \ldots, \mathbf{v}_k\}$$
-
-**Answer**: We need to **solve the equation** $A\mathbf{x} = \mathbf{0}$!
-
-More generally, we need a systematic method for solving $A\mathbf{x} = \mathbf{b}$ for any $\mathbf{b}$.
 :::
 
 ::: proposition
@@ -124,6 +151,45 @@ $\operatorname{Null}(A)$ is a subspace of $\mathbb{R}^n$.
 1. $\mathbf{0} \in \operatorname{Null}(A)$ since $A\mathbf{0} = \mathbf{0}$ ✓
 2. If $A\mathbf{x}_1 = \mathbf{0}$ and $A\mathbf{x}_2 = \mathbf{0}$, then $A(\mathbf{x}_1 + \mathbf{x}_2) = \mathbf{0}$ ✓
 3. If $A\mathbf{x} = \mathbf{0}$, then $A(c\mathbf{x}) = c(A\mathbf{x}) = \mathbf{0}$ ✓
+:::
+
+### 1.2 The Problem: We Need Constructive Description
+
+As we saw in the motivation, **descriptive definitions are good at verification but bad at generation**.
+
+::: example
+**Example 1.1: The verification-generation gap**
+
+$$A = \begin{pmatrix}
+1 & 2 & 3 \\
+2 & 4 & 6
+\end{pmatrix}$$
+
+**Descriptive definition**: $\operatorname{Null}(A) = \{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$
+
+**Verification** (easy): Is $\mathbf{v} = \begin{pmatrix} 3 \\ -2 \\ 1 \end{pmatrix}$ in $\operatorname{Null}(A)$?
+
+Check: $A\mathbf{v} = \begin{pmatrix} 1 \cdot 3 + 2 \cdot (-2) + 3 \cdot 1 \\ 2 \cdot 3 + 4 \cdot (-2) + 6 \cdot 1 \end{pmatrix} = \begin{pmatrix} 2 \\ 4 \end{pmatrix} \neq \mathbf{0}$
+
+Not in null space! ✗
+
+**Generation** (hard): Find **any** non-zero vector in $\operatorname{Null}(A)$...
+
+Random guessing doesn't work! We need a **systematic method**.
+:::
+
+::: attention
+**The Goal**
+
+Convert from **descriptive** (easy to verify, hard to generate):
+$$\operatorname{Null}(A) = \{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$$
+
+to **constructive** (easy to generate, basis):
+$$\operatorname{Null}(A) = \text{span}\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\}$$
+
+**Method**: Solve the equation $A\mathbf{x} = \mathbf{0}$ using cross-filling!
+
+More generally, we'll develop a method for $A\mathbf{x} = \mathbf{b}$ which handles both null space and column space questions.
 :::
 
 ---
