@@ -83,12 +83,17 @@ $$A\begin{pmatrix} 0\\1\\-2 \end{pmatrix} = \begin{pmatrix} -4\\-2\\-6\\0 \end{p
 
 Not in null space! ✗ (Easy to check!)
 
-**Generation** (hard ❌): Give me **any** vector in $\operatorname{Null}(A)$...
+**Generation** (hard ❌): The columns (🥛, ☕, 🍵) have redundancy — can you find it by staring?
 
-Staring at equations doesn't help! Need to **solve** $A\mathbf{x} = \mathbf{0}$ to get:
+Hard to see! Need to **solve** $A\mathbf{x} = \mathbf{0}$ to get:
 $$\operatorname{Null}(A) = \text{span}\left\{\begin{pmatrix} 0\\2\\-1 \end{pmatrix}\right\}$$
 
-Now generation is easy: $t\begin{pmatrix} 0\\2\\-1 \end{pmatrix}$ for any $t \in \mathbb{R}$.
+**What does this vector tell us?** It records the dependence relation:
+$$0 \cdot \text{🥛} + 2 \cdot \text{☕} - 1 \cdot \text{🍵} = \mathbf{0} \quad \Rightarrow \quad 2 \times \text{☕} = 1 \times \text{🍵}$$
+
+**Ah!** The 🍵 recipe uses exactly twice the ingredients of ☕ recipe. That's the redundancy!
+
+Now generation is easy: $t\begin{pmatrix} 0\\2\\-1 \end{pmatrix}$ for any $t \in \mathbb{R}$ (scalar multiples record the same relation).
 
 **Solving equations gives descriptive description the power to generate!**
 :::
@@ -135,9 +140,19 @@ For a matrix $A \in \mathbb{R}^{m \times n}$, the **null space** is:
 
 $$\operatorname{Null}(A) = \{\mathbf{x} \in \mathbb{R}^n : A\mathbf{x} = \mathbf{0}\}$$
 
-**Descriptive language**: "All input combinations that produce zero output."
+**What does this really mean?** Each vector $\mathbf{x} \in \operatorname{Null}(A)$ records a **linear dependence relation among the columns** of $A$.
 
-**Coffee shop**: "All meal combinations requiring zero raw materials."
+**Coffee shop interpretation**: Think about $A\mathbf{x} = \mathbf{0}$ using the column view:
+$$x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \cdots + x_n \mathbf{a}_n = \mathbf{0}$$
+
+If $\mathbf{x} = \begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix}$ is in $\operatorname{Null}(A)$, this doesn't mean "2 copies of meal 1 minus 1 copy of meal 2 requires zero ingredients" (nonsense!).
+
+**It means**: $2 \times \text{meal}_1 = 1 \times \text{meal}_2$ — **meal 2 is exactly twice meal 1**! There's a **redundancy** in your menu.
+
+**Think of $\operatorname{Null}(A)$ as the "redundancy catalog"**:
+- Each non-zero vector records one linear dependence relation among columns (meals)
+- If $\operatorname{Null}(A) = \{\mathbf{0}\}$ → no redundancy → columns are **linearly independent**
+- Larger $\operatorname{Null}(A)$ → more redundancy among columns
 
 Also called the **kernel**, denoted $\ker(A)$.
 :::
@@ -165,15 +180,21 @@ $$A = \begin{pmatrix}
 2 & 4 & 6
 \end{pmatrix}$$
 
+Look at the columns: $\mathbf{a}_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$, $\mathbf{a}_2 = \begin{pmatrix} 2 \\ 4 \end{pmatrix}$, $\mathbf{a}_3 = \begin{pmatrix} 3 \\ 6 \end{pmatrix}$
+
+By eye, we can see **redundancy**: $\mathbf{a}_2 = 2\mathbf{a}_1$ and $\mathbf{a}_3 = 3\mathbf{a}_1$. So there should be dependence relations in $\operatorname{Null}(A)$ recording this!
+
 **Descriptive definition**: $\operatorname{Null}(A) = \{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$
 
 **Verification** (easy): Is $\mathbf{v} = \begin{pmatrix} 3 \\ -2 \\ 1 \end{pmatrix}$ in $\operatorname{Null}(A)$?
 
 Check: $A\mathbf{v} = \begin{pmatrix} 1 \cdot 3 + 2 \cdot (-2) + 3 \cdot 1 \\ 2 \cdot 3 + 4 \cdot (-2) + 6 \cdot 1 \end{pmatrix} = \begin{pmatrix} 2 \\ 4 \end{pmatrix} \neq \mathbf{0}$
 
-Not in null space! ✗
+Not in null space! ✗ (So this vector does **not** record a valid dependence relation.)
 
-**Generation** (hard): Find **any** non-zero vector in $\operatorname{Null}(A)$...
+**Generation** (hard): Find a vector that **does** record the dependence relation "$\mathbf{a}_2 = 2\mathbf{a}_1$"...
+
+We know $2\mathbf{a}_1 - 1\mathbf{a}_2 + 0\mathbf{a}_3 = \mathbf{0}$, so $\begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix}$ should be in $\operatorname{Null}(A)$. But how do we **systematically find all such relations**?
 
 Random guessing doesn't work! We need a **systematic method**.
 :::
