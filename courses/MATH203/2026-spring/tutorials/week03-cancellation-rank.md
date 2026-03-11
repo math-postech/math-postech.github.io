@@ -136,28 +136,26 @@ For a matrix $M$:
 
 **But for practical checking**: Just compare rank to dimensions!
 
-#### Step 2: Why This Works — Cross-Filling Perspective (5 min)
+#### Step 2: Why This Works (3 min)
 
 ::: remark
-**Why Rank Determines Cancellation**
+**Connection to Linear Independence**
 
-From Lecture 4, we know that in cross-filling $A = UV$ where $r = \text{rank}(A)$:
-- $U$ is $m \times r$ with **columns always linearly independent**
-- $V$ is $r \times n$ with **rows always linearly independent**
+From Lecture 4:
+- Columns linearly independent ⟺ rank = number of columns
+- Rows linearly independent ⟺ rank = number of rows
 
-**The key insight**:
+From Lecture 4 Proposition (Left Cancellation):
+- Columns linearly independent ⟺ left cancellation works
 
-For $A$ to have **left cancellation** (cancel $A$ from left in $AP = AQ$):
-- Need: columns of $A$ are linearly independent
-- This happens when: $\text{rank}(A) = n$ (number of columns)
-- Why: Then $r = n$, so $U$ is $m \times n$ with independent columns, making $A = UV$ have independent columns
+By symmetry:
+- Rows linearly independent ⟺ right cancellation works
 
-For $A$ to have **right cancellation** (cancel $A$ from right in $PA = QA$):
-- Need: rows of $A$ are linearly independent
-- This happens when: $\text{rank}(A) = m$ (number of rows)
-- Why: Then $r = m$, so $V$ is $m \times n$ with independent rows, making $A = UV$ have independent rows
+**Therefore**:
+- rank = columns → left cancellation ✓
+- rank = rows → right cancellation ✓
 
-**Simple rule**: Compare rank to dimensions — that's it!
+That's the entire logic! Just compare rank to dimensions.
 :::
 
 #### Step 3: Examples and Non-Examples (5 min)
