@@ -386,8 +386,13 @@ $$\begin{pmatrix}
 
 ## Questions to Check Understanding
 
-1. **Simultaneous operations**: "If I have $A^{-1}BC = D$, which matrices should I apply row operations to?"
-   - Expected answer: Apply to both "$A$" and "$D$" simultaneously (the matrices on the **left** and **right** of the equation)
+1. **Simultaneous operations (form recognition)**:
+   - (a) "For $X = A^{-1}B$, do we use row operations or column operations?"
+     - Expected answer: **Row operations** — apply to both $A$ and $B$ simultaneously
+   - (b) "For $X = AB^{-1}$, do we use row operations or column operations?"
+     - Expected answer: **Column operations** — apply to both $A$ and $B$ simultaneously
+   - (c) "If I want to simplify $A^{-1}B$ where $A = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$ and $B = \begin{pmatrix} 5 \\ 3 \end{pmatrix}$, which matrices should I apply row operations to?"
+     - Expected answer: Apply row operations to both $A$ and $B$ simultaneously
 
 2. **Cancellation**: "I have a $3 \times 5$ matrix $M$ with rank 3. Can I use left cancellation? Right cancellation?"
    - Expected answer: Yes to left (rank = columns), No to right (rank ≠ rows)
