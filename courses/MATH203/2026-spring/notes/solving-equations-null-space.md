@@ -330,65 +330,60 @@ $$V = \begin{pmatrix}
 Each rank-one piece contributes one equation (all its rows are multiples of the first).
 :::
 
-### 2.3 The Complete Algorithm
+### 2.3 Observation: Variables Decrease, So Solve Backwards
 
-::: proposition
-**Cross-Filling Algorithm for Solving $A\mathbf{x} = \mathbf{b}$**
-
-**Input**: Augmented matrix $(A \mid \mathbf{b})$ where $A$ is $m \times n$
-
-**Step 1: Cross-fill the augmented matrix**
-
-Apply cross-filling to $(A \mid \mathbf{b})$:
+After cross-filling $(A \mid \mathbf{b})$, we get:
 
 $$(A \mid \mathbf{b}) = (R_1 \mid \mathbf{b}_1) + (R_2 \mid \mathbf{b}_2) + \cdots + (R_r \mid \mathbf{b}_r)$$
 
-where $r = \operatorname{rank}(A \mid \mathbf{b})$.
+**Pause and observe**: What pattern do these pieces have?
 
-**Step 2: Check each rank-one piece**
+::: remark
+**Key Observation: Progressive Variable Elimination**
 
-For each $(R_i \mid \mathbf{b}_i)$:
-- If $R_i \neq 0$: This gives a **valid equation** relating variables
-- If $R_i = 0$ but $\mathbf{b}_i \neq 0$: This gives a **contradiction** like $0 = c$ (where $c \neq 0$)
+Each $R_i$ corresponds to a pivot column $j_i$. As cross-filling proceeds:
+- $(R_1 \mid \mathbf{b}_1)$ involves **all $n$ variables**
+- $(R_2 \mid \mathbf{b}_2)$ involves **$n-1$ variables** (column $j_1$ already eliminated)
+- $(R_3 \mid \mathbf{b}_3)$ involves **$n-2$ variables** (columns $j_1, j_2$ eliminated)
+- $\vdots$
+- $(R_r \mid \mathbf{b}_r)$ involves **$n-r+1$ variables** (fewest!)
 
-**Step 3: Existence check**
-
-- If **any** $(R_i \mid \mathbf{b}_i)$ has $R_i = 0$ but $\mathbf{b}_i \neq 0$ → **No solution** exists (contradiction)
-- If **all** non-zero $R_i$ pieces also have non-zero $\mathbf{b}_i$ → **Solution exists**
-
-Equivalently: **Solution exists** $\iff$ $\operatorname{rank}(A \mid \mathbf{b}) = \operatorname{rank}(A)$
-
-**Step 4: Identify pivot and free variables**
-
-For each rank-one piece $(R_i \mid \mathbf{b}_i)$ where $R_i \neq 0$:
-- The piece was formed using a pivot in column $j_i$
-- Variable $x_{j_i}$ is a **pivot variable** (can be solved in terms of others)
-- Variables in non-pivot columns are **free variables** (can take any value)
-
-**Step 5: Solve for pivot variables**
-
-From each equation $(R_i \mid \mathbf{b}_i)$ (reading any non-zero row):
-- Express pivot variable $x_{j_i}$ in terms of free variables
-- The equations naturally have **decreasing number of variables**
-
-**Step 6: Write general solution**
-
-$$\mathbf{x} = \mathbf{x}_{\text{particular}} + c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_k\mathbf{v}_k$$
-
-where:
-- $\mathbf{x}_{\text{particular}}$ is a particular solution (set all free variables to 0)
-- $\{\mathbf{v}_1, \ldots, \mathbf{v}_k\}$ form a basis for $\operatorname{Null}(A)$ (one per free variable)
-- $c_1, \ldots, c_k$ are arbitrary constants (the free variables)
-
-**Step 7: Uniqueness check**
-
-- If there are **no free variables** ($k = 0$) → **Unique solution**
-- If there are **free variables** ($k > 0$) → **Infinitely many solutions**
+**Structure of each equation**:
+- Some columns are **non-pivot** → corresponding variables are **free** (choose any value)
+- One column is the **new pivot** → that variable can be **solved** in terms of free variables
 :::
 
-This seems abstract. Let's see detailed examples!
+**Natural idea**: Start from the **end** where things are simplest!
 
-### 2.4 Detailed Example: The Complete Process
+::: attention
+**Backward Solving Strategy**
+
+Since $(R_r \mid \mathbf{b}_r)$ has the fewest variables, solve **backwards**:
+
+**Step 1**: Read $(R_r \mid \mathbf{b}_r)$ (any non-zero row)
+- Solve for its pivot variable in terms of free variables
+
+**Step 2**: Read $(R_{r-1} \mid \mathbf{b}_{r-1})$
+- Solve for its pivot variable (can use free variables)
+
+**Step 3**: Continue backwards through $R_{r-2}, \ldots, R_2, R_1$
+- Each equation solves one more pivot variable
+- All pivot variables eventually expressed in terms of free variables
+
+**Result naturally appears**:
+- **General solution**: Free variables are parameters, pivot variables are formulas
+- **Particular solution**: Set all free variables = 0
+- **Null space basis**: Set each free variable = 1 (one at a time), others = 0
+
+**Existence & uniqueness**:
+- No solution if any $(R_i \mid \mathbf{b}_i)$ has $R_i = 0$ but $\mathbf{b}_i \neq 0$ (contradiction $0 = c$)
+- Unique solution if no free variables ($r = n$)
+- Infinitely many solutions if free variables exist ($r < n$)
+:::
+
+Let's see this in action.
+
+### 2.4 Example: Backward Solving in Action
 
 ::: example
 **Example 2.2: Solving a system using cross-filling**
@@ -400,7 +395,7 @@ $$\begin{pmatrix}
 3 & 6 & 1 & 3
 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} = \begin{pmatrix} 5 \\ 11 \\ 16 \end{pmatrix}$$
 
-**Step 1: Form augmented matrix**
+**Cross-fill the augmented matrix**:
 
 $$(A \mid \mathbf{b}) = \left[\begin{array}{cccc|c}
 1 & 2 & 0 & 1 & 5 \\
@@ -408,88 +403,69 @@ $$(A \mid \mathbf{b}) = \left[\begin{array}{cccc|c}
 3 & 6 & 1 & 3 & 16
 \end{array}\right]$$
 
-**Step 2: Cross-fill**
+Pivot at $(1,1)$:
 
-Choose pivot at position $(1,1)$ (entry is 1):
-
-**Cross through pivot**:
-- Row 1: $(1, 2, 0, 1 \mid 5)$
-- Column 1: $(1, 2, 3)^T$
-
-**Form rank-one piece**:
-$$(R_1 \mid \mathbf{b}_1) = \frac{1}{1} \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \begin{pmatrix} 1 & 2 & 0 & 1 & | & 5 \end{pmatrix}$$
-
-$$= \left[\begin{array}{cccc|c}
+$$(R_1 \mid \mathbf{b}_1) = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \begin{pmatrix} 1 & 2 & 0 & 1 & | & 5 \end{pmatrix} = \left[\begin{array}{cccc|c}
 1 & 2 & 0 & 1 & 5 \\
 2 & 4 & 0 & 2 & 10 \\
 3 & 6 & 0 & 3 & 15
 \end{array}\right]$$
 
-**Remainder**:
-$$(A_2 \mid \mathbf{b}_2) = (A \mid \mathbf{b}) - (R_1 \mid \mathbf{b}_1)$$
+Remainder after subtracting $R_1$:
 
-$$= \left[\begin{array}{cccc|c}
+$$\left[\begin{array}{cccc|c}
 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 & 1 \\
 0 & 0 & 1 & 0 & 1
 \end{array}\right]$$
 
-Continue cross-filling the remainder. Choose pivot at $(2,3)$ (entry is 1):
+Pivot at $(2,3)$:
 
-$$(R_2 \mid \mathbf{b}_2) = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} \begin{pmatrix} 0 & 0 & 1 & 0 & | & 1 \end{pmatrix}$$
-
-$$= \left[\begin{array}{cccc|c}
+$$(R_2 \mid \mathbf{b}_2) = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} \begin{pmatrix} 0 & 0 & 1 & 0 & | & 1 \end{pmatrix} = \left[\begin{array}{cccc|c}
 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 & 1 \\
 0 & 0 & 1 & 0 & 1
 \end{array}\right]$$
 
-**Final remainder**: All zeros. Done!
+Done! $\operatorname{rank}(A \mid \mathbf{b}) = \operatorname{rank}(A) = 2$ → solution exists ✓
 
-**Summary**:
-$$(A \mid \mathbf{b}) = (R_1 \mid \mathbf{b}_1) + (R_2 \mid \mathbf{b}_2)$$
+---
 
-**Step 3: Check existence**
+**Now observe the structure**:
 
-- $(R_1 \mid \mathbf{b}_1)$: $R_1 \neq 0$ and $\mathbf{b}_1 \neq 0$ ✓
-- $(R_2 \mid \mathbf{b}_2)$: $R_2 \neq 0$ and $\mathbf{b}_2 \neq 0$ ✓
+We have two rank-one pieces:
+- $(R_1 \mid \mathbf{b}_1)$: pivot at column 1 → involves variables $x_1, x_2, x_3, x_4$ (all 4)
+- $(R_2 \mid \mathbf{b}_2)$: pivot at column 3 → involves variable $x_3$ only (1 variable!)
 
-No contradictions! **Solution exists.** ✓
+Pivot columns: 1, 3 → **Pivot variables**: $x_1, x_3$
+Non-pivot columns: 2, 4 → **Free variables**: $x_2, x_4$ (choose freely!)
 
-Also: $\operatorname{rank}(A \mid \mathbf{b}) = 2 = \operatorname{rank}(A)$ ✓
+---
 
-**Step 4: Identify variables**
+**Backward solving**: Start from $R_2$ (simplest!)
 
-- Pivot columns: 1, 3 (used as pivots)
-- Non-pivot columns: 2, 4
-- **Pivot variables**: $x_1, x_3$
-- **Free variables**: $x_2, x_4$
+**From $(R_2 \mid \mathbf{b}_2)$** (read row 2):
+$$x_3 = 1$$
 
-**Step 5: Extract equations**
+Easy! Variable $x_3$ is just a constant.
 
-From $(R_1 \mid \mathbf{b}_1)$ (read row 1):
-$$1 \cdot x_1 + 2 \cdot x_2 + 0 \cdot x_3 + 1 \cdot x_4 = 5$$
-$$\Rightarrow x_1 = 5 - 2x_2 - x_4$$
+**From $(R_1 \mid \mathbf{b}_1)$** (read row 1):
+$$x_1 + 2x_2 + 0x_3 + x_4 = 5$$
 
-From $(R_2 \mid \mathbf{b}_2)$ (read row 2 or 3):
-$$0 \cdot x_1 + 0 \cdot x_2 + 1 \cdot x_3 + 0 \cdot x_4 = 1$$
-$$\Rightarrow x_3 = 1$$
+Solve for the pivot $x_1$:
+$$x_1 = 5 - 2x_2 - x_4$$
 
-**Step 6: General solution**
+Done! Both pivot variables expressed in terms of free variables.
 
-Set free variables: $x_2 = s$, $x_4 = t$ (parameters)
+---
 
-Then:
-- $x_3 = 1$
-- $x_1 = 5 - 2s - t$
+**General solution**: Let $x_2 = s$ and $x_4 = t$ (free parameters)
 
-$$\boxed{\mathbf{x} = \begin{pmatrix} 5 - 2s - t \\ s \\ 1 \\ t \end{pmatrix} = \begin{pmatrix} 5 \\ 0 \\ 1 \\ 0 \end{pmatrix} + s\begin{pmatrix} -2 \\ 1 \\ 0 \\ 0 \end{pmatrix} + t\begin{pmatrix} -1 \\ 0 \\ 0 \\ 1 \end{pmatrix}}$$
+$$\mathbf{x} = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} = \begin{pmatrix} 5 - 2s - t \\ s \\ 1 \\ t \end{pmatrix} = \begin{pmatrix} 5 \\ 0 \\ 1 \\ 0 \end{pmatrix} + s\begin{pmatrix} -2 \\ 1 \\ 0 \\ 0 \end{pmatrix} + t\begin{pmatrix} -1 \\ 0 \\ 0 \\ 1 \end{pmatrix}$$
 
-**Particular solution** (set $s = t = 0$): $\mathbf{x}_p = (5, 0, 1, 0)^T$
+**Particular solution**: Set $s = t = 0$ → $\mathbf{x}_p = \begin{pmatrix} 5 \\ 0 \\ 1 \\ 0 \end{pmatrix}$
 
-**Null space basis**: $\left\{\begin{pmatrix} -2 \\ 1 \\ 0 \\ 0 \end{pmatrix}, \begin{pmatrix} -1 \\ 0 \\ 0 \\ 1 \end{pmatrix}\right\}$
-
-**Step 7: Uniqueness**
+**Null space basis**: $\left\{\begin{pmatrix} -2 \\ 1 \\ 0 \\ 0 \end{pmatrix}, \begin{pmatrix} -1 \\ 0 \\ 0 \\ 1 \end{pmatrix}\right\}$ (one per free variable)
 
 Two free variables → **Infinitely many solutions** (2-parameter family)
 :::
