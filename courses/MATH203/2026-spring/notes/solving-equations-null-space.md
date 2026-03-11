@@ -140,21 +140,53 @@ For a matrix $A \in \mathbb{R}^{m \times n}$, the **null space** is:
 
 $$\operatorname{Null}(A) = \{\mathbf{x} \in \mathbb{R}^n : A\mathbf{x} = \mathbf{0}\}$$
 
-**What does this really mean?** Each vector $\mathbf{x} \in \operatorname{Null}(A)$ records a **linear dependence relation among the columns** of $A$.
-
-**Coffee shop interpretation**: Think about $A\mathbf{x} = \mathbf{0}$ using the column view:
-$$x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 + \cdots + x_n \mathbf{a}_n = \mathbf{0}$$
-
-If $\mathbf{x} = \begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix}$ is in $\operatorname{Null}(A)$, this doesn't mean "2 copies of meal 1 minus 1 copy of meal 2 requires zero ingredients" (nonsense!).
-
-**It means**: $2 \times \text{meal}_1 = 1 \times \text{meal}_2$ — **meal 2 is exactly twice meal 1**! There's a **redundancy** in your menu.
-
-**Think of $\operatorname{Null}(A)$ as the "redundancy catalog"**:
-- Each non-zero vector records one linear dependence relation among columns (meals)
-- If $\operatorname{Null}(A) = \{\mathbf{0}\}$ → no redundancy → columns are **linearly independent**
-- Larger $\operatorname{Null}(A)$ → more redundancy among columns
+**Geometric meaning**: $\operatorname{Null}(A)$ stores all **linear dependence relations** among the columns of $A$.
 
 Also called the **kernel**, denoted $\ker(A)$.
+:::
+
+::: example
+**Example: Null space records redundancy in the menu**
+
+Consider a coffee shop menu matrix:
+
+$$A = \begin{array}{c|ccc}
+ & \text{🥛 milk} & \text{☕ coffee} & \text{🍵 tea} \\
+\hline
+\text{🍃 tea leaves} & 0 & 0 & 2 \\
+\text{🍋 lemon} & 0 & 0 & 1 \\
+\text{🫘 coffee beans} & 0 & 2 & 4 \\
+\text{🐄 milk} & 1 & 0 & 1
+\end{array}$$
+
+**Question**: Are there any redundant recipes? That is, is one meal just a scaled version of another?
+
+Hard to see by staring! But if we find $\mathbf{x} \in \operatorname{Null}(A)$, it will **reveal the redundancy**.
+
+Suppose (we'll learn how to compute this soon) that:
+$$\mathbf{x} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix} \in \operatorname{Null}(A)$$
+
+**What does this vector tell us?** Using the column view of $A\mathbf{x} = \mathbf{0}$:
+$$0 \cdot \begin{pmatrix} 0\\0\\0\\1 \end{pmatrix} + 2 \cdot \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix} + (-1) \cdot \begin{pmatrix} 2\\1\\4\\1 \end{pmatrix} = \begin{pmatrix} 0\\0\\0\\0 \end{pmatrix}$$
+
+Rearranging:
+$$2 \cdot \begin{pmatrix} 0\\0\\2\\0 \end{pmatrix} = 1 \cdot \begin{pmatrix} 2\\1\\4\\1 \end{pmatrix}$$
+
+**In coffee shop terms**: $2 \times \text{☕} = 1 \times \text{🍵}$
+
+**Aha!** The 🍵 tea recipe uses exactly **twice the ingredients** of the ☕ coffee recipe. That's the redundancy!
+
+::: remark
+**Key Insight**
+
+- $\mathbf{x} = \begin{pmatrix} 0 \\ 2 \\ -1 \end{pmatrix}$ doesn't mean "2 coffees minus 1 tea produces zero ingredients" (nonsense!)
+- It means: **🍵 = 2×☕** (a dependence relation)
+- Think of $\operatorname{Null}(A)$ as the **"redundancy catalog"**
+
+**Size of the catalog**:
+- $\operatorname{Null}(A) = \{\mathbf{0}\}$ → no redundancy → columns **linearly independent**
+- $\dim(\operatorname{Null}(A)) = k$ → there are $k$ independent redundancy relations
+:::
 :::
 
 ::: proposition
@@ -267,47 +299,68 @@ When we cross-fill $(A \mid \mathbf{b})$:
 **Moreover**: Each equation is a **valid consequence** of the original system.
 :::
 
-### 2.2 Why Each Equation is Valid (关键论证)
+### 2.2 Why Can We Solve the Simplified System? (关键论证)
+
+**The key question**: We decompose $(A \mid \mathbf{b}) = (R_1 \mid \mathbf{b}_1) + (R_2 \mid \mathbf{b}_2) + \cdots$ and extract one equation from each rank-one piece. Why is solving these simpler equations **equivalent** to solving the original system $A\mathbf{x} = \mathbf{b}$?
 
 ::: proposition
-**Validity of Cross-Filling Equations**
+**Equivalence Theorem**
 
-Each equation obtained from a rank-one piece $(R_i \mid \mathbf{b}_i)$ is a **valid consequence** of the original system $A\mathbf{x} = \mathbf{b}$.
+Let $(A \mid \mathbf{b})$ be cross-filled as:
 
-**Proof idea**:
+$$(A \mid \mathbf{b}) = UV$$
 
-When we cross-fill $(A \mid \mathbf{b})$:
+where:
+- $U$ is an $m \times r$ matrix (columns from cross-filling)
+- $V$ is an $r \times (n+1)$ matrix (rows from cross-filling, each row = one rank-one piece)
 
-$$(A \mid \mathbf{b}) = (R_1 \mid \mathbf{b}_1) + (A_2 \mid \mathbf{b}_2)$$
+Then the solution set of the original system $A\mathbf{x} = \mathbf{b}$ **equals** the solution set of the simplified system defined by $V$'s rows.
 
-where $A_2 = A - R_1$ is the remainder.
+**Proof**:
 
-**Step 1**: The rank-one piece $(R_1 \mid \mathbf{b}_1)$ comes from:
-- Selecting a **pivot row $i$** from $A$
-- Forming cross pattern from row $i$ and some column $j$
+**Step 1**: Recall the **Cross-Filling Theorem** (Lecture 3):
 
-**The row of $(R_1 \mid \mathbf{b}_1)$ is a scalar multiple of the pivot row from the original matrix $A$.**
+When $(A \mid \mathbf{b}) = UV$, the matrix $U$ has **linearly independent columns** (by construction of cross-filling). This means $U$ can be **left-cancelled**:
 
-Therefore, the equation from $(R_1 \mid \mathbf{b}_1)$ is a **scalar multiple of an original equation** → valid! ✓
+$$UV\mathbf{z} = \mathbf{0} \iff V\mathbf{z} = \mathbf{0}$$
 
-**Step 2**: When we compute the remainder:
+**Why?** If $UV\mathbf{z} = \mathbf{0}$, then $V\mathbf{z}$ is in $\operatorname{Null}(U)$. But $U$ has independent columns, so $\operatorname{Null}(U) = \{\mathbf{0}\}$. Thus $V\mathbf{z} = \mathbf{0}$.
 
-$$(A_2 \mid \mathbf{b}_2) = (A \mid \mathbf{b}) - (R_1 \mid \mathbf{b}_1)$$
+**Step 2**: Connect to row spaces (equations):
 
-Each row of $(A_2 \mid \mathbf{b}_2)$ is a **linear combination** of:
-- The corresponding row from $(A \mid \mathbf{b})$ (original equation)
-- Minus a multiple of the pivot row (which is valid)
+Since $(A \mid \mathbf{b}) = UV$, the **row space** of $(A \mid \mathbf{b})$ equals the **row space** of $V$:
 
-**Linear combinations of valid equations are valid!** ✓
+$$\text{Row}((A \mid \mathbf{b})) = \text{Row}(V)$$
 
-**Step 3**: By induction, all subsequent rank-one pieces $(R_2 \mid \mathbf{b}_2), (R_3 \mid \mathbf{b}_3), \ldots$ are derived from valid equations.
+**What does this mean?** Every row of $(A \mid \mathbf{b})$ (i.e., every original equation) is a **linear combination** of the rows of $V$ (the simplified equations).
 
-**Conclusion**: Every equation we obtain is a **fact** derived from the original system.
+**Step 3**: Equivalent systems:
+
+If $\mathbf{x}$ satisfies all equations from $V$ → $\mathbf{x}$ satisfies all linear combinations of these equations → $\mathbf{x}$ satisfies all original equations from $(A \mid \mathbf{b})$ ✓
+
+Conversely, if $\mathbf{x}$ satisfies all original equations → it satisfies all equations in the row space → it satisfies the $r$ independent equations from $V$ ✓
+
+**Conclusion**: Solving $(A \mid \mathbf{b})$ ⟺ Solving $V$'s rows ⟺ Solving $r$ simplified equations (one from each rank-one piece)
 :::
 
-**Physical interpretation**:
+**Practical meaning**:
 
-When we decompose ingredient requirements, we're not inventing new constraints — we're just **reorganizing** the original requirements into simpler pieces that are easier to work with.
+We've reduced an $m$-equation system to an $r$-equation system (where $r = \operatorname{rank}(A \mid \mathbf{b}) \leq m$), and each equation in the simplified system has progressively fewer variables.
+
+::: remark
+**What is $V$?**
+
+$V$ is the collection of "representative rows" from each rank-one piece:
+
+$$V = \begin{pmatrix}
+\text{— first row of } (R_1 \mid \mathbf{b}_1) \text{ —} \\
+\text{— first row of } (R_2 \mid \mathbf{b}_2) \text{ —} \\
+\vdots \\
+\text{— first row of } (R_r \mid \mathbf{b}_r) \text{ —}
+\end{pmatrix}$$
+
+Each row = one independent equation.
+:::
 
 ### 2.3 The Complete Algorithm
 
