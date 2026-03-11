@@ -134,9 +134,9 @@ $$\operatorname{Null}(B) = \left\{\mathbf{x} : \begin{pmatrix} 1 & 0 & 2 \\ 0 & 
 Solving (by inspection or cross-filling):
 $$\operatorname{Null}(B) = \operatorname{span}\left\{\begin{pmatrix} -2\\-1\\1 \end{pmatrix}\right\}$$
 
-This says: $-2(\text{原料1}) - 1(\text{原料2}) + 1(\text{原料3}) = \mathbf{0}$ in all three semi-products.
+This records the linear dependence: $-2\mathbf{b}_1 - 1\mathbf{b}_2 + 1\mathbf{b}_3 = \mathbf{0}$ (where $\mathbf{b}_j$ are columns of $B$).
 
-Check: Does this also work for $AB$?
+Check: Does this linear dependence also hold for $AB$?
 $$AB\begin{pmatrix} -2\\-1\\1 \end{pmatrix} = \begin{pmatrix} 2 & 1 & 5 \\ 1 & 0 & 2 \end{pmatrix}\begin{pmatrix} -2\\-1\\1 \end{pmatrix} = \begin{pmatrix} 0\\0 \end{pmatrix}$$ ✓
 
 So $\operatorname{Null}(B) \subseteq \operatorname{Null}(AB)$ is confirmed!
@@ -384,7 +384,14 @@ Therefore, $(A^{-1})^T$ is the inverse of $A^T$, so $(A^{-1})^T = (A^T)^{-1}$. �
 **Proof of Property 3: $(A + B)^T = A^T + B^T$**
 
 Entry-by-entry:
-$$(A + B)^T_{ij} = (A + B)_{ji} = A_{ji} + B_{ji} = (A^T)_{ij} + (B^T)_{ij} = (A^T + B^T)_{ij}$$ □
+\begin{align*}
+(A + B)^T_{ij} &= (A + B)_{ji} \\
+&= A_{ji} + B_{ji} \\
+&= (A^T)_{ij} + (B^T)_{ij} \\
+&= (A^T + B^T)_{ij}
+\end{align*}
+
+Therefore $(A + B)^T = A^T + B^T$. □
 
 ---
 
