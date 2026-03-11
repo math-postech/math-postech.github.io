@@ -168,11 +168,7 @@ Lecture notes are organized by topic and will be added throughout the semester.
 
 - [Lecture 4: Subspace and Linear Independence](./notes/subspace-and-linear-independence.md) — Two languages (descriptive vs constructive), subspaces, column space, linear independence, basis, dimension, well-definedness of rank
 - [Lecture 5: Solving Linear Equations and Null Space](./notes/solving-equations-null-space.md) — Cross-filling method for solving $Ax=b$, null space (descriptive ↔ constructive), existence and uniqueness criteria, rank-nullity theorem preview
-
-<!--
-Upcoming notes:
- [Week 5-6: Four Fundamental Subspaces](notes/four-fundamental-subspaces.md)
--->
+- [Lecture 6: Four Fundamental Subspaces](./notes/four-fundamental-subspaces.md) — Subspaces of matrix products, transpose and symmetric matrices, orthogonality relationships ($\operatorname{Col}(A^T) \perp \operatorname{Null}(A)$, $\operatorname{Col}(A) \perp \operatorname{Null}(A^T)$), rank = row rank = column rank
 
 ---
 
