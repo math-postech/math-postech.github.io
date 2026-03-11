@@ -138,28 +138,26 @@ For a matrix $M$:
 
 #### Step 2: Why This Works — Cross-Filling Perspective (5 min)
 
-Explain the intuition using cross-filling:
-
 ::: remark
 **Why Rank Determines Cancellation**
 
-Recall from Lecture 3: Cross-filling gives $A = UV$ where:
-- $U$ is $m \times r$ (where $r = \text{rank}(A)$)
-- $V$ is $r \times n$
+From Lecture 4, we know that in cross-filling $A = UV$ where $r = \text{rank}(A)$:
+- $U$ is $m \times r$ with **columns always linearly independent**
+- $V$ is $r \times n$ with **rows always linearly independent**
 
-**From Lecture 4**:
-- Columns of $U$ are **always linearly independent** (proven via pivot structure)
-- Therefore $U$ **always has left cancellation**
+**The key insight**:
 
-**New insight for today**:
-- By symmetry, rows of $V$ are **also linearly independent**
-- Therefore $V$ **always has right cancellation**
+For $A$ to have **left cancellation** (cancel $A$ from left in $AP = AQ$):
+- Need: columns of $A$ are linearly independent
+- This happens when: $\text{rank}(A) = n$ (number of columns)
+- Why: Then $r = n$, so $U$ is $m \times n$ with independent columns, making $A = UV$ have independent columns
 
-**The simplified criteria**:
-- **Left cancellation** for $A$: rank(A) = columns ⟺ In $A = UV$, we have $U$ is $m \times n$ with linearly independent columns
-- **Right cancellation** for $A$: rank(A) = rows ⟺ In $A = UV$, we have $V$ is $m \times n$ with linearly independent rows
+For $A$ to have **right cancellation** (cancel $A$ from right in $PA = QA$):
+- Need: rows of $A$ are linearly independent
+- This happens when: $\text{rank}(A) = m$ (number of rows)
+- Why: Then $r = m$, so $V$ is $m \times n$ with independent rows, making $A = UV$ have independent rows
 
-Note: $A$ is **always** $A = UV$, not $A = U$ or $A = V$! The rank condition determines the **shape** of $U$ and $V$ in the factorization.
+**Simple rule**: Compare rank to dimensions — that's it!
 :::
 
 #### Step 3: Examples and Non-Examples (5 min)
