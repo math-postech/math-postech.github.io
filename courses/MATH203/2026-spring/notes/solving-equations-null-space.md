@@ -559,27 +559,34 @@ The equation $A\mathbf{x} = \mathbf{b}$ has a solution **if and only if**:
 
 $$\boxed{\operatorname{rank}(A \mid \mathbf{b}) = \operatorname{rank}(A)}$$
 
-**Proof via cross-filling**:
+**Understanding via cross-filling**:
 
-Cross-fill $(A \mid \mathbf{b})$ to get:
-$$(A \mid \mathbf{b}) = (R_1 \mid \mathbf{b}_1) + \cdots + (R_r \mid \mathbf{b}_r)$$
+Here's what actually happens when you cross-fill $(A \mid \mathbf{b})$:
 
-where $r = \operatorname{rank}(A \mid \mathbf{b})$.
+**Strategy**: Choose all pivots in $A$'s part (the first $n$ columns), never in the $\mathbf{b}$ column.
 
-**Case 1**: $\operatorname{rank}(A \mid \mathbf{b}) = \operatorname{rank}(A)$
+Suppose $\operatorname{rank}(A) = r$. Use these $r$ pivots from $A$ to decompose $(A \mid \mathbf{b})$:
 
-- This means when we delete the last column: $A = R_1 + \cdots + R_r$ (possibly with some $R_i = 0$)
-- But $\operatorname{rank}(A) = r$, so actually **none** of the $R_i$ are zero
-- Each $(R_i \mid \mathbf{b}_i)$ gives a valid equation (no contradictions)
+$$(A \mid \mathbf{b}) = (R_1 \mid \mathbf{b}_1) + \cdots + (R_r \mid \mathbf{b}_r) + \text{remainder}$$
+
+**Now look at what's left in the $\mathbf{b}$ column**:
+
+**Case 1**: The $\mathbf{b}$ column is completely accounted for (remainder in $\mathbf{b}$ column = all zeros)
+
+- Then $\operatorname{rank}(A \mid \mathbf{b}) = r = \operatorname{rank}(A)$ ✓
+- All equations from $(R_i \mid \mathbf{b}_i)$ are valid (no contradictions)
 - **Solution exists** ✓
 
-**Case 2**: $\operatorname{rank}(A \mid \mathbf{b}) > \operatorname{rank}(A)$
+**Case 2**: Something remains in the $\mathbf{b}$ column (remainder in $\mathbf{b}$ column ≠ zero)
 
-- This means $\operatorname{rank}(A) = r - k$ for some $k \geq 1$
-- When we delete the last column, $k$ of the $R_i$ become zero
-- But the corresponding $\mathbf{b}_i$ are non-zero (otherwise rank would be lower)
-- This gives contradictions: $\mathbf{0} = \mathbf{b}_i \neq \mathbf{0}$
+- Must take one more pivot in the last column to continue cross-filling
+- This gives a rank-one piece: $(0 \mid c)$ where $c \neq 0$
+- Represents the equation: $0 \cdot x_1 + \cdots + 0 \cdot x_n = c$ where $c \neq 0$
+- That's $0 = c$ — **contradiction!** ✗
+- So $\operatorname{rank}(A \mid \mathbf{b}) = r + 1 = \operatorname{rank}(A) + 1$
 - **No solution** ✗
+
+**Why can rank increase by at most 1?** Because $\mathbf{b}$ is only **one column**! Can't add more than 1 to the rank.
 :::
 
 **Geometric interpretation**:
