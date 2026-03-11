@@ -299,58 +299,26 @@ When we cross-fill $(A \mid \mathbf{b})$:
 **Moreover**: Each equation is a **valid consequence** of the original system.
 :::
 
-### 2.2 Why Can We Solve the Simplified System? (关键论证)
+### 2.2 Why Can We Solve the Simplified System?
 
-**The key question**: We decompose $(A \mid \mathbf{b}) = (R_1 \mid \mathbf{b}_1) + (R_2 \mid \mathbf{b}_2) + \cdots$ and extract one equation from each rank-one piece. Why is solving these simpler equations **equivalent** to solving the original system $A\mathbf{x} = \mathbf{b}$?
+**The key question**: We extract one equation from each rank-one piece. Why is solving these $r$ equations equivalent to solving the original $m$ equations?
 
-::: proposition
-**Equivalence Theorem**
+**Answer**: Cross-filling gives $(A \mid \mathbf{b}) = UV$ where:
+- $U$ is $m \times r$ with **linearly independent columns** (Lecture 3 theorem)
+- $V$ is $r \times (n+1)$ with rows from each rank-one piece
 
-Let $(A \mid \mathbf{b})$ be cross-filled as:
-
-$$(A \mid \mathbf{b}) = UV$$
-
-where:
-- $U$ is an $m \times r$ matrix (columns from cross-filling)
-- $V$ is an $r \times (n+1)$ matrix (rows from cross-filling, each row = one rank-one piece)
-
-Then the solution set of the original system $A\mathbf{x} = \mathbf{b}$ **equals** the solution set of the simplified system defined by $V$'s rows.
-
-**Proof**:
-
-**Step 1**: Recall the **Cross-Filling Theorem** (Lecture 3):
-
-When $(A \mid \mathbf{b}) = UV$, the matrix $U$ has **linearly independent columns** (by construction of cross-filling). This means $U$ can be **left-cancelled**:
+Since $U$'s columns are independent, $U$ can be **left-cancelled**:
 
 $$UV\mathbf{z} = \mathbf{0} \iff V\mathbf{z} = \mathbf{0}$$
 
-**Why?** If $UV\mathbf{z} = \mathbf{0}$, then $V\mathbf{z}$ is in $\operatorname{Null}(U)$. But $U$ has independent columns, so $\operatorname{Null}(U) = \{\mathbf{0}\}$. Thus $V\mathbf{z} = \mathbf{0}$.
+Therefore the solution spaces are **identical**:
 
-**Step 2**: Connect to row spaces (equations):
+$$\text{Solutions to } (A \mid \mathbf{b}) = \text{Solutions to } V$$
 
-Since $(A \mid \mathbf{b}) = UV$, the **row space** of $(A \mid \mathbf{b})$ equals the **row space** of $V$:
-
-$$\text{Row}((A \mid \mathbf{b})) = \text{Row}(V)$$
-
-**What does this mean?** Every row of $(A \mid \mathbf{b})$ (i.e., every original equation) is a **linear combination** of the rows of $V$ (the simplified equations).
-
-**Step 3**: Equivalent systems:
-
-If $\mathbf{x}$ satisfies all equations from $V$ → $\mathbf{x}$ satisfies all linear combinations of these equations → $\mathbf{x}$ satisfies all original equations from $(A \mid \mathbf{b})$ ✓
-
-Conversely, if $\mathbf{x}$ satisfies all original equations → it satisfies all equations in the row space → it satisfies the $r$ independent equations from $V$ ✓
-
-**Conclusion**: Solving $(A \mid \mathbf{b})$ ⟺ Solving $V$'s rows ⟺ Solving $r$ simplified equations (one from each rank-one piece)
-:::
-
-**Practical meaning**:
-
-We've reduced an $m$-equation system to an $r$-equation system (where $r = \operatorname{rank}(A \mid \mathbf{b}) \leq m$), and each equation in the simplified system has progressively fewer variables.
+We've reduced $m$ equations to $r$ equations ($r \leq m$), and $V$'s rows are exactly the simplified equations from cross-filling.
 
 ::: remark
 **What is $V$?**
-
-$V$ is the collection of "representative rows" from each rank-one piece:
 
 $$V = \begin{pmatrix}
 \text{— first row of } (R_1 \mid \mathbf{b}_1) \text{ —} \\
@@ -359,7 +327,7 @@ $$V = \begin{pmatrix}
 \text{— first row of } (R_r \mid \mathbf{b}_r) \text{ —}
 \end{pmatrix}$$
 
-Each row = one independent equation.
+Each rank-one piece contributes one equation (all its rows are multiples of the first).
 :::
 
 ### 2.3 The Complete Algorithm
