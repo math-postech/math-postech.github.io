@@ -156,8 +156,10 @@ Recall from Lecture 3: Cross-filling gives $A = UV$ where:
 - Therefore $V$ **always has right cancellation**
 
 **The simplified criteria**:
-- Left cancellation possible ⟺ rank = columns ⟺ $A$ can be written as $A = U$ (full column rank)
-- Right cancellation possible ⟺ rank = rows ⟺ $A$ can be written as $A = V$ (full row rank)
+- **Left cancellation** for $A$: rank(A) = columns ⟺ In $A = UV$, we have $U$ is $m \times n$ with linearly independent columns
+- **Right cancellation** for $A$: rank(A) = rows ⟺ In $A = UV$, we have $V$ is $m \times n$ with linearly independent rows
+
+Note: $A$ is **always** $A = UV$, not $A = U$ or $A = V$! The rank condition determines the **shape** of $U$ and $V$ in the factorization.
 :::
 
 #### Step 3: Examples and Non-Examples (5 min)
