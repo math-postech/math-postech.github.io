@@ -277,217 +277,72 @@ Work through a **modified version** of the homework problem:
 Consider the matrix depending on parameters $a, b, c$:
 
 $$M = \begin{pmatrix}
-1 & 3 & 2 \\
-2 & a & 4 \\
-3 & b & c
+1 & a & 2a \\
+0 & 1 & b \\
+0 & 0 & c
 \end{pmatrix}$$
 
 **(a)** Show that $\text{rank}(M) \geq 2$ for all values of $a, b, c$.
 
-**(b)** Find a polynomial equation in $a, b, c$ such that $\text{rank}(M) = 2$ if and only if this equation holds.
+**(b)** Find a polynomial $f(a, b, c)$ such that $\text{rank}(M) = 2$ if and only if $f(a, b, c) = 0$.
 
 **Solution**:
 
-**(a)** Proving $\text{rank}(M) \geq 2$:
+**(a)** Proving $\text{rank}(M) \geq 2$ for all values:
 
-**Step 1**: Look for two linearly independent columns (or rows).
+Look at the first two columns:
+- Column 1: $\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}$
+- Column 2: $\begin{pmatrix} a \\ 1 \\ 0 \end{pmatrix}$
 
-Observe: Columns 1 and 2 are $\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$ and $\begin{pmatrix} 3 \\ a \\ b \end{pmatrix}$
+Check linear independence: If $k_1\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} + k_2\begin{pmatrix} a \\ 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$
 
-Are they linearly independent? Check if one is a scalar multiple of the other:
+Then:
+- From row 1: $k_1 + ak_2 = 0$
+- From row 2: $k_2 = 0$
+- Therefore: $k_1 = 0$
 
-If they were dependent: $\begin{pmatrix} 3 \\ a \\ b \end{pmatrix} = k \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$ for some $k$
+So columns 1 and 2 are **always linearly independent** (for all values of $a, b, c$). ✓
 
-From first component: $3 = k \cdot 1 \Rightarrow k = 3$
-But then: $a = 3 \cdot 2 = 6$ and $b = 3 \cdot 3 = 9$
+Therefore: $\text{rank}(M) \geq 2$ for all parameter values. ✓
 
-So columns 1 and 2 are linearly dependent **only if** $a = 6$ AND $b = 9$.
+**(b)** Finding the rank = 2 condition using cross-filling:
 
-For **all other values** of $(a,b)$, columns 1 and 2 are linearly independent → $\text{rank}(M) \geq 2$ ✓
+**Step 1**: Choose pivot at $(1,1) = 1$
 
-**Step 2**: What if $a = 6$ and $b = 9$?
-
-Then $M = \begin{pmatrix} 1 & 3 & 2 \\ 2 & 6 & 4 \\ 3 & 9 & c \end{pmatrix}$
-
-Notice: Row 2 = 2 × Row 1
-
-So even in this case, we can find two linearly independent rows (e.g., rows 1 and 3, unless row 3 is also a multiple of row 1).
-
-Row 3 = $k$ × Row 1 would require: $(3, 9, c) = k(1, 3, 2) \Rightarrow k = 3$ and $c = 6$
-
-So unless $(a,b,c) = (6, 9, 6)$, we still have rank $\geq 2$.
-
-Even when $(a,b,c) = (6, 9, 6)$:
-$$M = \begin{pmatrix} 1 & 3 & 2 \\ 2 & 6 & 4 \\ 3 & 9 & 6 \end{pmatrix} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \begin{pmatrix} 1 & 3 & 2 \end{pmatrix}$$
-
-This is rank 1, not rank 0!
-
-**Better argument using cross-filling**:
-
-**Step 1** (cross-filling): Choose pivot at $(1,1) = 1$:
-
-$$R_1 = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \begin{pmatrix} 1 & 3 & 2 \end{pmatrix} = \begin{pmatrix}
-1 & 3 & 2 \\
-2 & 6 & 4 \\
-3 & 9 & 6
+$$R_1 = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} \begin{pmatrix} 1 & a & 2a \end{pmatrix} = \begin{pmatrix}
+1 & a & 2a \\
+0 & 0 & 0 \\
+0 & 0 & 0
 \end{pmatrix}$$
 
 Remainder:
 $$M - R_1 = \begin{pmatrix}
 0 & 0 & 0 \\
-0 & a-6 & 0 \\
-0 & b-9 & c-6
+0 & 1 & b \\
+0 & 0 & c
 \end{pmatrix}$$
 
-**Observation**: The remainder is **not entirely zero** unless $a = 6$, $b = 9$, AND $c = 6$ simultaneously.
+**Step 2**: Choose pivot at $(2,2) = 1$
 
-So for **any** choice of parameters (except possibly the special case), we get at least one more rank-1 piece.
-
-**Check special case** $(a,b,c) = (6,9,6)$:
-Remainder = $\mathbf{0}$ → rank = 1
-
-**For all other cases**: Remainder $\neq \mathbf{0}$ → rank $\geq 2$ ✓
-
-**Conclusion**: $\text{rank}(M) \geq 2$ for all $(a,b,c)$ **except** $(6, 9, 6)$ (where rank = 1).
-
-So actually, $\text{rank}(M) \geq 1$ for all values, and $\text{rank}(M) \geq 2$ for almost all values.
-
-**(b)** Finding the rank = 2 condition:
-
-From part (a), after peeling $R_1$:
-
-$$\text{Remainder} = \begin{pmatrix}
+$$R_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \begin{pmatrix} 0 & 1 & b \end{pmatrix} = \begin{pmatrix}
 0 & 0 & 0 \\
-0 & a-6 & 0 \\
-0 & b-9 & c-6
-\end{pmatrix}$$
-
-**Case 1**: If remainder = $\mathbf{0}$, then rank = 1
-- Condition: $a = 6, b = 9, c = 6$
-
-**Case 2**: If remainder $\neq \mathbf{0}$, continue cross-filling.
-
-The remainder has rank $\geq 1$ as long as it's nonzero. When does it have rank **exactly 1**?
-
-**Step 2** (continue cross-filling the remainder):
-
-If $a \neq 6$, pivot at $(2,2) = a-6$:
-
-$$R_2 = \begin{pmatrix} 0 \\ a-6 \\ 0 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \end{pmatrix} = \begin{pmatrix}
-0 & 0 & 0 \\
-0 & a-6 & 0 \\
+0 & 1 & b \\
 0 & 0 & 0
-\end{pmatrix}$$
-
-Wait, that's not right. Let me recalculate using proper cross-filling.
-
-Actually, let me use a different pivot. The remainder is:
-$$\begin{pmatrix}
-0 & 0 & 0 \\
-0 & a-6 & 0 \\
-0 & b-9 & c-6
-\end{pmatrix}$$
-
-Choose pivot at $(2, 2) = a-6$ (assuming $a \neq 6$):
-
-Column at pivot: $\begin{pmatrix} 0 \\ a-6 \\ b-9 \end{pmatrix}$, Row at pivot: $\begin{pmatrix} 0 & 1 & 0 \end{pmatrix}$ (normalized)
-
-$$R_2 = \begin{pmatrix} 0 \\ a-6 \\ b-9 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \end{pmatrix} = \begin{pmatrix}
-0 & 0 & 0 \\
-0 & a-6 & 0 \\
-0 & b-9 & 0
 \end{pmatrix}$$
 
 Second remainder:
 $$\begin{pmatrix}
 0 & 0 & 0 \\
 0 & 0 & 0 \\
-0 & 0 & c-6
+0 & 0 & c
 \end{pmatrix}$$
 
-**Rank of $M$**:
-- If $c = 6$: rank = 2 (two rank-1 pieces: $R_1$ and $R_2$)
-- If $c \neq 6$: rank = 3 (three pieces: $R_1$, $R_2$, and the $(3,3)$ entry)
+**Step 3**: Check if we need a third piece
 
-**But wait**: We also need $a \neq 6$ for this argument!
+- If $c = 0$: Second remainder = $\mathbf{0}$ → Stop → $\text{rank}(M) = 2$ ✓
+- If $c \neq 0$: Need $R_3$ with pivot at $(3,3) = c$ → $\text{rank}(M) = 3$
 
-**Case analysis**:
-
-1. If $a = 6, b = 9, c = 6$: rank = 1
-2. If $a \neq 6$ and $c = 6$: rank = 2 ✓
-3. If $a \neq 6$ and $c \neq 6$: rank = 3
-
-What if $a = 6$ but not both $b = 9$ and $c = 6$?
-
-Remainder becomes:
-$$\begin{pmatrix}
-0 & 0 & 0 \\
-0 & 0 & 0 \\
-0 & b-9 & c-6
-\end{pmatrix}$$
-
-This has rank 1 if $(b-9, c-6) \neq (0,0)$, so total rank = 2.
-
-**Summary**:
-
-$\text{rank}(M) = 2$ if and only if:
-- $(a \neq 6$ and $c = 6)$ OR $(a = 6$ and $(b,c) \neq (9, 6))$
-
-The cleanest polynomial condition:
-
-**From the cross-filling analysis**, rank = 3 if and only if we can peel 3 pieces.
-This happens when the remainder after $R_1$ and $R_2$ is still nonzero.
-
-The final remainder is the $(3,3)$ entry: $c - 6$
-
-So: $\text{rank}(M) = 3$ ⟺ $c \neq 6$ (and we can successfully peel $R_2$, which requires either $a \neq 6$ or $b \neq 9$)
-
-Actually, let me think more carefully...
-
-**Cleaner approach**: Use the fact that rank = 2 means the three rows are linearly dependent.
-
-The rows are:
-- $\mathbf{r}_1 = (1, 3, 2)$
-- $\mathbf{r}_2 = (2, a, 4)$
-- $\mathbf{r}_3 = (3, b, c)$
-
-Rows are linearly dependent ⟺ there exist $\alpha, \beta, \gamma$ (not all zero) such that:
-$$\alpha \mathbf{r}_1 + \beta \mathbf{r}_2 + \gamma \mathbf{r}_3 = \mathbf{0}$$
-
-We already know $\mathbf{r}_1$ and $\mathbf{r}_2$ span a 2D space (from part a), unless they're dependent.
-
-So rank = 2 ⟺ $\mathbf{r}_3$ is in $\text{span}\{\mathbf{r}_1, \mathbf{r}_2\}$
-
-This means: $(3, b, c) = s(1, 3, 2) + t(2, a, 4)$ for some $s, t$
-
-From first component: $3 = s + 2t$
-From second component: $b = 3s + at$
-From third component: $c = 2s + 4t$
-
-From first equation: $s = 3 - 2t$
-
-Substituting into third: $c = 2(3-2t) + 4t = 6 - 4t + 4t = 6$
-
-So we get: **$c = 6$** (regardless of $t$!)
-
-Let's verify: If $c = 6$, can we always write $\mathbf{r}_3$ as a combination of $\mathbf{r}_1$ and $\mathbf{r}_2$?
-
-From $s = 3 - 2t$ and $b = 3s + at$:
-$$b = 3(3-2t) + at = 9 - 6t + at = 9 + t(a-6)$$
-
-So: $t = \frac{b-9}{a-6}$ (if $a \neq 6$)
-
-This works as long as $a \neq 6$. If $a = 6$, we need $b = 9$ for consistency.
-
-**Final answer for part (b)**:
-
-$$\boxed{\text{rank}(M) = 2 \iff c = 6}$$
-
-(with the technicality that if $a = 6$, we also need $b = 9$ to avoid rank 1)
-
-Actually, for a clean polynomial: $f(a,b,c) = c - 6$
-
-$\text{rank}(M) = 2$ ⟺ $c - 6 = 0$ AND $(a,b) \neq (6, 9)$
+**Answer**: $$\boxed{f(a,b,c) = c, \quad \text{i.e., } \text{rank}(M) = 2 \iff c = 0}$$
 :::
 
 **Teaching note**: Walk through the cross-filling step-by-step on the board, emphasizing:
