@@ -257,13 +257,13 @@ $$\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\}$$
 **Three Key Relationships**
 
 1. **$\operatorname{Col}(AB) \subseteq \operatorname{Col}(A)$**
-   - The output of $AB$ is limited by what $A$ can produce
+   - Every column of $AB$ is a linear combination of columns of $A$
 
 2. **$\operatorname{Null}(B) \subseteq \operatorname{Null}(AB)$**
-   - Anything $B$ kills, $AB$ also kills
+   - Linear dependence relations among $B$'s columns persist in $AB$'s columns
 
 3. **$\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\} \Longleftrightarrow \operatorname{Null}(AB) = \operatorname{Null}(B)$**
-   - No "second-round killing" ⟺ Judge $A$ spares all of $B$'s living survivors
+   - No new dependencies created by $A$ ⟺ No nonzero vector from $\operatorname{Col}(B)$ lands in $\operatorname{Null}(A)$
 :::
 
 ---
