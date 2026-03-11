@@ -20,38 +20,23 @@ Today, we discover deeper relationships between subspaces:
 
 ## 1. Subspaces of Matrix Products
 
-### 1.1 Setup: Two Production Stages
+### 1.1 Setup: Combining Two Transformations
 
-Imagine a two-stage production system:
+Consider two matrices that we compose:
 
 ::: example
-**Example: Two-Stage Production**
+**Example: Two Matrices $B$ and $A$**
 
-**Stage 1** (Matrix $B$): Convert raw ingredients → semi-products
+$$B = \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 1 \\ 0 & 0 & 0 \end{pmatrix} \quad (3 \times 3 \text{ matrix})$$
 
-$$B = \begin{array}{c|ccc}
- & \text{原料1} & \text{原料2} & \text{原料3} \\
-\hline
-\text{半成品🥛} & 1 & 0 & 2 \\
-\text{半成品☕} & 0 & 1 & 1 \\
-\text{半成品🍵} & 0 & 0 & 0
-\end{array} = \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 1 \\ 0 & 0 & 0 \end{pmatrix}$$
+$$A = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix} \quad (2 \times 3 \text{ matrix})$$
 
-**Stage 2** (Matrix $A$): Convert semi-products → final products
-
-$$A = \begin{array}{c|ccc}
- & \text{🥛} & \text{☕} & \text{🍵} \\
-\hline
-\text{产品🍰} & 2 & 1 & 0 \\
-\text{产品🧁} & 1 & 0 & 0
-\end{array} = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix}$$
-
-**Combined operation** $AB$: Raw ingredients → final products (直接):
+**Product** $AB$:
 
 $$AB = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 0 & 0 \end{pmatrix} \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 1 \\ 0 & 0 & 0 \end{pmatrix} = \begin{pmatrix} 2 & 1 & 5 \\ 1 & 0 & 2 \end{pmatrix}$$
 :::
 
-**Question**: What can we say about $\operatorname{Col}(AB)$, $\operatorname{Null}(AB)$ compared to the individual spaces?
+**Question**: How do the column spaces and null spaces of $A$, $B$, and $AB$ relate?
 
 ---
 
@@ -65,26 +50,31 @@ The column space of $AB$ is always contained in the column space of $A$.
 
 **Proof:**
 
-By definition, $\operatorname{Col}(AB) = \{AB\mathbf{x} : \mathbf{x} \in \mathbb{R}^n\}$.
+Write $B$ with columns $\mathbf{b}_1, \ldots, \mathbf{b}_n$:
+$$B = \begin{pmatrix} | & | & & | \\ \mathbf{b}_1 & \mathbf{b}_2 & \cdots & \mathbf{b}_n \\ | & | & & | \end{pmatrix}$$
 
-For any $\mathbf{x}$, let $\mathbf{y} = B\mathbf{x}$. Then:
-$$AB\mathbf{x} = A(B\mathbf{x}) = A\mathbf{y}$$
+Then $AB$ has columns:
+$$AB = \begin{pmatrix} | & | & & | \\ A\mathbf{b}_1 & A\mathbf{b}_2 & \cdots & A\mathbf{b}_n \\ | & | & & | \end{pmatrix}$$
 
-Since $\mathbf{y}$ is a vector, $A\mathbf{y}$ is a linear combination of the columns of $A$. Therefore:
-$$AB\mathbf{x} \in \operatorname{Col}(A)$$
+**Key observation**: Each column of $AB$ is $A\mathbf{b}_j$, which is a **linear combination of the columns of $A$** (with coefficients from $\mathbf{b}_j$).
 
-This shows every vector in $\operatorname{Col}(AB)$ is also in $\operatorname{Col}(A)$. □
+Therefore, every column of $AB$ lies in $\operatorname{Col}(A)$.
+
+Since $\operatorname{Col}(AB)$ is spanned by the columns of $AB$, we have:
+$$\operatorname{Col}(AB) \subseteq \operatorname{Col}(A)$$ □
 
 ::: remark
-**Why this makes sense (production table view)**
+**Why this makes sense: Columns of $AB$ are linear combinations of columns of $A$**
 
-The final products from $AB$ are made by:
-1. $B$ converts raw materials → semi-products
-2. $A$ converts semi-products → final products
+Recall from Lecture 1: the $j$-th column of $AB$ equals $A$ times the $j$-th column of $B$:
+$$(AB)_j = A \mathbf{b}_j$$
 
-Everything coming out of $AB$ must pass through $A$, so the output is limited by what $A$ can produce.
+But $A\mathbf{b}_j$ is precisely a linear combination of $A$'s columns, with coefficients from $\mathbf{b}_j$.
 
-The column space $\operatorname{Col}(A)$ represents "all possible outputs from $A$". Since $AB$ uses $A$ in the second stage, its outputs cannot exceed what $A$ alone can produce.
+**Example**: If $\mathbf{b}_j = \begin{pmatrix} 2 \\ -1 \\ 3 \end{pmatrix}$ and $A$ has columns $\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3$, then:
+$$A\mathbf{b}_j = 2\mathbf{a}_1 - 1\mathbf{a}_2 + 3\mathbf{a}_3 \in \operatorname{Col}(A)$$
+
+So every column of $AB$ is built from $A$'s columns!
 :::
 
 **Verification with our example:**
@@ -120,13 +110,21 @@ $$(AB)\mathbf{x} = A(B\mathbf{x}) = A(\mathbf{0}) = \mathbf{0}$$
 Therefore $\mathbf{x} \in \operatorname{Null}(AB)$, proving $\operatorname{Null}(B) \subseteq \operatorname{Null}(AB)$. □
 
 ::: remark
-**Why this makes sense (production table view)**
+**Why this makes sense: Linear dependence relations persist**
 
-If a combination of raw materials produces **nothing** after stage 1 ($B$), then it also produces nothing after stage 2 ($A$).
+Recall from Lecture 5: a vector $\mathbf{x} \in \operatorname{Null}(B)$ **records a linear dependence relation** among the columns of $B$.
 
-Think of it this way: if $B$ kills it (maps to zero), then $A$ has nothing to work with, so the combined operation $AB$ also kills it.
+For example, if $\mathbf{x} = \begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix} \in \operatorname{Null}(B)$, this says:
+$$2\mathbf{b}_1 - 1\mathbf{b}_2 + 0\mathbf{b}_3 = \mathbf{0}$$
 
-But could there be **additional** combinations that $B$ doesn't kill, but $A$ does? That leads us to the next theorem...
+Now, what happens when we apply $A$ to this relation?
+$$A(2\mathbf{b}_1 - 1\mathbf{b}_2) = 2(A\mathbf{b}_1) - 1(A\mathbf{b}_2) = 2(AB)_1 - 1(AB)_2$$
+
+Since the original columns of $B$ had a linear dependence, the transformed columns of $AB$ inherit the **same** linear dependence!
+
+**General principle**: Applying $A$ preserves all linear relations that already existed in $B$'s columns.
+
+Could there be **new** linear dependencies in $AB$ that weren't in $B$? That's the next theorem...
 :::
 
 **Verification with our example:**
@@ -210,77 +208,45 @@ Hence, $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\}$. □
 
 ---
 
-### 1.5 A Tale of Two Cities: Understanding the Equivalence
+### 1.5 Understanding the Equivalence: Two Perspectives
 
-The equivalence $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\} \Longleftrightarrow \operatorname{Null}(AB) = \operatorname{Null}(B)$ connects two different perspectives. Let's understand it through a story.
+The equivalence $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\} \Longleftrightarrow \operatorname{Null}(AB) = \operatorname{Null}(B)$ has a beautiful geometric interpretation.
 
-::: example
-**The Two Cities and Two Judges**
+::: remark
+**Two Ways to Think About It**
 
-Imagine a two-city world:
-
-**旧城市 (Old City)** = Domain of $B$ (where raw materials live)
-**新城市 (New City)** = Codomain of $B$ (where semi-products live)
-
-**審判官 $B$** (Judge $B$): Operates in the old city
-- Kills some residents → they become "corpses" (zero vector) → $\operatorname{Null}(B)$
-- Lets others survive → they become "half-alive" (nonzero vectors) → these move to the new city as $\operatorname{Col}(B)$
-
-**審判官 $A$** (Judge $A$): Operates in the new city
-- Kills residents who fall into $\operatorname{Null}(A)$
-- Lets others survive
-
-**Two perspectives on the same question**: *Does Judge $A$ kill any survivors from Judge $B$?*
-
----
-
-**Perspective 1: Looking from the Old City (定义域视角)**
+**Perspective 1: Domain of $B$ (where $\mathbf{x}$ lives)**
 
 $$\operatorname{Null}(AB) = \operatorname{Null}(B)$$
 
-**Meaning**: Among all residents of the old city, those who die after both judges ($\operatorname{Null}(AB)$) are exactly those who were already killed by Judge $B$ ($\operatorname{Null}(B)$).
+**Meaning**: All linear dependence relations among columns of $AB$ were **already present** in columns of $B$. The transformation $A$ didn't create any **new** dependencies.
 
-**Translation**: Nobody who survived Judge $B$ gets killed later by Judge $A$. There is no "second-round killing".
+**Equivalently**: If $\mathbf{x}$ satisfies $(AB)\mathbf{x} = \mathbf{0}$, then it already satisfied $B\mathbf{x} = \mathbf{0}$.
 
 ---
 
-**Perspective 2: Looking from the New City (陪域视角)**
+**Perspective 2: Codomain of $B$ (where $B\mathbf{x}$ lives)**
 
 $$\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\}$$
 
-**Meaning**: Among immigrants from the old city ($\operatorname{Col}(B)$), none of the **living** ones (nonzero vectors) fall into Judge $A$'s kill zone ($\operatorname{Null}(A)$). The only intersection is the zero vector (corpses who were already dead).
+**Meaning**: Among all vectors that $B$ can produce (i.e., $\operatorname{Col}(B)$), **none** of the nonzero ones land in $\operatorname{Null}(A)$.
 
-**Translation**: Judge $A$ does not execute any living survivors who came from the old city. Judge $A$ is "merciful" to Judge $B$'s survivors.
+**Equivalently**: If $\mathbf{v} = B\mathbf{x}$ for some $\mathbf{x}$ and $A\mathbf{v} = \mathbf{0}$, then $\mathbf{v} = \mathbf{0}$ (which forces $B\mathbf{x} = \mathbf{0}$).
 
 ---
 
 **Why are these equivalent?**
 
-Both perspectives describe the same reality:
-- **Old city view**: Tracks who ultimately dies (combining both judges)
-- **New city view**: Tracks who dies in the second round
+- **If** $\operatorname{Null}(AB)$ is strictly larger than $\operatorname{Null}(B)$, there exists $\mathbf{x}$ with $B\mathbf{x} \neq \mathbf{0}$ but $(AB)\mathbf{x} = \mathbf{0}$
+- This means $\mathbf{v} = B\mathbf{x}$ is a **nonzero** vector in $\operatorname{Col}(B)$ that satisfies $A\mathbf{v} = \mathbf{0}$
+- So $\mathbf{v} \in \operatorname{Null}(A) \cap \operatorname{Col}(B)$ with $\mathbf{v} \neq \mathbf{0}$
 
-**The connection**:
-- If $\operatorname{Null}(AB)$ is strictly larger than $\operatorname{Null}(B)$, it means someone survived $B$ but died under $A$
-- This happens exactly when some **living** survivor from $B$ (nonzero vector in $\operatorname{Col}(B)$) falls into $\operatorname{Null}(A)$
-- That is, $\operatorname{Null}(A) \cap \operatorname{Col}(B)$ contains more than just $\{\mathbf{0}\}$
+**Conversely**:
+- **If** $\operatorname{Null}(A) \cap \operatorname{Col}(B)$ contains a nonzero vector $\mathbf{v}$, write $\mathbf{v} = B\mathbf{x}$ for some $\mathbf{x}$
+- Then $(AB)\mathbf{x} = A(B\mathbf{x}) = A\mathbf{v} = \mathbf{0}$ but $B\mathbf{x} = \mathbf{v} \neq \mathbf{0}$
+- So $\mathbf{x} \in \operatorname{Null}(AB)$ but $\mathbf{x} \notin \operatorname{Null}(B)$
 
-**Summary**:
-$$\text{No second-round deaths} \iff \text{Judge A spares all of B's living survivors}$$
-:::
-
-::: remark
-**Why This Framework Matters**
-
-This "two cities" perspective reveals a deep pattern:
-- The **old city** (domain of $B$) sees the *combined* effect $AB$
-- The **new city** (codomain of $B$ = domain of $A$) sees the *intermediate* state after $B$, before $A$
-
-Many theorems in linear algebra can be stated in both perspectives:
-- **Domain perspective**: Properties of $AB$ vs $B$
-- **Codomain/Domain boundary**: Interaction between $\operatorname{Null}(A)$ and $\operatorname{Col}(B)$
-
-This duality will reappear when we study the **four fundamental subspaces** later in this lecture.
+**Conclusion**: The two conditions detect the same phenomenon from different viewpoints!
 :::
 
 ---
