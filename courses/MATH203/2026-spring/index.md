@@ -35,6 +35,7 @@ Detailed teaching suggestions to help TAs prepare engaging tutorial sessions ali
 | Week | Date | Topics | Link |
 |------|------|--------|------|
 | **Week 2** | Mar 5 | Block Matrix Multiplication and Rank | [View Details](./tutorials/week02-block-matrix-rank.md) |
+| **Week 3** | Mar 12 | Cancellation Properties and Rank Conditions | [View Details](./tutorials/week03-cancellation-rank.md) |
 
 ---
 
