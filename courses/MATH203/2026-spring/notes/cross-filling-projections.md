@@ -126,8 +126,6 @@ Let $P$ be a projection ($P^2 = P$). Write $P = UV$ as a cross-filling decomposi
 - $V$ is $r \times n$
 
 Then **$VU = I_r$ automatically**.
-
-That is, **$V$ is a left inverse of $U$, and $U$ is a right inverse of $V$.**
 :::
 
 ::: remark
@@ -150,29 +148,19 @@ The proof uses only the defining property $P^2 = P$ and basic matrix algebra.
 
 $$UVUV = UV$$
 
-**Step 2**: Left-cancel by $U$ (meaning: left-multiply both sides by a left inverse of $U$).
+**Step 2**: Apply left cancellation to $U$.
 
-Since $U$ has full column rank (rank $r$), it has a left inverse. Applying it to both sides:
+Since $U$ has rank $r$ (full column rank), its columns are linearly independent. From Lecture 4, we know linearly independent columns allow **left cancellation**:
 
-$$VUV = V$$
+$$UVUV = UV \quad \Longrightarrow \quad VUV = V$$
 
-**Step 3**: Right-cancel by $V$ (meaning: right-multiply both sides by a right inverse of $V$).
+**Step 3**: Apply right cancellation to $V$.
 
-Since $V$ has full row rank (rank $r$), it has a right inverse. Applying it to both sides:
+Since $V$ has rank $r$ (full row rank), its rows are linearly independent, which allows **right cancellation**:
 
-$$VU = I_r$$
+$$VUV = V \quad \Longrightarrow \quad VU = I_r$$
 
 Done! ∎
-
-::: remark
-**Why Does $U$ Have a Left Inverse?**
-
-$U$ is $m \times r$ with rank $r$, meaning it has **full column rank**. This implies $U^T U$ is invertible, so $U$ has a left inverse $(U^T U)^{-1}U^T$.
-
-Similarly, $V$ has full row rank, so $VV^T$ is invertible and $V$ has a right inverse $V^T(VV^T)^{-1}$.
-
-The proof above uses these facts implicitly.
-:::
 
 ---
 
