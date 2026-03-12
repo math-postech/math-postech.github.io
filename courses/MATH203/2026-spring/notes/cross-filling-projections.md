@@ -196,6 +196,64 @@ Even though $\operatorname{trace}(A) = \operatorname{trace}(UV) = \operatorname{
 **This is why rank = trace is special to projections.**
 :::
 
+### 3.1 Characterization of Rank-1 Projections
+
+For rank-1 projections, we have a beautiful characterization.
+
+::: proposition
+**Corollary 3.2 (Rank-1 Projection Characterization)**
+
+For a square matrix $A$, consider the following three conditions:
+1. $\operatorname{rank}(A) = 1$
+2. $\operatorname{trace}(A) = 1$
+3. $A^2 = A$ (i.e., $A$ is a projection)
+
+**If any two of these conditions hold, then all three hold.**
+:::
+
+**Proof**:
+
+We prove each of the three implications:
+
+**(1) + (2) ⟹ (3)**: Suppose $\operatorname{rank}(A) = 1$ and $\operatorname{trace}(A) = 1$.
+
+Since rank is 1, we can write $A = \mathbf{u}\mathbf{v}^T$ for some vectors $\mathbf{u}, \mathbf{v}$.
+
+The trace is:
+$$\operatorname{trace}(A) = \operatorname{trace}(\mathbf{u}\mathbf{v}^T) = \mathbf{v}^T \mathbf{u} = 1$$
+
+Now compute $A^2$:
+$$A^2 = (\mathbf{u}\mathbf{v}^T)(\mathbf{u}\mathbf{v}^T) = \mathbf{u}(\mathbf{v}^T \mathbf{u})\mathbf{v}^T = \mathbf{u} \cdot 1 \cdot \mathbf{v}^T = \mathbf{u}\mathbf{v}^T = A$$
+
+So $A$ is a projection. ✓
+
+**(1) + (3) ⟹ (2)**: Suppose $\operatorname{rank}(A) = 1$ and $A^2 = A$.
+
+Write $A = UV$ where $U$ is $n \times 1$ and $V$ is $1 \times n$ (since rank is 1).
+
+By Theorem 2.1, $VU = I_1$ (i.e., $VU = 1$, a scalar).
+
+Therefore:
+$$\operatorname{trace}(A) = \operatorname{trace}(UV) = \operatorname{trace}(VU) = \operatorname{trace}(1) = 1$$
+
+✓
+
+**(2) + (3) ⟹ (1)**: Suppose $\operatorname{trace}(A) = 1$ and $A^2 = A$.
+
+By Theorem 3.1, $\operatorname{rank}(A) = \operatorname{trace}(A) = 1$. ✓
+
+Done! ∎
+
+::: remark
+**Why Is This Useful?**
+
+This characterization tells us that **rank-1 projections are exactly the matrices with rank 1 and trace 1**.
+
+We don't need to check $A^2 = A$ separately — the projection property comes for free from rank and trace!
+
+This will be crucial in Section 5 when we decompose projections into rank-1 pieces.
+:::
+
 ---
 
 ## 4. Compatible Families of Projections
