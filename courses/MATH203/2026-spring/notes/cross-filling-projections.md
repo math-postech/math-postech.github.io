@@ -168,46 +168,8 @@ Done! ∎
 
 The automatic property $VU = I$ leads to a stunning consequence.
 
-### 3.1 Trace of a Rank-1 Projection
-
-First, let's compute the trace of a rank-1 projection.
-
-::: example
-**Example 3.1: Trace of a Rank-1 Projection**
-
-Consider $P = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$.
-
-This is a rank-1 projection. Its trace is:
-
-$$\operatorname{trace}(P) = 1 + 0 = 1$$
-
-Consider $P = \frac{1}{2}\begin{pmatrix} 1 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.
-
-Its trace is:
-
-$$\operatorname{trace}(P) = \frac{1}{2}(1 + 1) = 1$$
-:::
-
 ::: proposition
-**Lemma 3.1 (Rank-1 Projection Has Trace 1)**
-
-If $P = \mathbf{u}\mathbf{v}^T$ is a rank-1 projection ($P^2 = P$), then:
-
-$$\operatorname{trace}(P) = 1$$
-
-**Proof**:
-
-From $VU = I$ (where $U = \mathbf{u}$ and $V = \mathbf{v}^T$ are both $1 \times 1$ after reduction to rank-1 case), we have:
-
-$$\operatorname{trace}(P) = \operatorname{trace}(UV) = \operatorname{trace}(VU) = \operatorname{trace}(I_1) = 1$$
-
-∎
-:::
-
-### 3.2 The Rank = Trace Theorem
-
-::: proposition
-**Theorem 3.2 (Rank = Trace for Projections)**
+**Theorem 3.1 (Rank = Trace for Projections)**
 
 For any projection $P$ (satisfying $P^2 = P$):
 
@@ -216,36 +178,20 @@ $$\operatorname{rank}(P) = \operatorname{trace}(P)$$
 
 **Proof**:
 
-Cross-fill $P$ into a sum of rank-1 projections:
+Write $P = UV$ where $\operatorname{rank}(P) = r$. By Theorem 2.1, $VU = I_r$.
 
-$$P = R_1 + R_2 + \cdots + R_r$$
+Using the cyclic property of trace:
 
-where $r = \operatorname{rank}(P)$ and each $R_i$ is a rank-1 matrix.
+$$\operatorname{trace}(P) = \operatorname{trace}(UV) = \operatorname{trace}(VU) = \operatorname{trace}(I_r) = r = \operatorname{rank}(P)$$
 
-**Key observation**: Since $P = UV$ with $VU = I$, we can write each $R_i$ as a rank-1 projection:
-
-$$R_i = U \mathbf{e}_i \mathbf{e}_i^T V$$
-
-where $\mathbf{e}_i$ is the $i$-th standard basis vector in $\mathbb{R}^r$.
-
-Each $R_i$ satisfies:
-
-$$R_i^2 = (U \mathbf{e}_i \mathbf{e}_i^T V)(U \mathbf{e}_i \mathbf{e}_i^T V) = U \mathbf{e}_i \mathbf{e}_i^T (VU) \mathbf{e}_i \mathbf{e}_i^T V = U \mathbf{e}_i \mathbf{e}_i^T I \mathbf{e}_i \mathbf{e}_i^T V = U \mathbf{e}_i \mathbf{e}_i^T V = R_i$$
-
-So each $R_i$ is a projection! By Lemma 3.1, $\operatorname{trace}(R_i) = 1$.
-
-Therefore:
-
-$$\operatorname{trace}(P) = \sum_{i=1}^r \operatorname{trace}(R_i) = \sum_{i=1}^r 1 = r = \operatorname{rank}(P)$$
-
-∎
+Done! ∎
 
 ::: remark
 **Why Doesn't This Work for General Matrices?**
 
-For a general matrix $A = UV$, we do NOT have $VU = I$, so the rank-1 pieces $R_i = \mathbf{u}_i \mathbf{v}_i^T$ are NOT projections.
+For a general matrix $A = UV$, we do NOT have $VU = I$.
 
-Without the projection property, we cannot conclude that $\operatorname{trace}(R_i) = 1$, and the whole argument breaks down.
+Even though $\operatorname{trace}(A) = \operatorname{trace}(UV) = \operatorname{trace}(VU)$, the matrix $VU$ is NOT the identity, so we cannot conclude that $\operatorname{trace}(A) = \operatorname{rank}(A)$.
 
 **This is why rank = trace is special to projections.**
 :::
@@ -427,7 +373,7 @@ In this lecture, we discovered the **magical properties of cross-filling project
 
 1. **VU = I Automatic** (Theorem 2.1): If $P = UV$ with $P^2 = P$, then $VU = I$.
 
-2. **Rank = Trace** (Theorem 3.2): For any projection $P$, $\operatorname{rank}(P) = \operatorname{trace}(P)$.
+2. **Rank = Trace** (Theorem 3.1): For any projection $P$, $\operatorname{rank}(P) = \operatorname{trace}(P)$.
 
 3. **Automatic Compatibility** (Theorem 5.1): If $P_1 + \cdots + P_k = P$ with each $P_i^2 = P_i$ and $P^2 = P$, then $P_i P_j = 0$ for $i \neq j$.
 :::
