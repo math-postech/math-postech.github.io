@@ -480,7 +480,3 @@ This is the topic of **Lecture 9: Constructing Projections**.
 
 **Exercise 8.5**: (Challenge) Suppose $P_1, P_2, P_3$ are projections with $P_1 + P_2 + P_3 = P$ where $P^2 = P$. Prove that $P_1, P_2, P_3$ are **linearly independent** matrices (as elements of the vector space of $n \times n$ matrices).
 :::
-
----
-
-*Next: [Lecture 9: Constructing Projections](./constructing-projections.md)*
