@@ -173,7 +173,7 @@ Lecture notes are organized by topic and will be added throughout the semester.
 ### Chapter 3: Linear Transformations and Projections
 
 - [Lecture 7: Linear Transformation and Projection](./notes/linear-transformation-and-projection.md) — Linear transformations, projection operators ($P^2=P$), sunlight-floor geometric model, column space and null space of projections, interchanging property ($\operatorname{Col}(P) = \operatorname{Null}(I-P)$), disjoint property ($\operatorname{Col}(P) \cap \operatorname{Null}(P) = \{\mathbf{0}\}$)
-- [Lecture 8: Cross-Filling Properties of Projections](./notes/cross-filling-projections.md) — Cross-filling decomposition $P=UV$ implies $VU=I$ automatically, rank(P) = trace(P), rank-1 projections, compatible families of projections, automatic compatibility theorem (sum of projections being projection implies orthogonality)
+- [Lecture 8: Decomposition of Projections](./notes/cross-filling-projections.md) — Decomposition $P=UV$ implies $VU=I$ automatically, rank(P) = trace(P), rank-1 characterization (any two of {rank=1, trace=1, $P^2=P$} imply third), $UV=I$ forces square matrices, projection decomposition theorem ($P=\sum R_i$ with rank condition implies each $R_i$ is projection)
 
 ---
 

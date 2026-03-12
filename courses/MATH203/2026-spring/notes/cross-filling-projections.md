@@ -1,6 +1,6 @@
-# Lecture 8: Cross-Filling Properties of Projections
+# Lecture 8: Decomposition of Projections
 
-> **Topics**: §5.2–5.3 — Cross-Filling Decomposition, VU=I Automatic, rank(P)=trace(P), Compatible Families
+> **Topics**: §5.2–5.3 — Decomposition P=UV, VU=I Automatic, rank(P)=trace(P), Projection Splitting
 > **Date**: Apr 6 – Apr 9, 2026
 
 ---
@@ -22,13 +22,13 @@ But we still have two fundamental questions unanswered:
 2. **What makes projections special?** We know from Chapter 1 that any matrix can be written as $A = UV$ via cross-filling. What happens when we cross-fill a projection?
 :::
 
-This lecture answers the second question. We will discover that **cross-filling projections reveals magical properties** that do not hold for general matrices.
+This lecture answers the second question. We will discover that **decomposing projections reveals magical properties** that do not hold for general matrices.
 
 ---
 
-## 1. Cross-Filling a Projection
+## 1. Decomposing Projections into Products
 
-### 1.1 Review: Cross-Filling Any Matrix
+### 1.1 Review: Decomposing Any Matrix
 
 Recall from Lecture 3 that any matrix $A$ can be decomposed into a sum of rank-1 matrices:
 
@@ -43,7 +43,7 @@ where:
 - $V$ is an $r \times n$ matrix whose rows are the "right parts" of each $R_i$
 
 ::: example
-**Example 1.1: Cross-Filling a General Matrix**
+**Example 1.1: Decomposing a General Matrix**
 
 $$A = \begin{pmatrix} 2 & 4 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 2 \end{pmatrix}$$
 
@@ -63,7 +63,7 @@ For general matrices, **$VU$ is just some number or matrix** — nothing special
 Now let's try the same process with a **projection matrix**.
 
 ::: example
-**Example 1.2: Cross-Filling a Projection**
+**Example 1.2: Decomposing a Projection**
 
 Consider the projection onto the $x$-axis:
 
@@ -114,16 +114,16 @@ This pattern suggests a deep theorem.
 
 ---
 
-## 2. The Fundamental Theorem: VU = I Automatic
+## 2. Decomposition and the VU = I Property
 
 ### 2.1 Statement
 
 ::: proposition
 **Theorem 2.1 (VU = I Automatic)**
 
-Let $P$ be a projection ($P^2 = P$). Write $P = UV$ as a cross-filling decomposition where:
-- $U$ is $m \times r$ with $r = \operatorname{rank}(P)$
-- $V$ is $r \times n$
+Let $P$ be a projection ($P^2 = P$). Suppose $P = UV$ where:
+- $U$ is $m \times r$ with full column rank (rank $r$)
+- $V$ is $r \times n$ with full row rank (rank $r$)
 
 Then **$VU = I_r$ automatically**.
 :::
@@ -254,6 +254,52 @@ We don't need to check $A^2 = A$ separately — the projection property comes fo
 This will be crucial in Section 5 when we decompose projections into rank-1 pieces.
 :::
 
+### 3.2 When Are Both U and V Square?
+
+An interesting question: if $UV = I$, when are both $U$ and $V$ square matrices?
+
+::: proposition
+**Corollary 3.3 (UV = I Forces Square Matrices)**
+
+Suppose $U$ is $m \times r$ and $V$ is $r \times n$ with $UV = I_{\min(m,n)}$.
+
+Then $m = n = r$, and **both $U$ and $V$ are square invertible matrices** with $VU = UV = I$.
+:::
+
+**Proof**:
+
+Since $UV = I$, the product must be square, so $m = n$.
+
+Thus $U$ is $n \times r$ and $V$ is $r \times n$, with $UV = I_n$.
+
+**Observe**: $UV = I_n$ is a projection, since $(UV)^2 = UVUV = I_n UV = UV$.
+
+Apply Theorem 3.1 (rank = trace for projections):
+
+$$\operatorname{rank}(UV) = \operatorname{trace}(UV) = \operatorname{trace}(I_n) = n$$
+
+But $\operatorname{rank}(UV) \leq r$ (since the product goes through an $r$-dimensional bottleneck).
+
+Therefore $n \leq r$.
+
+Conversely, for $UV = I_n$ to hold, we need $\operatorname{rank}(U) \geq n$ and $\operatorname{rank}(V) \geq n$.
+
+Since $U$ has only $r$ columns, $\operatorname{rank}(U) \leq r$, so $r \geq n$.
+
+Combining $n \leq r$ and $r \leq n$, we get $r = n$.
+
+Therefore $U$ and $V$ are both $n \times n$ square matrices with $UV = I_n$.
+
+For square matrices, left inverse equals right inverse, so $VU = I_n$. ∎
+
+::: remark
+**Why Is This Surprising?**
+
+This says: **You cannot have $UV = I$ with $U$ thin and $V$ fat** (or vice versa).
+
+If the product is the identity, both matrices must be square and invertible, and the product commutes: $UV = VU = I$.
+:::
+
 ---
 
 ## 4. Compatible Families of Projections
@@ -309,106 +355,128 @@ The space is **decomposed** into $k$ subspaces that are "perpendicular" (in a ge
 
 ---
 
-## 5. The Automatic Compatibility Theorem
+## 5. Decomposition of Projections
 
 Here comes the most surprising result of this lecture.
 
-### 5.1 The Conjecture
+### 5.1 The Question
 
-Suppose we have projections $P_1, \ldots, P_k$ (each $P_i^2 = P_i$), and we know:
+Suppose we have a projection $P$ decomposed into a sum of matrices:
 
-$$P_1 + P_2 + \cdots + P_k = P$$
+$$P = R_1 + R_2 + \cdots + R_k$$
 
-where $P$ is also a projection ($P^2 = P$).
+We don't know yet whether the $R_i$ are projections. We only know:
 
-**Question**: Does this automatically imply $P_i P_j = 0$ for $i \neq j$?
+$$\sum_{i=1}^k \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$$
 
-You might think: "This looks like a hard theorem to prove!" But using our cross-filling tools, the proof is almost trivial.
+**Question**: Can we conclude that each $R_i$ is a projection and that they are mutually orthogonal ($R_i R_j = 0$ for $i \neq j$)?
+
+Surprisingly, the answer is **yes**!
 
 ### 5.2 The Theorem
 
 ::: proposition
-**Theorem 5.1 (Automatic Compatibility)**
+**Theorem 5.1 (Projection Decomposition)**
 
-Let $P_1, \ldots, P_k$ be projections ($P_i^2 = P_i$). If:
+Let $P$ be a projection ($P^2 = P$). Suppose:
 
-$$P_1 + P_2 + \cdots + P_k = P$$
+$$P = R_1 + R_2 + \cdots + R_k$$
 
-where $P$ is also a projection ($P^2 = P$), then **automatically**:
+where each $R_i$ is a matrix satisfying:
 
-$$P_i P_j = 0 \quad \text{for all } i \neq j$$
+$$\sum_{i=1}^k \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$$
+
+Then **automatically**:
+1. Each $R_i$ is a projection ($R_i^2 = R_i$)
+2. $R_i R_j = 0$ for all $i \neq j$
 :::
 
 ::: remark
-**Why Is This Surprising?**
+**Why Is This Remarkable?**
 
-The condition $P_i P_j = 0$ seems completely independent from the condition $P_1 + \cdots + P_k = P$.
+We don't assume the $R_i$ are projections — **the projection property emerges automatically** from the rank condition!
 
-But the projection property $P^2 = P$ **forces them to be orthogonal** — no extra assumptions needed!
+This is the power of the rank = trace theorem combined with decomposition.
 :::
 
-### 5.3 Proof Using Cross-Filling and Trace
+### 5.3 Proof Using the R₀ Trick
+
+The key insight is to introduce a "complementary" matrix to make the sum equal to the identity.
 
 **Proof**:
 
-Cross-fill each $P_i$ as $P_i = U_i V_i$. Since $P_i^2 = P_i$, we know $V_i U_i = I_{r_i}$ where $r_i = \operatorname{rank}(P_i)$.
+Let $R_0 = I - P$. Note that $R_0$ is also a projection:
 
-Now collect all the columns of all $U_i$ into one big matrix $U$, and stack all the rows of all $V_i$ into one big matrix $V$:
+$$R_0^2 = (I - P)^2 = I - 2P + P^2 = I - 2P + P = I - P = R_0$$
 
-$$P = P_1 + \cdots + P_k = U_1 V_1 + \cdots + U_k V_k = \begin{pmatrix} U_1 & U_2 & \cdots & U_k \end{pmatrix} \begin{pmatrix} V_1 \\ V_2 \\ \vdots \\ V_k \end{pmatrix} = UV$$
+Now we have:
 
-**Step 1**: Count the rank.
+$$I_n = R_0 + R_1 + \cdots + R_k$$
 
-By the trace = rank theorem:
+**Step 1**: Count total rank.
 
-$$\operatorname{rank}(P) = \operatorname{trace}(P) = \operatorname{trace}(P_1) + \cdots + \operatorname{trace}(P_k) = \operatorname{rank}(P_1) + \cdots + \operatorname{rank}(P_k)$$
+$$\sum_{i=0}^k \operatorname{rank}(R_i) = \operatorname{rank}(R_0) + \sum_{i=1}^k \operatorname{rank}(R_i) \leq \operatorname{rank}(R_0) + \operatorname{rank}(P)$$
 
-So:
+Since $R_0 = I - P$ is a projection, by Theorem 3.1:
 
-$$\operatorname{rank}(P) = r_1 + r_2 + \cdots + r_k$$
+$$\operatorname{rank}(R_0) = \operatorname{trace}(R_0) = \operatorname{trace}(I - P) = n - \operatorname{trace}(P) = n - \operatorname{rank}(P)$$
 
-**Step 2**: Count the columns of $U$.
+Therefore:
 
-The matrix $U = \begin{pmatrix} U_1 & U_2 & \cdots & U_k \end{pmatrix}$ has exactly $r_1 + r_2 + \cdots + r_k$ columns.
+$$\sum_{i=0}^k \operatorname{rank}(R_i) \leq (n - \operatorname{rank}(P)) + \operatorname{rank}(P) = n$$
 
-Since $\operatorname{rank}(P) = r_1 + \cdots + r_k$, and $\operatorname{Col}(P) \subseteq \operatorname{Col}(U)$, we must have:
+**Step 2**: Decompose each $R_i$.
 
-$$\operatorname{rank}(U) \geq \operatorname{rank}(P) = r_1 + \cdots + r_k$$
+For each $i = 0, 1, \ldots, k$, decompose $R_i = U_i V_i$ where $U_i$ is $n \times r_i$ and $V_i$ is $r_i \times n$ with $r_i = \operatorname{rank}(R_i)$.
 
-But $U$ has exactly $r_1 + \cdots + r_k$ columns, so:
+Collect all pieces:
 
-$$\operatorname{rank}(U) = r_1 + \cdots + r_k$$
+$$U = \begin{pmatrix} U_0 & U_1 & \cdots & U_k \end{pmatrix}, \quad V = \begin{pmatrix} V_0 \\ V_1 \\ \vdots \\ V_k \end{pmatrix}$$
 
-This means **$U$ has full column rank**!
+Then:
 
-**Step 3**: Conclude $VU = I$.
+$$UV = \sum_{i=0}^k U_i V_i = \sum_{i=0}^k R_i = I_n$$
 
-Since $P = UV$ is a projection and $U$ has full column rank, by Theorem 2.1:
+The matrix $U$ is $n \times \left(\sum_{i=0}^k r_i\right)$ and $V$ is $\left(\sum_{i=0}^k r_i\right) \times n$.
 
-$$VU = I_{r_1 + \cdots + r_k}$$
+**Step 3**: Apply Corollary 3.3.
 
-**Step 4**: Block structure implies orthogonality.
+Since $UV = I_n$ and $\sum_{i=0}^k r_i \leq n$ (from Step 1), by Corollary 3.3, both $U$ and $V$ must be $n \times n$ square matrices, and:
 
-Write out $VU$ in block form:
+$$VU = I_n$$
 
-$$VU = \begin{pmatrix} V_1 \\ V_2 \\ \vdots \\ V_k \end{pmatrix} \begin{pmatrix} U_1 & U_2 & \cdots & U_k \end{pmatrix} = \begin{pmatrix} V_1 U_1 & V_1 U_2 & \cdots & V_1 U_k \\ V_2 U_1 & V_2 U_2 & \cdots & V_2 U_k \\ \vdots & \vdots & \ddots & \vdots \\ V_k U_1 & V_k U_2 & \cdots & V_k U_k \end{pmatrix}$$
+This forces $\sum_{i=0}^k r_i = n$ (equality must hold).
 
-Since $VU = I$, this must be a block diagonal matrix:
+**Step 4**: Block structure.
 
-$$\begin{pmatrix} I_{r_1} & 0 & \cdots & 0 \\ 0 & I_{r_2} & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & I_{r_k} \end{pmatrix}$$
+Since $VU = I_n$, we have:
 
-Therefore, $V_i U_j = 0$ for all $i \neq j$.
+$$\begin{pmatrix} V_0 \\ V_1 \\ \vdots \\ V_k \end{pmatrix} \begin{pmatrix} U_0 & U_1 & \cdots & U_k \end{pmatrix} = \begin{pmatrix} V_0 U_0 & V_0 U_1 & \cdots & V_0 U_k \\ V_1 U_0 & V_1 U_1 & \cdots & V_1 U_k \\ \vdots & \vdots & \ddots & \vdots \\ V_k U_0 & V_k U_1 & \cdots & V_k U_k \end{pmatrix} = I_n$$
 
-**Step 5**: Compute $P_i P_j$.
+The only way this equals $I_n$ is if the matrix is block diagonal:
+
+$$V_i U_j = 0 \quad \text{for all } i \neq j, \quad \text{and} \quad V_i U_i = I_{r_i}$$
+
+**Step 5**: Prove each $R_i$ is a projection.
+
+For each $i$:
+
+$$R_i^2 = (U_i V_i)(U_i V_i) = U_i (V_i U_i) V_i = U_i I_{r_i} V_i = U_i V_i = R_i$$
+
+So each $R_i$ is a projection! ✓
+
+**Step 6**: Prove orthogonality.
 
 For $i \neq j$:
 
-$$P_i P_j = (U_i V_i)(U_j V_j) = U_i (V_i U_j) V_j = U_i \cdot 0 \cdot V_j = 0$$
+$$R_i R_j = (U_i V_i)(U_j V_j) = U_i (V_i U_j) V_j = U_i \cdot 0 \cdot V_j = 0$$
+
+So $R_i R_j = 0$ for all $i \neq j$! ✓
 
 Done! ∎
 
 ::: remark
-**The Magic of Cross-Filling**
+**The Magic of Decomposing**
 
 This proof would be much harder without the cross-filling perspective!
 
@@ -424,22 +492,26 @@ All of this flows naturally from $P^2 = P$. No additional conditions needed!
 
 ## 6. Summary and Looking Ahead
 
-In this lecture, we discovered the **magical properties of cross-filling projections**:
+In this lecture, we discovered the **magical properties of decomposing projections**:
 
 ::: tip
 **Key Theorems**
 
-1. **VU = I Automatic** (Theorem 2.1): If $P = UV$ with $P^2 = P$, then $VU = I$.
+1. **VU = I Automatic** (Theorem 2.1): If $P = UV$ with $P^2 = P$ and $U, V$ full rank, then $VU = I$.
 
 2. **Rank = Trace** (Theorem 3.1): For any projection $P$, $\operatorname{rank}(P) = \operatorname{trace}(P)$.
 
-3. **Automatic Compatibility** (Theorem 5.1): If $P_1 + \cdots + P_k = P$ with each $P_i^2 = P_i$ and $P^2 = P$, then $P_i P_j = 0$ for $i \neq j$.
+3. **Rank-1 Characterization** (Corollary 3.2): For square matrix $A$, any two of {rank=1, trace=1, $A^2=A$} imply the third.
+
+4. **UV = I Forces Square** (Corollary 3.3): If $UV = I$ with $U$ thin and $V$ fat, then both must be square and $VU = I$.
+
+5. **Projection Decomposition** (Theorem 5.1): If $P = R_1 + \cdots + R_k$ with $\sum \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$, then each $R_i$ is a projection and $R_i R_j = 0$.
 :::
 
 These results show that **projections have extremely rigid structure**. The single equation $P^2 = P$ imposes so many constraints that:
-- Cross-filling automatically produces left/right inverses
+- Decomposition automatically produces $VU = I$
 - Rank equals trace
-- Sums of projections are automatically orthogonal
+- Sum decompositions automatically produce mutually orthogonal projections
 
 ::: question
 **What's Next?**
