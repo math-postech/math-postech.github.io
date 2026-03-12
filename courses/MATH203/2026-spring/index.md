@@ -170,6 +170,10 @@ Lecture notes are organized by topic and will be added throughout the semester.
 - [Lecture 5: Solving Linear Equations and Null Space](./notes/solving-equations-null-space.md) — Cross-filling method for solving $Ax=b$, null space (descriptive ↔ constructive), existence and uniqueness criteria, rank-nullity theorem preview
 - [Lecture 6: Four Fundamental Subspaces](./notes/four-fundamental-subspaces.md) — Subspaces of matrix products, transpose and symmetric matrices, orthogonality relationships ($\operatorname{Col}(A^T) \perp \operatorname{Null}(A)$, $\operatorname{Col}(A) \perp \operatorname{Null}(A^T)$), rank = row rank = column rank
 
+### Chapter 3: Linear Transformations and Projections
+
+- [Lecture 7: Linear Transformation and Projection](./notes/linear-transformation-and-projection.md) — Linear transformations, projection operators ($P^2=P$), sunlight-floor geometric model, column space and null space of projections, interchanging property ($\operatorname{Col}(P) = \operatorname{Null}(I-P)$), disjoint property ($\operatorname{Col}(P) \cap \operatorname{Null}(P) = \{\mathbf{0}\}$)
+
 ---
 
 ## Support for Students with Disabilities
