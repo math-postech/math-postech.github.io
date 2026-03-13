@@ -39,45 +39,30 @@ We prove $P = Q$ using the interchanging property from Lecture 7.
 
 **Step 1**: Show $P = QP$.
 
-Since $\operatorname{Col}(P) = \operatorname{Col}(Q)$, and using the interchanging property:
-$$\operatorname{Col}(P) = \operatorname{Null}(I-P)$$
+Since $\operatorname{Col}(P) = \operatorname{Col}(Q)$, we can apply the interchanging property to $Q$:
+$$\operatorname{Col}(Q) = \operatorname{Null}(I-Q)$$
 
-we have:
-$$\operatorname{Col}(Q) = \operatorname{Null}(I-P)$$
+Thus:
+$$\operatorname{Col}(P) = \operatorname{Null}(I-Q)$$
 
-Thus $(I-P)Q = 0$, which gives:
-$$Q = PQ \quad \implies \quad Q = QP \quad \text{(since } Q^2 = Q \text{)}$$
-
-Wait, let me reconsider. From $\operatorname{Col}(Q) = \operatorname{Null}(I-P)$, we get $(I-P)Q = 0$, so:
-$$Q = PQ$$
-
-Actually, we need to be more careful. Let me use the correct interchanging property.
-
-From $\operatorname{Col}(P) = \operatorname{Col}(Q)$:
-$$\operatorname{Col}(Q) = \operatorname{Null}(I-P)$$
-
-The second equality uses the interchanging property. This means:
-$$(I-P)Q = 0$$
-
-Therefore:
-$$Q = PQ$$
-
-Since $P$ and $Q$ are both projections, we have $Q = PQ = Q(PQ) = QPQ$. But we also have $P^2 = P$, so:
-
-Actually, from $(I-P)Q = 0$, we get $Q = PQ$. Let me continue more carefully.
+This means $(I-Q)P = 0$, so:
+$$P = QP$$
 
 **Step 2**: Show $Q = QP$.
 
-Since $\operatorname{Null}(P) = \operatorname{Null}(Q)$, using the interchanging property:
+Since $\operatorname{Null}(P) = \operatorname{Null}(Q)$, we can apply the interchanging property to $P$:
+$$\operatorname{Null}(P) = \operatorname{Col}(I-P)$$
+
+Thus:
 $$\operatorname{Null}(Q) = \operatorname{Col}(I-P)$$
 
-Thus $Q(I-P) = 0$, which gives:
+This means $Q(I-P) = 0$, so:
 $$Q = QP$$
 
 **Step 3**: Combine.
 
 From Steps 1 and 2:
-$$P = QP \quad \text{and} \quad Q = QP$$
+$$P = QP = Q$$
 
 Therefore $P = Q$. □
 
@@ -178,11 +163,17 @@ These conditions ensure every vector $\mathbf{v} \in \mathbb{R}^n$ has a unique 
 
 - **Column space** (constructive form): Write $W = \operatorname{Col}(B)$, where $B$ is an $n \times r$ matrix with columns forming a basis of $W$. Since the columns are linearly independent, $B$ has **full column rank** (rank $r = \dim(W)$).
 
-- **Null space** (descriptive form): Write $S = \operatorname{Null}(A)$, where $A$ is a $k \times n$ matrix whose rows give the equations defining $S$. Since the equations are linearly independent, $A$ has **full row rank** (rank $k = \dim(S)$).
+- **Null space** (descriptive form): Write $S = \operatorname{Null}(A)$, where $A$ is a $k \times n$ matrix whose rows give the equations defining $S$. Since the equations are linearly independent, $A$ has **full row rank**.
 
-From the complementary condition $\dim(W) + \dim(S) = n$:
-- $B$ is $n \times r$ with rank $r$
-- $A$ is $(n-r) \times n$ with rank $n-r$
+From the complementary condition $\dim(W) + \dim(S) = n$, we have $\dim(S) = n - r$. Since $S = \operatorname{Null}(A)$:
+$$\dim(\operatorname{Null}(A)) = n - \operatorname{rank}(A) = n - r$$
+
+Therefore $\operatorname{rank}(A) = r$. If $A$ has full row rank, then $A$ must be $r \times n$.
+
+**Summary**:
+- $B$ is $n \times r$ with full column rank (rank $r$)
+- $A$ is $r \times n$ with full row rank (rank $r$)
+- $AB$ is $r \times r$ (square matrix)
 
 ::: example
 **Example 3.1 (Continued): Matrix Representation**
@@ -190,89 +181,28 @@ From the complementary condition $\dim(W) + \dim(S) = n$:
 For $W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix}, \begin{pmatrix} 0\\1\\0\\1 \end{pmatrix}\right\}$, we take:
 $$B = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}$$
 
-For $S = \operatorname{span}\left\{\begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix}, \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix}\right\}$, we need to find equations.
+For $S = \operatorname{span}\left\{\begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix}, \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix}\right\}$, we need to find $A$ such that $\operatorname{Null}(A) = S$.
 
-The null space $S$ consists of vectors $\mathbf{x}$ orthogonal to a basis of $S^\perp$. We can compute:
-$$A = \begin{pmatrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 0 & -1 \end{pmatrix}$$
+**Observation**: Check if $W$ and $S$ are orthogonal complements.
+
+Compute inner products:
+- $\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix} \cdot \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} = 1 + 0 - 1 + 0 = 0$ ✓
+- $\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix} \cdot \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix} = 1 + 0 - 1 + 0 = 0$ ✓
+- $\begin{pmatrix} 0\\1\\0\\1 \end{pmatrix} \cdot \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} = 0 + 1 + 0 - 1 = 0$ ✓
+- $\begin{pmatrix} 0\\1\\0\\1 \end{pmatrix} \cdot \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix} = 0 - 1 + 0 + 1 = 0$ ✓
+
+Therefore $S = W^\perp$. The rows of $A$ should be the basis vectors of $W^T$:
+$$A = \begin{pmatrix} 1 & 0 & 1 & 0 \\ 0 & 1 & 0 & 1 \end{pmatrix}$$
 
 **Verify**:
-$$A \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} = \begin{pmatrix} 1(1) + 0(1) + (-1)(-1) + 0(-1) \\ 0(1) + 1(1) + 0(-1) + (-1)(-1) \end{pmatrix} = \begin{pmatrix} 2\\2 \end{pmatrix}$$
+$$A \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} = \begin{pmatrix} 1 + 0 - 1 + 0 \\ 0 + 1 + 0 - 1 \end{pmatrix} = \begin{pmatrix} 0\\0 \end{pmatrix}$$ ✓
 
-Wait, this is not zero! Let me recalculate.
+$$A \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix} = \begin{pmatrix} 1 + 0 - 1 + 0 \\ 0 - 1 + 0 + 1 \end{pmatrix} = \begin{pmatrix} 0\\0 \end{pmatrix}$$ ✓
 
-Actually, to find $A$ such that $\operatorname{Null}(A) = S$, I need the rows of $A$ to be orthogonal to the basis vectors of $S$.
-
-Let $\mathbf{s}_1 = \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix}$, $\mathbf{s}_2 = \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix}$.
-
-Find vectors $\mathbf{a}_1, \mathbf{a}_2$ with $\mathbf{a}_i \perp \mathbf{s}_j$ for all $i,j$.
-
-Actually, let me use a different approach. Since $\dim(S) = 2$ and we're in $\mathbb{R}^4$, we need $\dim(S^\perp) = 2$.
-
-From the basis of $W$, we observe that vectors in $W$ have the form $\begin{pmatrix} a\\b\\a\\b \end{pmatrix}$.
-
-We can take:
-$$A = \begin{pmatrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 0 & -1 \end{pmatrix}$$
-
-Then $\operatorname{Null}(A) = \{\mathbf{x} : x_1 = x_3, x_2 = x_4\}$.
-
-Check if our basis vectors satisfy this:
-- $\begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix}$: $x_1 = 1 \neq -1 = x_3$ ✗
-
-I made an error. Let me reconsider.
-
-Since we already verified $W \cap S = \{\mathbf{0}\}$, and $\dim(W) + \dim(S) = 4$, we know $W$ and $S$ are complementary. Therefore $S = W^\perp$ (in some sense, though not necessarily orthogonal complement).
-
-Actually, for this example, let me just **assume** we have found appropriate $A$ and $B$, and move on to the general construction. (We will give a complete worked example in Section 6.)
+Therefore $\operatorname{Null}(A) \supseteq S$. Since $A$ is $2 \times 4$ with rank $2$, we have $\dim(\operatorname{Null}(A)) = 4 - 2 = 2 = \dim(S)$, so $\operatorname{Null}(A) = S$ ✓
 :::
 
-**Step 2**: The invertibility condition.
-
-Consider the product $AB$:
-- $A$ is $(n-r) \times n$
-- $B$ is $n \times r$
-- $AB$ is $(n-r) \times r$
-
-**Key question**: When is $AB$ invertible (i.e., when is $AB$ a square matrix with full rank)?
-
-First, for $AB$ to be invertible, it must be **square**:
-$$(n-r) \times r \text{ is square} \quad \Longleftrightarrow \quad n - r = r \quad \Longleftrightarrow \quad n = 2r$$
-
-**Wait, this can't be right!** The construction should work whenever $W$ and $S$ are complementary, not just when $\dim(W) = \dim(S)$.
-
-Let me reconsider the formula from notes.md...
-
-Actually, looking back at notes.md Section 5.3, the formula is $P = B(AB)^{-1}A$, where:
-- $B$ is $n \times \dim(W)$ (full column rank)
-- $A$ is $\dim(S) \times n$ (full row rank... wait, that's not right either)
-
-Let me re-read notes.md more carefully.
-
-From notes.md lines 1127-1130:
-"1. $W = \operatorname{Col}(B)$ (parametric form) and $B$ is full rank thin matrix.
-2. $U = \operatorname{Null}(A)$ (standard equations) and $A$ is a full rank fat matrix."
-
-So $A$ is fat (more columns than rows), meaning $A$ is $k \times n$ with $k < n$.
-
-And from line 1134: "Therefore $AB$ is a square matrix."
-
-Let me recalculate:
-- $B$ is $n \times r$ (where $r = \dim(W)$)
-- $A$ is $(n-r) \times n$ (where $n - r = \dim(S)$... wait, that's not right)
-
-Actually, if $\operatorname{Null}(A)$ has dimension $\dim(S)$, then by rank-nullity:
-$$\dim(\operatorname{Null}(A)) = n - \operatorname{rank}(A)$$
-
-So if $\dim(S) = n - r$ and $\dim(S) = \dim(\operatorname{Null}(A))$, then:
-$$\operatorname{rank}(A) = r$$
-
-And if $A$ has full row rank, then $A$ must be $r \times n$.
-
-So:
-- $A$ is $r \times n$ (full row rank $r$)
-- $B$ is $n \times r$ (full column rank $r$)
-- $AB$ is $r \times r$ (square!)
-
-This makes sense now.
+---
 
 ::: proposition
 **Theorem 4.1 (Matrix Representation)**
