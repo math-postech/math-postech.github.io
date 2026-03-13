@@ -257,7 +257,7 @@ These two simple algebraic equations completely capture the geometric idea of "s
 
 ## 4. Constructing Orthogonal Projections
 
-### 4.1 From General to Orthogonal
+### 4.1 Orthogonal Projection Formula
 
 Recall from Lecture 9 that we can construct a projection onto $W = \operatorname{Col}(B)$ along $S = \operatorname{Null}(A)$ using:
 
@@ -267,44 +267,16 @@ provided $W \cap S = \{\mathbf{0}\}$ (equivalently: $AB$ is invertible).
 
 For an **orthogonal** projection onto $W$, we want $S = W^{\perp}$.
 
-::: proposition
-**Proposition 4.1: Choosing $A$ for Orthogonal Projection**
+From **Lecture 6** (Four Fundamental Subspaces), we know:
 
-If we want to construct the orthogonal projection onto $W = \operatorname{Col}(B)$, we need:
+$$\operatorname{Null}(B^T) \perp \operatorname{Col}(B)$$
 
-$$\operatorname{Null}(A) = W^{\perp}$$
+Therefore, if $W = \operatorname{Col}(B)$, then $W^{\perp} = \operatorname{Null}(B^T)$.
 
-**Descriptive form**: $A\mathbf{x} = \mathbf{0}$ if and only if $\mathbf{x} \perp W$.
-
-**Constructive form**: The **rows of $A$** should be a basis for $W$.
-
-Why? Because $A\mathbf{x} = \mathbf{0}$ means each row of $A$ is orthogonal to $\mathbf{x}$, which is exactly the condition for $\mathbf{x} \perp W$.
-:::
-
-::: example
-**Example 4.1: Finding $A$ from $B$**
-
-Let $W = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}\right\}$.
-
-We have $B = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$.
-
-To find $A$ such that $\operatorname{Null}(A) = W^{\perp}$, we use Proposition 4.1: **rows of $A$ should be basis vectors for $W$**.
-
-Therefore:
-$$A = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{pmatrix}$$
-
-Check:
-$$AB = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$$
-
-This is invertible (determinant = $2 \cdot 2 - 1 = 3 \neq 0$). ✓
-:::
-
-### 4.2 Simplification: When $A = B^T$
-
-When the columns of $B$ are orthogonal to each other, a beautiful simplification occurs:
+This means: **$A = B^T$**.
 
 ::: proposition
-**Proposition 4.2: Orthogonal Projection Formula**
+**Proposition 4.1: Orthogonal Projection Formula**
 
 Let $B$ be an $n \times r$ matrix with **full column rank** (rank $r$). The orthogonal projection onto $\operatorname{Col}(B)$ is:
 
@@ -312,7 +284,7 @@ $$P = B(B^T B)^{-1} B^T$$
 
 **Proof**:
 
-From Proposition 4.1, we want $A = B^T$ (rows of $A$ = columns of $B^T$ = columns of $B$).
+By Lecture 6, $\operatorname{Null}(B^T) = (\operatorname{Col}(B))^{\perp}$, so $A = B^T$.
 
 By Lecture 9's construction formula:
 $$P = B(AB)^{-1}A = B(B^T B)^{-1} B^T$$
@@ -343,7 +315,7 @@ Therefore $P$ is an orthogonal projection. ∎
 :::
 
 ::: example
-**Example 4.2: Orthogonal Projection onto a Plane**
+**Example 4.1: Orthogonal Projection onto a Plane**
 
 Find the orthogonal projection matrix onto the plane $W = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}\right\}$ (the $xy$-plane in $\mathbb{R}^3$).
 
