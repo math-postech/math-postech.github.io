@@ -332,11 +332,13 @@ This is a compatible family.
 ::: remark
 **What Does Compatibility Mean Geometrically?**
 
-If $\{P_1, \ldots, P_k\}$ is a compatible family:
+If $\{P_1, \ldots, P_k\}$ is a compatible family with $P_1 + \cdots + P_k = P$:
 
-1. **$P_1 + \cdots + P_k = I$** means: every vector $\mathbf{v}$ can be uniquely decomposed as:
+1. **Unique decomposition**: Every vector $\mathbf{v}$ satisfies:
 
-   $$\mathbf{v} = P_1\mathbf{v} + P_2\mathbf{v} + \cdots + P_k\mathbf{v}$$
+   $$P\mathbf{v} = P_1\mathbf{v} + P_2\mathbf{v} + \cdots + P_k\mathbf{v}$$
+
+   and this decomposition is unique (any element of $\operatorname{Col}(P)$ can be uniquely written as a sum of elements from $\operatorname{Col}(P_1), \ldots, \operatorname{Col}(P_k)$).
 
 2. **$P_i P_j = 0$ for $i \neq j$** means: the "floors" are mutually orthogonal in the sense that:
 
