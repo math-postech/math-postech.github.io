@@ -628,5 +628,5 @@ Prove that **$A^{-1}R_i$ is a projection** for each $i = 1, \ldots, n$.
 
 Furthermore, show that $\{A^{-1}R_1, \ldots, A^{-1}R_n\}$ forms a **compatible family** of projections.
 
-*Hint: Write $A = UV$ where $U$ and $V$ are $n \times n$ matrices. What can you say about $UV$ and $VU$? Express each $R_i$ in terms of $U$, $V$, and the standard basis vectors $\mathbf{e}_i$.*
+*Hint: Multiply both sides of $A = R_1 + \cdots + R_n$ by $A^{-1}$. What projection do you get on the left side? Now apply Theorem 5.1.*
 :::
