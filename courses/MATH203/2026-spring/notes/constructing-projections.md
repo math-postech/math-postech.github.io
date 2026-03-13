@@ -238,7 +238,7 @@ $$\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\} \quad \Long
 Since $B$ has full column rank, $\operatorname{Null}(B) = \{\mathbf{0}\}$. Thus:
 $$\operatorname{Null}(AB) = \operatorname{Null}(B) = \{\mathbf{0}\}$$
 
-The equivalence $(3) \Leftrightarrow (4)$: Since $AB$ is $r \times r$ (square), $AB$ is invertible if and only if $\operatorname{Null}(AB) = \{\mathbf{0}\}$. □
+The equivalence $(3) \Leftrightarrow (4)$: Since $AB$ is $r \times r$ (square), by **Proposition 3.4** (Lecture 8), $AB$ is invertible if and only if $\operatorname{rank}(AB) = r$. By the rank-nullity theorem (Lecture 5, Theorem 4.1), $\operatorname{rank}(AB) = r$ if and only if $\operatorname{Null}(AB) = \{\mathbf{0}\}$. □
 
 ::: remark
 **Interpretation: Geometric Condition Becomes Algebraic**
