@@ -462,14 +462,36 @@ $$(B^T B)^{-1} - Q_1 = \frac{1}{11}\begin{pmatrix} 9 & -5 \\ -5 & 4 \end{pmatrix
 
 $$= \frac{1}{11}\begin{pmatrix} 0 & 0 \\ 0 & 11/9 \end{pmatrix} = \frac{1}{99}\begin{pmatrix} 0 & 0 \\ 0 & 11 \end{pmatrix}$$
 
-**Step 6**: Compute $R_1 = BQ_1B^T$ and $R_2 = BQ_2B^T$.
+**Step 6**: Compute $R_1 = BQ_1B^T$.
 
-The matrix multiplications $BQ_1B^T$ and $BQ_2B^T$ give $4 \times 4$ matrices. By Theorem 5.1:
-- Each $R_i$ is automatically a rank-1 orthogonal projection
-- $R_1 + R_2 = P$ (the orthogonal projection onto $\operatorname{Col}(B)$)
-- $R_1 R_2 = 0$ (compatible family)
+First compute $BQ_1$:
+$$BQ_1 = \frac{1}{11}\begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 2 \end{pmatrix}\begin{pmatrix} 9 & -5 \\ -5 & 25/9 \end{pmatrix} = \frac{1}{11}\begin{pmatrix} 9 & -5 \\ 4 & -20/9 \\ -1 & 5/9 \\ -1 & 5/9 \end{pmatrix}$$
 
-**Key observation**: We decomposed a $4 \times 4$ projection into two rank-1 orthogonal projections by only cross-filling a $2 \times 2$ matrix! The computation of $Q_1, Q_2$ required $O(2^2) = O(4)$ operations, compared to $O(4^2) = O(16)$ if we cross-filled $P$ directly.
+Then:
+$$R_1 = BQ_1 B^T = \frac{1}{11}\begin{pmatrix} 9 & -5 \\ 4 & -20/9 \\ -1 & 5/9 \\ -1 & 5/9 \end{pmatrix}\begin{pmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 2 & 2 \end{pmatrix}$$
+
+$$= \frac{1}{99}\begin{pmatrix} 81 & 36 & -9 & -9 \\ 36 & 16 & -4 & -4 \\ -9 & -4 & 1 & 1 \\ -9 & -4 & 1 & 1 \end{pmatrix}$$
+
+**Step 7**: Compute $R_2 = BQ_2B^T$.
+
+Since $Q_2$ has zeros except at (2,2):
+$$BQ_2 = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 2 \end{pmatrix} \cdot \frac{1}{99}\begin{pmatrix} 0 & 0 \\ 0 & 11 \end{pmatrix} = \frac{1}{9}\begin{pmatrix} 0 & 0 \\ 0 & 1 \\ 0 & 2 \\ 0 & 2 \end{pmatrix}$$
+
+This is $\frac{1}{9}\mathbf{v}\mathbf{e}_2^T$ where $\mathbf{v} = \begin{pmatrix} 0 \\ 1 \\ 2 \\ 2 \end{pmatrix}$.
+
+Therefore:
+$$R_2 = BQ_2 B^T = \frac{1}{9}\mathbf{v}\mathbf{e}_2^T B^T = \frac{1}{9}\mathbf{v}\mathbf{v}^T = \frac{1}{9}\begin{pmatrix} 0 & 0 & 0 & 0 \\ 0 & 1 & 2 & 2 \\ 0 & 2 & 4 & 4 \\ 0 & 2 & 4 & 4 \end{pmatrix}$$
+
+**Step 8**: Verify $P = R_1 + R_2$.
+
+$$P = B(B^TB)^{-1}B^T = R_1 + R_2 = \frac{1}{99}\begin{pmatrix} 81 & 36 & -9 & -9 \\ 36 & 27 & 18 & 18 \\ -9 & 18 & 45 & 45 \\ -9 & 18 & 45 & 45 \end{pmatrix}$$
+
+**Verification**:
+- $R_2 = \frac{1}{9}\mathbf{v}\mathbf{v}^T$ where $\|\mathbf{v}\|^2 = 0 + 1 + 4 + 4 = 9$, so $R_2$ has rank 1 and trace $\frac{1}{9}(9) = 1$ ✓
+- $R_1 = P - R_2$ is also rank-1 orthogonal projection (by Theorem 5.1) ✓
+- $\text{trace}(P) = \text{trace}(R_1) + \text{trace}(R_2) = 1 + 1 = 2 = \text{rank}(P)$ ✓
+
+**Key observation**: We decomposed a $4 \times 4$ projection into two rank-1 orthogonal projections by only cross-filling a $2 \times 2$ matrix!
 :::
 
 ---
