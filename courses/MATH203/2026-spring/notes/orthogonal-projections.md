@@ -449,35 +449,27 @@ $$(B^T B)^{-1} = \frac{1}{11} \begin{pmatrix} 9 & -5 \\ -5 & 4 \end{pmatrix}$$
 
 **Step 4**: Diagonal cross-filling of $(B^T B)^{-1}$.
 
-The diagonal entries are $\frac{9}{11}$ and $\frac{4}{11}$. Let's cross-fill at the first diagonal entry:
+Cross-fill at position (1,1) with pivot 9. Use the **multiplication table trick**: to complete a rank-1 matrix from pivot (1,1), the (2,2) entry must satisfy:
 
-$$Q_1 = \frac{1}{11} \cdot \frac{1}{9/11} \begin{pmatrix} 9 \\ -5 \end{pmatrix} \begin{pmatrix} 9 & -5 \end{pmatrix} = \frac{1}{9} \begin{pmatrix} 9 \\ -5 \end{pmatrix} \begin{pmatrix} 9 & -5 \end{pmatrix} = \frac{1}{9} \begin{pmatrix} 81 & -45 \\ -45 & 25 \end{pmatrix}$$
+$$(2,2) = \frac{(1,2) \times (2,1)}{(1,1)} = \frac{(-5) \times (-5)}{9} = \frac{25}{9}$$
 
-$$= \begin{pmatrix} 9 & -5 \\ -5 & 25/9 \end{pmatrix}$$
+Therefore:
+$$Q_1 = \frac{1}{11}\begin{pmatrix} 9 & -5 \\ -5 & 25/9 \end{pmatrix}$$
 
-Wait, let me recalculate more carefully. The cross-filling formula at entry $(1,1) = \frac{9}{11}$ is:
+**Step 5**: Compute $Q_2 = (B^T B)^{-1} - Q_1$:
 
-$$Q_1 = \frac{1}{\text{pivot}} \begin{pmatrix} \text{column 1} \end{pmatrix} \begin{pmatrix} \text{row 1} \end{pmatrix}$$
+$$(B^T B)^{-1} - Q_1 = \frac{1}{11}\begin{pmatrix} 9 & -5 \\ -5 & 4 \end{pmatrix} - \frac{1}{11}\begin{pmatrix} 9 & -5 \\ -5 & 25/9 \end{pmatrix} = \frac{1}{11}\begin{pmatrix} 0 & 0 \\ 0 & 4 - 25/9 \end{pmatrix}$$
 
-$$Q_1 = \frac{1}{9/11} \begin{pmatrix} 9/11 \\ -5/11 \end{pmatrix} \begin{pmatrix} 9/11 & -5/11 \end{pmatrix} = \frac{11}{9} \cdot \frac{1}{121} \begin{pmatrix} 9 \\ -5 \end{pmatrix} \begin{pmatrix} 9 & -5 \end{pmatrix}$$
+$$= \frac{1}{11}\begin{pmatrix} 0 & 0 \\ 0 & 11/9 \end{pmatrix} = \frac{1}{99}\begin{pmatrix} 0 & 0 \\ 0 & 11 \end{pmatrix}$$
 
-$$= \frac{1}{99} \begin{pmatrix} 81 & -45 \\ -45 & 25 \end{pmatrix}$$
+**Step 6**: Compute $R_1 = BQ_1B^T$ and $R_2 = BQ_2B^T$.
 
-Let me verify: $(B^T B)^{-1} - Q_1$ should have zero in the $(1,1)$ position:
+The matrix multiplications $BQ_1B^T$ and $BQ_2B^T$ give $4 \times 4$ matrices. By Theorem 5.1:
+- Each $R_i$ is automatically a rank-1 orthogonal projection
+- $R_1 + R_2 = P$ (the orthogonal projection onto $\operatorname{Col}(B)$)
+- $R_1 R_2 = 0$ (compatible family)
 
-$$(B^T B)^{-1} - Q_1 = \frac{1}{11}\begin{pmatrix} 9 & -5 \\ -5 & 4 \end{pmatrix} - \frac{1}{99}\begin{pmatrix} 81 & -45 \\ -45 & 25 \end{pmatrix}$$
-
-$$= \frac{1}{99}\begin{pmatrix} 81 & -45 \\ -45 & 36 \end{pmatrix} - \frac{1}{99}\begin{pmatrix} 81 & -45 \\ -45 & 25 \end{pmatrix} = \frac{1}{99}\begin{pmatrix} 0 & 0 \\ 0 & 11 \end{pmatrix}$$
-
-**Step 5**:
-$$Q_2 = \frac{1}{99}\begin{pmatrix} 0 & 0 \\ 0 & 11 \end{pmatrix}$$
-
-**Step 6**: Construct $R_1 = B Q_1 B^T$ and $R_2 = B Q_2 B^T$.
-
-This is getting quite computational. The key point is:
-- We cross-filled a $2 \times 2$ matrix instead of a $4 \times 4$ matrix
-- We get exactly 2 rank-1 orthogonal projections (matching $\dim(W) = 2$)
-- Each $R_i = B Q_i B^T$ is automatically a rank-1 orthogonal projection
+**Key observation**: We decomposed a $4 \times 4$ projection into two rank-1 orthogonal projections by only cross-filling a $2 \times 2$ matrix! The computation of $Q_1, Q_2$ required $O(2^2) = O(4)$ operations, compared to $O(4^2) = O(16)$ if we cross-filled $P$ directly.
 :::
 
 ---
