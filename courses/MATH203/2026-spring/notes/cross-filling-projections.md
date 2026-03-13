@@ -621,4 +621,12 @@ This is the topic of **Lecture 9: Constructing Projections**.
 **Exercise 8.4**: Let $P = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}$ and $Q = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$. Verify that $\{P, Q\}$ is a compatible family.
 
 **Exercise 8.5**: (Challenge) Suppose $P_1, P_2, P_3$ are projections with $P_1 + P_2 + P_3 = P$ where $P^2 = P$. Prove that $P_1, P_2, P_3$ are **linearly independent** matrices (as elements of the vector space of $n \times n$ matrices).
+
+**Exercise 8.6**: (Challenge) Let $A$ be a **full-rank square matrix** (i.e., $A$ is $n \times n$ and $\operatorname{rank}(A) = n$). Suppose $A = R_1 + R_2 + \cdots + R_n$ is the decomposition of $A$ into a sum of rank-1 matrices (via cross-filling).
+
+Prove that **$A^{-1}R_i$ is a projection** for each $i = 1, \ldots, n$.
+
+Furthermore, show that $\{A^{-1}R_1, \ldots, A^{-1}R_n\}$ forms a **compatible family** of projections.
+
+*Hint: Write $A = UV$ where $U$ and $V$ are $n \times n$ matrices. What can you say about $UV$ and $VU$? Express each $R_i$ in terms of $U$, $V$, and the standard basis vectors $\mathbf{e}_i$.*
 :::
