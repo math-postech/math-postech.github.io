@@ -340,7 +340,11 @@ This gives $I = R_1 Y + \cdots + R_k Y$.
 Since $\operatorname{rank}(R_i Y) \leq \operatorname{rank}(R_i) = 1$ for each $i$, we have:
 $$\sum_{i=1}^k \operatorname{rank}(R_i Y) \leq \sum_{i=1}^k \operatorname{rank}(R_i) = k$$
 
-But $\operatorname{rank}(I) = n$, so we must have $k \geq n$. Since $k = \operatorname{rank}(X) \leq n$ (for an $n \times n$ matrix), we conclude $k = n$.
+Since $k \leq n$ and $\operatorname{rank}(I) = n$, we can apply **Theorem 5.1** (Projection Decomposition): if a projection $P$ can be written as $P = S_1 + \cdots + S_m$ with $\sum \operatorname{rank}(S_i) \leq \operatorname{rank}(P)$, then equality must hold.
+
+Therefore $\sum_{i=1}^k \operatorname{rank}(R_i Y) = \operatorname{rank}(I) = n$, which implies $k \geq n$.
+
+Since $k = \operatorname{rank}(X) \leq n$ (for an $n \times n$ matrix), we conclude $k = n$.
 
 **Direction** $(\Leftarrow)$: If $\operatorname{rank}(X) = n$, then $X$ is invertible.
 
