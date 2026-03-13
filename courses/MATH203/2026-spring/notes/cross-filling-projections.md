@@ -345,6 +345,68 @@ If $\{P_1, \ldots, P_k\}$ is a compatible family:
 The space is **decomposed** into $k$ subspaces that are "perpendicular" (in a generalized sense).
 :::
 
+### 4.3 Key Properties of Compatible Families
+
+Compatible families have beautiful properties related to linear independence and closure under subsums.
+
+::: proposition
+**Theorem 4.1 (Properties of Compatible Families)**
+
+Let $\{P_1, \ldots, P_k\}$ be a compatible family of projections. Then:
+
+1. **Vector decompositions are linearly independent**: For any vector $\mathbf{v}$, the nonzero vectors among $\{P_1\mathbf{v}, \ldots, P_k\mathbf{v}\}$ are linearly independent.
+
+2. **Subsums are projections**: For any subset $I \subseteq \{1, \ldots, k\}$, the sum $\sum_{i \in I} P_i$ is also a projection.
+:::
+
+**Proof of (1)**:
+
+Suppose $c_1 P_1\mathbf{v} + \cdots + c_k P_k\mathbf{v} = \mathbf{0}$.
+
+Left-multiply both sides by $P_j$ for any $j$:
+
+$$P_j(c_1 P_1\mathbf{v} + \cdots + c_k P_k\mathbf{v}) = \mathbf{0}$$
+
+Expanding:
+
+$$c_1 P_j P_1\mathbf{v} + \cdots + c_j P_j P_j\mathbf{v} + \cdots + c_k P_j P_k\mathbf{v} = \mathbf{0}$$
+
+Since $P_j P_i = 0$ for $i \neq j$ and $P_j P_j = P_j$:
+
+$$c_j P_j\mathbf{v} = \mathbf{0}$$
+
+If $P_j\mathbf{v} \neq \mathbf{0}$, then $c_j = 0$.
+
+Therefore, all coefficients of nonzero vectors must be zero, proving linear independence. ∎
+
+**Proof of (2)**:
+
+Let $Q = \sum_{i \in I} P_i$. We need to show $Q^2 = Q$.
+
+$$Q^2 = \left(\sum_{i \in I} P_i\right)\left(\sum_{j \in I} P_j\right) = \sum_{i \in I}\sum_{j \in I} P_i P_j$$
+
+Since $P_i P_j = 0$ for $i \neq j$ and $P_i P_i = P_i$:
+
+$$Q^2 = \sum_{i \in I} P_i P_i = \sum_{i \in I} P_i = Q$$
+
+∎
+
+::: remark
+**The Direct Sum Interpretation**
+
+Property (1) is the **vector-level statement of direct sum decomposition**:
+
+If $\{P_1, \ldots, P_k\}$ is compatible with $P_1 + \cdots + P_k = P$, then:
+
+$$P\mathbf{v} = P_1\mathbf{v} + P_2\mathbf{v} + \cdots + P_k\mathbf{v}$$
+
+is the **unique way** to write $P\mathbf{v}$ as a sum of vectors from $\operatorname{Col}(P_1), \ldots, \operatorname{Col}(P_k)$.
+
+This is exactly the definition of **direct sum**:
+
+$$\operatorname{Col}(P) = \operatorname{Col}(P_1) \oplus \operatorname{Col}(P_2) \oplus \cdots \oplus \operatorname{Col}(P_k)$$
+:::
+
 ---
 
 ## 5. Decomposition of Projections
