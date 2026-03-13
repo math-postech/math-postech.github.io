@@ -316,6 +316,80 @@ If the product is the identity, both matrices must be square and invertible, and
 
 ---
 
+### 3.3 Full-Rank Square Matrix is Invertible
+
+Corollary 3.3 establishes a key property of square matrices with one-sided inverses. We now use this result to prove the fundamental invertibility criterion.
+
+::: proposition
+**Proposition 3.4 (Full-Rank Square Matrix is Invertible)**
+
+An $n \times n$ matrix $X$ is invertible if and only if $\operatorname{rank}(X) = n$ (full rank).
+:::
+
+**Proof**:
+
+**Direction** $(\Rightarrow)$: If $X$ is invertible, then $\operatorname{rank}(X) = n$.
+
+Suppose $XY = I$ for some matrix $Y$. Note that $I$ is a projection ($I^2 = I$) with $\operatorname{rank}(I) = n$.
+
+By cross-filling (Lecture 3), decompose $X = R_1 + \cdots + R_k$ where each $R_i$ is rank-1 and $k = \operatorname{rank}(X)$. Then:
+$$(R_1 + \cdots + R_k)Y = I$$
+
+This gives $I = R_1 Y + \cdots + R_k Y$.
+
+Since $\operatorname{rank}(R_i Y) \leq \operatorname{rank}(R_i) = 1$ for each $i$, we have:
+$$\sum_{i=1}^k \operatorname{rank}(R_i Y) \leq \sum_{i=1}^k \operatorname{rank}(R_i) = k$$
+
+But $\operatorname{rank}(I) = n$, so we must have $k \geq n$. Since $k = \operatorname{rank}(X) \leq n$ (for an $n \times n$ matrix), we conclude $k = n$.
+
+**Direction** $(\Leftarrow)$: If $\operatorname{rank}(X) = n$, then $X$ is invertible.
+
+By cross-filling, $X = UV$ where $\operatorname{rank}(X) = n$.
+
+Since $X$ is $n \times n$ with rank $n$, the decomposition requires exactly $n$ rank-one pieces, so $U$ and $V$ must both be $n \times n$ square matrices.
+
+**Construct a one-sided inverse for $V$**:
+
+Consider the augmented matrix $(X \mid I_n)$ and apply cross-filling using the **same pivot selections** as used to decompose $X$:
+- Each pivot is selected from the $X$-part (not from $I_n$)
+- Each pivot clears its row and column
+
+Since all pivots are in $X$, the $X$-part decomposes exactly as before: $X = UV$. However, $I_n$ is affected by the same row operations—each time a pivot row is selected, the corresponding row of $I_n$ is "bombarded" and transformed.
+
+Since $\operatorname{rank}(X) = n$, we select $n$ pivots covering all $n$ rows. Therefore $I_n$ is completely "bombarded" through all rows, transforming into some matrix $F$.
+
+The cross-filling structure gives:
+$$(X \mid I_n) = (U \mid F)V$$
+
+Comparing both sides:
+- Left part: $X = UV$ ✓
+- Right part: $I_n = FV$
+
+Therefore $FV = I_n$. Since $V$ is square, by **Corollary 3.3** (if $FV = I$ for square matrices, then $VF = I$), we have $V$ invertible.
+
+**Construct a one-sided inverse for $U$**:
+
+Similarly, consider $\begin{pmatrix} X \\ I_n \end{pmatrix}$ and apply cross-filling using **column selections** (all pivots selected from $X$-part). Since $\operatorname{rank}(X) = n$ (equal to the number of columns), all $n$ columns are covered, so $I_n$ is completely bombarded through all columns, giving:
+$$\begin{pmatrix} X \\ I_n \end{pmatrix} = U\begin{pmatrix} V \\ G \end{pmatrix}$$
+
+Thus $I_n = UG$. By **Corollary 3.3**, $U$ is invertible.
+
+**Conclusion**: $X = UV$ with both $U, V$ invertible, so $X$ is invertible. □
+
+::: remark
+**Key Insight from Cross-Filling**
+
+This proof shows that when $\operatorname{rank}(X) = n$ (full rank), the cross-filling decomposition $X = UV$ automatically produces **invertible** factors $U$ and $V$.
+
+The augmented matrix technique simultaneously reveals one-sided inverses:
+- $(X \mid I) = (U \mid F)V$ gives $FV = I$, so $F = V^{-1}$
+- $\begin{pmatrix} X \\ I \end{pmatrix} = U\begin{pmatrix} V \\ G \end{pmatrix}$ gives $UG = I$, so $G = U^{-1}$
+
+This connects to the standard method of finding $X^{-1}$ by row-reducing $(X \mid I) \to (I \mid X^{-1})$.
+:::
+
+---
+
 ## 4. Compatible Families of Projections
 
 Now we explore what happens when we have **multiple projections that add up to the identity**.
