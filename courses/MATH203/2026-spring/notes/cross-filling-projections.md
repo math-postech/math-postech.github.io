@@ -268,21 +268,43 @@ Then $n = r$, and **both $U$ and $V$ are square invertible matrices** with $VU =
 
 **Proof**:
 
-**Observe**: $UV = I_n$ is a projection, since $(UV)^2 = UVUV = I_n UV = UV$.
+**Step 1**: Observe that $VU$ is a projection.
 
-Apply Theorem 3.1 (rank = trace for projections):
+$$VU \cdot VU = V(UV)U = VI_nU = VU$$
 
-$$\operatorname{rank}(UV) = \operatorname{trace}(UV) = \operatorname{trace}(I_n) = n$$
+So $VU$ is an $r \times r$ projection.
 
-But $\operatorname{rank}(UV) \leq r$ (since the product goes through an $r$-dimensional bottleneck).
+**Step 2**: Show that $I_r - VU$ is also a projection.
 
-Therefore $n \leq r$.
+$$(I_r - VU)^2 = I_r - 2VU + (VU)^2 = I_r - 2VU + VU = I_r - VU$$
+
+**Step 3**: Compute the trace.
+
+$$\operatorname{trace}(I_r - VU) = \operatorname{trace}(I_r) - \operatorname{trace}(VU) = r - \operatorname{trace}(VU)$$
+
+But $\operatorname{trace}(VU) = \operatorname{trace}(UV) = \operatorname{trace}(I_n) = n$.
+
+Therefore:
+
+$$\operatorname{trace}(I_r - VU) = r - n$$
+
+**Step 4**: Apply rank = trace.
+
+Since $I_r - VU$ is a projection, by Theorem 3.1:
+
+$$\operatorname{rank}(I_r - VU) = \operatorname{trace}(I_r - VU) = r - n$$
+
+**Step 5**: Conclude.
+
+Since rank $\geq 0$, we have $r - n \geq 0$, so $r \geq n$.
 
 Combined with the assumption $r \leq n$, we get $r = n$.
 
-Therefore $U$ and $V$ are both $n \times n$ square matrices with $UV = I_n$.
+Therefore $\operatorname{trace}(I_r - VU) = 0$, which means $\operatorname{rank}(I_r - VU) = 0$.
 
-For square matrices, left inverse equals right inverse, so $VU = I_n$. ∎
+A matrix with rank 0 is the zero matrix, so $I_r - VU = 0$.
+
+Hence $VU = I_r$. ∎
 
 ::: remark
 **Why Is This Surprising?**
