@@ -340,7 +340,7 @@ This gives $I = R_1 Y + \cdots + R_k Y$.
 Since $\operatorname{rank}(R_i Y) \leq \operatorname{rank}(R_i) = 1$ for each $i$, we have:
 $$\sum_{i=1}^k \operatorname{rank}(R_i Y) \leq \sum_{i=1}^k \operatorname{rank}(R_i) = k$$
 
-Since $k \leq n$ and $\operatorname{rank}(I) = n$, we can apply **Theorem 5.1** (Projection Decomposition): if a projection $P$ can be written as $P = S_1 + \cdots + S_m$ with $\sum \operatorname{rank}(S_i) \leq \operatorname{rank}(P)$, then equality must hold.
+Since $k \leq n$ and $\operatorname{rank}(I) = n$, we can apply **Theorem 5.1 (part 3)**: if a projection $P$ can be written as $P = S_1 + \cdots + S_m$ with $\sum \operatorname{rank}(S_i) \leq \operatorname{rank}(P)$, then automatically $\sum \operatorname{rank}(S_i) = \operatorname{rank}(P)$.
 
 Therefore $\sum_{i=1}^k \operatorname{rank}(R_i Y) = \operatorname{rank}(I) = n$, which implies $k \geq n$.
 
@@ -545,6 +545,7 @@ $$\sum_{i=1}^k \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$$
 Then **automatically**:
 1. Each $R_i$ is a projection ($R_i^2 = R_i$)
 2. $R_i R_j = 0$ for all $i \neq j$
+3. $\sum_{i=1}^k \operatorname{rank}(R_i) = \operatorname{rank}(P)$ (equality holds)
 :::
 
 ::: remark
