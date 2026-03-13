@@ -441,45 +441,10 @@ Let $W = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix
 $$B = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 2 \end{pmatrix}$$
 
 **Step 2**: Compute $B^T B$:
-$$B^T B = \begin{pmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 2 & 2 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 4 & 6 \\ 6 & 9 \end{pmatrix}$$
+$$B^T B = \begin{pmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 2 & 2 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 4 & 5 \\ 5 & 9 \end{pmatrix}$$
 
 **Step 3**: Compute $(B^T B)^{-1}$:
-$$\det(B^T B) = 4 \cdot 9 - 6 \cdot 6 = 36 - 36 = 0$$
-
-**Wait!** The determinant is zero, which means $B^T B$ is **not invertible**. This indicates the columns of $B$ are **not linearly independent**.
-
-Let me verify: Is the second column a multiple of the first?
-$$\begin{pmatrix} 0 \\ 1 \\ 2 \\ 2 \end{pmatrix} \stackrel{?}{=} c \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix}$$
-
-No, they are not multiples. But let's check if they are linearly dependent:
-$$c_1 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + c_2 \begin{pmatrix} 0 \\ 1 \\ 2 \\ 2 \end{pmatrix} = \mathbf{0}?$$
-
-This would require: $c_1 = 0$, $c_1 + c_2 = 0$, $c_1 + 2c_2 = 0$, $c_1 + 2c_2 = 0$.
-
-Only solution: $c_1 = c_2 = 0$. So the columns **are** linearly independent!
-
-The issue is that $\det(B^T B) = 0$ was a **computational error**. Let me recalculate:
-$$B^T B = \begin{pmatrix} 4 & 6 \\ 6 & 9 \end{pmatrix}$$
-$$\det = 36 - 36 = 0$$
-
-This is indeed zero! But this contradicts linear independence. Let me recalculate $B^T B$:
-
-$$B^T B = \begin{pmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 2 & 2 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 2 \end{pmatrix}$$
-
-Entry $(1,1)$: $1 \cdot 1 + 1 \cdot 1 + 1 \cdot 1 + 1 \cdot 1 = 4$ ✓
-
-Entry $(1,2)$: $1 \cdot 0 + 1 \cdot 1 + 1 \cdot 2 + 1 \cdot 2 = 0 + 1 + 2 + 2 = 5$ (not 6!)
-
-Entry $(2,1)$: $0 \cdot 1 + 1 \cdot 1 + 2 \cdot 1 + 2 \cdot 1 = 0 + 1 + 2 + 2 = 5$ (not 6!)
-
-Entry $(2,2)$: $0 \cdot 0 + 1 \cdot 1 + 2 \cdot 2 + 2 \cdot 2 = 0 + 1 + 4 + 4 = 9$ ✓
-
-So the correct matrix is:
-$$B^T B = \begin{pmatrix} 4 & 5 \\ 5 & 9 \end{pmatrix}$$
-
-$$\det = 4 \cdot 9 - 5 \cdot 5 = 36 - 25 = 11$$
-
-**Step 3 (corrected)**:
+$$\det(B^T B) = 4 \cdot 9 - 5 \cdot 5 = 36 - 25 = 11$$
 $$(B^T B)^{-1} = \frac{1}{11} \begin{pmatrix} 9 & -5 \\ -5 & 4 \end{pmatrix}$$
 
 **Step 4**: Diagonal cross-filling of $(B^T B)^{-1}$.
