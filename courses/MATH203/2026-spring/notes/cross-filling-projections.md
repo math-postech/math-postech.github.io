@@ -261,16 +261,12 @@ An interesting question: if $UV = I$, when are both $U$ and $V$ square matrices?
 ::: proposition
 **Corollary 3.3 (UV = I Forces Square Matrices)**
 
-Suppose $U$ is $m \times r$ and $V$ is $r \times n$ with $UV = I_{\min(m,n)}$.
+Suppose $U$ is $n \times r$ and $V$ is $r \times n$ with $UV = I_n$ and $r \leq n$.
 
-Then $m = n = r$, and **both $U$ and $V$ are square invertible matrices** with $VU = UV = I$.
+Then $n = r$, and **both $U$ and $V$ are square invertible matrices** with $VU = UV = I$.
 :::
 
 **Proof**:
-
-Since $UV = I$, the product must be square, so $m = n$.
-
-Thus $U$ is $n \times r$ and $V$ is $r \times n$, with $UV = I_n$.
 
 **Observe**: $UV = I_n$ is a projection, since $(UV)^2 = UVUV = I_n UV = UV$.
 
@@ -282,11 +278,7 @@ But $\operatorname{rank}(UV) \leq r$ (since the product goes through an $r$-dime
 
 Therefore $n \leq r$.
 
-Conversely, for $UV = I_n$ to hold, we need $\operatorname{rank}(U) \geq n$ and $\operatorname{rank}(V) \geq n$.
-
-Since $U$ has only $r$ columns, $\operatorname{rank}(U) \leq r$, so $r \geq n$.
-
-Combining $n \leq r$ and $r \leq n$, we get $r = n$.
+Combined with the assumption $r \leq n$, we get $r = n$.
 
 Therefore $U$ and $V$ are both $n \times n$ square matrices with $UV = I_n$.
 
