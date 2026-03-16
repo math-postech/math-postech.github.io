@@ -384,33 +384,37 @@ Each proof is **one line**: cite the appropriate rule. ∎
 
 ## Practice Problems
 
-### Problem Set A: Composition and Decomposition Rules
+### Problem Set A: Rank of Matrix Products
 
-**A1**: If $A$ is $3 \times 2$ with rank 2 and $B$ is $2 \times 4$ with rank 2, is $AB$ left cancelable? Is $AB$ right cancelable?
+**A1**: Let $A$ be $3 \times 2$ with rank 2 and $B$ be $2 \times 4$ with rank 2. Are the columns of $AB$ linearly independent? Do the rows of $AB$ span $\mathbb{R}^3$?
 
-**A2**: $B$ is $4 \times 7$. Without knowing anything about $A$, can $AB$ be left cancelable? (Use contrapositive.)
+**A2**: $B$ is a $4 \times 7$ matrix. Can the columns of $AB$ be linearly independent for any choice of $A$?
 
-**A3**: If $ABC$ is left cancelable, list everything you can conclude about $A$, $B$, $C$, $AB$, $BC$.
+**A3**: Suppose $A$ is $m \times n$ and $B$ is $n \times p$. If $\text{rank}(A) = n$ and $\text{rank}(B) = p$, prove $\text{rank}(AB) = p$.
 
-**A4**: If $ABC$ is right cancelable, list everything you can conclude about $A$, $B$, $C$, $AB$, $BC$.
+**A4**: Suppose $\text{rank}(AB) = m$ (number of rows of $A$). Prove $\text{rank}(A) = m$.
 
-### Problem Set B: Linear Independence (Left Cancelable)
+**A5**: The columns of $ABC$ are linearly independent. What can you conclude about $\text{rank}(C)$? About $\text{rank}(BC)$? Can you conclude anything about $\text{rank}(A)$ or $\text{rank}(B)$ individually?
 
-**B1**: If $Av_1, Av_2, Av_3$ are linearly independent, prove $v_1, v_2, v_3$ are linearly independent. (One-line proof.)
+### Problem Set B: Linear Independence
 
-**B2**: Let $A = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 1 & 1 \end{pmatrix}$. Prove: $v_1, v_2 \in \mathbb{R}^3$ are linearly independent $\iff$ $Av_1, Av_2 \in \mathbb{R}^4$ are linearly independent. (State which direction uses which rule.)
+**B1**: If $Av_1, Av_2, Av_3$ are linearly independent, prove $v_1, v_2, v_3$ are linearly independent.
 
-**B3**: If $A$ and $B$ both have linearly independent columns, prove: $v_1, \ldots, v_k$ linearly independent $\iff$ $ABv_1, \ldots, ABv_k$ linearly independent.
+**B2**: Let $A = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 1 & 1 \end{pmatrix}$. Prove: $v_1, v_2 \in \mathbb{R}^3$ are linearly independent $\iff$ $Av_1, Av_2 \in \mathbb{R}^4$ are linearly independent.
 
-### Problem Set C: Spanning (Right Cancelable)
+**B3**: Let $A$ be $m \times n$ with $\text{rank}(A) = n$ and $B$ be $n \times p$ with $\text{rank}(B) = p$. Prove: $v_1, \ldots, v_k$ linearly independent $\iff$ $ABv_1, \ldots, ABv_k$ linearly independent.
 
-**C1**: If $w_1 = v_1 + v_2$, $w_2 = v_2 + v_3$, $w_3 = v_1 + v_3$, and $w_1, w_2, w_3$ span $\mathbb{R}^3$, prove $v_1, v_2, v_3$ span $\mathbb{R}^3$. (One-line proof.)
+**B4**: Let $A$ be $5 \times 3$ with rank 2. Give an example where $v_1, v_2$ are linearly independent but $Av_1, Av_2$ are linearly dependent. Why doesn't the composition rule apply?
+
+### Problem Set C: Spanning
+
+**C1**: Let $w_1 = v_1 + v_2$, $w_2 = v_2 + v_3$, $w_3 = v_1 + v_3$. If $w_1, w_2, w_3$ span $\mathbb{R}^3$, prove $v_1, v_2, v_3$ span $\mathbb{R}^3$.
 
 **C2**: Let $A$ be $3 \times 5$ with rank 3. If $v_1, \ldots, v_7$ span $\mathbb{R}^5$, prove $Av_1, \ldots, Av_7$ span $\mathbb{R}^3$.
 
-**C3**: Vectors $w_1, w_2, w_3$ are linear combinations of $v_1, v_2 \in \mathbb{R}^3$. Can $w_1, w_2, w_3$ span $\mathbb{R}^3$? (Use decomposition + rank constraint.)
+**C3**: Vectors $w_1, w_2, w_3$ are linear combinations of $v_1, v_2 \in \mathbb{R}^3$. Can $w_1, w_2, w_3$ span $\mathbb{R}^3$? Explain why or why not.
 
-**C4**: If $Av_1, \ldots, Av_k$ span $\mathbb{R}^m$ (where $A$ is $m \times n$), what can you conclude about $A$? What can you **not** conclude about $v_1, \ldots, v_k$?
+**C4**: If $Av_1, \ldots, Av_k$ span $\mathbb{R}^m$ (where $A$ is $m \times n$), prove $\text{rank}(A) = m$. Give an example showing that $v_1, \ldots, v_k$ need not span $\mathbb{R}^n$.
 
 ---
 
@@ -454,17 +458,17 @@ Each proof is **one line**: cite the appropriate rule. ∎
 
 ## Questions to Check Understanding
 
-1. **Decomposition**: "If $AB$ is right cancelable, which factor must be right cancelable?"
-   - Expected: $A$ (the **left** factor)
+1. **Rank of product**: "If $\text{rank}(AB) = m$ (number of rows of $A$), what can you say about $\text{rank}(A)$? About $\text{rank}(B)$?"
+   - Expected: $\text{rank}(A) = m$ (decomposition rule). Nothing guaranteed about $\text{rank}(B)$.
 
-2. **Contrapositive**: "If $B$ is $4 \times 7$, can $AB$ be left cancelable for any $A$?"
-   - Expected: No — rank$(B) \leq 4 < 7$ columns, so $B$ not left cancelable. Contrapositive: $AB$ not left cancelable.
+2. **Rank constraint**: "$B$ is a $4 \times 7$ matrix. Can $\text{rank}(AB) = 7$ (= number of columns of $AB$)?"
+   - Expected: No — $\text{rank}(B) \leq 4 < 7$, so the columns of $B$ are not linearly independent. By decomposition, the columns of $AB$ can't be independent either.
 
 3. **Independence**: "$Av_1, Av_2$ are linearly independent. Are $v_1, v_2$ independent? Do I need any condition on $A$?"
-   - Expected: Yes, by decomposition rule (no condition on $A$ needed).
+   - Expected: Yes they are, by decomposition rule. No condition on $A$ needed.
 
 4. **Spanning**: "Vectors $w_1, w_2, w_3$ are linear combinations of $v_1, v_2 \in \mathbb{R}^3$ and span $\mathbb{R}^3$. Do $v_1, v_2$ span $\mathbb{R}^3$?"
-   - Expected: Right decomposition says $V = (v_1|v_2)$ is right cancelable, meaning rank$(V) = 3$. But $V$ is $3 \times 2$, so rank $\leq 2 < 3$. **Contradiction** — the hypothesis is impossible! Two vectors can never have linear combinations spanning $\mathbb{R}^3$.
+   - Expected: Decomposition would force $\text{rank}(v_1|v_2) = 3$. But $(v_1|v_2)$ is $3 \times 2$, so rank $\leq 2 < 3$. **Contradiction** — the hypothesis is impossible! Two vectors can never have linear combinations spanning $\mathbb{R}^3$.
 
 ---
 
