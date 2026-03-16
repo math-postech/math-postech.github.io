@@ -143,4 +143,41 @@ Time: 3pm
 Venue: room 404
 -----
 
+Mar. 20 - Matteo Mucciconi (National University of Singapore)
+Email: mucci@nus.edu.sg
+Title: Multiplicative Averages of Plancherel Random Partitions: Elliptic Functions, Phase Transitions, and Applications
+Online: https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1
+-----
+
+Mar. 27 - Jongyook Park (Kyungpook National University)
+Email: jongyook@knu.ac.kr
+Title: Clique–coclique methods and spectral bounds for strongly regular graphs
+-----
+
+Apr. 3 - Hyung Tae Choi (Chung-Ang University)
+Email: htchoi@cau.ac.kr
+Title: Nonlinear $L_{1}$ Control and Set-invariance-based Approaches
+-----
+
+Apr. 24 - Byung Hee An (Kyungpook National University)
+Email: anbyhee@knu.ac.kr
+Title: Cluster structures of Legendrian cablings
+-----
+
+May 1 - Ziquan Yang (The Chinese University of Hong Kong)
+Email: zqyang@cuhk.edu.hk
+Title: Picard rank jumps for non ordinary K3 surfaces
+-----
+
+May 22 - Euiyong Park (University of Seoul)
+Email: epark@uos.ac.kr
+Title: Monoidal categorifications for cluster algebras
+Online talk requested
+-----
+
+May 29 - Kyu-Hwan Lee (University of Connecticut)
+Email: khlee@math.uconn.edu
+Title: Advancing combinatorics and number theory with AI
+-----
+
 -->
