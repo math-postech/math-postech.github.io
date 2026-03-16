@@ -41,6 +41,8 @@ Finally, we will present representative examples illustrating how SML can achiev
 ### Mar. 20 - Matteo Mucciconi (National University of Singapore)
 **Title:** Multiplicative Averages of Plancherel Random Partitions: Elliptic Functions, Phase Transitions, and Applications
 
+**Online Link:** [https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1](https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1)
+
 **Abstract:**
 
 We consider random integer partitions~$\lambda$ that follow the Poissonized Plancherel measure of parameter~$t^2$.
