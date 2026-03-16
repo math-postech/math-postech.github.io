@@ -1,473 +1,416 @@
-# Tutorial Suggestions: Week 4 — Composition Properties of Cancelable Matrices
+# Tutorial Suggestions: Week 4 — Composition and Decomposition Rules
 
 > **For**: Teaching Assistants conducting tutorial sessions (Mar 19, 2026)
 > **Related Lectures**: [Lecture 4: Subspace and Linear Independence](../notes/subspace-and-linear-independence.md), [Tutorial 3: Cancellation and Rank](./week03-cancellation-rank.md)
 > **Duration**: 50 minutes
-> **Prerequisites**: Students know left/right cancelable definitions, rank criteria (rank = columns for left cancel, rank = rows for right cancel), and linear independence
+> **Prerequisites**: Students know left/right cancelable definitions, rank criteria (rank = columns ⟺ left cancel, rank = rows ⟺ right cancel)
 
 ---
 
 ## Overview
 
-This tutorial develops the **algebraic properties** of left/right cancelable matrices and shows how these properties generate a rich collection of **linear independence exercises**.
+Last week we established rank criteria for cancellation. This week we derive two powerful rules — **composition** and **decomposition** — for both left and right cancelable matrices. These two rules become an **exercise generation machine**:
+
+- **Left cancelable** → exercises about **linear independence**
+- **Right cancelable** → exercises about **spanning**
 
 **Key topics**:
-1. **Composition properties** — if $A, B$ are left cancelable, then $AB$ is left cancelable (and the dual for right cancelable)
-2. **Factorization properties** — if $AB$ is left cancelable, then $B$ must be left cancelable
-3. **Applications to linear independence** — using cancelable properties to prove theorems about transformed vectors
-4. **Exercise construction** — how to generate practice problems from these properties
+1. **Composition rule** — left/right cancelable matrices compose (both sides)
+2. **Decomposition rule** — left/right cancelable passes to a factor, with contrapositive
+3. **Left cancelable applications** — linear independence exercises from composition and decomposition
+4. **Right cancelable applications** — spanning exercises from composition and decomposition
 
 **Pedagogical goals**:
-- Emphasize that cancelable matrices behave like "one-sided invertible" matrices
-- Show the **logical structure**: composition → factorization → applications
-- Build intuition for why "injective linear maps preserve linear independence"
+- Every exercise is a **one-line proof** citing the appropriate rule
+- Left and right are treated **symmetrically** throughout
+- Students learn to **recognize** which rule applies, not re-derive from scratch
 
 ---
 
-## Topic 1: Composition Properties (12 min)
+## Topic 1: Composition Rule (8 min)
 
 ### Learning Goal
 
-Students should understand and prove that left cancelable matrices compose (and similarly for right cancelable).
+Students understand that left (resp. right) cancelable matrices compose.
 
 ### Suggested Approach
 
-#### Step 1: State the Main Results (3 min)
-
-Present both properties side-by-side to emphasize symmetry:
+Present both rules side-by-side:
 
 ::: proposition
-**Proposition 1.1: Left Cancelable Matrices Compose**
+**Composition Rule (Left)**
 
 If $A$ and $B$ are both left cancelable, then $AB$ is left cancelable.
 
-**Proof**: We need to show $(AB)P = (AB)Q \Rightarrow P = Q$.
+**Proof**: Given $(AB)P = (AB)Q$:
 
-Given $(AB)P = (AB)Q$:
-- By associativity: $A(BP) = A(BQ)$
-- Since $A$ is left cancelable: $BP = BQ$
-- Since $B$ is left cancelable: $P = Q$ ✓
+$$A(BP) = A(BQ) \xRightarrow{A \text{ left cancel}} BP = BQ \xRightarrow{B \text{ left cancel}} P = Q \quad \checkmark$$
 :::
 
 ::: proposition
-**Proposition 1.2: Right Cancelable Matrices Compose**
+**Composition Rule (Right)**
 
 If $A$ and $B$ are both right cancelable, then $AB$ is right cancelable.
 
-**Proof**: We need to show $P(AB) = Q(AB) \Rightarrow P = Q$.
+**Proof**: Given $P(AB) = Q(AB)$:
 
-Given $P(AB) = Q(AB)$:
-- By associativity: $(PA)B = (QA)B$
-- Since $B$ is right cancelable: $PA = QA$
-- Since $A$ is right cancelable: $P = Q$ ✓
+$$(PA)B = (QA)B \xRightarrow{B \text{ right cancel}} PA = QA \xRightarrow{A \text{ right cancel}} P = Q \quad \checkmark$$
 :::
 
 ::: attention
-**Key Insight**
+**Pattern**
 
-The proof uses **cancellation twice** — first cancel the "outside" matrix, then cancel the "inside" matrix.
-
-**Pattern**:
-- Left cancelable: cancel from left to right ($A$ first, then $B$)
-- Right cancelable: cancel from right to left ($B$ first, then $A$)
-:::
-
-#### Step 2: Verify with Rank (4 min)
-
-Connect to last week's rank criterion:
-
-::: example
-**Example 1.1: Verifying composition with rank**
-
-Let $A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$ (3×2 matrix) and $B = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 1 & 1 \end{pmatrix}$ (2×3 matrix)
-
-**Check**: Are $A, B$ left cancelable?
-- $\text{rank}(A) = 2$ = number of columns of $A$ → **Yes**, $A$ is left cancelable ✓
-- $\text{rank}(B) = 2$ = number of columns of $B$? Check: columns are $\begin{pmatrix} 2 \\ 1 \end{pmatrix}, \begin{pmatrix} 1 \\ 1 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}$
-  - Column 3 = Column 2, so they're NOT linearly independent
-  - Actually $\text{rank}(B) = 2 < 3$ → **No**, $B$ is NOT left cancelable ✗
-
-**Conclusion**: Since $B$ is not left cancelable, we **cannot** apply Proposition 1.1. Indeed:
-
-$$AB = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 2 & 1 & 0 \\ 1 & 1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 1 & 1 \\ 3 & 2 & 1 \end{pmatrix}$$
-
-$\text{rank}(AB) = 2 < 3$ columns → $AB$ is **not** left cancelable. ✓
-
-This confirms: composition property **requires both** $A$ and $B$ to be left cancelable.
+- Left composition: cancel **left to right** ($A$ first, then $B$)
+- Right composition: cancel **right to left** ($B$ first, then $A$)
 :::
 
 ::: example
-**Example 1.2: Successful composition**
+**Example 1.1: Applying the composition rule**
 
-Let $A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$ (3×2) and $B = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$ (2×2)
+$A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$ (3×2, rank 2 = 2 columns → left cancelable ✓)
 
-**Check**:
-- $\text{rank}(A) = 2$ = 2 columns → $A$ is left cancelable ✓
-- $\text{rank}(B) = 2$ = 2 columns (since $B$ is invertible) → $B$ is left cancelable ✓
+$B = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$ (2×2, rank 2 = 2 columns → left cancelable ✓)
 
-**Predict**: By Proposition 1.1, $AB$ should be left cancelable.
+By the composition rule: $AB$ is left cancelable. ✓
 
-**Verify**:
-$$AB = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 0 & 3 \\ 2 & 4 \end{pmatrix}$$
-
-Columns of $AB$: $\begin{pmatrix} 2 \\ 0 \\ 2 \end{pmatrix}, \begin{pmatrix} 1 \\ 3 \\ 4 \end{pmatrix}$ are linearly independent.
-
-$\text{rank}(AB) = 2$ = 2 columns → $AB$ is left cancelable ✓
+**No need to compute $AB$!** The rule gives the answer immediately.
 :::
-
-#### Step 3: Extend to Multiple Matrices (5 min)
 
 ::: proposition
-**Corollary: Composition of Multiple Left Cancelable Matrices**
+**Corollary: Multiple Compositions**
 
-If $A_1, A_2, \ldots, A_k$ are all left cancelable (and compatible for multiplication), then the product $A_1 A_2 \cdots A_k$ is left cancelable.
+If $A_1, A_2, \ldots, A_k$ are all left cancelable (and compatible for multiplication), then $A_1 A_2 \cdots A_k$ is left cancelable. (By induction on the composition rule.)
 
-**Proof**: Induction using Proposition 1.1.
-- Base case: $k=1$ is trivial
-- Inductive step: $(A_1 A_2 \cdots A_{k-1}) A_k$ = (left cancelable) · (left cancelable) = left cancelable ✓
-:::
-
-::: example
-**Example 1.3: Three-matrix product**
-
-If $A = \begin{pmatrix} 1 & 0 \\ 2 & 1 \\ 3 & 0 \end{pmatrix}$, $B = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, $C = \begin{pmatrix} 2 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}$ are all left cancelable, then $ABC$ is left cancelable.
-
-(No need to compute the product — the theorem guarantees the result!)
+Dually for right cancelable.
 :::
 
 ---
 
-## Topic 2: Factorization Properties (10 min)
+## Topic 2: Decomposition Rule (12 min)
 
 ### Learning Goal
 
-Students should understand that being left cancelable can be **factored out** — if $AB$ is left cancelable, then the "outside factor" $B$ must be left cancelable.
+Students understand the decomposition rule and its **contrapositive** for instant conclusions.
 
 ### Suggested Approach
 
-#### Step 1: State the Factorization Theorem (3 min)
+#### Step 1: State the Decomposition Rules (4 min)
 
 ::: proposition
-**Proposition 2.1: Left Cancelable Factors**
+**Decomposition Rule (Left)**
 
-If $AB$ is left cancelable, then $B$ is left cancelable.
+If $AB$ is left cancelable, then $B$ (the **right factor**) is left cancelable.
 
-**Proof**: We need to show $BP = BQ \Rightarrow P = Q$.
+**Proof**: Given $BP = BQ$:
 
-Given $BP = BQ$:
-- Multiply both sides on the left by $A$: $A(BP) = A(BQ)$
-- By associativity: $(AB)P = (AB)Q$
-- Since $AB$ is left cancelable: $P = Q$ ✓
-
-**Contrapositive form**: If $B$ is **not** left cancelable, then $AB$ is **not** left cancelable (for any $A$).
+$$ABP = ABQ \xRightarrow{AB \text{ left cancel}} P = Q \quad \checkmark$$
 :::
 
 ::: proposition
-**Proposition 2.2: Right Cancelable Factors**
+**Decomposition Rule (Right)**
 
-If $AB$ is right cancelable, then $A$ is right cancelable.
+If $AB$ is right cancelable, then $A$ (the **left factor**) is right cancelable.
 
-**Proof**: We need to show $PA = QA \Rightarrow P = Q$.
+**Proof**: Given $PA = QA$:
 
-Given $PA = QA$:
-- Multiply both sides on the right by $B$: $(PA)B = (QA)B$
-- By associativity: $P(AB) = Q(AB)$
-- Since $AB$ is right cancelable: $P = Q$ ✓
+$$PAB = QAB \xRightarrow{AB \text{ right cancel}} P = Q \quad \checkmark$$
 :::
 
 ::: attention
-**Pattern to Notice**
+**Direction Pattern**
 
-- **Left cancelable**: The condition passes to the **right** factor ($AB$ left cancel → $B$ left cancel)
-- **Right cancelable**: The condition passes to the **left** factor ($AB$ right cancel → $A$ right cancel)
-
-**Mnemonic**: "Cancel toward the factor — left cancel looks right, right cancel looks left"
+- **Left cancelable**: passes to the **right** factor ($AB$ left cancel → $B$ left cancel)
+- **Right cancelable**: passes to the **left** factor ($AB$ right cancel → $A$ right cancel)
 :::
 
-#### Step 2: Non-Example (3 min)
+#### Step 2: The Contrapositive (4 min)
+
+::: proposition
+**Contrapositive Forms**
+
+- If $B$ is **not** left cancelable → $AB$ is **not** left cancelable (for **any** $A$)
+- If $A$ is **not** right cancelable → $AB$ is **not** right cancelable (for **any** $B$)
+
+**Warning**: These are **contrapositives** (correct), not negations. The negation "$B$ left cancel ⟹ $AB$ left cancel" is **FALSE**.
+:::
 
 ::: example
-**Example 2.1: What the theorem does NOT say**
+**Example 2.1: Instant conclusion via contrapositive**
 
-If $AB$ is left cancelable, can we conclude that $A$ is left cancelable?
+$A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$ (3×2), $B = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 1 & 1 \end{pmatrix}$ (2×3)
 
-**Answer**: **No!**
+**Question**: Is $AB$ left cancelable?
 
-**Counterexample**: Let $A = \begin{pmatrix} 1 & 1 \end{pmatrix}$ (1×2 matrix), $B = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ (2×1 matrix)
+**Answer**: $B$ is $2 \times 3$, so $\text{rank}(B) \leq 2 < 3$ columns. Thus $B$ is **not** left cancelable.
 
-Then:
-$$AB = \begin{pmatrix} 1 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 1 \end{pmatrix}$$
+By the **contrapositive of the decomposition rule**: $AB$ is **not** left cancelable. ∎
 
-$AB$ is 1×1 invertible → $AB$ is left cancelable ✓
+**One line. No computation of $AB$ needed.**
+:::
+
+#### Step 3: What decomposition does NOT say (4 min)
+
+::: example
+**Example 2.2: Decomposition is directional**
+
+$AB$ is left cancelable ⟹ $A$ is left cancelable? **No!**
+
+$A = \begin{pmatrix} 1 & 1 \end{pmatrix}$ (1×2), $B = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ (2×1).
+
+$AB = (1)$ → left cancelable ✓
 
 But $\text{rank}(A) = 1 < 2$ columns → $A$ is **not** left cancelable ✗
 
-**Lesson**: The factorization property is **directional**. Left cancelable passes to the **right** factor, not the left.
-:::
-
-#### Step 3: Combining Composition and Factorization (4 min)
-
-::: example
-**Example 2.2: Using both properties**
-
-Suppose $ABC$ is left cancelable. What can we conclude?
-
-**Answer**:
-- By Proposition 2.1 (applied to $ABC = (AB) \cdot C$): $C$ is left cancelable ✓
-- By Proposition 2.1 (applied to $AB \cdot C$ and using that $C$ is left cancel): Actually, we only know $(AB)$ might not be left cancelable directly...
-
-**Careful!** We can only conclude: $C$ and $BC$ are left cancelable.
-
-**Why?** Apply Proposition 2.1 twice:
-1. $ABC$ is left cancel → $C$ is left cancel (factor out from right)
-2. $ABC = A(BC)$ is left cancel → $BC$ is left cancel (factor out from right)
-
-But we **cannot** conclude $A$ or $B$ are left cancelable individually!
+Left cancelable passes to the **right** factor only.
 :::
 
 ::: remark
-**General Pattern**
+**General Pattern for Products**
 
-If $A_1 A_2 \cdots A_k$ is left cancelable, then:
-- **Guaranteed left cancelable**: All "right suffixes" $A_i A_{i+1} \cdots A_k$ for $i = 2, 3, \ldots, k$
-- **NOT guaranteed**: Individual matrices $A_1, A_2, \ldots, A_{k-1}$
+If $A_1 A_2 \cdots A_k$ is left cancelable:
+- **Guaranteed left cancelable**: all right suffixes $A_k$, $A_{k-1}A_k$, ..., $A_2 \cdots A_k$
+- **NOT guaranteed**: $A_1, A_2, \ldots, A_{k-1}$ individually
+
+Dually, if $A_1 A_2 \cdots A_k$ is right cancelable:
+- **Guaranteed right cancelable**: all left prefixes $A_1$, $A_1 A_2$, ..., $A_1 \cdots A_{k-1}$
+- **NOT guaranteed**: $A_2, A_3, \ldots, A_k$ individually
 :::
 
 ---
 
-## Topic 3: Applications to Linear Independence (18 min)
+## Topic 3: Applications to Linear Independence — Left Cancelable (15 min)
 
 ### Learning Goal
 
-Students should use cancelable properties to prove standard theorems about how linear transformations interact with linear independence and spanning.
+Students see that linear independence exercises are **instances** of the composition and decomposition rules applied to the product $A \cdot (v_1 | \cdots | v_k)$.
 
 ### Suggested Approach
 
-#### Step 1: Main Theorem (5 min)
-
-::: proposition
-**Theorem 3.1: Injective Maps Preserve Linear Independence**
-
-If $A$ is left cancelable and $v_1, \ldots, v_k$ are linearly independent, then $Av_1, \ldots, Av_k$ are linearly independent.
-
-**Proof**: Suppose $c_1(Av_1) + \cdots + c_k(Av_k) = 0$.
-
-Rewrite using matrix multiplication:
-$$A(c_1 v_1 + \cdots + c_k v_k) = 0 = A \cdot 0$$
-
-Since $A$ is left cancelable (hence $A \cdot P = A \cdot Q \Rightarrow P = Q$):
-$$c_1 v_1 + \cdots + c_k v_k = 0$$
-
-Since $v_1, \ldots, v_k$ are linearly independent: $c_1 = \cdots = c_k = 0$ ✓
-
-Therefore $Av_1, \ldots, Av_k$ are linearly independent. ✓
-:::
+#### Step 1: The Key Translation (3 min)
 
 ::: attention
-**Converse is NOT True**
+**Key Observation**
 
-If $Av_1, \ldots, Av_k$ are linearly independent, we **cannot** conclude $v_1, \ldots, v_k$ are linearly independent.
+Let $V = (v_1 | v_2 | \cdots | v_k)$ be an $n \times k$ matrix. Then:
 
-**Counterexample**: Let $A = \begin{pmatrix} 1 & 0 \end{pmatrix}$, $v_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$, $v_2 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$
+$$V \text{ is left cancelable} \iff \text{rank}(V) = k \iff v_1, \ldots, v_k \text{ are linearly independent}$$
 
-Then $Av_1 = 1, Av_2 = 1$ → $Av_1 = Av_2$ → NOT linearly independent!
+Now consider the product $AV = (Av_1 | Av_2 | \cdots | Av_k)$:
 
-Wait, let me reconsider... Actually if $Av_1, \ldots, Av_k$ are linearly independent, then we need $A$ to be "recovering" the information, which requires a different condition.
+$$AV \text{ is left cancelable} \iff Av_1, \ldots, Av_k \text{ are linearly independent}$$
+
+**Every left cancelable statement about $A \cdot V$ translates directly into a linear independence statement!**
 :::
 
-#### Step 2: The Reverse Direction (5 min)
+#### Step 2: Exercise from Decomposition Rule (4 min)
 
 ::: proposition
-**Theorem 3.2: When Linear Independence is Preserved Backward**
+**Exercise Type 1 (Left Decomposition)**
 
 If $Av_1, \ldots, Av_k$ are linearly independent, then $v_1, \ldots, v_k$ are linearly independent.
 
-**Proof**: We prove the contrapositive: if $v_1, \ldots, v_k$ are linearly **dependent**, then $Av_1, \ldots, Av_k$ are linearly **dependent**.
+**Proof**: $AV$ is left cancelable. By the **decomposition rule**, $V$ (the right factor) is left cancelable. ∎
 
-If $v_1, \ldots, v_k$ are linearly dependent, then there exist $c_1, \ldots, c_k$ (not all zero) such that:
-$$c_1 v_1 + \cdots + c_k v_k = 0$$
-
-Apply $A$ to both sides:
-$$c_1(Av_1) + \cdots + c_k(Av_k) = A \cdot 0 = 0$$
-
-Since not all $c_i$ are zero, $Av_1, \ldots, Av_k$ are linearly dependent. ✓
+**Note**: No condition on $A$ is needed!
 :::
 
-::: remark
-**Key Observation**
+::: example
+**Example 3.1**
 
-Theorem 3.2 **does not require $A$ to be left cancelable**! It works for **any** matrix $A$.
+Let $A$ be any $5 \times 3$ matrix. If $Av_1, Av_2$ are linearly independent vectors in $\mathbb{R}^5$, then $v_1, v_2$ are linearly independent in $\mathbb{R}^3$.
 
-**Summary**:
-- **Forward** (independent → independent): Requires $A$ left cancelable
-- **Backward** (dependent → dependent): Always true
+**One-line proof**: Decomposition rule applied to $A \cdot (v_1 | v_2)$. ∎
 :::
 
-#### Step 3: Combining Both Directions (8 min)
+#### Step 3: Exercise from Composition Rule (3 min)
 
 ::: proposition
-**Theorem 3.3: Equivalence under Left Cancelable Condition**
+**Exercise Type 2 (Left Composition)**
 
-If $A$ has **linearly independent columns** (i.e., $A$ is left cancelable), then:
+If $A$ has linearly independent columns and $v_1, \ldots, v_k$ are linearly independent, then $Av_1, \ldots, Av_k$ are linearly independent.
 
-$$v_1, \ldots, v_k \text{ are linearly independent} \iff Av_1, \ldots, Av_k \text{ are linearly independent}$$
+**Proof**: $A$ is left cancelable + $V$ is left cancelable → by **composition rule**, $AV$ is left cancelable. ∎
+:::
+
+#### Step 4: The Combined Equivalence (5 min)
+
+::: proposition
+**Exercise Type 3 (Equivalence = Composition + Decomposition)**
+
+If $A$ has linearly independent columns, then:
+
+$$v_1, \ldots, v_k \text{ linearly independent} \iff Av_1, \ldots, Av_k \text{ linearly independent}$$
 
 **Proof**:
-- ($\Rightarrow$): By Theorem 3.1 (using $A$ left cancelable)
-- ($\Leftarrow$): By Theorem 3.2 (no assumption needed)
+- ($\Rightarrow$): **Composition rule** — $A$ left cancel + $V$ left cancel ⟹ $AV$ left cancel
+- ($\Leftarrow$): **Decomposition rule** — $AV$ left cancel ⟹ $V$ (right factor) left cancel ∎
+
+**Note**: The ($\Leftarrow$) direction is always true (decomposition needs no condition on $A$). The ($\Rightarrow$) direction requires $A$ left cancelable (composition needs both factors).
 :::
 
 ::: example
-**Example 3.1: Applying the equivalence**
+**Example 3.2: The equivalence in action**
 
-Let $A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 2 & 3 \end{pmatrix}$ and $v_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, v_2 = \begin{pmatrix} 3 \\ 4 \end{pmatrix}$
+$A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 2 & 3 \end{pmatrix}$ has linearly independent columns (rank 2 = 2 columns).
 
-**Question**: Are $Av_1, Av_2$ linearly independent?
+Therefore: $v_1, v_2 \in \mathbb{R}^2$ linearly independent $\iff$ $Av_1, Av_2 \in \mathbb{R}^3$ linearly independent.
 
-**Solution**:
-
-**Step 1**: Check if $A$ has linearly independent columns.
-- Columns: $\begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 3 \end{pmatrix}$ are clearly independent (standard basis extended)
-- So $A$ is left cancelable ✓
-
-**Step 2**: Check if $v_1, v_2$ are linearly independent.
-- $\begin{pmatrix} 1 \\ 2 \end{pmatrix}, \begin{pmatrix} 3 \\ 4 \end{pmatrix}$ are independent (determinant = $1 \cdot 4 - 2 \cdot 3 = -2 \neq 0$) ✓
-
-**Step 3**: By Theorem 3.3, $Av_1, Av_2$ are linearly independent ✓
-
-**Verification** (not necessary, but reassuring):
-$$Av_1 = \begin{pmatrix} 1 \\ 2 \\ 8 \end{pmatrix}, \quad Av_2 = \begin{pmatrix} 3 \\ 4 \\ 18 \end{pmatrix}$$
-
-These are independent (check: $3 \cdot 8 = 24 \neq 18 \cdot 1$) ✓
+Sometimes it's easier to check one side than the other!
 :::
 
 ::: example
-**Example 3.2: What if $A$ is not left cancelable?**
+**Example 3.3: Why the ($\Rightarrow$) direction fails without left cancelable**
 
-Let $A = \begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix}$ and $v_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, v_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$
+$A = \begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix}$ (rank 1 < 2 columns, NOT left cancelable)
 
-**Check**:
-- $v_1, v_2$ are linearly independent (standard basis) ✓
-- But $Av_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, Av_2 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ → $Av_1 = Av_2$ → NOT linearly independent ✗
+$v_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, v_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$ are linearly independent ✓
 
-This confirms: **without** $A$ being left cancelable, Theorem 3.1 fails!
+But $Av_1 = Av_2 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ → NOT linearly independent ✗
+
+Without $A$ left cancelable, composition rule doesn't apply, and the forward direction fails.
 :::
 
 ---
 
-## Topic 4: Application to Spanning (10 min)
+## Topic 4: Applications to Spanning — Right Cancelable (15 min)
 
 ### Learning Goal
 
-Students should understand the dual property for spanning sets.
+Students see that spanning exercises are **instances** of the composition and decomposition rules for **right cancelable**, just as independence exercises come from left cancelable.
 
 ### Suggested Approach
 
-#### Step 1: Spanning Under Linear Maps (6 min)
+#### Step 1: The Key Translation (3 min)
 
-::: proposition
-**Theorem 4.1: Surjective Maps Preserve Spanning**
+::: attention
+**Key Observation**
 
-If $A$ is right cancelable (rows are linearly independent, i.e., $A$ is "surjective onto its row space") and $v_1, \ldots, v_k$ span $\mathbb{R}^n$, then $Av_1, \ldots, Av_k$ span the row space of $A$.
+Let $V = (v_1 | v_2 | \cdots | v_k)$ be an $n \times k$ matrix. Then:
 
-**Actually, let me reconsider this statement...**
+$$V \text{ is right cancelable} \iff \text{rank}(V) = n \iff v_1, \ldots, v_k \text{ span } \mathbb{R}^n$$
 
-Better statement:
+(Right cancelable means rank = number of **rows** = $n$, which means columns span the entire space $\mathbb{R}^n$.)
 
-If $v_1, \ldots, v_k$ span some space that **includes the row space** of $A$, then $Av_1, \ldots, Av_k$ span the row space of $A$.
+**Comparison**:
+- $V$ **left** cancelable (rank = $k$ = columns) ⟺ $v_i$ **linearly independent**
+- $V$ **right** cancelable (rank = $n$ = rows) ⟺ $v_i$ **span** $\mathbb{R}^n$
 :::
 
-Actually, let me think about this more carefully. The spanning property is more delicate. Let me present a simpler, correct version:
+#### Step 2: Exercise from Decomposition Rule (5 min)
 
 ::: proposition
-**Theorem 4.1: Linear Combinations Preserve Spanning**
+**Exercise Type 4 (Right Decomposition)**
 
-If $\text{span}(v_1, \ldots, v_k) = \mathbb{R}^n$ (i.e., $v_1, \ldots, v_k$ span the whole space), then for any matrix $A$ (with $n$ columns):
+If some linear combinations of $v_1, \ldots, v_k$ span $\mathbb{R}^n$, then $v_1, \ldots, v_k$ themselves span $\mathbb{R}^n$.
 
-$$\text{span}(Av_1, \ldots, Av_k) = \text{Col}(A) \quad \text{(column space of } A\text{)}$$
+**Setup**: Write $w_j = c_{j1}v_1 + \cdots + c_{jk}v_k$ for $j = 1, \ldots, s$.
 
-**Proof**:
+In matrix form: $(w_1 | \cdots | w_s) = (v_1 | \cdots | v_k) \cdot C = V \cdot C$
 
-**Step 1**: Show $\text{span}(Av_1, \ldots, Av_k) \subseteq \text{Col}(A)$
+where $C$ is the $k \times s$ coefficient matrix.
 
-Each $Av_i$ is in $\text{Col}(A)$ by definition, so any linear combination is also in $\text{Col}(A)$. ✓
+**Proof**: $VC$ is right cancelable (the $w_j$ span $\mathbb{R}^n$). By the **decomposition rule**, $V$ (the **left** factor) is right cancelable. So $v_1, \ldots, v_k$ span $\mathbb{R}^n$. ∎
 
-**Step 2**: Show $\text{Col}(A) \subseteq \text{span}(Av_1, \ldots, Av_k)$
-
-Any vector in $\text{Col}(A)$ has the form $Aw$ for some $w \in \mathbb{R}^n$.
-
-Since $v_1, \ldots, v_k$ span $\mathbb{R}^n$, we can write:
-$$w = c_1 v_1 + \cdots + c_k v_k$$
-
-Therefore:
-$$Aw = A(c_1 v_1 + \cdots + c_k v_k) = c_1(Av_1) + \cdots + c_k(Av_k) \in \text{span}(Av_1, \ldots, Av_k)$$
-
-So $\text{Col}(A) \subseteq \text{span}(Av_1, \ldots, Av_k)$ ✓
+**Note**: No condition on the coefficient matrix $C$ is needed!
 :::
 
 ::: example
-**Example 4.1: Spanning application**
+**Example 4.1**
 
-Let $v_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, v_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$ (standard basis for $\mathbb{R}^2$)
+Let $w_1 = 2v_1 + 3v_2$, $w_2 = v_1 - v_2$, $w_3 = v_2 + 4v_3$.
 
-Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix}$
+If $w_1, w_2, w_3$ span $\mathbb{R}^n$, then $v_1, v_2, v_3$ span $\mathbb{R}^n$.
 
-**Question**: What is $\text{span}(Av_1, Av_2)$?
-
-**Solution**:
-
-Since $v_1, v_2$ span $\mathbb{R}^2$, by Theorem 4.1:
-$$\text{span}(Av_1, Av_2) = \text{Col}(A)$$
-
-Compute:
-$$Av_1 = \begin{pmatrix} 1 \\ 3 \\ 5 \end{pmatrix}, \quad Av_2 = \begin{pmatrix} 2 \\ 4 \\ 6 \end{pmatrix}$$
-
-Notice: $Av_2 = 2Av_1$, so $\text{rank}(A) = 1$.
-
-Therefore $\text{span}(Av_1, Av_2) = \text{span}(Av_1) = \text{span}\left\{\begin{pmatrix} 1 \\ 3 \\ 5 \end{pmatrix}\right\}$
+**One-line proof**: $(w_1|w_2|w_3) = (v_1|v_2|v_3) \cdot C$. Right decomposition: $V$ (left factor) is right cancelable. ∎
 :::
 
-#### Step 2: Corollary (4 min)
+#### Step 3: Exercise from Composition Rule (3 min)
 
 ::: proposition
-**Corollary 4.2: Sufficient Condition for Full Column Span**
+**Exercise Type 5 (Right Composition)**
 
-If $v_1, \ldots, v_k$ span $\mathbb{R}^n$ and $Av_1, \ldots, Av_k$ span $\mathbb{R}^m$ (where $A$ is $m \times n$), then $A$ has **full row rank** (rank = $m$).
+If $A$ is $m \times n$ with linearly independent rows (rank $= m$, i.e., $A$ is right cancelable) and $v_1, \ldots, v_k$ span $\mathbb{R}^n$, then $Av_1, \ldots, Av_k$ span $\mathbb{R}^m$.
 
-**Proof**:
+**Proof**: $A$ is right cancelable + $V$ is right cancelable → by **composition rule**, $AV$ is right cancelable. ∎
+:::
 
-By Theorem 4.1, $\text{span}(Av_1, \ldots, Av_k) = \text{Col}(A)$.
+::: example
+**Example 4.2**
 
-Given that $\text{span}(Av_1, \ldots, Av_k) = \mathbb{R}^m$, we have $\text{Col}(A) = \mathbb{R}^m$.
+$A = \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 3 \end{pmatrix}$ (2×3, rank 2 = 2 rows → right cancelable ✓)
 
-Therefore $\text{rank}(A) = \dim(\text{Col}(A)) = m$ ✓
+If $v_1, v_2, v_3, v_4 \in \mathbb{R}^3$ span $\mathbb{R}^3$, then $Av_1, Av_2, Av_3, Av_4$ span $\mathbb{R}^2$.
+
+**One-line proof**: Right composition rule. ∎
+:::
+
+#### Step 4: Another Exercise from Decomposition (4 min)
+
+::: proposition
+**Exercise Type 6 (Right Decomposition applied to $A \cdot V$)**
+
+If $Av_1, \ldots, Av_k$ span $\mathbb{R}^m$ (where $A$ is $m \times n$), then $A$ has linearly independent rows (rank $= m$, i.e., $A$ is right cancelable).
+
+**Proof**: $AV$ is right cancelable. By the **decomposition rule**, $A$ (the **left** factor) is right cancelable. ∎
+:::
+
+::: example
+**Example 4.3: The decomposition catches impossibility**
+
+$A$ is a $3 \times 2$ matrix. Can $Av_1, Av_2$ span $\mathbb{R}^3$?
+
+By Exercise Type 6, that would require $A$ to be right cancelable: rank$(A) = 3$. But $A$ is $3 \times 2$, so rank$(A) \leq 2 < 3$. **Impossible!**
+
+(Equivalently: by contrapositive, $A$ not right cancelable ⟹ $AV$ not right cancelable.)
 :::
 
 ---
 
-## Practice Problems for Students
+## Summary: The Exercise Generation Machine
 
-### Problem Set A: Composition and Factorization
+::: attention
+**The Complete Pattern**
 
-**Problem A1**: If $A$ is a $3 \times 5$ matrix with rank 3 and $B$ is a $5 \times 2$ matrix with rank 2, is $AB$ left cancelable? Right cancelable?
+| Rule | Left Cancelable (↔ **Independence**) | Right Cancelable (↔ **Spanning**) |
+|------|---------------------------------------|-----------------------------------|
+| **Decomposition** | $Av_i$ indep ⟹ $v_i$ indep | lin. comb. of $v_i$ span $\mathbb{R}^n$ ⟹ $v_i$ span $\mathbb{R}^n$ |
+| **Composition** | $A$ col indep + $v_i$ indep ⟹ $Av_i$ indep | $A$ row indep + $v_i$ span $\mathbb{R}^n$ ⟹ $Av_i$ span $\mathbb{R}^m$ |
+| **Equivalence** | $A$ col indep: $v_i$ indep ⟺ $Av_i$ indep | — |
 
-**Problem A2**: If $ABC$ is a $4 \times 6$ matrix with rank 4, what can you conclude about $A$, $B$, $C$?
+Each proof is **one line**: cite the appropriate rule. ∎
+:::
 
-**Problem A3**: Give an example of matrices $A, B$ where $A$ is not left cancelable, $B$ is left cancelable, but $AB$ is left cancelable.
+---
 
-### Problem Set B: Linear Independence
+## Practice Problems
 
-**Problem B1**: Suppose $A$ is a $4 \times 3$ matrix with linearly independent columns. If $v_1, v_2 \in \mathbb{R}^3$ are linearly independent, prove that $Av_1, Av_2$ are linearly independent.
+### Problem Set A: Composition and Decomposition Rules
 
-**Problem B2**: Suppose $Av_1, Av_2, Av_3$ are linearly independent. Can you conclude that $v_1, v_2, v_3$ are linearly independent? Prove or give a counterexample.
+**A1**: If $A$ is $3 \times 2$ with rank 2 and $B$ is $2 \times 4$ with rank 2, is $AB$ left cancelable? Is $AB$ right cancelable?
 
-**Problem B3**: If $A$ has rank 5 and $Av_1, \ldots, Av_k$ are linearly independent, what can you conclude about $v_1, \ldots, v_k$?
+**A2**: $B$ is $4 \times 7$. Without knowing anything about $A$, can $AB$ be left cancelable? (Use contrapositive.)
 
-### Problem Set C: Spanning
+**A3**: If $ABC$ is left cancelable, list everything you can conclude about $A$, $B$, $C$, $AB$, $BC$.
 
-**Problem C1**: If $v_1, v_2, v_3$ span $\mathbb{R}^3$ and $A$ is a $2 \times 3$ matrix, what is $\text{span}(Av_1, Av_2, Av_3)$?
+**A4**: If $ABC$ is right cancelable, list everything you can conclude about $A$, $B$, $C$, $AB$, $BC$.
 
-**Problem C2**: Suppose $v_1, \ldots, v_k$ span $\mathbb{R}^4$ and $Av_1, \ldots, Av_k$ span $\mathbb{R}^3$ (where $A$ is $3 \times 4$). What is $\text{rank}(A)$?
+### Problem Set B: Linear Independence (Left Cancelable)
+
+**B1**: If $Av_1, Av_2, Av_3$ are linearly independent, prove $v_1, v_2, v_3$ are linearly independent. (One-line proof.)
+
+**B2**: Let $A = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 1 & 1 \end{pmatrix}$. Prove: $v_1, v_2 \in \mathbb{R}^3$ are linearly independent $\iff$ $Av_1, Av_2 \in \mathbb{R}^4$ are linearly independent. (State which direction uses which rule.)
+
+**B3**: If $A$ and $B$ both have linearly independent columns, prove: $v_1, \ldots, v_k$ linearly independent $\iff$ $ABv_1, \ldots, ABv_k$ linearly independent.
+
+### Problem Set C: Spanning (Right Cancelable)
+
+**C1**: If $w_1 = v_1 + v_2$, $w_2 = v_2 + v_3$, $w_3 = v_1 + v_3$, and $w_1, w_2, w_3$ span $\mathbb{R}^3$, prove $v_1, v_2, v_3$ span $\mathbb{R}^3$. (One-line proof.)
+
+**C2**: Let $A$ be $3 \times 5$ with rank 3. If $v_1, \ldots, v_7$ span $\mathbb{R}^5$, prove $Av_1, \ldots, Av_7$ span $\mathbb{R}^3$.
+
+**C3**: Vectors $w_1, w_2, w_3$ are linear combinations of $v_1, v_2 \in \mathbb{R}^3$. Can $w_1, w_2, w_3$ span $\mathbb{R}^3$? (Use decomposition + rank constraint.)
+
+**C4**: If $Av_1, \ldots, Av_k$ span $\mathbb{R}^m$ (where $A$ is $m \times n$), what can you conclude about $A$? What can you **not** conclude about $v_1, \ldots, v_k$?
 
 ---
 
@@ -475,62 +418,71 @@ Therefore $\text{rank}(A) = \dim(\text{Col}(A)) = m$ ✓
 
 | Topic | Suggested Time | Adjustment Strategy |
 |-------|---------------|---------------------|
-| Composition properties | 12 min | Essential — show both left and right cases for symmetry |
-| Factorization properties | 10 min | Can compress to 7 min by skipping Example 2.2 |
-| Linear independence apps | 18 min | **Core content** — do not skip Theorems 3.1, 3.2, 3.3 |
-| Spanning applications | 10 min | If short on time, state Theorem 4.1 and assign as reading |
+| Composition rule | 8 min | Can compress to 5 min by showing left version, stating right as dual |
+| Decomposition rule | 12 min | **Essential** — contrapositive and directionality are key |
+| Independence apps (left) | 15 min | **Core** — show all three exercise types with key translation |
+| Spanning apps (right) | 15 min | **Core** — parallel structure to independence, show decomposition and composition |
 
 ---
 
 ## Common Student Mistakes to Address
 
-### Mistake 1: Assuming composition works in reverse
+### Mistake 1: Confusing contrapositive with negation
 
-**Symptom**: "If $AB$ is left cancelable, then $A$ and $B$ are both left cancelable"
+**Symptom**: "If $B$ is left cancelable, then $AB$ is left cancelable"
 
-**Fix**: Emphasize **directionality** — only the right factor inherits left cancelable property.
+**Fix**: That's the **negation** (FALSE). The **contrapositive** reverses AND negates:
+- Original: $AB$ left cancel ⟹ $B$ left cancel
+- Contrapositive: $B$ NOT left cancel ⟹ $AB$ NOT left cancel ✓
+- Negation (WRONG): $B$ left cancel ⟹ $AB$ left cancel ✗
 
-### Mistake 2: Confusing linear independence directions
+### Mistake 2: Applying decomposition in the wrong direction
 
-**Symptom**: "Since $Av_1, Av_2$ are independent, $v_1, v_2$ must be independent"
+**Symptom**: "$AB$ left cancel ⟹ $A$ left cancel"
 
-**Fix**: Show Example 3.2 to demonstrate this fails without $A$ being left cancelable.
+**Fix**: Left cancel passes to the **right** factor. Draw on the board:
+- Left cancel: $AB \xrightarrow{\text{passes to}} B$ (right factor)
+- Right cancel: $AB \xrightarrow{\text{passes to}} A$ (left factor)
 
-### Mistake 3: Applying theorems without checking hypotheses
+### Mistake 3: Re-deriving instead of citing the rule
 
-**Symptom**: Using Theorem 3.1 without verifying $A$ has independent columns
+**Symptom**: Proving "$Av_i$ independent ⟹ $v_i$ independent" from scratch using contrapositive of dependence, instead of just citing the decomposition rule.
 
-**Fix**: Before every theorem application, explicitly check: "Does $A$ satisfy the hypothesis?"
+**Fix**: The whole point of composition/decomposition is that exercises become **one-line proofs**. Recognize the pattern: $A \cdot (v_1|\cdots|v_k)$, decomposition rule, done.
 
 ---
 
 ## Questions to Check Understanding
 
-1. **Composition**: "If $A$ is $3 \times 2$ with rank 2 and $B$ is $2 \times 4$ with rank 2, is $AB$ left cancelable?"
-   - Expected answer: Yes (both are left cancelable, so composition is left cancelable)
+1. **Decomposition**: "If $AB$ is right cancelable, which factor must be right cancelable?"
+   - Expected: $A$ (the **left** factor)
 
-2. **Factorization**: "If $AB$ is right cancelable, which of $A$ or $B$ must be right cancelable?"
-   - Expected answer: $A$ must be right cancelable (left factor inherits right cancelable property)
+2. **Contrapositive**: "If $B$ is $4 \times 7$, can $AB$ be left cancelable for any $A$?"
+   - Expected: No — rank$(B) \leq 4 < 7$ columns, so $B$ not left cancelable. Contrapositive: $AB$ not left cancelable.
 
-3. **Linear independence**: "I know $Av_1, Av_2$ are linearly dependent. Can I conclude anything about $v_1, v_2$?"
-   - Expected answer: No direct conclusion. But if $v_1, v_2$ were independent and $A$ were left cancelable, we'd have a contradiction. So either $v_1, v_2$ are dependent OR $A$ is not left cancelable.
+3. **Independence**: "$Av_1, Av_2$ are linearly independent. Are $v_1, v_2$ independent? Do I need any condition on $A$?"
+   - Expected: Yes, by decomposition rule (no condition on $A$ needed).
+
+4. **Spanning**: "Vectors $w_1, w_2, w_3$ are linear combinations of $v_1, v_2 \in \mathbb{R}^3$ and span $\mathbb{R}^3$. Do $v_1, v_2$ span $\mathbb{R}^3$?"
+   - Expected: Right decomposition says $V = (v_1|v_2)$ is right cancelable, meaning rank$(V) = 3$. But $V$ is $3 \times 2$, so rank $\leq 2 < 3$. **Contradiction** — the hypothesis is impossible! Two vectors can never have linear combinations spanning $\mathbb{R}^3$.
 
 ---
 
 ## Materials to Prepare
 
-- [ ] Summary table of composition properties (left vs right cancelable)
-- [ ] Summary table of factorization properties (which factor inherits cancelability)
-- [ ] Pre-worked Example 3.1 (with explicit matrix computations)
+- [ ] Summary table: composition and decomposition rules (left AND right)
+- [ ] Arrow diagram showing which factor inherits cancelability
+- [ ] Pre-worked Example 3.2 (equivalence for independence)
+- [ ] Pre-worked Example 4.1 (spanning from decomposition)
 - [ ] Practice problem handout (Problem Sets A, B, C)
 
 ---
 
 ## Connections to Future Material
 
-- **Fundamental Theorem of Linear Maps** will formalize "injective maps preserve independence, surjective maps preserve spanning"
 - **Rank-nullity theorem** will connect rank to kernel dimension
-- **Change of basis** will use these properties to show basis vectors map to basis vectors under invertible transformations
+- **Four fundamental subspaces** will use row/column independence systematically
+- **Change of basis**: invertible matrices are both left and right cancelable → independence and spanning both preserved
 
 ---
 
