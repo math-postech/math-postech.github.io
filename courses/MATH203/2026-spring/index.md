@@ -118,7 +118,7 @@ The textbook is only for the reference, we will follow our lecture notes in this
 
 | Week | Dates (Mon–Thu) | Topics | Content |
 |------|-----------------|--------|---------|
-| **Week 9** | 04-20 -- 04-23 | **Ch3 §3.5–3.7**: Constructing Projections | Oblique projection construction: P=B(AB)⁻¹A. Orthogonal projection: P=B(BᵀB)⁻¹Bᵀ. Least squares. Diagonal cross-filling → UUᵀ. Orthogonal diagonalization. **HW3 assigned.** |
+| **Week 9** | 04-20 -- 04-23 | **Ch3 §3.5–3.7**: Constructing Projections | Uniqueness of projections. Oblique projection construction: P=B(AB)⁻¹A. Orthogonal projection: P=B(BᵀB)⁻¹Bᵀ. Inner diagonal cross-filling. Least squares. **HW3 assigned.** |
 | **Week 10** | 04-27 -- 04-30 | **Ch4 §4.1–4.3**: Determinants | Geometric motivation. Four axioms (multilinear, alternating, normalized). Laplace expansion, cofactors. Adjugate: A\*A=(det A)I. |
 | **Week 11** | 05-04 -- 05-07 | **Ch4 §4.4–4.5**: Det Properties & Cayley-Hamilton | det(AB)=det(A)det(B). Inverse formula, Cramer's rule. Annihilating polynomials. **Cayley-Hamilton theorem**: det(tI−A) annihilates A. *(05-05 Children's Day, does not affect Mon/Wed classes)* |
 | **Week 12** | 05-11 -- 05-14 | **Ch5 §5.1–5.2**: Eigenvalues & Lagrange Interpolation | Characteristic polynomial, principal minors, eigenvalues. **Lagrange interpolation**: fᵢ(xⱼ)=δᵢⱼ. Value-table philosophy: g(A) depends only on g(λ₁),...,g(λₘ). **HW4 assigned.** |
@@ -175,8 +175,8 @@ Lecture notes are organized by topic and will be added throughout the semester.
 
 - [Lecture 7: Linear Transformation and Projection](./notes/linear-transformation-and-projection.md) — Linear transformations, projection operators ($P^2=P$), sunlight-floor geometric model, interchanging property ($\operatorname{Col}(P) = \operatorname{Null}(I-P)$), disjoint property, orthogonal projections ($P^2=P, P=P^T \Leftrightarrow \operatorname{Col}(P) \perp \operatorname{Null}(P)$)
 - [Lecture 8: Cross-Filling Projections](./notes/cross-filling-projections.md) — Cross-filling a projection produces rank-1 projections automatically, $P=UV$ implies $VU=I$, rank(P) = trace(P), rank-1 characterization (any two of {rank=1, trace=1, $P^2=P$} imply third), $UV=I$ forces square matrices, full rank $\Leftrightarrow$ invertible
-- [Lecture 9: Constructing Projections](./notes/constructing-projections.md) — Uniqueness theorem (projection determined by column and null space), bridge theorem from Lecture 6, construction formula $P = B(AB)^{-1}A$ where $\operatorname{Col}(B) = \operatorname{Col}(P)$ and $\operatorname{Null}(A) = \operatorname{Null}(P)$, AB invertible condition (geometric disjointness $\Leftrightarrow$ algebraic invertibility)
-- [Lecture 10: Orthogonal Projections](./notes/orthogonal-projections.md) — Inner product and orthogonality, orthogonal projections ($P^2=P=P^T$), geometric vs algebraic characterization (sunlight perpendicular to floor $\Leftrightarrow$ $P=P^T$), orthogonal projection formula $P=B(B^TB)^{-1}B^T$, diagonal cross-filling for orthonormal bases, inner diagonal cross-filling method (cross-fill $(B^TB)^{-1}$ for efficiency)
+- [Lecture 9: Compatible Projections](./notes/compatible-projections.md) — Compatible families ($P_iP_j=0$), projection decomposition theorem (rank condition $\Rightarrow$ automatic compatibility), cross-filling and inner cross-filling methods, diagonal cross-filling for orthogonal projections
+- [Lecture 10: Constructing Projections](./notes/constructing-projections.md) — Uniqueness theorem, construction formula $P = B(AB)^{-1}A$, orthogonal projection formula $P=B(B^TB)^{-1}B^T$, inner diagonal cross-filling, least squares
 
 ---
 
