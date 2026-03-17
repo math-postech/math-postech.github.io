@@ -1,6 +1,6 @@
 # Lecture 7: Linear Transformation and Projection
 
-> **Topics**: §4.1, §5.1 — Linear Transformations, Projection Operators (P²=P), Sunlight-Floor Model, Column Space and Null Space of Projections
+> **Topics**: §4.1, §5.1 — Linear Transformations, Projection Operators (P²=P), Sunlight-Floor Model, Orthogonal Projections (P=P^T)
 > **Date**: Mar 30 – Apr 2, 2026
 
 ---
@@ -385,7 +385,133 @@ A non-zero vector cannot simultaneously be on the floor and point toward the sun
 
 ---
 
-## 4. Summary
+## 4. Orthogonal Projections
+
+In Lecture 6, we discovered that for any matrix $A$:
+
+$$\operatorname{Col}(A^T) \perp \operatorname{Null}(A)$$
+
+where $\mathbf{u} \perp \mathbf{v}$ means $\mathbf{u}^T \mathbf{v} = 0$. This orthogonality relationship is a fundamental feature of the four subspaces.
+
+A natural question arises in the sunlight-floor model: **Can the sunlight shine perpendicular to the floor?**
+
+### 4.1 Definition
+
+::: definition
+**Orthogonal Projection**
+
+A projection $P$ (satisfying $P^2 = P$) is called an **orthogonal projection** if the floor and the sunlight direction are perpendicular:
+
+$$\operatorname{Col}(P) \perp \operatorname{Null}(P)$$
+
+That is, $\mathbf{v}^T \mathbf{w} = 0$ for every $\mathbf{v} \in \operatorname{Col}(P)$ and $\mathbf{w} \in \operatorname{Null}(P)$.
+:::
+
+### 4.2 Orthogonal vs Oblique: Same Floor, Different Sunlight
+
+::: example
+**Example 4.1: Two Projections onto the Line $y = x$**
+
+Consider the line $W = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 1 \end{pmatrix}\right\}$ in $\mathbb{R}^2$. We construct two projections onto this same floor.
+
+**Orthogonal projection**: $P_1 = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$
+
+Verify: $P_1^2 = \frac{1}{4}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} = \frac{1}{4}\begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} = P_1$ ✓
+
+- $\operatorname{Col}(P_1) = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 1 \end{pmatrix}\right\}$ (the line $y = x$)
+- $\operatorname{Null}(P_1) = \operatorname{span}\left\{\begin{pmatrix} 1 \\ -1 \end{pmatrix}\right\}$ (the line $y = -x$)
+- $\begin{pmatrix} 1 \\ 1 \end{pmatrix}^T \begin{pmatrix} 1 \\ -1 \end{pmatrix} = 1 - 1 = 0$ ✓ **Sunlight perpendicular to floor!**
+- Also note: $P_1 = P_1^T$ ✓
+
+**Oblique projection**: $P_2 = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$
+
+Verify: $P_2^2 = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_2$ ✓
+
+- $\operatorname{Col}(P_2) = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 1 \end{pmatrix}\right\}$ (same floor!)
+- $\operatorname{Null}(P_2) = \operatorname{span}\left\{\begin{pmatrix} 0 \\ 1 \end{pmatrix}\right\}$ (sunlight from a different direction)
+- $\begin{pmatrix} 1 \\ 1 \end{pmatrix}^T \begin{pmatrix} 0 \\ 1 \end{pmatrix} = 0 + 1 = 1 \neq 0$ ✗ **Not perpendicular!**
+- Also note: $P_2 \neq P_2^T$ ✗
+
+Both projections land on the same floor, but the sunlight direction differs. Only $P_1$ has perpendicular sunlight.
+:::
+
+### 4.3 The Characterization Theorem
+
+How do we check whether a projection is orthogonal? Testing all pairs of vectors in $\operatorname{Col}(P)$ and $\operatorname{Null}(P)$ seems hopeless. The following theorem gives a single, elegant algebraic test.
+
+::: proposition
+**Theorem 4.1 (Orthogonal Projection ↔ Symmetry)**
+
+Let $P$ be a projection ($P^2 = P$). The following are equivalent:
+
+1. **Geometric condition**: $\operatorname{Col}(P) \perp \operatorname{Null}(P)$
+2. **Algebraic condition**: $P = P^T$
+:::
+
+**Proof**:
+
+**(2 $\implies$ 1): Symmetry implies perpendicularity**
+
+Assume $P = P^T$. Take any $\mathbf{v} \in \operatorname{Col}(P)$ and $\mathbf{w} \in \operatorname{Null}(P)$.
+
+By Proposition 3.1: $P\mathbf{v} = \mathbf{v}$.
+
+By the interchanging property (Proposition 3.3): $\mathbf{w} \in \operatorname{Null}(P) = \operatorname{Col}(I - P)$, so $\mathbf{w} = (I - P)\mathbf{u}$ for some $\mathbf{u}$.
+
+Compute:
+$$\mathbf{v}^T \mathbf{w} = (P\mathbf{v})^T (I - P)\mathbf{u} = \mathbf{v}^T P^T(I - P)\mathbf{u}$$
+
+Since $P^T = P$:
+
+$$= \mathbf{v}^T P(I - P)\mathbf{u} = \mathbf{v}^T (P - P^2)\mathbf{u} = \mathbf{v}^T \cdot \mathbf{0} = 0$$
+
+Therefore $\operatorname{Col}(P) \perp \operatorname{Null}(P)$. ✓
+
+**(1 $\implies$ 2): Perpendicularity implies symmetry**
+
+Assume $\operatorname{Col}(P) \perp \operatorname{Null}(P)$.
+
+For any standard basis vectors $\mathbf{e}_i$ and $\mathbf{e}_j$:
+- $P\mathbf{e}_i \in \operatorname{Col}(P)$
+- $(I - P)\mathbf{e}_j \in \operatorname{Null}(P)$ (by the interchanging property)
+
+By the orthogonality assumption:
+
+$$(P\mathbf{e}_i)^T (I - P)\mathbf{e}_j = 0$$
+
+The left side is the $(i,j)$-entry of the matrix $P^T(I - P)$. Since this holds for all $i, j$:
+
+$$P^T(I - P) = 0 \quad \Longrightarrow \quad P^T = P^T P$$
+
+Taking the transpose of both sides:
+
+$$P = (P^T P)^T = P^T P$$
+
+Therefore $P = P^T P = P^T$. ∎
+
+::: success
+**Orthogonal Projection: Two Algebraic Conditions**
+
+An orthogonal projection is completely characterized by:
+
+$$P^2 = P \quad \text{and} \quad P = P^T$$
+
+The geometry of "sunlight perpendicular to floor" is captured algebraically by **matrix symmetry**.
+:::
+
+::: remark
+**Why This Characterization Is Powerful**
+
+To check $P = P^T$, we simply compare entries: $p_{ij} = p_{ji}$. No need to compute column spaces, null spaces, or inner products.
+
+In later lectures, this characterization will lead to an explicit construction formula for the orthogonal projection onto $\operatorname{Col}(B)$:
+
+$$P = B(B^T B)^{-1} B^T$$
+:::
+
+---
+
+## 5. Summary
 
 ::: success
 **Key Concepts from This Lecture**
@@ -399,27 +525,27 @@ A non-zero vector cannot simultaneously be on the floor and point toward the sun
    - $\operatorname{Col}(P)$ = the floor (where shadows land)
    - $\operatorname{Null}(P)$ = direction of sunlight
 
-3. **$I - P$ is also a projection**
-   - Measures displacement from floor
+3. **Basic Properties**:
+   - $I - P$ is also a projection (measures displacement from floor)
+   - $\mathbf{y} \in \operatorname{Col}(P) \iff P\mathbf{y} = \mathbf{y}$ (floor membership test)
+   - $\operatorname{Col}(P) = \operatorname{Null}(I - P)$ (interchanging property)
+   - $\operatorname{Col}(P) \cap \operatorname{Null}(P) = \{\mathbf{0}\}$ (disjoint property)
 
-4. **Column Space Characterization**: $\mathbf{y} \in \operatorname{Col}(P) \iff P\mathbf{y} = \mathbf{y}$
-
-5. **Interchanging Property**: $\operatorname{Col}(P) = \operatorname{Null}(I - P)$ and vice versa
-
-6. **Disjoint Property**: $\operatorname{Col}(P) \cap \operatorname{Null}(P) = \{\mathbf{0}\}$
+4. **Orthogonal Projection**: $P^2 = P$ and $P = P^T$
+   - Sunlight perpendicular to floor
+   - Geometric orthogonality $\iff$ algebraic symmetry
 :::
 
 ### Looking Ahead to Lecture 8
 
-In **Lecture 8**, we will discover something remarkable about projections:
+In **Lecture 8**, we apply **cross-filling** to projection matrices and discover something remarkable:
 
-When you apply **cross-filling** to a projection $P = UV$, you automatically get $VU = I$!
+When you decompose a projection $P = R_1 + R_2 + \cdots + R_r$ into rank-one pieces, **each $R_i$ is automatically a projection too!**
 
 This will lead to:
-- Decomposition into rank-one projections: $P = R_1 + \cdots + R_m$
-- The crucial identity: $\operatorname{rank}(P) = \operatorname{trace}(P)$ (true ONLY for projections!)
-- Compatible families of projections
-- Spectral decomposition preview
+- The fundamental identity $\operatorname{rank}(P) = \operatorname{trace}(P)$ — true **only** for projections
+- A criterion: when a product of matrices equals $I$, the factors must be square and invertible
+- A proof that **full-rank square matrices are always invertible**
 
 ---
 
@@ -486,4 +612,30 @@ Fill in the blanks so that the following matrix is a projection:
 $$P = \begin{pmatrix} 0.5 & \square \\ 0.5 & \square \end{pmatrix}$$
 
 Verify your answer by checking $P^2 = P$.
+:::
+
+::: problem
+**Exercise 6: Orthogonal vs Oblique**
+
+(a) The following matrix is a projection (verify!):
+$$P = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$$
+Is $P$ an orthogonal projection? Check both $P^2 = P$ and $P = P^T$.
+
+(b) The following matrix is also a projection (verify!):
+$$Q = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$$
+Is $Q$ an orthogonal projection?
+
+(c) Find $\operatorname{Col}(P)$ and $\operatorname{Col}(Q)$. What do you notice?
+
+(d) Find $\operatorname{Null}(P)$ and $\operatorname{Null}(Q)$. For which projection is the null space perpendicular to the column space?
+:::
+
+::: problem
+**Exercise 7: Orthogonal Projection in $\mathbb{R}^3$**
+
+Let $P = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}$ (from Exercise 2).
+
+(a) Is $P$ an orthogonal projection? (Check $P = P^T$.)
+
+(b) Find a vector $\mathbf{v} \in \operatorname{Col}(P)$ and a vector $\mathbf{w} \in \operatorname{Null}(P)$ such that $\mathbf{v}^T \mathbf{w} \neq 0$. This confirms geometrically that $P$ is not orthogonal.
 :::
