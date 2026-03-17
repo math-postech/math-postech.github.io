@@ -57,31 +57,28 @@ Our learning path follows a logical progression from classical foundations to mo
   - Lattices (for $\text{GL}_n$, explicit)
 - ind-scheme structure
 - $G((t))$-action and $G[[t]]$-equivariance
-- Visualization: Points as lattices deforming
+- **Examples:**
+  - $\text{GL}_n$ case: lattice chains, explicit description
+  - $\text{SL}_2$ case: complete worked example
 
-*References: [Zhu (2016)](#zhu-intro) §2, [Fang](#fang) §2, [Baumann-Riche](#baumann-riche) §1*
+*References: [Zhu (2016)](#zhu-intro) §2, [Fang](#fang) §2-3, [Baumann-Riche](#baumann-riche) §1*
 
-**Talk 4: Schubert Stratification**
+**Talk 4: Schubert Stratification and Convolution**
 - Affine Weyl group $W_{\text{aff}} = X_*(T) \rtimes W$
 - Schubert cells: $\text{Gr}_\lambda$ indexed by $\lambda \in X_*(T)^+$
 - Closure relations and dimensions
 - Convolution diagram: $\text{Gr}_G \times^{G[[t]]} \text{Gr}_G \to \text{Gr}_G$
 - Commutativity constraint
+- **Additional structures:**
+  - Based loop group and based affine Grassmannian
+  - Relation to affine flag variety
+  - Explicit computations in key examples
 
-*References: [Zhu (2016)](#zhu-intro) §3, [Baumann-Riche](#baumann-riche) §2-3, [Mirkovic-Vilonen](#mv)*
-
-**Talk 5: Examples and Geometry**
-- $\text{SL}_2$ case: explicit description
-- $\text{GL}_n$ case: lattice chains, determinant line bundle
-- Based loop group and based affine Grassmannian
-- Relation to affine flag variety
-- Key examples without excessive computation
-
-*References: [Zhu (2016)](#zhu-intro) §2.3-2.4, [Fang](#fang) §3*
+*References: [Zhu (2016)](#zhu-intro) §2.3-2.4, §3, [Baumann-Riche](#baumann-riche) §2-3, [Mirkovic-Vilonen](#mv)*
 
 ### Part III: Perverse Sheaves (Weeks 6-7)
 
-**Talk 6: Perverse Sheaves**
+**Talk 5: Perverse Sheaves**
 - Derived categories: $D^b_c(X, k)$
 - t-structures and hearts
 - Perverse sheaves = $\text{Perv}(X, k)$
@@ -90,7 +87,7 @@ Our learning path follows a logical progression from classical foundations to mo
 
 *References: [Baumann-Riche](#baumann-riche) Appendix A, BBD: Faisceaux pervers, de Cataldo-Migliorini*
 
-**Talk 7: Convolution of Perverse Sheaves**
+**Talk 6: Convolution of Perverse Sheaves**
 - Category $\text{Perv}_{G[[t]]}(\text{Gr}_G, k)$: $G[[t]]$-equivariant perverse sheaves
 - Convolution product via correspondence
 - Associativity and commutativity constraint
@@ -101,7 +98,7 @@ Our learning path follows a logical progression from classical foundations to mo
 
 ### Part IV: Geometric Satake Equivalence (Weeks 8-10)
 
-**Talk 8: Statement and Tannakian Formalism**
+**Talk 7: Statement and Tannakian Formalism**
 - Main theorem: Functor $\text{Rep}(G^\vee_k) \to \text{Perv}_{G[[t]]}(\text{Gr}_G, k)$ is an equivalence of symmetric monoidal categories
 - Tannakian reconstruction: neutral monoidal category → $\text{Rep}(G)$
 - Strategy:
@@ -111,7 +108,7 @@ Our learning path follows a logical progression from classical foundations to mo
 
 *References: [Baumann-Riche](#baumann-riche) §6, [Deligne-Milne](#deligne-milne), [Zhu (2016)](#zhu-intro) §4*
 
-**Talk 9: Proof Part I - Neutrality**
+**Talk 8: Proof Part I - Neutrality**
 - Fiber functor construction
 - Key technical inputs:
   - Cohomology vanishing theorems
@@ -121,7 +118,7 @@ Our learning path follows a logical progression from classical foundations to mo
 
 *References: [Baumann-Riche](#baumann-riche) §7-8, [Mirkovic-Vilonen](#mv)*
 
-**Talk 10: Proof Part II - Identifying the Dual Group**
+**Talk 9: Proof Part II - Identifying the Dual Group**
 - Computing weight spaces
 - Relating to representations of $G^\vee$
 - Verification of commutativity constraint (crucial diagram chase)
@@ -132,7 +129,7 @@ Our learning path follows a logical progression from classical foundations to mo
 
 ### Part V: Extensions and Applications (Weeks 11-12)
 
-**Talk 11: Beyond Complex Coefficients**
+**Talk 10: Beyond Complex Coefficients**
 - Geometric Satake for p-adic groups
 - Mixed characteristic case
 - Affine Grassmannians for group schemes
@@ -141,7 +138,7 @@ Our learning path follows a logical progression from classical foundations to mo
 
 *References: [Zhu (2018)](#zhu-categorical) §2-3, [Zhu-Pappas](#zhu-pappas), Richarz*
 
-**Talk 12: Categorical Traces and Towards Categorical Langlands**
+**Talk 11: Categorical Traces and Towards Categorical Langlands**
 - What are categorical traces?
 - Application to Shimura varieties: Kottwitz conjecture, stabilization
 - From geometric Satake to geometric Langlands
