@@ -1,120 +1,143 @@
-# Lecture 8: Decomposition of Projections
+# Lecture 8: Cross-Filling Projections
 
-> **Topics**: §5.2–5.3 — Decomposition P=UV, VU=I Automatic, rank(P)=trace(P), Projection Splitting
+> **Topics**: §3.2–3.3 — Cross-Filling Decomposition of Projections, VU = I Property, rank(P) = trace(P), Rank-1 Projection Characterization, Full-Rank Invertibility
 > **Date**: Apr 6 – Apr 9, 2026
 
 ---
 
 ## Introduction
 
-In Lecture 7, we introduced projection operators through the **sunlight-floor model** and proved key properties from the defining equation $P^2 = P$. We discovered that:
-- $\operatorname{Col}(P) = \{\mathbf{v} : P\mathbf{v} = \mathbf{v}\}$ (vectors on the floor)
-- $\operatorname{Null}(P) = \{\mathbf{v} : P\mathbf{v} = \mathbf{0}\}$ (vectors pointing to the sun)
-- $\operatorname{Col}(P) \cap \operatorname{Null}(P) = \{\mathbf{0}\}$ (floor and sunlight are not parallel)
+In Lecture 7, we introduced projections through the sunlight-floor model and proved basic properties from $P^2 = P$. We also characterized orthogonal projections by the symmetry condition $P = P^T$.
 
-But we still have two fundamental questions unanswered:
+Now we explore the **internal structure** of projections.
 
 ::: question
-**Two Natural Questions**
+**What Makes Projections Special?**
 
-1. **How to construct projections?** Given a floor and a sunlight direction, how do we write down the matrix $P$?
+Any matrix can be cross-filled: $A = R_1 + R_2 + \cdots + R_r$ (sum of rank-1 pieces). For a general matrix, the pieces $R_i$ are just arbitrary rank-1 matrices.
 
-2. **What makes projections special?** We know from Chapter 1 that any matrix can be written as $A = UV$ via cross-filling. What happens when we cross-fill a projection?
+What happens when we cross-fill a **projection**?
 :::
-
-This lecture answers the second question. We will discover that **decomposing projections reveals magical properties** that do not hold for general matrices.
 
 ---
 
-## 1. Decomposing Projections into Products
+## 1. The Remarkable Discovery
 
-### 1.1 Review: Decomposing Any Matrix
+### 1.1 Review: Two Forms of Cross-Filling
 
-Recall from Lecture 3 that any matrix $A$ can be decomposed into a sum of rank-1 matrices:
+Recall from Lecture 3 that cross-filling decomposes any matrix into:
 
-$$A = R_1 + R_2 + \cdots + R_r$$
+**Sum form**: $A = R_1 + R_2 + \cdots + R_r$ where each $R_i$ has rank 1 and $r = \operatorname{rank}(A)$.
 
-where $r = \operatorname{rank}(A)$. We can collect these rank-1 pieces into a product form:
+**Product form**: $A = UV$ where $U$ is $m \times r$ (columns of $U$ are the column parts of each $R_i$), $V$ is $r \times n$ (rows of $V$ are the row parts of each $R_i$).
 
-$$A = UV$$
+The two forms are related: $R_i = \mathbf{u}_i \mathbf{v}_i^T$ where $\mathbf{u}_i$ is column $i$ of $U$ and $\mathbf{v}_i^T$ is row $i$ of $V$.
 
-where:
-- $U$ is an $m \times r$ matrix whose columns are the "left parts" of each $R_i$
-- $V$ is an $r \times n$ matrix whose rows are the "right parts" of each $R_i$
+### 1.2 Cross-Filling a General Matrix
 
 ::: example
-**Example 1.1: Decomposing a General Matrix**
+**Example 1.1: A Non-Projection Matrix**
 
-$$A = \begin{pmatrix} 2 & 4 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 2 \end{pmatrix}$$
+$$A = \begin{pmatrix} 2 & 4 \\ 1 & 2 \end{pmatrix}$$
 
-Here $U = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$ (one column) and $V = \begin{pmatrix} 1 & 2 \end{pmatrix}$ (one row).
+This has rank 1. Cross-filling gives:
 
-We can verify: $UV = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 2 \end{pmatrix} = \begin{pmatrix} 2 & 4 \\ 1 & 2 \end{pmatrix} = A$. ✓
+$$A = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 2 \end{pmatrix} = UV$$
 
-But what about $VU$?
+So $U = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$ and $V = \begin{pmatrix} 1 & 2 \end{pmatrix}$.
 
-$$VU = \begin{pmatrix} 1 & 2 \end{pmatrix}\begin{pmatrix} 2 \\ 1 \end{pmatrix} = 1 \cdot 2 + 2 \cdot 1 = 4 \neq I$$
+Compute $VU$:
 
-For general matrices, **$VU$ is just some number or matrix** — nothing special.
+$$VU = \begin{pmatrix} 1 & 2 \end{pmatrix}\begin{pmatrix} 2 \\ 1 \end{pmatrix} = 4$$
+
+Note: $VU = 4 \neq 1 = I_1$. Also, $A^2 = \begin{pmatrix} 8 & 16 \\ 4 & 8 \end{pmatrix} \neq A$.
+
+For general matrices, **$VU$ is just some number or matrix — nothing special**.
 :::
 
-### 1.2 What Happens When We Cross-Fill a Projection?
+### 1.3 Cross-Filling a Projection
 
-Now let's try the same process with a **projection matrix**.
+Now let's try the same process with **projection matrices**.
 
 ::: example
-**Example 1.2: Decomposing a Projection**
+**Example 1.2: A Rank-1 Projection**
 
-Consider the projection onto the $x$-axis:
+$$P = \frac{1}{5}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$$
 
-$$P = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$$
+Verify: $P^2 = \frac{1}{25}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix} = \frac{1}{25}\begin{pmatrix} 5 & 10 \\ 10 & 20 \end{pmatrix} = \frac{1}{5}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix} = P$ ✓
 
-Verify it's a projection: $P^2 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} = P$. ✓
+Cross-filling at pivot $(1,1)$ with value $\frac{1}{5}$:
 
-Cross-fill it:
+$$P = \begin{pmatrix} 1 \\ 2 \end{pmatrix} \cdot \frac{1}{5} \cdot \begin{pmatrix} 1 & 2 \end{pmatrix} = UV$$
 
-$$P = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \end{pmatrix}$$
+So $U = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$ and $V = \frac{1}{5}\begin{pmatrix} 1 & 2 \end{pmatrix}$.
 
-So $U = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $V = \begin{pmatrix} 1 & 0 \end{pmatrix}$.
+Compute $VU$:
 
-Now compute $VU$:
-
-$$VU = \begin{pmatrix} 1 & 0 \end{pmatrix}\begin{pmatrix} 1 \\ 0 \end{pmatrix} = 1 = I_1$$
+$$VU = \frac{1}{5}\begin{pmatrix} 1 & 2 \end{pmatrix}\begin{pmatrix} 1 \\ 2 \end{pmatrix} = \frac{1}{5}(1 + 4) = 1 = I_1$$
 
 **Remarkable!** For this projection, $VU = I$.
+
+Also notice: $\operatorname{rank}(P) = 1$ and $\operatorname{trace}(P) = \frac{1}{5}(1 + 4) = 1$. So $\operatorname{rank}(P) = \operatorname{trace}(P)$.
 :::
 
-Is this just a coincidence, or does it always happen?
+Is this just a coincidence? Let's try a higher-rank example.
 
 ::: example
-**Example 1.3: Another Projection**
+**Example 1.3: A Rank-2 Projection**
 
-Consider the projection onto the line $y = x$:
+$$P = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}$$
 
-$$P = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$$
+Verify: $P^2 = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}\begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix} = P$ ✓
 
-Verify: $P^2 = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} \cdot \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} = \frac{1}{4}\begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} = P$. ✓
+This has $\operatorname{rank}(P) = 2$. Cross-fill at pivot $(2,2)$ with value $1$:
 
-Cross-fill it:
+$$R_1 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}\begin{pmatrix} -1 & 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}$$
 
-$$P = \frac{1}{2}\begin{pmatrix} 1 \\ 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \end{pmatrix}$$
+Remainder: $P - R_1 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix}$. Cross-fill at pivot $(3,3)$:
 
-So $U = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}$ and $V = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \end{pmatrix}$ (we can scale to normalize).
+$$R_2 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\begin{pmatrix} -1 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix}$$
 
-Actually, let's just take $U = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$ and $V = \frac{1}{2}\begin{pmatrix} 1 & 1 \end{pmatrix}$.
+**Check: Are the rank-1 pieces projections?**
 
-Then:
+$$R_1^2 = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}\begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} = R_1 \quad ✓$$
 
-$$VU = \frac{1}{2}\begin{pmatrix} 1 & 1 \end{pmatrix}\begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{1}{2}(1 + 1) = 1 = I_1$$
+$$R_2^2 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix}\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix} = R_2 \quad ✓$$
 
-Again, $VU = I$!
+**Check: Are they mutually annihilating?**
+
+$$R_1 R_2 = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} \quad ✓$$
+
+**Check: Product form and $VU$.**
+
+$$U = \begin{pmatrix} 0 & 0 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad V = \begin{pmatrix} -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}$$
+
+$$VU = \begin{pmatrix} -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}\begin{pmatrix} 0 & 0 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I_2 \quad ✓$$
+
+Again: $VU = I$ and every summand is a projection!
+
+Also: $\operatorname{trace}(P) = 0 + 1 + 1 = 2 = \operatorname{rank}(P)$.
 :::
 
-This pattern suggests a deep theorem.
+### 1.4 The Pattern
+
+::: attention
+**The Discovery**
+
+When we cross-fill a projection $P = R_1 + R_2 + \cdots + R_r$:
+
+1. **Every rank-1 piece is automatically a projection**: $R_i^2 = R_i$ for all $i$
+2. **All pieces are mutually annihilating**: $R_i R_j = 0$ for $i \neq j$
+3. **Rank equals trace**: $\operatorname{rank}(P) = \operatorname{trace}(P)$
+
+None of this happens for general matrices. The equation $P^2 = P$ forces extraordinary structure.
+:::
+
+Why does this happen? The key is hidden in the product form.
 
 ---
 
-## 2. Decomposition and the VU = I Property
+## 2. The Proof Mechanism: $P = UV$ Implies $VU = I$
 
 ### 2.1 Statement
 
@@ -122,51 +145,85 @@ This pattern suggests a deep theorem.
 **Theorem 2.1 (VU = I Automatic)**
 
 Let $P$ be a projection ($P^2 = P$). Suppose $P = UV$ where:
-- $U$ is $m \times r$ with full column rank (rank $r$)
+- $U$ is $n \times r$ with full column rank (rank $r$)
 - $V$ is $r \times n$ with full row rank (rank $r$)
 
-Then **$VU = I_r$ automatically**.
+Then $VU = I_r$ **automatically**.
 :::
 
 ::: remark
-**Why Is This Remarkable?**
+**Role of This Theorem**
 
-For a general matrix $A = UV$, the product $VU$ can be anything:
-- It might not even be square (if $U$ and $V$ have different numbers of columns/rows)
-- Even if square, it's typically not the identity
-
-But for projections, **$P^2 = P$ forces $VU = I$ automatically** — no additional conditions needed!
+This is **not** the discovery — it is the **proof mechanism** that explains the discovery. We need $VU = I$ as a tool to prove that cross-filling projections produces rank-1 projections.
 :::
 
 ### 2.2 Proof
 
-The proof uses only the defining property $P^2 = P$ and basic matrix algebra.
-
-**Given**: $P = UV$ and $P^2 = P$.
+The proof uses only $P^2 = P$ and the cancellation properties from Lecture 4.
 
 **Step 1**: Expand $P^2 = P$ using $P = UV$:
 
 $$UVUV = UV$$
 
-**Step 2**: Apply left cancellation to $U$.
+**Step 2**: Left-cancel $U$.
 
-Since $U$ has rank $r$ (full column rank), its columns are linearly independent. From Lecture 4, we know linearly independent columns allow **left cancellation**:
+Since $U$ has full column rank, its columns are linearly independent. Therefore $U$ is left-cancelable:
 
 $$UVUV = UV \quad \Longrightarrow \quad VUV = V$$
 
-**Step 3**: Apply right cancellation to $V$.
+**Step 3**: Right-cancel $V$.
 
-Since $V$ has rank $r$ (full row rank), its rows are linearly independent, which allows **right cancellation**:
+Since $V$ has full row rank, its rows are linearly independent. Therefore $V$ is right-cancelable:
 
 $$VUV = V \quad \Longrightarrow \quad VU = I_r$$
 
 Done! ∎
 
+### 2.3 Completing the Proof of the Discovery
+
+Now we can explain **why** cross-filling a projection produces rank-1 projections.
+
+Write $P = UV$ with $VU = I_r$. The rank-1 pieces from cross-filling are:
+
+$$R_i = \mathbf{u}_i \mathbf{v}_i^T$$
+
+where $\mathbf{u}_i$ is column $i$ of $U$ and $\mathbf{v}_i^T$ is row $i$ of $V$.
+
+The condition $VU = I_r$ means:
+
+$$\mathbf{v}_i^T \mathbf{u}_j = \begin{cases} 1 & \text{if } i = j \\ 0 & \text{if } i \neq j \end{cases}$$
+
+This single fact proves everything:
+
+**Each $R_i$ is a projection**:
+
+$$R_i^2 = (\mathbf{u}_i \mathbf{v}_i^T)(\mathbf{u}_i \mathbf{v}_i^T) = \mathbf{u}_i (\mathbf{v}_i^T \mathbf{u}_i) \mathbf{v}_i^T = \mathbf{u}_i \cdot 1 \cdot \mathbf{v}_i^T = R_i \quad ✓$$
+
+**Pieces are mutually annihilating**:
+
+For $i \neq j$:
+
+$$R_i R_j = (\mathbf{u}_i \mathbf{v}_i^T)(\mathbf{u}_j \mathbf{v}_j^T) = \mathbf{u}_i (\mathbf{v}_i^T \mathbf{u}_j) \mathbf{v}_j^T = \mathbf{u}_i \cdot 0 \cdot \mathbf{v}_j^T = 0 \quad ✓$$
+
+::: remark
+**The Trace Connection**
+
+From $\mathbf{v}_i^T \mathbf{u}_i = 1$, we also get:
+
+$$\operatorname{trace}(R_i) = \operatorname{trace}(\mathbf{u}_i \mathbf{v}_i^T) = \mathbf{v}_i^T \mathbf{u}_i = 1$$
+
+Each rank-1 piece has trace exactly 1. Summing over all pieces:
+
+$$\operatorname{trace}(P) = \sum_{i=1}^r \operatorname{trace}(R_i) = r = \operatorname{rank}(P)$$
+
+This leads to the next major theorem.
+:::
+
 ---
 
 ## 3. Rank Equals Trace for Projections
 
-The automatic property $VU = I$ leads to a stunning consequence.
+### 3.1 The Theorem
 
 ::: proposition
 **Theorem 3.1 (Rank = Trace for Projections)**
@@ -186,526 +243,354 @@ $$\operatorname{trace}(P) = \operatorname{trace}(UV) = \operatorname{trace}(VU) 
 
 Done! ∎
 
+### 3.2 Why Only for Projections
+
 ::: remark
-**Why Doesn't This Work for General Matrices?**
+**This Identity Is Special to Projections**
 
-For a general matrix $A = UV$, we do NOT have $VU = I$.
+For a general matrix $A = UV$, we still have $\operatorname{trace}(A) = \operatorname{trace}(UV) = \operatorname{trace}(VU)$. But $VU$ is NOT the identity, so we cannot conclude $\operatorname{trace}(A) = \operatorname{rank}(A)$.
 
-Even though $\operatorname{trace}(A) = \operatorname{trace}(UV) = \operatorname{trace}(VU)$, the matrix $VU$ is NOT the identity, so we cannot conclude that $\operatorname{trace}(A) = \operatorname{rank}(A)$.
+Compare:
+- **Example 1.1** (not a projection): $A = \begin{pmatrix} 2 & 4 \\ 1 & 2 \end{pmatrix}$, $\operatorname{rank} = 1$, $\operatorname{trace} = 4$. Different!
+- **Example 1.2** (projection): $P = \frac{1}{5}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$, $\operatorname{rank} = 1$, $\operatorname{trace} = 1$. Equal!
 
-**This is why rank = trace is special to projections.**
+The identity $\operatorname{rank} = \operatorname{trace}$ is a **fingerprint** of projection matrices.
 :::
 
-### 3.1 Characterization of Rank-1 Projections
+This identity now opens up three important branches.
 
-For rank-1 projections, we have a beautiful characterization.
+---
+
+## 4. Three Consequences
+
+### 4.1 Rank-1 Projection Characterization
 
 ::: proposition
-**Corollary 3.2 (Rank-1 Projection Characterization)**
+**Corollary 4.1 (Rank-1 Projection Characterization)**
 
 For a square matrix $A$, consider the following three conditions:
 1. $\operatorname{rank}(A) = 1$
 2. $\operatorname{trace}(A) = 1$
-3. $A^2 = A$ (i.e., $A$ is a projection)
+3. $A^2 = A$ (projection)
 
 **If any two of these conditions hold, then all three hold.**
 :::
 
 **Proof**:
 
-We prove each of the three implications:
+**(1) + (2) $\implies$ (3)**: If $\operatorname{rank}(A) = 1$ and $\operatorname{trace}(A) = 1$.
 
-**(1) + (2) ⟹ (3)**: Suppose $\operatorname{rank}(A) = 1$ and $\operatorname{trace}(A) = 1$.
+Write $A = \mathbf{u}\mathbf{v}^T$ (rank 1). Then $\operatorname{trace}(A) = \mathbf{v}^T \mathbf{u} = 1$.
 
-Since rank is 1, we can write $A = \mathbf{u}\mathbf{v}^T$ for some vectors $\mathbf{u}, \mathbf{v}$.
+$$A^2 = (\mathbf{u}\mathbf{v}^T)(\mathbf{u}\mathbf{v}^T) = \mathbf{u}(\mathbf{v}^T \mathbf{u})\mathbf{v}^T = \mathbf{u} \cdot 1 \cdot \mathbf{v}^T = A \quad ✓$$
 
-The trace is:
-$$\operatorname{trace}(A) = \operatorname{trace}(\mathbf{u}\mathbf{v}^T) = \mathbf{v}^T \mathbf{u} = 1$$
+**(1) + (3) $\implies$ (2)**: If $\operatorname{rank}(A) = 1$ and $A^2 = A$.
 
-Now compute $A^2$:
-$$A^2 = (\mathbf{u}\mathbf{v}^T)(\mathbf{u}\mathbf{v}^T) = \mathbf{u}(\mathbf{v}^T \mathbf{u})\mathbf{v}^T = \mathbf{u} \cdot 1 \cdot \mathbf{v}^T = \mathbf{u}\mathbf{v}^T = A$$
+Write $A = UV$ with $U$ being $n \times 1$ and $V$ being $1 \times n$. By Theorem 2.1: $VU = I_1 = 1$.
 
-So $A$ is a projection. ✓
+$$\operatorname{trace}(A) = \operatorname{trace}(UV) = \operatorname{trace}(VU) = 1 \quad ✓$$
 
-**(1) + (3) ⟹ (2)**: Suppose $\operatorname{rank}(A) = 1$ and $A^2 = A$.
+**(2) + (3) $\implies$ (1)**: If $\operatorname{trace}(A) = 1$ and $A^2 = A$.
 
-Write $A = UV$ where $U$ is $n \times 1$ and $V$ is $1 \times n$ (since rank is 1).
-
-By Theorem 2.1, $VU = I_1$ (i.e., $VU = 1$, a scalar).
-
-Therefore:
-$$\operatorname{trace}(A) = \operatorname{trace}(UV) = \operatorname{trace}(VU) = \operatorname{trace}(1) = 1$$
-
-✓
-
-**(2) + (3) ⟹ (1)**: Suppose $\operatorname{trace}(A) = 1$ and $A^2 = A$.
-
-By Theorem 3.1, $\operatorname{rank}(A) = \operatorname{trace}(A) = 1$. ✓
+By Theorem 3.1: $\operatorname{rank}(A) = \operatorname{trace}(A) = 1$. ✓
 
 Done! ∎
 
 ::: remark
 **Why Is This Useful?**
 
-This characterization tells us that **rank-1 projections are exactly the matrices with rank 1 and trace 1**.
-
-We don't need to check $A^2 = A$ separately — the projection property comes for free from rank and trace!
-
-This will be crucial in Section 5 when we decompose projections into rank-1 pieces.
+To check whether a rank-1 matrix is a projection, we only need to compute its trace. If the trace is 1, the projection property $A^2 = A$ is **automatic**.
 :::
 
-### 3.2 When Are Both U and V Square?
+### 4.2 Key Lemma: $UV = I$ Forces Square Matrices
 
-An interesting question: if $UV = I$, when are both $U$ and $V$ square matrices?
+Here is a surprising rigidity result.
 
 ::: proposition
-**Corollary 3.3 (UV = I Forces Square Matrices)**
+**Corollary 4.2 ($UV = I$ Forces Square)**
 
 Suppose $U$ is $n \times r$ and $V$ is $r \times n$ with $UV = I_n$ and $r \leq n$.
 
-Then $n = r$, and **both $U$ and $V$ are square invertible matrices** with $VU = UV = I$.
+Then $r = n$, and both $U$ and $V$ are square invertible matrices with $VU = UV = I_n$.
 :::
 
 **Proof**:
 
-**Step 1**: Observe that $VU$ is a projection.
+**Step 1**: $VU$ is a projection.
 
-$$VU \cdot VU = V(UV)U = VI_nU = VU$$
+$$(VU)(VU) = V(UV)U = VI_nU = VU$$
 
 So $VU$ is an $r \times r$ projection.
 
-**Step 2**: Show that $I_r - VU$ is also a projection.
+**Step 2**: $I_r - VU$ is also a projection.
 
 $$(I_r - VU)^2 = I_r - 2VU + (VU)^2 = I_r - 2VU + VU = I_r - VU$$
 
 **Step 3**: Compute the trace.
 
-$$\operatorname{trace}(I_r - VU) = \operatorname{trace}(I_r) - \operatorname{trace}(VU) = r - \operatorname{trace}(VU)$$
-
-But $\operatorname{trace}(VU) = \operatorname{trace}(UV) = \operatorname{trace}(I_n) = n$.
-
-Therefore:
-
-$$\operatorname{trace}(I_r - VU) = r - n$$
+$$\operatorname{trace}(I_r - VU) = r - \operatorname{trace}(VU) = r - \operatorname{trace}(UV) = r - \operatorname{trace}(I_n) = r - n$$
 
 **Step 4**: Apply rank = trace.
 
 Since $I_r - VU$ is a projection, by Theorem 3.1:
 
-$$\operatorname{rank}(I_r - VU) = \operatorname{trace}(I_r - VU) = r - n$$
+$$\operatorname{rank}(I_r - VU) = r - n$$
+
+Since $\operatorname{rank} \geq 0$: $r \geq n$. Combined with $r \leq n$: $r = n$.
 
 **Step 5**: Conclude.
 
-Since rank $\geq 0$, we have $r - n \geq 0$, so $r \geq n$.
+With $r = n$: $\operatorname{rank}(I_r - VU) = 0$, so $I_r - VU = 0$, giving $VU = I_n$.
 
-Combined with the assumption $r \leq n$, we get $r = n$.
-
-Therefore $\operatorname{trace}(I_r - VU) = 0$, which means $\operatorname{rank}(I_r - VU) = 0$.
-
-A matrix with rank 0 is the zero matrix, so $I_r - VU = 0$.
-
-Hence $VU = I_r$. ∎
+Therefore both $U$ and $V$ are $n \times n$ with $UV = VU = I_n$. ∎
 
 ::: remark
-**Why Is This Surprising?**
+**Geometric Meaning**
 
-This says: **You cannot have $UV = I$ with $U$ thin and $V$ fat** (or vice versa).
-
-If the product is the identity, both matrices must be square and invertible, and the product commutes: $UV = VU = I$.
+You cannot have a "thin" matrix times a "fat" matrix equal the identity. If $UV = I$, both factors must be square and invertible. The identity matrix is too "rigid" to be factored into mismatched dimensions.
 :::
 
----
-
-### 3.3 Full-Rank Square Matrix is Invertible
-
-Corollary 3.3 establishes a key property of square matrices with one-sided inverses. We now use this result to prove the fundamental invertibility criterion.
+An important special case:
 
 ::: proposition
-**Proposition 3.4 (Full-Rank Square Matrix is Invertible)**
+**Proposition 4.3 (One-Sided Inverse $\implies$ Two-Sided for Square Matrices)**
 
-An $n \times n$ matrix $X$ is invertible if and only if $\operatorname{rank}(X) = n$ (full rank).
+If $F$ and $V$ are both $n \times n$ and $FV = I_n$, then $VF = I_n$.
+:::
+
+**Proof**: Apply Corollary 4.2 with $r = n$: from $FV = I_n$ (with $F$ being $n \times n$ and $V$ being $n \times n$), we get $VF = I_n$. ∎
+
+::: remark
+**Comparison with Lecture 1**
+
+In Lecture 1, we defined "invertible" by assuming both $AB = I$ and $BA = I$. Proposition 4.3 shows that **for square matrices, one equation suffices**:
+
+$$FV = I_n \quad \Longrightarrow \quad VF = I_n$$
+
+This is a strictly stronger result: we no longer need to assume the existence of a two-sided inverse.
+:::
+
+### 4.3 Full-Rank Square Matrix Is Invertible
+
+::: proposition
+**Theorem 4.4 (Full Rank $\iff$ Invertible)**
+
+An $n \times n$ matrix $X$ is invertible if and only if $\operatorname{rank}(X) = n$.
 :::
 
 **Proof**:
 
-**Direction** $(\Rightarrow)$: If $X$ is invertible, then $\operatorname{rank}(X) = n$.
+**$(\Longrightarrow)$ Invertible $\implies$ full rank**:
 
-Suppose $XY = I$ for some matrix $Y$. Note that $I$ is a projection ($I^2 = I$) with $\operatorname{rank}(I) = n$.
-
-By cross-filling (Lecture 3), decompose $X = R_1 + \cdots + R_k$ where each $R_i$ is rank-1 and $k = \operatorname{rank}(X)$. Then:
-$$(R_1 + \cdots + R_k)Y = I$$
-
-This gives $I = R_1 Y + \cdots + R_k Y$.
-
-Since $\operatorname{rank}(R_i Y) \leq \operatorname{rank}(R_i) = 1$ for each $i$, we have:
-$$\sum_{i=1}^k \operatorname{rank}(R_i Y) \leq \sum_{i=1}^k \operatorname{rank}(R_i) = k$$
-
-Since $k \leq n$ and $\operatorname{rank}(I) = n$, we can apply **Theorem 5.1 (part 3)**: if a projection $P$ can be written as $P = S_1 + \cdots + S_m$ with $\sum \operatorname{rank}(S_i) \leq \operatorname{rank}(P)$, then automatically $\sum \operatorname{rank}(S_i) = \operatorname{rank}(P)$.
-
-Therefore $\sum_{i=1}^k \operatorname{rank}(R_i Y) = \operatorname{rank}(I) = n$, which implies $k \geq n$.
-
-Since $k = \operatorname{rank}(X) \leq n$ (for an $n \times n$ matrix), we conclude $k = n$.
-
-**Direction** $(\Leftarrow)$: If $\operatorname{rank}(X) = n$, then $X$ is invertible.
-
-By cross-filling, $X = UV$ where $\operatorname{rank}(X) = n$.
-
-Since $X$ is $n \times n$ with rank $n$, the decomposition requires exactly $n$ rank-one pieces, so $U$ and $V$ must both be $n \times n$ square matrices.
-
-**Construct a one-sided inverse for $V$**:
-
-Consider the augmented matrix $(X \mid I_n)$ and apply cross-filling using the **same pivot selections** as used to decompose $X$:
-- Each pivot is selected from the $X$-part (not from $I_n$)
-- Each pivot clears its row and column
-
-Since all pivots are in $X$, the $X$-part decomposes exactly as before: $X = UV$. However, $I_n$ is affected by the same row operations—each time a pivot row is selected, the corresponding row of $I_n$ is "bombarded" and transformed.
-
-Since $\operatorname{rank}(X) = n$, we select $n$ pivots covering all $n$ rows. Therefore $I_n$ is completely "bombarded" through all rows, transforming into some matrix $F$.
-
-The cross-filling structure gives:
-$$(X \mid I_n) = (U \mid F)V$$
-
-Comparing both sides:
-- Left part: $X = UV$ ✓
-- Right part: $I_n = FV$
-
-Therefore $FV = I_n$. Since $V$ is square, by **Corollary 3.3** (if $FV = I$ for square matrices, then $VF = I$), we have $V$ invertible.
-
-**Construct a one-sided inverse for $U$**:
-
-Similarly, consider $\begin{pmatrix} X \\ I_n \end{pmatrix}$ and apply cross-filling using **column selections** (all pivots selected from $X$-part). Since $\operatorname{rank}(X) = n$ (equal to the number of columns), all $n$ columns are covered, so $I_n$ is completely bombarded through all columns, giving:
-$$\begin{pmatrix} X \\ I_n \end{pmatrix} = U\begin{pmatrix} V \\ G \end{pmatrix}$$
-
-Thus $I_n = UG$. By **Corollary 3.3**, $U$ is invertible.
-
-**Conclusion**: $X = UV$ with both $U, V$ invertible, so $X$ is invertible. □
-
-::: remark
-**Key Insight from Cross-Filling**
-
-This proof shows that when $\operatorname{rank}(X) = n$ (full rank), the cross-filling decomposition $X = UV$ automatically produces **invertible** factors $U$ and $V$.
-
-The augmented matrix technique simultaneously reveals one-sided inverses:
-- $(X \mid I) = (U \mid F)V$ gives $FV = I$, so $F = V^{-1}$
-- $\begin{pmatrix} X \\ I \end{pmatrix} = U\begin{pmatrix} V \\ G \end{pmatrix}$ gives $UG = I$, so $G = U^{-1}$
-
-This connects to the standard method of finding $X^{-1}$ by row-reducing $(X \mid I) \to (I \mid X^{-1})$.
-:::
-
----
-
-## 4. Compatible Families of Projections
-
-Now we explore what happens when we have **multiple projections that add up to the identity**.
-
-### 4.1 Definition
-
-::: definition
-**Compatible Family of Projections**
-
-A collection of projection matrices $\{P_1, P_2, \ldots, P_k\}$ (each satisfying $P_i^2 = P_i$) is called a **compatible family** if:
-
-$$P_1 + P_2 + \cdots + P_k = I$$
-
-and
-
-$$P_i P_j = 0 \quad \text{for all } i \neq j$$
-:::
-
-::: example
-**Example 4.1: Projections onto Coordinate Axes**
-
-In $\mathbb{R}^3$, consider:
-
-$$P_1 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad P_2 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad P_3 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
-
-Check:
-- Each $P_i^2 = P_i$ ✓
-- $P_1 + P_2 + P_3 = I_3$ ✓
-- $P_i P_j = 0$ for $i \neq j$ ✓
-
-This is a compatible family.
-:::
-
-### 4.2 Geometric Interpretation
-
-::: remark
-**What Does Compatibility Mean Geometrically?**
-
-If $\{P_1, \ldots, P_k\}$ is a compatible family with $P_1 + \cdots + P_k = P$:
-
-1. **Unique decomposition**: Every vector $\mathbf{v}$ satisfies:
-
-   $$P\mathbf{v} = P_1\mathbf{v} + P_2\mathbf{v} + \cdots + P_k\mathbf{v}$$
-
-   and this decomposition is unique (any element of $\operatorname{Col}(P)$ can be uniquely written as a sum of elements from $\operatorname{Col}(P_1), \ldots, \operatorname{Col}(P_k)$).
-
-2. **$P_i P_j = 0$ for $i \neq j$** means: the "floors" are mutually orthogonal in the sense that:
-
-   $$\operatorname{Col}(P_i) \cap \operatorname{Col}(P_j) = \{\mathbf{0}\} \quad \text{for } i \neq j$$
-
-The space is **decomposed** into $k$ subspaces that are "perpendicular" (in a generalized sense).
-:::
-
-### 4.3 Key Properties of Compatible Families
-
-Compatible families have beautiful properties related to linear independence and closure under subsums.
-
-::: proposition
-**Theorem 4.1 (Properties of Compatible Families)**
-
-Let $\{P_1, \ldots, P_k\}$ be a compatible family of projections. Then:
-
-1. **Vector decompositions are linearly independent**: For any vector $\mathbf{v}$, the nonzero vectors among $\{P_1\mathbf{v}, \ldots, P_k\mathbf{v}\}$ are linearly independent.
-
-2. **Subsums are projections**: For any subset $I \subseteq \{1, \ldots, k\}$, the sum $\sum_{i \in I} P_i$ is also a projection.
-:::
-
-**Proof of (1)**:
-
-Suppose $c_1 P_1\mathbf{v} + \cdots + c_k P_k\mathbf{v} = \mathbf{0}$.
-
-Left-multiply both sides by $P_j$ for any $j$:
-
-$$P_j(c_1 P_1\mathbf{v} + \cdots + c_k P_k\mathbf{v}) = \mathbf{0}$$
-
-Expanding:
-
-$$c_1 P_j P_1\mathbf{v} + \cdots + c_j P_j P_j\mathbf{v} + \cdots + c_k P_j P_k\mathbf{v} = \mathbf{0}$$
-
-Since $P_j P_i = 0$ for $i \neq j$ and $P_j P_j = P_j$:
-
-$$c_j P_j\mathbf{v} = \mathbf{0}$$
-
-If $P_j\mathbf{v} \neq \mathbf{0}$, then $c_j = 0$.
-
-Therefore, all coefficients of nonzero vectors must be zero, proving linear independence. ∎
-
-**Proof of (2)**:
-
-Let $Q = \sum_{i \in I} P_i$. We need to show $Q^2 = Q$.
-
-$$Q^2 = \left(\sum_{i \in I} P_i\right)\left(\sum_{j \in I} P_j\right) = \sum_{i \in I}\sum_{j \in I} P_i P_j$$
-
-Since $P_i P_j = 0$ for $i \neq j$ and $P_i P_i = P_i$:
-
-$$Q^2 = \sum_{i \in I} P_i P_i = \sum_{i \in I} P_i = Q$$
-
-∎
-
-::: remark
-**The Direct Sum Interpretation**
-
-Property (1) is the **vector-level statement of direct sum decomposition**:
-
-If $\{P_1, \ldots, P_k\}$ is compatible with $P_1 + \cdots + P_k = P$, then:
-
-$$P\mathbf{v} = P_1\mathbf{v} + P_2\mathbf{v} + \cdots + P_k\mathbf{v}$$
-
-is the **unique way** to write $P\mathbf{v}$ as a sum of vectors from $\operatorname{Col}(P_1), \ldots, \operatorname{Col}(P_k)$.
-
-This is exactly the definition of **direct sum**:
-
-$$\operatorname{Col}(P) = \operatorname{Col}(P_1) \oplus \operatorname{Col}(P_2) \oplus \cdots \oplus \operatorname{Col}(P_k)$$
-:::
-
----
-
-## 5. Decomposition of Projections
-
-Here comes the most surprising result of this lecture.
-
-### 5.1 The Question
-
-Suppose we have a projection $P$ decomposed into a sum of matrices:
-
-$$P = R_1 + R_2 + \cdots + R_k$$
-
-We don't know yet whether the $R_i$ are projections. We only know:
-
-$$\sum_{i=1}^k \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$$
-
-**Question**: Can we conclude that each $R_i$ is a projection and that they are mutually orthogonal ($R_i R_j = 0$ for $i \neq j$)?
-
-Surprisingly, the answer is **yes**!
-
-### 5.2 The Theorem
-
-::: proposition
-**Theorem 5.1 (Projection Decomposition)**
-
-Let $P$ be a projection ($P^2 = P$). Suppose:
-
-$$P = R_1 + R_2 + \cdots + R_k$$
-
-where each $R_i$ is a matrix satisfying:
-
-$$\sum_{i=1}^k \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$$
-
-Then **automatically**:
-1. Each $R_i$ is a projection ($R_i^2 = R_i$)
-2. $R_i R_j = 0$ for all $i \neq j$
-3. $\sum_{i=1}^k \operatorname{rank}(R_i) = \operatorname{rank}(P)$ (equality holds)
-:::
-
-::: remark
-**Why Is This Remarkable?**
-
-We don't assume the $R_i$ are projections — **the projection property emerges automatically** from the rank condition!
-
-This is the power of the rank = trace theorem combined with decomposition.
-:::
-
-### 5.3 Proof Using the R₀ Trick
-
-The key insight is to introduce a "complementary" matrix to make the sum equal to the identity.
-
-**Proof**:
-
-Let $R_0 = I - P$. Note that $R_0$ is also a projection:
-
-$$R_0^2 = (I - P)^2 = I - 2P + P^2 = I - 2P + P = I - P = R_0$$
-
-Now we have:
-
-$$I_n = R_0 + R_1 + \cdots + R_k$$
-
-**Step 1**: Count total rank.
-
-$$\sum_{i=0}^k \operatorname{rank}(R_i) = \operatorname{rank}(R_0) + \sum_{i=1}^k \operatorname{rank}(R_i) \leq \operatorname{rank}(R_0) + \operatorname{rank}(P)$$
-
-Since $R_0 = I - P$ is a projection, by Theorem 3.1:
-
-$$\operatorname{rank}(R_0) = \operatorname{trace}(R_0) = \operatorname{trace}(I - P) = n - \operatorname{trace}(P) = n - \operatorname{rank}(P)$$
-
-Therefore:
-
-$$\sum_{i=0}^k \operatorname{rank}(R_i) \leq (n - \operatorname{rank}(P)) + \operatorname{rank}(P) = n$$
-
-**Step 2**: Decompose each $R_i$.
-
-For each $i = 0, 1, \ldots, k$, decompose $R_i = U_i V_i$ where $U_i$ is $n \times r_i$ and $V_i$ is $r_i \times n$ with $r_i = \operatorname{rank}(R_i)$.
-
-Collect all pieces:
-
-$$U = \begin{pmatrix} U_0 & U_1 & \cdots & U_k \end{pmatrix}, \quad V = \begin{pmatrix} V_0 \\ V_1 \\ \vdots \\ V_k \end{pmatrix}$$
+Suppose $XY = I_n$ for some $Y$. Cross-fill $X = UV$ where $U$ is $n \times k$, $V$ is $k \times n$, and $k = \operatorname{rank}(X) \leq n$.
 
 Then:
 
-$$UV = \sum_{i=0}^k U_i V_i = \sum_{i=0}^k R_i = I_n$$
+$$U(VY) = I_n$$
 
-The matrix $U$ is $n \times \left(\sum_{i=0}^k r_i\right)$ and $V$ is $\left(\sum_{i=0}^k r_i\right) \times n$.
+where $U$ is $n \times k$ and $VY$ is $k \times n$ with $k \leq n$.
 
-**Step 3**: Apply Corollary 3.3.
+By Corollary 4.2: $k = n$. Therefore $\operatorname{rank}(X) = n$. ✓
 
-Since $UV = I_n$ and $\sum_{i=0}^k r_i \leq n$ (from Step 1), by Corollary 3.3, both $U$ and $V$ must be $n \times n$ square matrices, and:
+**$(\Longleftarrow)$ Full rank $\implies$ invertible**:
 
-$$VU = I_n$$
+Suppose $\operatorname{rank}(X) = n$. We construct an explicit inverse.
 
-This forces $\sum_{i=0}^k r_i = n$ (equality must hold).
+**Step 1**: Cross-fill $X = UV$ where $U$ and $V$ are both $n \times n$ (since rank $= n$, the decomposition uses $n$ rank-1 pieces).
 
-**Step 4**: Block structure.
+**Step 2**: Augmented cross-filling (horizontal).
 
-Since $VU = I_n$, we have:
+Apply cross-filling to the augmented matrix $(X \mid I_n)$ using the **same pivot selections** as in Step 1.
 
-$$\begin{pmatrix} V_0 \\ V_1 \\ \vdots \\ V_k \end{pmatrix} \begin{pmatrix} U_0 & U_1 & \cdots & U_k \end{pmatrix} = \begin{pmatrix} V_0 U_0 & V_0 U_1 & \cdots & V_0 U_k \\ V_1 U_0 & V_1 U_1 & \cdots & V_1 U_k \\ \vdots & \vdots & \ddots & \vdots \\ V_k U_0 & V_k U_1 & \cdots & V_k U_k \end{pmatrix} = I_n$$
+At each step, the pivot lies in the $X$ block. The column part $\mathbf{u}_k$ comes from $X$ (the same column as before). The row part extends across the full augmented matrix: $(\mathbf{v}_k^T \mid \mathbf{w}_k^T)$, where $\mathbf{v}_k^T$ comes from the $X$ block and $\mathbf{w}_k^T$ from the $I_n$ block.
 
-The only way this equals $I_n$ is if the matrix is block diagonal:
+Since $\operatorname{rank}(X) = n$, all $n$ rows are covered by the $n$ pivots. The $I_n$ block is completely transformed. The decomposition gives:
 
-$$V_i U_j = 0 \quad \text{for all } i \neq j, \quad \text{and} \quad V_i U_i = I_{r_i}$$
+$$(X \mid I_n) = U(V \mid W)$$
 
-**Step 5**: Prove each $R_i$ is a projection.
+Comparing both sides:
+- Left part: $X = UV$ ✓ (same as before)
+- Right part: $I_n = UW$
 
-For each $i$:
+**Step 3**: From $UW = I_n$ (both $n \times n$), Proposition 4.3 gives $WU = I_n$.
 
-$$R_i^2 = (U_i V_i)(U_i V_i) = U_i (V_i U_i) V_i = U_i I_{r_i} V_i = U_i V_i = R_i$$
+Therefore $U$ is invertible with $U^{-1} = W$.
 
-So each $R_i$ is a projection! ✓
+**Step 4**: Augmented cross-filling (vertical).
 
-**Step 6**: Prove orthogonality.
+Similarly, apply cross-filling to $\begin{pmatrix} X \\ I_n \end{pmatrix}$ using the same pivots. At each step, the row part $\mathbf{v}_k^T$ comes from $X$. The column part extends: $\begin{pmatrix} \mathbf{u}_k \\ \mathbf{g}_k \end{pmatrix}$, where $\mathbf{u}_k$ comes from $X$ and $\mathbf{g}_k$ from $I_n$.
 
-For $i \neq j$:
+Since all $n$ columns are covered, the decomposition gives:
 
-$$R_i R_j = (U_i V_i)(U_j V_j) = U_i (V_i U_j) V_j = U_i \cdot 0 \cdot V_j = 0$$
+$$\begin{pmatrix} X \\ I_n \end{pmatrix} = \begin{pmatrix} U \\ G \end{pmatrix} V$$
 
-So $R_i R_j = 0$ for all $i \neq j$! ✓
+This gives $I_n = GV$. By Proposition 4.3: $VG = I_n$.
+
+Therefore $V$ is invertible with $V^{-1} = G$.
+
+**Step 5**: $X = UV$ with both $U, V$ invertible, so:
+
+$$X^{-1} = V^{-1}U^{-1} = GW$$
 
 Done! ∎
 
+::: example
+**Example 4.1: Finding an Inverse via Augmented Cross-Filling**
+
+Let $X = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$. Since $\operatorname{rank}(X) = 2$, it should be invertible.
+
+**Step 1**: Cross-fill $X$ at pivots $(1,1)$ and $(2,2)$.
+
+Pivot $(1,1) = 2$: row $= (2, 1)$, column $= \begin{pmatrix} 2 \\ 1 \end{pmatrix}$.
+
+$$R_1 = \frac{1}{2}\begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 2 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 1/2 \end{pmatrix}$$
+
+Remainder: $X - R_1 = \begin{pmatrix} 0 & 0 \\ 0 & 1/2 \end{pmatrix}$.
+
+Pivot $(2,2) = 1/2$:
+
+$$R_2 = \frac{1}{1/2}\begin{pmatrix} 0 \\ 1/2 \end{pmatrix}\begin{pmatrix} 0 & 1/2 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 1/2 \end{pmatrix}$$
+
+Product form: $U = \begin{pmatrix} 2 & 0 \\ 1 & 1/2 \end{pmatrix}$, $V = \begin{pmatrix} 1 & 1/2 \\ 0 & 1 \end{pmatrix}$.
+
+**Step 2**: Augmented cross-filling of $(X \mid I_2)$.
+
+Apply the same pivots to $\begin{pmatrix} 2 & 1 & 1 & 0 \\ 1 & 1 & 0 & 1 \end{pmatrix}$.
+
+Pivot $(1,1) = 2$: row $= (2, 1, 1, 0)$, column $= \begin{pmatrix} 2 \\ 1 \end{pmatrix}$.
+
+Peel off: $\frac{1}{2}\begin{pmatrix} 2 \\ 1 \end{pmatrix}(2, 1, 1, 0) = \begin{pmatrix} 2 & 1 & 1 & 0 \\ 1 & 1/2 & 1/2 & 0 \end{pmatrix}$
+
+Remainder: $\begin{pmatrix} 0 & 0 & 0 & 0 \\ 0 & 1/2 & -1/2 & 1 \end{pmatrix}$
+
+Pivot $(2,2) = 1/2$: row $= (0, 1/2, -1/2, 1)$.
+
+So: $V = \begin{pmatrix} 1 & 1/2 \\ 0 & 1 \end{pmatrix}$, $W = \begin{pmatrix} 1/2 & 0 \\ -1 & 2 \end{pmatrix}$.
+
+**Verify**: $UW = \begin{pmatrix} 2 & 0 \\ 1 & 1/2 \end{pmatrix}\begin{pmatrix} 1/2 & 0 \\ -1 & 2 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I_2$ ✓
+
+**Step 3**: $X^{-1} = V^{-1}U^{-1}$.
+
+$U^{-1} = W = \begin{pmatrix} 1/2 & 0 \\ -1 & 2 \end{pmatrix}$, $V^{-1} = \begin{pmatrix} 1 & -1/2 \\ 0 & 1 \end{pmatrix}$.
+
+$$X^{-1} = V^{-1}U^{-1} = \begin{pmatrix} 1 & -1/2 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1/2 & 0 \\ -1 & 2 \end{pmatrix} = \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}$$
+
+**Verify**: $X \cdot X^{-1} = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ ✓
+:::
+
 ::: remark
-**The Magic of Decomposing**
+**The Augmented Cross-Filling and Classical Row Reduction**
 
-This proof would be much harder without the cross-filling perspective!
-
-The key insight is:
-1. **Trace = rank** tells us how many columns $U$ must have
-2. **VU = I** forces a block diagonal structure
-3. The block diagonal structure **forces orthogonality**
-
-All of this flows naturally from $P^2 = P$. No additional conditions needed!
+The augmented cross-filling technique is analogous to the classical method of finding $X^{-1}$ by row-reducing $(X \mid I) \to (I \mid X^{-1})$. But here, the inverse emerges as a **by-product** of the cross-filling decomposition $X = UV$, and the proof of invertibility relies on the projection-theoretic Corollary 4.2 rather than on row-reduction theory.
 :::
 
 ---
 
-## 6. Summary and Looking Ahead
+## 5. Summary and Looking Ahead
 
-In this lecture, we discovered the **magical properties of decomposing projections**:
+::: success
+**Key Theorems from This Lecture**
 
-::: tip
-**Key Theorems**
+1. **The Discovery** (§1): Cross-filling a projection produces rank-1 projections that are mutually annihilating.
 
-1. **VU = I Automatic** (Theorem 2.1): If $P = UV$ with $P^2 = P$ and $U, V$ full rank, then $VU = I$.
+2. **$VU = I$ Automatic** (Theorem 2.1): If $P = UV$ with $P^2 = P$ and $U, V$ full rank, then $VU = I$.
 
-2. **Rank = Trace** (Theorem 3.1): For any projection $P$, $\operatorname{rank}(P) = \operatorname{trace}(P)$.
+3. **Rank = Trace** (Theorem 3.1): For any projection $P$, $\operatorname{rank}(P) = \operatorname{trace}(P)$.
 
-3. **Rank-1 Characterization** (Corollary 3.2): For square matrix $A$, any two of {rank=1, trace=1, $A^2=A$} imply the third.
+4. **Rank-1 Characterization** (Corollary 4.1): Any two of $\{\operatorname{rank}=1, \operatorname{trace}=1, A^2=A\}$ imply the third.
 
-4. **UV = I Forces Square** (Corollary 3.3): If $UV = I$ with $U$ thin and $V$ fat, then both must be square and $VU = I$.
+5. **$UV = I$ Forces Square** (Corollary 4.2): If $UV = I$ with $U$ thin and $V$ fat (or equal size), both must be square with $VU = I$.
 
-5. **Projection Decomposition** (Theorem 5.1): If $P = R_1 + \cdots + R_k$ with $\sum \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$, then each $R_i$ is a projection and $R_i R_j = 0$.
+6. **Full Rank $\iff$ Invertible** (Theorem 4.4): An $n \times n$ matrix is invertible if and only if it has rank $n$.
 :::
 
-These results show that **projections have extremely rigid structure**. The single equation $P^2 = P$ imposes so many constraints that:
-- Decomposition automatically produces $VU = I$
-- Rank equals trace
-- Sum decompositions automatically produce mutually orthogonal projections
+### Looking Ahead to Lecture 9
+
+In this lecture, we proved that **cross-filling** a projection produces mutually annihilating rank-1 projections. But cross-filling is just one way to decompose a projection.
 
 ::: question
-**What's Next?**
+**Does this generalize?**
 
-We now understand the **internal structure** of projections (via cross-filling). But we still haven't answered our first question from the introduction:
+Suppose we write a projection as **any** sum $P = R_1 + \cdots + R_k$ (not necessarily from cross-filling), with $\sum \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$.
 
-**How do we construct a projection from scratch?**
-
-Given:
-- A "floor" (a subspace $W \subseteq \mathbb{R}^n$)
-- A "sunlight direction" (another subspace $S \subseteq \mathbb{R}^n$)
-
-How do we write down the matrix $P$ that projects onto $W$ along $S$?
-
-This is the topic of **Lecture 9: Constructing Projections**.
+Must each $R_i$ still be a projection? Must they still satisfy $R_i R_j = 0$?
 :::
+
+The answer is **yes** — this is the **projection decomposition theorem**, the central result of Lecture 9. This leads to:
+- **Compatible families** of projections
+- Powerful decomposition methods (inner cross-filling, diagonal cross-filling)
+- The foundation for **spectral decomposition**
 
 ---
 
 ## Exercises
 
 ::: problem
-**Exercise 8.1**: Verify $VU = I$ for the projection $P = \frac{1}{5}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$.
+**Exercise 1: Verify $VU = I$**
 
-**Exercise 8.2**: Find two projections $P_1, P_2$ in $\mathbb{R}^2$ such that $P_1 + P_2 = I$ and verify that $P_1 P_2 = 0$.
+For the projection $P = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$:
 
-**Exercise 8.3**: Show that if $P$ is a projection, then $\operatorname{trace}(P) = \dim(\operatorname{Col}(P))$.
+(a) Find a cross-filling decomposition $P = UV$.
 
-**Exercise 8.4**: Let $P = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}$ and $Q = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$. Verify that $\{P, Q\}$ is a compatible family.
+(b) Compute $VU$ and verify it equals $I_1$.
 
-**Exercise 8.5**: (Challenge) Suppose $P_1, P_2, P_3$ are projections with $P_1 + P_2 + P_3 = P$ where $P^2 = P$. Prove that $P_1, P_2, P_3$ are **linearly independent** matrices (as elements of the vector space of $n \times n$ matrices).
+(c) Check that $\operatorname{rank}(P) = \operatorname{trace}(P)$.
+:::
 
-**Exercise 8.6**: (Challenge) Let $A$ be a **full-rank square matrix** (i.e., $A$ is $n \times n$ and $\operatorname{rank}(A) = n$). Suppose $A = R_1 + R_2 + \cdots + R_n$ is the decomposition of $A$ into a sum of rank-1 matrices (via cross-filling).
+::: problem
+**Exercise 2: Rank-1 Characterization**
 
-Prove that **$A^{-1}R_i$ is a projection** for each $i = 1, \ldots, n$.
+For each matrix, check which two of the three conditions hold, then deduce the third:
 
-Furthermore, show that $\{A^{-1}R_1, \ldots, A^{-1}R_n\}$ forms a **compatible family** of projections.
+(a) $A = \begin{pmatrix} 1/3 & 2/3 \\ 1/3 & 2/3 \end{pmatrix}$ (given: rank = 1, trace = 1)
 
-*Hint: Multiply both sides of $A = R_1 + \cdots + R_n$ by $A^{-1}$. What projection do you get on the left side? Now apply Theorem 5.1.*
+(b) $B = \begin{pmatrix} 1 & -1 \\ 0 & 0 \end{pmatrix}$ (given: rank = 1, $B^2 = B$)
+
+(c) $C = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}$ (given: $C^2 = C$, trace = 1)
+:::
+
+::: problem
+**Exercise 3: One-Sided Inverse**
+
+Let $F = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}$ and $V = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.
+
+(a) Verify that $FV = I_2$.
+
+(b) Without computing $VF$ directly, explain why Proposition 4.3 guarantees $VF = I_2$.
+
+(c) Now verify $VF = I_2$ by direct computation.
+:::
+
+::: problem
+**Exercise 4: Full Rank and Invertibility**
+
+Determine which matrices are invertible using the rank criterion (Theorem 4.4):
+
+(a) $A = \begin{pmatrix} 1 & 2 \\ 3 & 6 \end{pmatrix}$
+
+(b) $B = \begin{pmatrix} 1 & 2 \\ 3 & 7 \end{pmatrix}$
+
+(c) $C = \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 1 \\ 0 & 0 & 3 \end{pmatrix}$
+
+For invertible ones, find the inverse using augmented cross-filling.
+:::
+
+::: problem
+**Exercise 5: Trace and Rank**
+
+(a) Find a $3 \times 3$ projection with $\operatorname{rank} = 2$ and $\operatorname{trace} = 2$.
+
+(b) Prove: if $P$ is a projection and $\operatorname{trace}(P) = 0$, then $P = 0$.
+
+(c) Prove: if $P$ is a projection and $\operatorname{trace}(P) = n$ (where $P$ is $n \times n$), then $P = I_n$.
+:::
+
+::: problem
+**Exercise 6** (Challenge)
+
+Let $A$ be a **full-rank square matrix** ($n \times n$, $\operatorname{rank}(A) = n$). Suppose $A = R_1 + R_2 + \cdots + R_n$ is the cross-filling decomposition into rank-1 pieces.
+
+Prove that $A^{-1}R_i$ is a projection for each $i = 1, \ldots, n$.
+
+*Hint: Left-multiply $A = R_1 + \cdots + R_n$ by $A^{-1}$. What do you get on the left? Apply the discovery from Section 1.*
 :::
