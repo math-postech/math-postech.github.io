@@ -302,8 +302,109 @@ $$R_2 = BQ_2B^T = \frac{1}{5}\begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}\begin{pma
 Check: $R_2 = R_2^T$ ✓, $\operatorname{rank}(R_2) = 1$ ✓, $\operatorname{trace}(R_2) = 1$ ✓
 
 $R_1 = P - R_2$ is the other rank-1 orthogonal projection.
+:::
 
-**Key observation**: We decomposed a $3 \times 3$ orthogonal projection into two rank-1 orthogonal projections by cross-filling only a $2 \times 2$ matrix!
+But we haven't yet extracted the real treasure from this decomposition.
+
+### 6.1 Finding Orthogonal Bases: The Real Payoff
+
+Each $Q_j$ from the diagonal cross-filling is rank-1 and symmetric. Because the pivot is on the diagonal, $Q_j$ has the form:
+
+$$Q_j = \frac{1}{q_{jj}} \mathbf{d}_j \mathbf{d}_j^T$$
+
+where $\mathbf{d}_j$ is the column at the pivot position and $q_{jj}$ is the pivot value.
+
+Now compute $BQ_j$:
+
+$$BQ_j = \frac{1}{q_{jj}} (B\mathbf{d}_j) \mathbf{d}_j^T$$
+
+This tells us: $BQ_j$ is rank-1, and its **column space is spanned by $B\mathbf{d}_j$**.
+
+Therefore:
+
+$$R_j = BQ_jB^T = \frac{1}{q_{jj}} (B\mathbf{d}_j)(B\mathbf{d}_j)^T$$
+
+::: attention
+**The Key Insight**
+
+Each rank-1 orthogonal projection $R_j$ projects onto the line spanned by $B\mathbf{d}_j$.
+
+Since $\{R_1, \ldots, R_r\}$ is a compatible family with $R_i R_j = 0$, their column spaces are mutually orthogonal. Therefore:
+
+$$B\mathbf{d}_1, \quad B\mathbf{d}_2, \quad \ldots, \quad B\mathbf{d}_r$$
+
+are **mutually orthogonal vectors** that span $\operatorname{Col}(B)$.
+
+**To find an orthogonal basis for $\operatorname{Col}(B)$**: just read off $\mathbf{d}_j$ from each $Q_j$ and multiply by $B$.
+:::
+
+In practice, we don't even need to compute the full matrices $Q_j$ or $R_j$. Since $Q_j$ is rank-1, **all of its information is in one column**. We just need:
+
+1. Diagonally cross-fill $(B^TB)^{-1}$: at each step, read off the column at the pivot position → $\mathbf{d}_j$
+2. Compute $B\mathbf{d}_j$ → orthogonal direction
+3. Normalize if needed: $\mathbf{v}_j = B\mathbf{d}_j / \|B\mathbf{d}_j\|$ → orthonormal basis vector
+
+::: remark
+**No Gram-Schmidt Needed!**
+
+The classical **Gram-Schmidt process** finds an orthogonal basis by iteratively subtracting projections:
+- Start with $\mathbf{b}_1$
+- Subtract the projection of $\mathbf{b}_2$ onto $\mathbf{b}_1$ to get $\mathbf{v}_2$
+- Subtract projections of $\mathbf{b}_3$ onto $\mathbf{v}_1, \mathbf{v}_2$ to get $\mathbf{v}_3$
+- And so on...
+
+The inner diagonal cross-filling method is fundamentally different:
+- Compute $(B^TB)^{-1}$ (an $r \times r$ matrix)
+- Cross-fill it diagonally (reading off columns)
+- Multiply each column by $B$
+
+The orthogonal directions emerge **simultaneously** from the cross-filling — no iterative subtraction required. The mutual orthogonality is **guaranteed by the projection decomposition theorem**.
+:::
+
+::: example
+**Example 6.2: Extracting the Orthogonal Basis (Continuing Example 6.1)**
+
+We had $B = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}$ and $(B^TB)^{-1} = \frac{1}{6}\begin{pmatrix} 5 & -3 \\ -3 & 3 \end{pmatrix}$.
+
+**Step 1**: Cross-fill at diagonal pivot $(1,1)$ with value $\frac{5}{6}$.
+
+Read off column 1 of $(B^TB)^{-1}$: $\mathbf{d}_1 = \frac{1}{6}\begin{pmatrix} 5 \\ -3 \end{pmatrix}$, or equivalently $\mathbf{d}_1 \propto \begin{pmatrix} 5 \\ -3 \end{pmatrix}$.
+
+**Step 2**: Compute $B\mathbf{d}_1$:
+
+$$B\begin{pmatrix} 5 \\ -3 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}\begin{pmatrix} 5 \\ -3 \end{pmatrix} = \begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix}$$
+
+**Step 3**: Remainder after cross-filling: $Q_2 = \frac{1}{5}\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$.
+
+Read off the nonzero column: $\mathbf{d}_2 \propto \begin{pmatrix} 0 \\ 1 \end{pmatrix}$.
+
+$$B\begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}$$
+
+**Step 4**: Verify orthogonality:
+
+$$\begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix}^T \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} = 0 + 2 - 2 = 0 \quad ✓$$
+
+**Result**: $\left\{\begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}\right\}$ is an **orthogonal basis** for $\operatorname{Col}(B)$.
+
+**Verify**: The original basis was $\left\{\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}\right\}$. Indeed:
+
+$$5 \cdot \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix} + (-3) \cdot \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix} \in \operatorname{Col}(B) \quad ✓$$
+
+The cross-filling told us exactly which linear combination of the original columns produces an orthogonal basis — the coefficients are in $\mathbf{d}_j$!
+:::
+
+::: success
+**Summary: Inner Diagonal Cross-Filling for Orthogonal Bases**
+
+Given a basis $\{\mathbf{b}_1, \ldots, \mathbf{b}_r\}$ for a subspace $W$ (columns of $B$):
+
+1. Compute $(B^TB)^{-1}$ (an $r \times r$ symmetric matrix)
+2. Diagonally cross-fill $(B^TB)^{-1}$: at each step, read the column $\mathbf{d}_j$ at the pivot
+3. Compute $B\mathbf{d}_j$ — this is an orthogonal basis vector for $W$
+
+**What $\mathbf{d}_j$ tells you**: the coefficients for combining the original columns of $B$ into mutually orthogonal vectors. The cross-filling of $(B^TB)^{-1}$ computes these coefficients automatically.
+
+**Normalize** $\mathbf{v}_j = B\mathbf{d}_j / \|B\mathbf{d}_j\|$ if an orthonormal basis is desired.
 :::
 
 ---
@@ -398,15 +499,19 @@ Let $P$ be the orthogonal projection onto $W = \operatorname{span}\left\{\begin{
 :::
 
 ::: problem
-**Exercise 3**
+**Exercise 3: Orthogonal Basis via Inner Diagonal Cross-Filling**
 
-Find the orthogonal projection onto $W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1 \end{pmatrix}, \begin{pmatrix} 0\\1\\1 \end{pmatrix}\right\}$ in $\mathbb{R}^3$.
+Let $W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1 \end{pmatrix}, \begin{pmatrix} 0\\1\\1 \end{pmatrix}\right\}$ in $\mathbb{R}^3$.
 
 (a) Compute $B^TB$ and $(B^TB)^{-1}$.
 
-(b) Compute $P = B(B^TB)^{-1}B^T$.
+(b) Diagonally cross-fill $(B^TB)^{-1}$ into $Q_1 + Q_2$.
 
-(c) Apply diagonal cross-filling to $(B^TB)^{-1}$ and verify each $R_j = BQ_jB^T$ is a rank-1 orthogonal projection.
+(c) Read off the column $\mathbf{d}_j$ from each $Q_j$. Compute $B\mathbf{d}_1$ and $B\mathbf{d}_2$.
+
+(d) Verify that $B\mathbf{d}_1$ and $B\mathbf{d}_2$ are **orthogonal**. You have found an orthogonal basis for $W$ without Gram-Schmidt!
+
+(e) Normalize to get an orthonormal basis.
 :::
 
 ::: problem
