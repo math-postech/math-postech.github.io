@@ -1,28 +1,28 @@
-# Lecture 9: Constructing Projections
+# Lecture 10: Constructing Projections
 
-> **Topics**: §3.5 — Uniqueness of Projections, Construction Formula
+> **Topics**: §3.5–3.7 — Uniqueness of Projections, Construction Formula $P = B(AB)^{-1}A$, Orthogonal Projection Formula $P = B(B^TB)^{-1}B^T$, Inner Diagonal Cross-Filling, Least Squares
 > **Date**: Apr 20–23, 2026
 
 ---
 
-## 🎯 Overview
+## Overview
 
 In previous lectures, we learned:
-- **Lecture 7**: Definition of projection ($P^2 = P$), geometric model, interchanging property ($\operatorname{Col}(P) = \operatorname{Null}(I-P)$)
-- **Lecture 8**: Decomposition properties, $\operatorname{rank}(P) = \operatorname{trace}(P)$, compatible families
+- **Lecture 7**: Projection ($P^2 = P$), orthogonal projection ($P = P^T$), sunlight-floor model
+- **Lecture 8**: Cross-filling projections, $\operatorname{rank}(P) = \operatorname{trace}(P)$, full rank $\iff$ invertible
+- **Lecture 9**: Compatible families, projection decomposition theorem, decomposition methods
 
-Today, we solve the **construction problem**: Given two subspaces $W$ and $S$, how do we construct a projection $P$ with $\operatorname{Col}(P) = W$ and $\operatorname{Null}(P) = S$?
+Today we solve the **construction problem**: Given two subspaces $W$ and $S$, how do we construct a projection $P$ with $\operatorname{Col}(P) = W$ and $\operatorname{Null}(P) = S$?
 
 **Key questions:**
 1. Is such a projection unique?
 2. What conditions on $W$ and $S$ guarantee existence?
 3. How do we compute $P$ explicitly?
+4. What is the formula when $P$ is orthogonal?
 
 ---
 
 ## 1. Uniqueness: Projection Determined by Column and Null Space
-
-The first question: if a projection exists with given column and null spaces, is it unique?
 
 ::: proposition
 **Theorem 1.1 (Uniqueness of Projection)**
@@ -35,73 +35,46 @@ then $P = Q$.
 
 **Proof:**
 
-We prove $P = Q$ using the interchanging property from Lecture 7.
-
 **Step 1**: Show $P = QP$.
 
-Since $\operatorname{Col}(P) = \operatorname{Col}(Q)$, we can apply the interchanging property to $Q$:
-$$\operatorname{Col}(Q) = \operatorname{Null}(I-Q)$$
+Since $\operatorname{Col}(P) = \operatorname{Col}(Q)$, the interchanging property (Lecture 7) gives:
+$$\operatorname{Col}(P) = \operatorname{Col}(Q) = \operatorname{Null}(I-Q)$$
 
-Thus:
-$$\operatorname{Col}(P) = \operatorname{Null}(I-Q)$$
-
-This means $(I-Q)P = 0$, so:
-$$P = QP$$
+Thus $(I-Q)P = 0$, so $P = QP$.
 
 **Step 2**: Show $Q = QP$.
 
-Since $\operatorname{Null}(P) = \operatorname{Null}(Q)$, we can apply the interchanging property to $P$:
-$$\operatorname{Null}(P) = \operatorname{Col}(I-P)$$
+Since $\operatorname{Null}(P) = \operatorname{Null}(Q)$, the interchanging property gives:
+$$\operatorname{Null}(Q) = \operatorname{Null}(P) = \operatorname{Col}(I-P)$$
 
-Thus:
-$$\operatorname{Null}(Q) = \operatorname{Col}(I-P)$$
-
-This means $Q(I-P) = 0$, so:
-$$Q = QP$$
+Thus $Q(I-P) = 0$, so $Q = QP$.
 
 **Step 3**: Combine.
 
-From Steps 1 and 2:
 $$P = QP = Q$$
 
-Therefore $P = Q$. □
+Therefore $P = Q$. ∎
 
 ::: remark
-**Why This Makes Sense: Two Subspaces Determine the Projection**
+**Two Subspaces Determine the Projection**
 
-Recall from Lecture 7 that a projection $P$ splits the space into two complementary parts:
-- $\operatorname{Col}(P)$ = vectors that are "projected onto"
-- $\operatorname{Null}(P)$ = vectors that are "projected away" (killed)
-
-The interchanging property showed these two subspaces are complementary: $\operatorname{Col}(P) \oplus \operatorname{Null}(P) = \mathbb{R}^n$ (every vector $\mathbf{v}$ has a unique decomposition $\mathbf{v} = P\mathbf{v} + (I-P)\mathbf{v}$).
-
-**Theorem 1.1 says**: This decomposition is *unique*. If you specify which vectors to keep ($\operatorname{Col}(P)$) and which to kill ($\operatorname{Null}(P)$), there is exactly one projection doing this job.
+A projection $P$ splits the space into two complementary parts: $\operatorname{Col}(P)$ (the floor) and $\operatorname{Null}(P)$ (the sunlight direction). This theorem says: if you specify which vectors to keep and which to kill, there is **exactly one** projection doing this job.
 :::
 
 ---
 
-## 2. Bridge Theorem: Disjoint Subspaces and Null Space Equality
+## 2. Bridge Theorem (from Lecture 6)
 
-Before constructing projections, we need a key tool from Lecture 6.
+Before constructing projections, we recall a key tool from Lecture 6.
 
 ::: proposition
-**Theorem 2.1 (Lecture 6, Theorem 3)**
+**Theorem 2.1 (Lecture 6)**
 
 For matrices $A$ and $B$:
 $$\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\} \quad \Longleftrightarrow \quad \operatorname{Null}(AB) = \operatorname{Null}(B)$$
 :::
 
-::: remark
-**Why We Need This Theorem**
-
-This theorem bridges two perspectives:
-- **Geometric**: The subspaces $\operatorname{Null}(A)$ and $\operatorname{Col}(B)$ are disjoint (intersect only at zero)
-- **Algebraic**: The null space of the product $AB$ equals the null space of $B$ (no new dependencies created)
-
-For projection construction, this translates a **geometric condition** (the desired column and null spaces must be disjoint) into an **algebraic condition** ($AB$ is invertible).
-:::
-
-We will not reprove this theorem (see Lecture 6, §1.4). Instead, we use it as a tool.
+This bridges a **geometric condition** (subspaces are disjoint) with an **algebraic condition** ($AB$ has the same null space as $B$).
 
 ---
 
@@ -110,152 +83,37 @@ We will not reprove this theorem (see Lecture 6, §1.4). Instead, we use it as a
 **Setup**: Given two subspaces $W$ and $S$ of $\mathbb{R}^n$, we want to construct a projection $P$ such that:
 $$\operatorname{Col}(P) = W \quad \text{and} \quad \operatorname{Null}(P) = S$$
 
+**Necessary conditions**:
+1. $W \cap S = \{\mathbf{0}\}$ (disjoint — a vector cannot be both on the floor and pointing toward the sun)
+2. $\dim(W) + \dim(S) = n$ (complementary — every vector decomposes uniquely)
+
 **Strategy**: Express the subspaces using matrices.
+- **Column space** (constructive form): $W = \operatorname{Col}(B)$, where $B$ is $n \times r$ with full column rank ($r = \dim(W)$)
+- **Null space** (descriptive form): $S = \operatorname{Null}(A)$, where $A$ is $r \times n$ with full row rank
 
-::: example
-**Example 3.1: Two Subspaces in $\mathbb{R}^4$**
-
-Let:
-$$W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix}, \begin{pmatrix} 0\\1\\0\\1 \end{pmatrix}\right\}$$
-
-$$S = \operatorname{span}\left\{\begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix}, \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix}\right\}$$
-
-**Observation**:
-- $\dim(W) = 2$, $\dim(S) = 2$
-- $\dim(W) + \dim(S) = 4 = n$ (dimensions add up to the ambient dimension)
-
-**Question**: Do $W$ and $S$ intersect only at $\mathbf{0}$?
-
-Check: Is there a nonzero vector in both spaces?
-
-A vector in $W$ has the form $\begin{pmatrix} a\\b\\a\\b \end{pmatrix}$.
-
-A vector in $S$ has the form $c\begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} + d\begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix} = \begin{pmatrix} c+d\\c-d\\-c-d\\-c+d \end{pmatrix}$.
-
-For these to be equal:
-$$\begin{cases}
-a = c+d \\
-b = c-d \\
-a = -c-d \\
-b = -c+d
-\end{cases}$$
-
-From equations 1 and 3: $c+d = -c-d$, so $c+d = 0$.
-
-From equations 2 and 4: $c-d = -c+d$, so $c-d = 0$.
-
-Thus $c = d = 0$, giving $a = b = 0$.
-
-Therefore $W \cap S = \{\mathbf{0}\}$ ✓
-:::
-
-**Key observation**: For a projection to exist with $\operatorname{Col}(P) = W$ and $\operatorname{Null}(P) = S$, we need:
-1. $W \cap S = \{\mathbf{0}\}$ (disjoint)
-2. $\dim(W) + \dim(S) = n$ (complementary)
-
-These conditions ensure every vector $\mathbf{v} \in \mathbb{R}^n$ has a unique decomposition $\mathbf{v} = \mathbf{w} + \mathbf{s}$ with $\mathbf{w} \in W$ and $\mathbf{s} \in S$.
-
----
-
-## 4. Matrix Representation and the AB Invertible Condition
-
-**Step 1**: Represent the subspaces using matrices.
-
-- **Column space** (constructive form): Write $W = \operatorname{Col}(B)$, where $B$ is an $n \times r$ matrix with columns forming a basis of $W$. Since the columns are linearly independent, $B$ has **full column rank** (rank $r = \dim(W)$).
-
-- **Null space** (descriptive form): Write $S = \operatorname{Null}(A)$, where $A$ is a $k \times n$ matrix whose rows give the equations defining $S$. Since the equations are linearly independent, $A$ has **full row rank**.
-
-From the complementary condition $\dim(W) + \dim(S) = n$, we have $\dim(S) = n - r$. Since $S = \operatorname{Null}(A)$:
-$$\dim(\operatorname{Null}(A)) = n - \operatorname{rank}(A) = n - r$$
-
-Therefore $\operatorname{rank}(A) = r$. If $A$ has full row rank, then $A$ must be $r \times n$.
-
-**Summary**:
-- $B$ is $n \times r$ with full column rank (rank $r$)
-- $A$ is $r \times n$ with full row rank (rank $r$)
-- $AB$ is $r \times r$ (square matrix)
-
-::: example
-**Example 3.1 (Continued): Matrix Representation**
-
-For $W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix}, \begin{pmatrix} 0\\1\\0\\1 \end{pmatrix}\right\}$, we take:
-$$B = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}$$
-
-For $S = \operatorname{span}\left\{\begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix}, \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix}\right\}$, we need to find $A$ such that $\operatorname{Null}(A) = S$.
-
-**Observation**: Check if $W$ and $S$ are orthogonal complements.
-
-Compute inner products:
-- $\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix} \cdot \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} = 1 + 0 - 1 + 0 = 0$ ✓
-- $\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix} \cdot \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix} = 1 + 0 - 1 + 0 = 0$ ✓
-- $\begin{pmatrix} 0\\1\\0\\1 \end{pmatrix} \cdot \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} = 0 + 1 + 0 - 1 = 0$ ✓
-- $\begin{pmatrix} 0\\1\\0\\1 \end{pmatrix} \cdot \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix} = 0 - 1 + 0 + 1 = 0$ ✓
-
-Therefore $S = W^\perp$. The rows of $A$ should be the basis vectors of $W^T$:
-$$A = \begin{pmatrix} 1 & 0 & 1 & 0 \\ 0 & 1 & 0 & 1 \end{pmatrix}$$
-
-**Verify**:
-$$A \begin{pmatrix} 1\\1\\-1\\-1 \end{pmatrix} = \begin{pmatrix} 1 + 0 - 1 + 0 \\ 0 + 1 + 0 - 1 \end{pmatrix} = \begin{pmatrix} 0\\0 \end{pmatrix}$$ ✓
-
-$$A \begin{pmatrix} 1\\-1\\-1\\1 \end{pmatrix} = \begin{pmatrix} 1 + 0 - 1 + 0 \\ 0 - 1 + 0 + 1 \end{pmatrix} = \begin{pmatrix} 0\\0 \end{pmatrix}$$ ✓
-
-Therefore $\operatorname{Null}(A) \supseteq S$. Since $A$ is $2 \times 4$ with rank $2$, we have $\dim(\operatorname{Null}(A)) = 4 - 2 = 2 = \dim(S)$, so $\operatorname{Null}(A) = S$ ✓
-:::
-
----
+The product $AB$ is $r \times r$ (square).
 
 ::: proposition
-**Theorem 4.1 (Matrix Representation)**
+**Theorem 3.1 (AB Invertible Condition)**
 
-Suppose $W$ and $S$ are subspaces of $\mathbb{R}^n$ with:
-- $\dim(W) + \dim(S) = n$
-- $W \cap S = \{\mathbf{0}\}$
-
-Then we can write:
-- $W = \operatorname{Col}(B)$ where $B$ is $n \times r$ with full column rank (rank $r = \dim(W)$)
-- $S = \operatorname{Null}(A)$ where $A$ is $r \times n$ with full row rank (rank $r$)
-
-The product $AB$ is an $r \times r$ square matrix.
-:::
-
-::: proposition
-**Theorem 4.2 (AB Invertible Condition)**
-
-With notation as in Theorem 4.1, the following are equivalent:
-1. $W \cap S = \{\mathbf{0}\}$
-2. $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\}$
-3. $\operatorname{Null}(AB) = \operatorname{Null}(B) = \{\mathbf{0}\}$
-4. $AB$ is invertible
+With notation as above:
+$$W \cap S = \{\mathbf{0}\} \quad \Longleftrightarrow \quad AB \text{ is invertible}$$
 :::
 
 **Proof:**
 
-The equivalence $(1) \Leftrightarrow (2)$ is immediate from $W = \operatorname{Col}(B)$ and $S = \operatorname{Null}(A)$.
+$W \cap S = \{\mathbf{0}\}$ means $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\}$.
 
-The equivalence $(2) \Leftrightarrow (3)$ follows from **Theorem 2.1** (the bridge theorem from Lecture 6):
-$$\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\} \quad \Longleftrightarrow \quad \operatorname{Null}(AB) = \operatorname{Null}(B)$$
+By the bridge theorem (Theorem 2.1): $\operatorname{Null}(AB) = \operatorname{Null}(B)$.
 
-Since $B$ has full column rank, $\operatorname{Null}(B) = \{\mathbf{0}\}$. Thus:
-$$\operatorname{Null}(AB) = \operatorname{Null}(B) = \{\mathbf{0}\}$$
-
-The equivalence $(3) \Leftrightarrow (4)$: Since $AB$ is $r \times r$ (square), by **Proposition 3.4** (Lecture 8), $AB$ is invertible if and only if $\operatorname{rank}(AB) = r$. By the rank-nullity theorem (Lecture 5, Theorem 4.1), $\operatorname{rank}(AB) = r$ if and only if $\operatorname{Null}(AB) = \{\mathbf{0}\}$. □
-
-::: remark
-**Interpretation: Geometric Condition Becomes Algebraic**
-
-The **geometric condition** "$W$ and $S$ are disjoint" translates precisely to the **algebraic condition** "$AB$ is invertible."
-
-This is the power of the bridge theorem: it converts a question about subspace intersection into a question about matrix invertibility, which we can compute!
-:::
+Since $B$ has full column rank, $\operatorname{Null}(B) = \{\mathbf{0}\}$. Therefore $\operatorname{Null}(AB) = \{\mathbf{0}\}$, which means $AB$ has linearly independent columns. Since $AB$ is $r \times r$ (square), this gives $\operatorname{rank}(AB) = r$. By Theorem 4.4 of Lecture 8: $AB$ is invertible. ∎
 
 ---
 
-## 5. Construction Formula
-
-Now we can state the main result.
+## 4. Construction Formula
 
 ::: proposition
-**Theorem 5.1 (Construction of Projection)**
+**Theorem 4.1 (Construction of Projection)**
 
 Suppose:
 - $W = \operatorname{Col}(B)$ where $B$ is $n \times r$ with full column rank
@@ -268,212 +126,316 @@ $$P = B(AB)^{-1}A$$
 
 **Proof:**
 
-We must verify three things:
-1. $P^2 = P$ (projection property)
-2. $\operatorname{Col}(P) = \operatorname{Col}(B) = W$
-3. $\operatorname{Null}(P) = \operatorname{Null}(A) = S$
+We verify three things.
 
-**Verification 1**: $P^2 = P$.
+**$P^2 = P$**:
 
-\begin{align*}
-P^2 &= \left(B(AB)^{-1}A\right) \left(B(AB)^{-1}A\right) \\
-&= B(AB)^{-1} (AB) (AB)^{-1} A \\
-&= B(AB)^{-1} A \\
-&= P \quad ✓
-\end{align*}
+$$P^2 = B(AB)^{-1}A \cdot B(AB)^{-1}A = B(AB)^{-1} (AB) (AB)^{-1} A = B(AB)^{-1} A = P \quad ✓$$
 
-**Verification 2**: $\operatorname{Col}(P) = \operatorname{Col}(B)$.
+**$\operatorname{Col}(P) = \operatorname{Col}(B)$**:
 
-Since $P = B(AB)^{-1}A$:
-$$\operatorname{Col}(P) = \operatorname{Col}(B(AB)^{-1}A) \subseteq \operatorname{Col}(B)$$
+Since $P = B(AB)^{-1}A$, every column of $P$ is a linear combination of columns of $B$, so $\operatorname{Col}(P) \subseteq \operatorname{Col}(B)$.
 
-(Every column of $P$ is a linear combination of columns of $B$.)
+For the reverse: $PB = B(AB)^{-1}(AB) = B$. So every column of $B$ is in $\operatorname{Col}(P)$. ✓
 
-To show the reverse inclusion, note that:
-$$PB = B(AB)^{-1}A \cdot B = B(AB)^{-1}(AB) = B$$
+**$\operatorname{Null}(P) = \operatorname{Null}(A)$**:
 
-Thus every column of $B$ is in $\operatorname{Col}(P)$, so $\operatorname{Col}(B) \subseteq \operatorname{Col}(P)$.
+If $A\mathbf{x} = \mathbf{0}$: $P\mathbf{x} = B(AB)^{-1}A\mathbf{x} = \mathbf{0}$. So $\operatorname{Null}(A) \subseteq \operatorname{Null}(P)$.
 
-Therefore $\operatorname{Col}(P) = \operatorname{Col}(B)$ ✓
+If $P\mathbf{x} = \mathbf{0}$: $B(AB)^{-1}A\mathbf{x} = \mathbf{0}$. Since $B$ has full column rank: $(AB)^{-1}A\mathbf{x} = \mathbf{0}$. Multiply by $AB$: $A\mathbf{x} = \mathbf{0}$. So $\operatorname{Null}(P) \subseteq \operatorname{Null}(A)$. ✓
 
-**Verification 3**: $\operatorname{Null}(P) = \operatorname{Null}(A)$.
-
-**Direction 1**: $\operatorname{Null}(A) \subseteq \operatorname{Null}(P)$.
-
-If $\mathbf{x} \in \operatorname{Null}(A)$, then $A\mathbf{x} = \mathbf{0}$. Thus:
-$$P\mathbf{x} = B(AB)^{-1}A\mathbf{x} = B(AB)^{-1}\mathbf{0} = \mathbf{0}$$
-
-So $\mathbf{x} \in \operatorname{Null}(P)$.
-
-**Direction 2**: $\operatorname{Null}(P) \subseteq \operatorname{Null}(A)$.
-
-If $\mathbf{x} \in \operatorname{Null}(P)$, then $P\mathbf{x} = \mathbf{0}$:
-$$B(AB)^{-1}A\mathbf{x} = \mathbf{0}$$
-
-Since $B$ has full column rank, $\operatorname{Null}(B) = \{\mathbf{0}\}$. Thus:
-$$(AB)^{-1}A\mathbf{x} = \mathbf{0}$$
-
-Multiplying both sides by $AB$:
-$$A\mathbf{x} = \mathbf{0}$$
-
-So $\mathbf{x} \in \operatorname{Null}(A)$.
-
-Therefore $\operatorname{Null}(P) = \operatorname{Null}(A)$ ✓
-
-**Conclusion**: $P = B(AB)^{-1}A$ is a projection with the desired column and null spaces. By Theorem 1.1 (uniqueness), it is the **unique** such projection. □
+By uniqueness (Theorem 1.1), this is the **unique** such projection. ∎
 
 ::: remark
 **Understanding the Formula**
 
-The formula $P = B(AB)^{-1}A$ has a beautiful structure:
-- $A$ on the right: "Test" whether the input is in $\operatorname{Null}(A) = S$
-- $(AB)^{-1}$ in the middle: Rescaling factor (needed to make $P^2 = P$)
-- $B$ on the left: Output vectors in $\operatorname{Col}(B) = W$
-
-The formula simultaneously projects onto $W$ and along $S$ (kills vectors in $S$).
+The formula $P = B(AB)^{-1}A$ has a clear structure:
+- $A$ on the right: "test" whether the input is in $\operatorname{Null}(A) = S$
+- $(AB)^{-1}$ in the middle: rescaling factor (needed to make $P^2 = P$)
+- $B$ on the left: output vectors in $\operatorname{Col}(B) = W$
 :::
 
----
-
-## 6. Examples
-
 ::: example
-**Example 6.1: Projection in $\mathbb{R}^3$**
+**Example 4.1: Projection in $\mathbb{R}^3$**
 
 Let:
 $$W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1 \end{pmatrix}\right\}, \quad S = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\-1 \end{pmatrix}, \begin{pmatrix} 0\\1\\0 \end{pmatrix}\right\}$$
 
-**Step 1**: Check dimensions.
-- $\dim(W) = 1$, $\dim(S) = 2$
-- $\dim(W) + \dim(S) = 3$ ✓
+**Step 1**: $\dim(W) = 1$, $\dim(S) = 2$, $\dim(W) + \dim(S) = 3$ ✓
 
-**Step 2**: Check disjointness.
+**Step 2**: Check disjointness. A vector in $W$: $\begin{pmatrix} a\\0\\a \end{pmatrix}$. A vector in $S$: $\begin{pmatrix} b\\c\\-b \end{pmatrix}$. Equal implies $a = b$, $0 = c$, $a = -b$, so $a = 0$. ✓
 
-A vector in $W$ has the form $\begin{pmatrix} a\\0\\a \end{pmatrix}$.
+**Step 3**: $B = \begin{pmatrix} 1\\0\\1 \end{pmatrix}$, $A = \begin{pmatrix} 1 & 0 & 1 \end{pmatrix}$ (since $S$ satisfies $x_1 + x_3 = 0$).
 
-A vector in $S$ has the form $b\begin{pmatrix} 1\\0\\-1 \end{pmatrix} + c\begin{pmatrix} 0\\1\\0 \end{pmatrix} = \begin{pmatrix} b\\c\\-b \end{pmatrix}$.
+**Step 4**: $AB = \begin{pmatrix} 1 & 0 & 1 \end{pmatrix}\begin{pmatrix} 1\\0\\1 \end{pmatrix} = 2$, so $(AB)^{-1} = \frac{1}{2}$.
 
-For these to be equal: $a = b$, $0 = c$, $a = -b$. Thus $a = -a$, so $a = 0$.
+**Step 5**:
+$$P = B(AB)^{-1}A = \begin{pmatrix} 1\\0\\1 \end{pmatrix} \cdot \frac{1}{2} \cdot \begin{pmatrix} 1 & 0 & 1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix}$$
 
-Therefore $W \cap S = \{\mathbf{0}\}$ ✓
-
-**Step 3**: Construct $B$ and $A$.
-
-$$B = \begin{pmatrix} 1\\0\\1 \end{pmatrix} \quad \text{(column basis for } W\text{)}$$
-
-For $S = \operatorname{Null}(A)$, we need $A$ to be $1 \times 3$ (since $r = \dim(W) = 1$) with $\operatorname{Null}(A) = S$.
-
-The vectors in $S$ satisfy $x_1 + x_3 = 0$ (check: $(1, 0, -1)$ gives $1 + (-1) = 0$ ✓, $(0, 1, 0)$ gives $0 + 0 = 0$ ✓).
-
-Thus:
-$$A = \begin{pmatrix} 1 & 0 & 1 \end{pmatrix}$$
-
-**Step 4**: Compute $AB$.
-
-$$AB = \begin{pmatrix} 1 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1\\0\\1 \end{pmatrix} = 2$$
-
-Since $AB = 2 \neq 0$, it is invertible with $(AB)^{-1} = \frac{1}{2}$.
-
-**Step 5**: Compute $P = B(AB)^{-1}A$.
-
-$$P = \begin{pmatrix} 1\\0\\1 \end{pmatrix} \cdot \frac{1}{2} \cdot \begin{pmatrix} 1 & 0 & 1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix}$$
-
-**Step 6**: Verify.
-
-$$P^2 = \frac{1}{4}\begin{pmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix} = \frac{1}{4}\begin{pmatrix} 2 & 0 & 2 \\ 0 & 0 & 0 \\ 2 & 0 & 2 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix} = P \quad ✓$$
-
-$$\operatorname{Col}(P) = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1 \end{pmatrix}\right\} = W \quad ✓$$
-
-Check $\operatorname{Null}(P)$:
-$$P\begin{pmatrix} 1\\0\\-1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix}\begin{pmatrix} 1\\0\\-1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 0\\0\\0 \end{pmatrix} = \mathbf{0} \quad ✓$$
-
-$$P\begin{pmatrix} 0\\1\\0 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix}\begin{pmatrix} 0\\1\\0 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 0\\0\\0 \end{pmatrix} = \mathbf{0} \quad ✓$$
-
-Therefore $\operatorname{Null}(P) \supseteq S$. Since $\dim(\operatorname{Null}(P)) = 3 - \operatorname{rank}(P) = 3 - 1 = 2 = \dim(S)$, we have $\operatorname{Null}(P) = S$ ✓
-:::
-
-::: example
-**Example 6.2: Identity as Projection**
-
-Take $W = \mathbb{R}^n$ and $S = \{\mathbf{0}\}$.
-
-Then:
-$$B = I_n \quad \text{(columns form basis of } \mathbb{R}^n\text{)}$$
-$$A = I_n \quad \text{(}\operatorname{Null}(I_n) = \{\mathbf{0}\}\text{)}$$
-
-$$AB = I_n \cdot I_n = I_n$$
-
-$$P = I_n (I_n)^{-1} I_n = I_n$$
-
-Indeed, the identity is the projection onto $\mathbb{R}^n$ along $\{\mathbf{0}\}$ ✓
+**Verify**: $P^2 = P$ ✓, $\operatorname{Col}(P) = W$ ✓, $P \cdot \begin{pmatrix} 1\\0\\-1 \end{pmatrix} = \mathbf{0}$ ✓, $P \cdot \begin{pmatrix} 0\\1\\0 \end{pmatrix} = \mathbf{0}$ ✓
 :::
 
 ---
 
-## 7. Summary
+## 5. Orthogonal Projection Formula
 
-::: tip
-**What We Learned**
+For an **orthogonal** projection onto $W$, we want $\operatorname{Null}(P) = W^{\perp}$.
 
-**1. Uniqueness** (§1):
-- A projection is uniquely determined by its column space and null space
-- If $\operatorname{Col}(P) = \operatorname{Col}(Q)$ and $\operatorname{Null}(P) = \operatorname{Null}(Q)$, then $P = Q$
+From Lecture 6 (Four Fundamental Subspaces), if $W = \operatorname{Col}(B)$, then:
 
-**2. Bridge Theorem** (§2):
-- $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\} \Longleftrightarrow \operatorname{Null}(AB) = \operatorname{Null}(B)$
-- Connects geometric disjointness to algebraic properties
+$$W^{\perp} = \operatorname{Null}(B^T)$$
 
-**3. Construction Formula** (§3–5):
-- Given $W = \operatorname{Col}(B)$ and $S = \operatorname{Null}(A)$ with $W \cap S = \{\mathbf{0}\}$
-- The projection $P$ with $\operatorname{Col}(P) = W$ and $\operatorname{Null}(P) = S$ is:
-$$P = B(AB)^{-1}A$$
-- The condition $W \cap S = \{\mathbf{0}\}$ is equivalent to $AB$ being invertible
+Therefore, in the construction formula, we set **$A = B^T$**.
 
-**4. Verification** (§5):
-- $P^2 = P$ follows from $(AB)(AB)^{-1} = I$
-- $\operatorname{Col}(P) = \operatorname{Col}(B)$ follows from $PB = B$
-- $\operatorname{Null}(P) = \operatorname{Null}(A)$ follows from the full-rank properties of $A$ and $B$
+::: proposition
+**Theorem 5.1 (Orthogonal Projection Formula)**
 
-**Key Insight**: The construction formula $P = B(AB)^{-1}A$ provides an explicit, computable way to construct any projection from its desired column and null spaces.
+Let $B$ be an $n \times r$ matrix with **full column rank** (rank $r$). The orthogonal projection onto $\operatorname{Col}(B)$ is:
+
+$$P = B(B^T B)^{-1} B^T$$
 :::
+
+**Proof:**
+
+By the construction formula with $A = B^T$:
+
+$$P = B(B^TB)^{-1}B^T$$
+
+**$B^TB$ is invertible**: Suppose $(B^T B)\mathbf{x} = \mathbf{0}$. Then $\mathbf{x}^T(B^T B)\mathbf{x} = (B\mathbf{x})^T(B\mathbf{x}) = \|B\mathbf{x}\|^2 = 0$. So $B\mathbf{x} = \mathbf{0}$. Since $B$ has full column rank: $\mathbf{x} = \mathbf{0}$. Therefore $\operatorname{Null}(B^TB) = \{\mathbf{0}\}$, so $B^TB$ is invertible (by Lecture 8, Theorem 4.4).
+
+**$P = P^T$**: Since $B^TB$ is symmetric, so is $(B^TB)^{-1}$:
+
+$$P^T = (B(B^TB)^{-1}B^T)^T = B((B^TB)^{-1})^TB^T = B(B^TB)^{-1}B^T = P \quad ✓$$
+
+Therefore $P$ is an orthogonal projection by Lecture 7, Theorem 4.1. ∎
+
+::: example
+**Example 5.1: Orthogonal Projection onto a Line**
+
+Project orthogonally onto $W = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 2 \end{pmatrix}\right\}$ in $\mathbb{R}^2$.
+
+$B = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$, $B^TB = 1 + 4 = 5$, $(B^TB)^{-1} = \frac{1}{5}$.
+
+$$P = \frac{1}{5}\begin{pmatrix} 1 \\ 2 \end{pmatrix}\begin{pmatrix} 1 & 2 \end{pmatrix} = \frac{1}{5}\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$$
+
+Verify: $P = P^T$ ✓, $P^2 = P$ ✓
+:::
+
+::: example
+**Example 5.2: Orthogonal Projection onto a Plane**
+
+Project orthogonally onto $W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\0 \end{pmatrix}, \begin{pmatrix} 0\\1\\0 \end{pmatrix}\right\}$ (the $xy$-plane in $\mathbb{R}^3$).
+
+$B = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 0 \end{pmatrix}$, $B^TB = I_2$, $(B^TB)^{-1} = I_2$.
+
+$$P = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 0 \end{pmatrix} I_2 \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}$$
+
+Verify: $P\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} x \\ y \\ 0 \end{pmatrix}$ (projects onto $xy$-plane) ✓
+:::
+
+---
+
+## 6. Inner Diagonal Cross-Filling
+
+From Lecture 9, the **inner cross-filling** method decomposes a projection by cross-filling an inner factor. For orthogonal projections written as $P = B(B^TB)^{-1}B^T$, we can cross-fill the small $r \times r$ matrix $(B^TB)^{-1}$ instead of the large $n \times n$ matrix $P$.
+
+::: proposition
+**Theorem 6.1 (Inner Diagonal Cross-Filling)**
+
+Let $P = B(B^TB)^{-1}B^T$ be an orthogonal projection. Decompose $(B^TB)^{-1}$ by diagonal cross-filling:
+
+$$(B^TB)^{-1} = Q_1 + Q_2 + \cdots + Q_r$$
+
+where each $Q_j$ is rank-1 and symmetric (diagonal pivots preserve symmetry).
+
+Define $R_j = BQ_jB^T$. Then:
+
+1. $P = R_1 + R_2 + \cdots + R_r$
+2. Each $R_j$ is a **rank-1 orthogonal projection**
+3. $\{R_1, \ldots, R_r\}$ is a compatible family
+:::
+
+**Proof:**
+
+**(1)**: $\sum R_j = \sum BQ_jB^T = B\left(\sum Q_j\right)B^T = B(B^TB)^{-1}B^T = P$. ✓
+
+**(2)**: Since $\operatorname{rank}(R_j) \leq \operatorname{rank}(Q_j) = 1$ and $\sum \operatorname{rank}(R_j) \leq r = \operatorname{rank}(P)$, the projection decomposition theorem (Lecture 9, Theorem 3.1) gives: each $R_j$ is a projection.
+
+For symmetry: $R_j^T = (BQ_jB^T)^T = BQ_j^TB^T = BQ_jB^T = R_j$ (since $Q_j^T = Q_j$).
+
+So each $R_j$ is an orthogonal projection. ✓
+
+**(3)**: Follows from the projection decomposition theorem. ✓ ∎
+
+::: success
+**Efficiency Gain**
+
+| Method | Matrix size | Cost |
+|--------|-----------|------|
+| Direct diagonal cross-filling of $P$ | $n \times n$ | $O(n^2)$ per step |
+| Inner diagonal cross-filling of $(B^TB)^{-1}$ | $r \times r$ | $O(r^2)$ per step |
+
+When $r \ll n$, the inner method is **much faster**.
+:::
+
+::: example
+**Example 6.1: Inner Diagonal Cross-Filling**
+
+Let $B = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}$ ($3 \times 2$, full column rank).
+
+**Step 1**: $B^TB = \begin{pmatrix} 3 & 3 \\ 3 & 5 \end{pmatrix}$, $\det = 15 - 9 = 6$.
+
+$$(B^TB)^{-1} = \frac{1}{6}\begin{pmatrix} 5 & -3 \\ -3 & 3 \end{pmatrix}$$
+
+**Step 2**: Diagonal cross-fill at $(1,1)$ with pivot $\frac{5}{6}$:
+
+$$Q_1 = \frac{1}{5/6} \cdot \frac{1}{6}\begin{pmatrix} 5 \\ -3 \end{pmatrix} \cdot \frac{1}{6}\begin{pmatrix} 5 & -3 \end{pmatrix} = \frac{1}{6}\begin{pmatrix} 5 & -3 \\ -3 & 9/5 \end{pmatrix}$$
+
+$$Q_2 = (B^TB)^{-1} - Q_1 = \frac{1}{6}\begin{pmatrix} 0 & 0 \\ 0 & 6/5 \end{pmatrix} = \frac{1}{5}\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$$
+
+**Step 3**: Compute $R_2 = BQ_2B^T$:
+
+$$BQ_2 = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix} \frac{1}{5}\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} = \frac{1}{5}\begin{pmatrix} 0 & 0 \\ 0 & 1 \\ 0 & 2 \end{pmatrix}$$
+
+$$R_2 = BQ_2B^T = \frac{1}{5}\begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}\begin{pmatrix} 0 & 1 & 2 \end{pmatrix} = \frac{1}{5}\begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & 2 \\ 0 & 2 & 4 \end{pmatrix}$$
+
+Check: $R_2 = R_2^T$ ✓, $\operatorname{rank}(R_2) = 1$ ✓, $\operatorname{trace}(R_2) = 1$ ✓
+
+$R_1 = P - R_2$ is the other rank-1 orthogonal projection.
+
+**Key observation**: We decomposed a $3 \times 3$ orthogonal projection into two rank-1 orthogonal projections by cross-filling only a $2 \times 2$ matrix!
+:::
+
+---
+
+## 7. Application: Least Squares
+
+The orthogonal projection formula provides an elegant solution to the **least squares problem**.
+
+::: proposition
+**Theorem 7.1 (Least Squares)**
+
+Given an inconsistent system $A\mathbf{x} = \mathbf{b}$ (where $A$ is $m \times n$ with full column rank), the **least squares solution** $\hat{\mathbf{x}}$ that minimizes $\|\mathbf{b} - A\mathbf{x}\|$ satisfies:
+
+$$A^T A \, \hat{\mathbf{x}} = A^T \mathbf{b}$$
+
+and the best approximation is $A\hat{\mathbf{x}} = P\mathbf{b}$ where $P = A(A^TA)^{-1}A^T$ is the orthogonal projection onto $\operatorname{Col}(A)$.
+:::
+
+**Proof:**
+
+The vector $A\hat{\mathbf{x}} \in \operatorname{Col}(A)$ that is closest to $\mathbf{b}$ is the orthogonal projection of $\mathbf{b}$ onto $\operatorname{Col}(A)$:
+
+$$A\hat{\mathbf{x}} = P\mathbf{b} = A(A^TA)^{-1}A^T\mathbf{b}$$
+
+Left-canceling $A$ (which has full column rank):
+
+$$\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b}$$
+
+Equivalently: $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$. ∎
+
+::: remark
+**Why "Least Squares"?**
+
+The residual $\mathbf{b} - A\hat{\mathbf{x}} = (I - P)\mathbf{b}$ is orthogonal to $\operatorname{Col}(A)$ (since $I - P$ projects onto $\operatorname{Col}(A)^{\perp}$). This is the geometric meaning of "least squares": the closest point in a subspace is found by dropping a perpendicular.
+:::
+
+---
+
+## 8. Summary
+
+::: success
+**Key Results from This Lecture**
+
+1. **Uniqueness** (§1): A projection is uniquely determined by $\operatorname{Col}(P)$ and $\operatorname{Null}(P)$.
+
+2. **Construction Formula** (§4):
+$$P = B(AB)^{-1}A$$
+where $\operatorname{Col}(B) = W$, $\operatorname{Null}(A) = S$, and $W \cap S = \{\mathbf{0}\}$ (equivalently, $AB$ invertible).
+
+3. **Orthogonal Projection Formula** (§5): Set $A = B^T$ to get:
+$$P = B(B^TB)^{-1}B^T$$
+
+4. **Inner Diagonal Cross-Filling** (§6): Decompose $(B^TB)^{-1}$ instead of $P$ — much more efficient when $r \ll n$. Produces rank-1 orthogonal projections automatically.
+
+5. **Least Squares** (§7): The least squares solution is $\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b}$.
+:::
+
+### Looking Ahead
+
+With projection theory complete, we now have all the tools needed for **spectral decomposition** (Chapter 5).
+
+The idea: if a matrix $A$ can be written as $A = \lambda_1 P_1 + \lambda_2 P_2 + \cdots + \lambda_k P_k$ where $\{P_1, \ldots, P_k\}$ is a compatible family, then:
+- $A^n = \lambda_1^n P_1 + \cdots + \lambda_k^n P_k$
+- $e^A = e^{\lambda_1} P_1 + \cdots + e^{\lambda_k} P_k$
+- Any function $f(A) = f(\lambda_1) P_1 + \cdots + f(\lambda_k) P_k$
+
+Finding the $\lambda_i$ (eigenvalues) and $P_i$ (spectral projections) is the goal of **Chapters 4–5**.
 
 ---
 
 ## Exercises
 
 ::: problem
-**Exercise 9.1**
+**Exercise 1**
 
 Find the projection $P$ onto $W$ along $S$ where:
 $$W = \operatorname{span}\left\{\begin{pmatrix} 1\\1\\0 \end{pmatrix}\right\}, \quad S = \operatorname{span}\left\{\begin{pmatrix} 1\\-1\\0 \end{pmatrix}, \begin{pmatrix} 0\\0\\1 \end{pmatrix}\right\}$$
 
-Verify that $P^2 = P$, $\operatorname{Col}(P) = W$, and $\operatorname{Null}(P) = S$.
+Verify $P^2 = P$, $\operatorname{Col}(P) = W$, and $\operatorname{Null}(P) = S$.
 :::
 
 ::: problem
-**Exercise 9.2**
+**Exercise 2**
 
-Let $P$ be the projection onto the $xy$-plane in $\mathbb{R}^3$.
-(a) What are $\operatorname{Col}(P)$ and $\operatorname{Null}(P)$?
-(b) Find matrices $B$ and $A$ such that $\operatorname{Col}(B) = \operatorname{Col}(P)$ and $\operatorname{Null}(A) = \operatorname{Null}(P)$.
-(c) Use the construction formula to compute $P$.
+Let $P$ be the orthogonal projection onto $W = \operatorname{span}\left\{\begin{pmatrix} 3 \\ 4 \end{pmatrix}\right\}$ in $\mathbb{R}^2$.
+
+(a) Use the formula $P = B(B^TB)^{-1}B^T$ to compute $P$.
+
+(b) Verify $P = P^T$ and $P^2 = P$.
+
+(c) Compute the orthogonal projection of $\mathbf{b} = \begin{pmatrix} 5 \\ 0 \end{pmatrix}$ onto $W$.
 :::
 
 ::: problem
-**Exercise 9.3**
+**Exercise 3**
 
-Suppose $B$ is $n \times r$ with full column rank, and $A$ is $r \times n$ with full row rank.
-(a) Show that if $AB = I_r$, then $P = BA$ is a projection.
-(b) What are $\operatorname{Col}(P)$ and $\operatorname{Null}(P)$?
-(c) How does this relate to Theorem 5.1?
+Find the orthogonal projection onto $W = \operatorname{span}\left\{\begin{pmatrix} 1\\0\\1 \end{pmatrix}, \begin{pmatrix} 0\\1\\1 \end{pmatrix}\right\}$ in $\mathbb{R}^3$.
 
-*Hint*: This appeared in Lecture 8. Compare with the construction formula.
+(a) Compute $B^TB$ and $(B^TB)^{-1}$.
+
+(b) Compute $P = B(B^TB)^{-1}B^T$.
+
+(c) Apply diagonal cross-filling to $(B^TB)^{-1}$ and verify each $R_j = BQ_jB^T$ is a rank-1 orthogonal projection.
 :::
 
 ::: problem
-**Exercise 9.4**
+**Exercise 4**
+
+Suppose $B$ is $n \times r$ with full column rank, and $A$ is $r \times n$ with full row rank, satisfying $AB = I_r$.
+
+(a) Show that $P = BA$ is a projection with $\operatorname{Col}(P) = \operatorname{Col}(B)$ and $\operatorname{Null}(P) = \operatorname{Null}(A)$.
+
+(b) How does this relate to the formula $P = B(AB)^{-1}A$?
+:::
+
+::: problem
+**Exercise 5: Least Squares**
+
+Consider the inconsistent system $A\mathbf{x} = \mathbf{b}$ where:
+$$A = \begin{pmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{pmatrix}, \quad \mathbf{b} = \begin{pmatrix} 0 \\ 8 \\ 8 \end{pmatrix}$$
+
+(a) Compute $A^TA$ and $A^T\mathbf{b}$.
+
+(b) Solve the normal equation $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$.
+
+(c) Compute $P\mathbf{b}$ where $P = A(A^TA)^{-1}A^T$ and verify $P\mathbf{b} = A\hat{\mathbf{x}}$.
+:::
+
+::: problem
+**Exercise 6**
 
 True or false: If $W$ and $S$ are subspaces with $\dim(W) + \dim(S) = n$, then there always exists a projection $P$ with $\operatorname{Col}(P) = W$ and $\operatorname{Null}(P) = S$.
 
-Justify your answer. If false, give a counterexample. If true, prove it.
+If false, give a counterexample. If true, prove it.
 :::
