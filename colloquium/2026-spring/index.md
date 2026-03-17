@@ -60,14 +60,18 @@ Applications of our results include an explicit characterization of tail probabi
 ### Mar. 27 - Jongyook Park (Kyungpook National University)
 **Title:** Clique–coclique methods and spectral bounds for strongly regular graphs
 
-**Abstract:** TBA
+**Abstract:** Strongly regular graphs play an important role in algebraic combinatorics and are closely connected with finite geometry and design theory. A basic problem is to understand which parameter sets of strongly regular graphs can actually occur.
+
+In this talk we discuss several results obtained using spectral methods together with structural information about cliques and cocliques. In particular, we explain how eigenvalue constraints interact with the combinatorial structure of large cliques and with cocliques in local graphs, and how these ideas lead to restrictions on the parameters of strongly regular graphs.
+
+This is based on joint works with Jack H. Koolen, Chenhui Lv and Greg Markowsky.
 
 ---
 
 ### Apr. 3 - Hyung Tae Choi (Chung-Ang University)
 **Title:** Nonlinear $L_{1}$ Control and Set-invariance-based Approaches
 
-**Abstract:** TBA
+**Abstract:** In this talk, we discuss the mathematical foundations and applications for nonlinear $L_1$ control, a framework for robust control of systems subject to disturbances, with broad relevance to nonlinear control systems such as robots, helicopters, and autonomous vehicles. We begin by giving a mathematical definition of nonlinear $L_1$ control and reviewing several recent developments in this area. Building on this framework, we present sufficient conditions for ensuring $L_1$ performance, as well as existence results for controllers that achieve such performance. These results are developed using, respectively, set invariance principles and set-valued analysis, which are the necessary mathematical backgrounds on these topics. We further introduce a recent barrier-function-based algorithm for the synthesis of $L_1$ state-feedback controllers. To illustrate the applicability of the theory, we present simulation results with helicopter dynamics. Finally, we conclude with several directions for future research.
 
 ---
 
@@ -105,7 +109,7 @@ This is a joint work in progress with Youngjin Bae(INU).
 ### May 22 - Euiyong Park (University of Seoul)
 **Title:** Monoidal categorifications for cluster algebras
 
-**Abstract:** TBA
+**Abstract:** Monoidal categorification is a categorical-approach to studying (quantum) cluster algebras from the perspective of monoidal categories. In this talk, I will discuss the notion of categorification and explain how a monoidal category can lift the cluster algebra structure to the categorical level. If time permits, then I will explain my recent result on the monoidal categorification for quantum affine algebras. This is partially based on joint works with Masaki Kashiwara, Myungho Kim and Se-jin Oh.
 
 ---
 
