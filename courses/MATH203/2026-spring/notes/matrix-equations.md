@@ -566,22 +566,22 @@ Therefore $B = C$. □
 ::: proposition
 **Proposition 1.4 (Left Inverse Equals Right Inverse)**
 
-For a square matrix $A$, if $AB = I$, then $B = A^{-1}$ (and automatically $BA = I$).
+If a square matrix $A$ has both a right inverse ($AB = I$) and a left inverse ($CA = I$), then $B = C$. That is, left and right inverses are equal when both exist.
 :::
 
-**Proof**: Suppose $AB = I$. We need to show $BA = I$.
-
-Since $A$ is square and $AB = I$, we know $A$ has a left inverse. Let $CA = I$ for some matrix $C$.
-
-Then:
+**Proof**: Suppose $AB = I$ and $CA = I$. Then:
 $$B = IB = (CA)B = C(AB) = CI = C$$
 
-Therefore $BA = CA = I$.
-
-So $AB = BA = I$, which means $B = A^{-1}$. □
+Therefore $B = C$. □
 
 ::: remark
-**Practical implication**: To verify that $B$ is the inverse of square matrix $A$, you only need to check **one direction**! If $AB = I$, then automatically $BA = I$.
+**Note on the stronger statement**
+
+We have proven that **if** $A$ has both left and right inverses, they must be equal.
+
+The **stronger statement** — "a one-sided inverse implies a two-sided inverse" (i.e., $AB = I$ automatically implies $BA = I$) — requires deeper theory. This will be proven rigorously in **Lecture 8** using projection methods (specifically, Corollary 3.3).
+
+**For practical purposes in this chapter**: We work only with matrices that are **known to be invertible** (having $AB = BA = I$), so this distinction does not affect our computations.
 :::
 
 ::: proposition
@@ -590,10 +590,11 @@ So $AB = BA = I$, which means $B = A^{-1}$. □
 If $A$ and $B$ are invertible, then $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
 :::
 
-**Proof**:
+**Proof**: We verify both directions:
 $$(AB)(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = AIA^{-1} = AA^{-1} = I$$
+$$(B^{-1}A^{-1})(AB) = B^{-1}(A^{-1}A)B = B^{-1}IB = B^{-1}B = I$$
 
-By Proposition 1.4, this proves $(AB)^{-1} = B^{-1}A^{-1}$. □
+Therefore $AB$ is invertible with $(AB)^{-1} = B^{-1}A^{-1}$. □
 
 ::: remark
 **Order reversal**: $(AB)^{-1} = B^{-1}A^{-1}$, not $A^{-1}B^{-1}$.
@@ -802,7 +803,7 @@ Solve for $B$ using row operations on $B = A^{-1}C$.
    - Simultaneous column ops on $B$ and $C$ (Prop 1.2)
    - (Semi-finished updates avoided due to mixed logic)
 
-4. **Left inverse = right inverse** for square matrices (Prop 1.4)
+4. **Left and right inverses are equal** when both exist (Prop 1.4); the stronger result (one-sided inverse implies two-sided) requires Lecture 8
 
 5. **Solving $AB = C$** (when $A$ invertible): use row ops on $B = A^{-1}C$ until "$A$" becomes $I$
 

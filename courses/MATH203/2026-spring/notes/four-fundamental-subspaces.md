@@ -2,6 +2,7 @@
 
 > **Topics**: §2.3–2.4 — Transpose, Orthogonality Relationships, Four Fundamental Subspaces
 > **Date**: Mar 23–26, 2026
+> **Slides**: [PDF](../slides/lecture06-four-fundamental-subspaces.pdf)
 
 ---
 
