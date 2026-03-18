@@ -2,6 +2,7 @@
 
 > **Topics**: §2.1–2.2 — Solving $A\mathbf{x}=\mathbf{b}$ via Cross-Filling, Null Space (Descriptive ↔ Constructive), Existence and Uniqueness
 > **Date**: Mar 16–19, 2026
+> **Slides**: [PDF](../slides/lecture05-solving-equations-null-space.pdf)
 
 ---
 
