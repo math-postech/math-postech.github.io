@@ -21,10 +21,16 @@
 | Mar. 27    | Jongyook Park (Kyungpook National University) | Clique–coclique methods and spectral bounds for strongly regular graphs |
 | Apr. 3     | Hyung Tae Choi (Chung-Ang University) | Nonlinear $L_{1}$ Control and Set-invariance-based Approaches |
 | Apr. 24    | Byung Hee An (Kyungpook National University) | Cluster structures of Legendrian cablings (IBS-CGP) |
-| May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces (IBS-CGP) |
+| May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces (Undetermined) |
 | May 15     | Minsung Kim (POSTECH)           | Rapid mixing of random walks on nilmanifolds |
 | May 22     | Euiyong Park (University of Seoul) | Monoidal categorifications for cluster algebras (Online) |
 | May 29     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
+
+> **Online**: The talk will be held via Zoom. A Zoom link will be provided on this page before the talk.
+>
+> **IBS-CGP**: The talk will be held at the [IBS Center for Geometry and Physics](https://cgp.ibs.re.kr/), not in Room 404. A shuttle bus will be available — please check the bus schedule and make sure to catch it, or arrange your own transportation to the IBS venue.
+>
+> **Undetermined**: The speaker may be unable to attend in person due to personal reasons. The talk may be rescheduled as an online talk.
 
 ## Talk Details
 
@@ -93,7 +99,7 @@ This is a joint work in progress with Youngjin Bae(INU).
 ---
 
 ### May 1 - Ziquan Yang (The Chinese University of Hong Kong)
-**Title:** Picard rank jumps for non ordinary K3 surfaces
+**Title:** Picard rank jumps for non ordinary K3 surfaces **(Undetermined)**
 
 **Abstract:** TBA
 
