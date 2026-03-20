@@ -47,7 +47,9 @@ Finally, we will present representative examples illustrating how SML can achiev
 ### Mar. 20 - Matteo Mucciconi (National University of Singapore)
 **Title:** Multiplicative Averages of Plancherel Random Partitions: Elliptic Functions, Phase Transitions, and Applications
 
-**Online Link:** [https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1](https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1)
+**The talk starts at 15:20.** Most updated Zoom link: [https://us06web.zoom.us/j/4564461054?pwd=dE0cORLr3sTaDw0zMBd04E33va1EL5.1&omn=85172273791](https://us06web.zoom.us/j/4564461054?pwd=dE0cORLr3sTaDw0zMBd04E33va1EL5.1&omn=85172273791)
+
+Original Zoom link: [https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1](https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1)
 
 **Abstract:**
 
