@@ -28,6 +28,30 @@ All tutorial sessions meet on **THU 18:00-18:50**. The first tutorial starts 202
 - **Section 03** (Yu Seungook): Hogil Kim Building [306], [307], [308]
   *TAs: Heejin Kim([306]), Yunjae Oh([307]), Seunghoon Jeong([308])*
 
+<!--
+TA Contact Information (internal reference, not displayed on page)
+Updated: 2026-03-21
+
+Section 01 (Q. Li):
+  - 이민수 Lee Minsu [104]: crisophy@postech.ac.kr, 010-6390-1764 (통합7, 20232298, 지도교수: 신선영)
+  - 윤명운 Yun Myeongun [402]: muyun@postech.ac.kr, 010-2474-6055 (통합2, 20252610, 지도교수: 장진우)
+  - 전민수 Minsu Jeon [206]: minsujeon@postech.ac.kr, 010-9077-6093 (통합3, 20252998, 지도교수: 장진우)
+
+Section 02 (Kim Younjin):
+  - 권재영 Kwon Jaeyoung [109]: jykwon00@postech.ac.kr, 010-5458-7093 (통합3, 20252043, 지도교수: 장진우)
+  - 장충재 Chungjae Jang [111]: jangggg7@postech.ac.kr, 010-2746-0912 (통합13, 20202723, 지도교수: 정재훈)
+  - 권용성 Yong Seong Kwon [113]: ky5s27@postech.ac.kr, 010-5655-7433 (통합3, 20252805, 지도교수: 장진우)
+
+Section 03 (Yu Seungook):
+  - 김회진 Heejin Kim [306]: hjkim1123@postech.ac.kr, 010-3389-5597 (통합4, 20242432, 지도교수: 김진수)
+  - 오윤재 Yunjae Oh [307]: yunoh@postech.ac.kr, 010-7533-5526 (통합14, 20192846, 지도교수: 차재춘)
+  - 정승훈 Seunghoon Jeong [308]: jshmth@postech.ac.kr, 010-3315-7009 (통합7, 20232764, 지도교수: 장진우)
+
+TA Changes (2026 Spring):
+  - Section 01: 허담 (hertom@postech.ac.kr) → 이민수 (crisophy@postech.ac.kr)
+  - Section 02: 김성태 (st0554@postech.ac.kr) → 권재영 (jykwon00@postech.ac.kr)
+-->
+
 ### Tutorial Lecture Suggestions for TAs
 
 Detailed teaching suggestions to help TAs prepare engaging tutorial sessions aligned with the course's unique pedagogical approach.
