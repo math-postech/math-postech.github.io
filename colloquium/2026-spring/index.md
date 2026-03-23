@@ -103,7 +103,7 @@ This is a joint work in progress with Youngjin Bae(INU).
 ### May 1 - Ziquan Yang (The Chinese University of Hong Kong)
 **Title:** Picard rank jumps for non ordinary K3 surfaces **(Undetermined)**
 
-**Abstract:** TBA
+**Abstract:** Suppose that f : X → S is a smooth proper family of varieties. The Noether-Lefschetz locus is the set of points over which the geometric fiber has a Picard rank larger than that of the geometric generic fiber. In short, it is the locus where the fibers acquire "more" divisors. In this talk, I will present some progress on understanding the Noether-Lefschetz locus in an arithmetic setting, including joint works with David Urbanik, Ananth Shankar and Ruofan Jiang.
 
 ---
 
