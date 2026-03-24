@@ -291,8 +291,8 @@ May 29  - Kyu-Hwan Lee (University of Connecticut, number_theory/representation/
 
 ## Colloquium Organizers
 - Colloquium Chair: Qirui Li (qiruili@postech.ac.kr)
-- Co-organizer: Valentin Buciumas (buciumas@postech.ac.kr)
 - Co-organizer: Kyoung-Seog Lee (kyoungseog@postech.ac.kr)
+- Faculty: Valentin Buciumas (buciumas@postech.ac.kr)
 -----
 
 -->
