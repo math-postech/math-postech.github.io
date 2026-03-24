@@ -17,6 +17,12 @@
 
  All sections share the same syllabus and exam schedule. Tutorial sessions: THU 18:00-18:50.
 
+### Office Hours (Section 01)
+
+- **Time**: Tuesdays 14:00–15:00
+- **Location**: Room 219, Mathematical Science Building (Instructor's office)
+- If you cannot attend, email [qiruili@postech.ac.kr](mailto:qiruili@postech.ac.kr) to arrange an alternative appointment.
+
 ### Tutorial Sessions
 
 All tutorial sessions meet on **THU 18:00-18:50**. The first tutorial starts 2026-03-05(Thu). Locations differ by section:
