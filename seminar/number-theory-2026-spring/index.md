@@ -19,9 +19,11 @@ All are welcome to attend.
 | Date       | Speaker | Topic | Notes |
 |------------|---------|-------|-------|
 | Feb. 24    | Qirui Li | Introduction and Schedule Overview | Room 404 |
+| Mar. 3     | Tom Huh | Classical Satake Isomorphism | |
+| Mar. 10    | Yuchan Lee | Motivation on the Geometric Satake Isomorphism | |
+| Mar. 17    | Jiwan Jung | Affine Grassmannians | |
+| Mar. 24    | Jungtaek Hong | Schubert Stratification of Affine Grassmannians | |
 |            |         |       |       |
-
-*Schedule will be updated as talks are confirmed. Speakers will be assigned at the first meeting.*
 
 ## Tentative Plan
 
@@ -202,5 +204,5 @@ Our learning path follows a logical progression from classical foundations to mo
 ## Notes
 
 - **[Introduction](./notes/introduction)** (Feb 24) - Overview of geometric Satake equivalence: motivation, main theorem, key concepts, and learning path
-
-*Additional notes from individual talks will be posted as they become available.*
+- **[Classical Satake Isomorphism](./notes/classical-satake)** (Mar 3) - Root datum review, Satake transform (split and quasi-split cases), modular character, examples for GL_n, Sp_4, SU_3, and D^x
+- **[Motivation on the Geometric Satake Isomorphism](./notes/geometric-motivation)** (Mar 10) - Affine Grassmannian, Schubert stratification, perverse sheaves, function-sheaf dictionary
