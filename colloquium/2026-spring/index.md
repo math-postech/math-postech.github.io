@@ -266,29 +266,33 @@ Department of Mathematics
 Pohang University of Science and Technology (POSTECH)
 -----
 
-### Administrative contacts
-- Budget management: Ms. Eunju Kim (Senior Manager)
-- General support (speaker docs, announcements, refreshments, dinner reservations): Ms. Boyoung Shin
+### Administrative contacts (CC on all announcements)
+- Budget management: Ms. Eunju Kim (김은주, ejkim@postech.ac.kr)
+- General support (speaker docs, announcements, refreshments, dinner reservations): Ms. Boyoung Shin (신보영, shinby9865@postech.ac.kr)
 - Zoom link creation and lecture recording: Ms. Seyoung Jang (장세영, www0559@postech.ac.kr)
 - Backup admin: Ms. Minju Kim (김민주, kimminju159@postech.ac.kr)
 - Department office: (054)279-3812
 - Mailing lists: math-prof@postech.ac.kr (faculty), math-all@postech.ac.kr (everyone)
 
-## Speaker Contact Info
-Mar. 6  - Minseok Choi (POSTECH)
-Mar. 20 - Matteo Mucciconi (NUS) — Email: mucci@nus.edu.sg — Online
-Mar. 27 - Jongyook Park (Kyungpook National University) — Email: jongyook@knu.ac.kr
-Apr. 3  - Hyung Tae Choi (Chung-Ang University) — Email: htchoi@cau.ac.kr
-Apr. 24 - Byung Hee An (Kyungpook National University) — Email: anbyhee@knu.ac.kr
-May 1   - Ziquan Yang (CUHK) — Email: zqyang@cuhk.edu.hk — Undetermined
-May 15  - Minsung Kim (POSTECH) — Email: minsung@postech.ac.kr
-May 22  - Euiyong Park (University of Seoul) — Email: epark@uos.ac.kr — Online
-May 29  - Kyu-Hwan Lee (University of Connecticut) — Email: khlee@math.uconn.edu
+### CC rule for weekly announcement emails
+To: math-prof@postech.ac.kr
+Cc: {speaker email}, {inviter email}, kyoungseog@postech.ac.kr, kimminju159@postech.ac.kr, shinby9865@postech.ac.kr, www0559@postech.ac.kr
+
+## Speaker Info (including inviter = the faculty who suggested/invited the speaker)
+Mar. 6  - Minseok Choi (POSTECH) — Email: N/A — Inviter: N/A
+Mar. 20 - Matteo Mucciconi (NUS) — Email: mucci@nus.edu.sg — Online — Inviter: N/A
+Mar. 27 - Jongyook Park (박종육, Kyungpook National University, combinatorics) — Email: jongyook@knu.ac.kr — Inviter: yhson@postech.ac.kr (Younghwan Son) — Thread: QgrcJHsTkxcmGJZGGpSgwGfFmBZVFhXptBv
+Apr. 3  - Hyung Tae Choi (Chung-Ang University, robust_control) — Email: htchoi@cau.ac.kr — Inviter: bogwang.jeon@postech.ac.kr (Bogwang Jeon) — Thread: QgrcJHsTkxcmGJZGGpSgwGfFmBZVFhXptBv
+Apr. 24 - Byung Hee An (Kyungpook National University, math_education dept, topology) — Email: anbyhee@knu.ac.kr — Inviter: kyoungseog@postech.ac.kr (Kyoung-Seog Lee) — Thread: QgrcJHsTkxcmGJZGGpSgwGfFmBZVFhXptBv
+May 1   - Ziquan Yang (CUHK, arithmetic/algebraic geometry, Shimura varieties) — Email: zqyang@cuhk.edu.hk — Undetermined — Inviter: qiruili@postech.ac.kr (Qirui Li) — URL: https://sites.google.com/view/zqyang
+May 15  - Minsung Kim (POSTECH) — Email: minsung@postech.ac.kr — Inviter: N/A
+May 22  - Euiyong Park (University of Seoul, representation) — Email: epark@uos.ac.kr — Online — Inviter: buciumas@postech.ac.kr (Valentin Buciumas) — Thread: QgrcJHsNhNVBCsKFdsGbqTMHKsGQklWZNkV — URL: https://sites.google.com/site/epark1024/
+May 29  - Kyu-Hwan Lee (University of Connecticut, number_theory/representation/ML) — Email: khlee@math.uconn.edu — Inviter: buciumas@postech.ac.kr (Valentin Buciumas) — Thread: QgrcJHsNhNVBCsKFdsGbqTMHKsGQklWZNkV — URL: https://khlee-math.github.io/
 
 ## Colloquium Organizers
 - Colloquium Chair: Qirui Li (qiruili@postech.ac.kr)
 - Co-organizer: Valentin Buciumas (buciumas@postech.ac.kr)
-- Faculty: Kyoung-Seog Lee (kyoungseog@postech.ac.kr)
+- Co-organizer: Kyoung-Seog Lee (kyoungseog@postech.ac.kr)
 -----
 
 -->
