@@ -128,6 +128,15 @@ This is a joint work in progress with Youngjin Bae(INU).
 
 In this talk, I will discuss how machine learning techniques and AI tools can be applied to datasets arising in combinatorics and number theory, with the goal of uncovering hidden structures, generating conjectures, and guiding mathematical exploration.
 <!--
+## Colloquium Sheets (for AI agent email automation)
+- Mar. 6  Minseok Choi:    https://docs.google.com/spreadsheets/d/1VRoN-TGTZuco6s8vbPhylwmZPyzk1vP9kT6EJFptkZY/edit
+- Mar. 27 Jongyook Park:   https://docs.google.com/spreadsheets/d/1Y-0zB1V7JjX7pLzOoMWMOOX33L_Ap_76NaAv8SyPv9E/edit
+- Apr. 3  Hyung Tae Choi:  https://docs.google.com/spreadsheets/d/1GW_lMBdtRgK4xL_k-sVJkekUTPksvfg8b0lqbdDlgKY/edit
+- Apr. 24 Byung Hee An:    https://docs.google.com/spreadsheets/d/1R-52EYGVkZZ4sT2Ox8ZPnG0JLCwf5NA7OqL52r0V7sg/edit
+- May 1   Ziquan Yang:     https://docs.google.com/spreadsheets/d/1txP1A_a55gXuGKd8veuIgae4mUIuvPe_4t-bpPNhF4g/edit
+- May 15  Minsung Kim:     https://docs.google.com/spreadsheets/d/17XXECPSJNv9nm6XsXgdB2XLwXSaMZxK18qogUIsZOUk/edit
+- May 29  Kyu-Hwan Lee:    https://docs.google.com/spreadsheets/d/1Rh0-rZQsRLGh7mZU8cV3OHtqWKrmkhVaCkAaoY9xdgE/edit
+
 ## Weekly Emails (Note: the confidential URL will be covered by [url] tag)
 ----
 Subject: Colloquium  03-06 15:00 Minseok Choi (POSTECH) Learning to Solve PDEs: Scientific Machine Learning from Principles to Practice
