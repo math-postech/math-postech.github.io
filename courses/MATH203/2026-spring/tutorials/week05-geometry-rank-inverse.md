@@ -276,21 +276,15 @@ Students understand that left inverses exist for thin full-rank matrices, are **
 
 A **left inverse** of $U$ is a matrix $U_L$ such that $U_L U = I$.
 
-- Left inverse makes sense only when $U$ is **left cancelable** (rank = columns).
-- Typically: $U$ is **thin full rank** ($m \times r$, rank $r$, $m > r$).
+**Left inverse requires left cancelable**: If $U$ is not left cancelable, there exist $X \neq Y$ with $UX = UY$. But if a left inverse $U_L$ existed, then $X = U_L UX = U_L UY = Y$ — contradiction.
 
-A **right inverse** of $V$ is a matrix $V_R$ such that $VV_R = I$.
+Similarly, a **right inverse** of $V$ (i.e., $VV_R = I$) requires $V$ to be right cancelable.
 
-- Right inverse makes sense only when $V$ is **right cancelable** (rank = rows).
-- Typically: $V$ is **fat full rank** ($r \times n$, rank $r$, $n > r$).
-
-**If $U$ is thin (not square), it has NO right inverse.** If $V$ is fat (not square), it has NO left inverse.
-:::
-
-::: remark
-**Why?**
-
-Suppose $U$ is $m \times r$ with $m > r$ and $UX = I_m$. Then $\operatorname{Col}(UX) = \operatorname{Col}(I_m) = \mathbb{R}^m$. But $\operatorname{Col}(UX) \subseteq \operatorname{Col}(U)$ which has dimension $r < m$. Contradiction! So no right inverse exists.
+**Summary**:
+- Left inverse exists → $U$ must be left cancelable (rank = columns), typically **thin full rank**
+- Right inverse exists → $V$ must be right cancelable (rank = rows), typically **fat full rank**
+- Thin (not square) → has left inverse but **no right inverse** (since $\operatorname{Col}(UX) \subseteq \operatorname{Col}(U) \subsetneq \mathbb{R}^m$, so $UX = I_m$ is impossible)
+- Fat (not square) → has right inverse but **no left inverse** (dual argument)
 :::
 
 #### Step 2: Constructing a Left Inverse (5 min)
