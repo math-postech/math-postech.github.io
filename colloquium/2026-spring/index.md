@@ -137,68 +137,158 @@ In this talk, I will discuss how machine learning techniques and AI tools can be
 - May 15  Minsung Kim:     https://docs.google.com/spreadsheets/d/17XXECPSJNv9nm6XsXgdB2XLwXSaMZxK18qogUIsZOUk/edit
 - May 29  Kyu-Hwan Lee:    https://docs.google.com/spreadsheets/d/1Rh0-rZQsRLGh7mZU8cV3OHtqWKrmkhVaCkAaoY9xdgE/edit
 
-## Weekly Emails (Note: the confidential URL will be covered by [url] tag)
-----
-Subject: Colloquium  03-06 15:00 Minseok Choi (POSTECH) Learning to Solve PDEs: Scientific Machine Learning from Principles to Practice
+## Email Templates (for AI agent automation)
+
+### Template 1: Weekly Announcement (in-person talk)
+To: math-prof@postech.ac.kr
+Subject: Colloquium {MM-DD} 15:00 {Speaker} ({Affiliation}) {Title}
 
 Hello everyone,
 
-This Friday we will host a colloquium talk. We're happy to have Professor Minseok Choi from POSTECH who will speak on "Learning to Solve PDEs: Scientific Machine Learning from Principles to Practice". Hope to see many of you there. 
+This Friday we will host a colloquium talk. We're happy to have Professor {Speaker} from {Affiliation} who will speak on "{Title}". Hope to see many of you there.
 
-The talk takes place in the math department in room 404. 
+The talk takes place in the math department in room 404.
 
 Best wishes,
 Qirui Li
 
+{Month}. {Day} - {Speaker} ({Affiliation})
+Title: {Title}
 
-Mar. 6 - Minseok Choi (POSTECH)
-Title: Learning to Solve PDEs: Scientific Machine Learning from Principles to Practice
+Abstract: {Abstract}
 
-Abstract: Scientific Machine Learning (SML) is rapidly emerging as a powerful paradigm for addressing complex problems in science and engineering by integrating machine learning with real-world data and the fundamental laws of physics.
-This talk will provide a concise overview of the core concepts and algorithmic foundations of SML. In particular, we will introduce methodologies such as Physics-Informed Neural Networks (PINNs), which embed physical constraints directly into the learning process, and Operator Learning, which aims to learn mappings between function spaces and thereby enables fast and efficient prediction of system responses under varying input conditions.
-We will also discuss recent advancements designed to overcome key limitations of early PINN and operator learning approaches, including issues related to data efficiency, generalization, and computational stability.
-Finally, we will present representative examples illustrating how SML can achieve innovative results in practical applications, often delivering substantial speed-ups compared to traditional numerical simulations.
-
-Date: Friday, 2026/03/06
+Date: Friday, {YYYY/MM/DD}
 Time: 3pm
 Venue: room 404
 -----
 
-Mar. 20 - Matteo Mucciconi (National University of Singapore)
-Email: mucci@nus.edu.sg
-Title: Multiplicative Averages of Plancherel Random Partitions: Elliptic Functions, Phase Transitions, and Applications
-Online: https://us06web.zoom.us/j/86239705521?pwd=WRnWumxpXjRMvWymXiW419datyKEZ3.1
+### Template 2: Weekly Announcement (online talk)
+To: math-prof@postech.ac.kr
+Subject: Colloquium {MM-DD} 15:00(Korean time) {Speaker} ({Affiliation short}) — {Short Title}
+
+Hello everyone,
+
+This Friday we will host a colloquium talk. We are pleased to have Professor {Speaker} from {Affiliation}, who will speak on "{Title}."
+
+The talk will take place online. You may join via the following Zoom link:
+{Zoom link}
+
+Best wishes,
+Qirui Li
+
+{Month}. {Day} – {Speaker} ({Affiliation})
+Title: {Title}
+
+Abstract: {Abstract}
+
+Date: Friday, {YYYY/MM/DD}
+Time: 3pm(Korean Time)
+Venue: Online (Zoom)
 -----
 
-Mar. 27 - Jongyook Park (Kyungpook National University)
-Email: jongyook@knu.ac.kr
-Title: Clique–coclique methods and spectral bounds for strongly regular graphs
+### Template 3: Day-of Reminder (in-person)
+To: math-prof@postech.ac.kr
+Subject: Reminder: Colloquium {MM-DD} 15:00 {Speaker} ({Affiliation short}) — {Short Title}
+
+Hello everyone,
+
+This is a friendly reminder that today we will host a colloquium talk. We are pleased to have Professor {Speaker} from {Affiliation}, who will speak on "{Title}."
+
+The talk takes place in the math department in room 404.
+
+Best wishes,
+Qirui Li
 -----
 
-Apr. 3 - Hyung Tae Choi (Chung-Ang University)
-Email: htchoi@cau.ac.kr
-Title: Nonlinear $L_{1}$ Control and Set-invariance-based Approaches
+### Template 4: Food Preference (sent to speaker before talk)
+To: {Speaker email}
+Subject: Food Preference for POSTECH colloquium dinner {MM/DD}
+
+Dear {Speaker name},
+
+I hope this email finds you well. We are pleased to welcome you to the POSTECH colloquium.
+
+To arrange the colloquium dinner, I would like to ask about your food preferences or any dietary restrictions before making a reservation.
+
+We are considering the following options:
+
+Sashimi (미식가의 집 / 동양횟집)
+Korean BBQ (이동간받이)
+Grilled eel (금학장)
+Korean cuisine (탐솥)
+Traditional Korean course meal (한옥정)
+
+Please let me know if you have any preferences or allergies, and feel free to indicate all options you would be comfortable with. We will then choose an option from your list.
+
+Thank you very much.
+
+Sincerely,
+Qirui Li
 -----
 
-Apr. 24 - Byung Hee An (Kyungpook National University)
-Email: anbyhee@knu.ac.kr
-Title: Cluster structures of Legendrian cablings
+### Template 5: Initial Invitation
+To: {Speaker email}
+Cc: buciumas@postech.ac.kr, kyoungseog@postech.ac.kr
+Subject: Invitation to POSTECH Mathematics Colloquium (Spring {Year})
+
+Dear Professor {Speaker name},
+
+I am writing to invite you to give a colloquium talk at the Department of Mathematics, Pohang University of Science and Technology (POSTECH), as part of our Spring {Year} Colloquium Series hold on Fridays(March–May {Year}).
+
+We would be very interested in welcoming you to POSTECH in person. As a tentative suggestion, a talk at Friday, {Suggested date}, would fit well with our colloquium schedule. If this date is not convenient, we would be glad to consider other dates during the Spring {Year} period that suit your availability.
+
+For the talk, you would of course be welcome to choose any topic you feel appropriate for a general mathematics colloquium. {Personalized sentence about speaker's work}.
+
+Please let me know your availability, and we can coordinate accordingly.
+
+Sincerely,
+Qirui Li
+Department of Mathematics
+Pohang University of Science and Technology (POSTECH)
+qiruili@postech.ac.kr
 -----
 
-May 1 - Ziquan Yang (The Chinese University of Hong Kong)
-Email: zqyang@cuhk.edu.hk
-Title: Picard rank jumps for non ordinary K3 surfaces
+### Template 6: Confirmation & Request for Title/CV
+To: {Speaker email}
+Subject: Re: Invitation to POSTECH Mathematics Colloquium
+
+Dear Professor {Speaker name},
+
+Thank you for your kind reply. We are delighted to schedule your colloquium talk at POSTECH on Friday, {Date}.
+
+At your convenience, could you please send us the title of your talk and a recent CV? We would appreciate receiving these as soon as possible so that we can proceed with the announcement and administrative arrangements.
+
+We look forward to your visit and your lecture.
+
+Best regards,
+Qirui Li
+Department of Mathematics
+Pohang University of Science and Technology (POSTECH)
 -----
 
-May 22 - Euiyong Park (University of Seoul)
-Email: epark@uos.ac.kr
-Title: Monoidal categorifications for cluster algebras
-Online talk requested
------
+### Administrative contacts
+- Budget management: Ms. Eunju Kim (Senior Manager)
+- General support (speaker docs, announcements, refreshments, dinner reservations): Ms. Boyoung Shin
+- Zoom link creation and lecture recording: Ms. Seyoung Jang (장세영, www0559@postech.ac.kr)
+- Backup admin: Ms. Minju Kim (김민주, kimminju159@postech.ac.kr)
+- Department office: (054)279-3812
+- Mailing lists: math-prof@postech.ac.kr (faculty), math-all@postech.ac.kr (everyone)
 
-May 29 - Kyu-Hwan Lee (University of Connecticut)
-Email: khlee@math.uconn.edu
-Title: Advancing combinatorics and number theory with AI
+## Speaker Contact Info
+Mar. 6  - Minseok Choi (POSTECH)
+Mar. 20 - Matteo Mucciconi (NUS) — Email: mucci@nus.edu.sg — Online
+Mar. 27 - Jongyook Park (Kyungpook National University) — Email: jongyook@knu.ac.kr
+Apr. 3  - Hyung Tae Choi (Chung-Ang University) — Email: htchoi@cau.ac.kr
+Apr. 24 - Byung Hee An (Kyungpook National University) — Email: anbyhee@knu.ac.kr
+May 1   - Ziquan Yang (CUHK) — Email: zqyang@cuhk.edu.hk — Undetermined
+May 15  - Minsung Kim (POSTECH) — Email: minsung@postech.ac.kr
+May 22  - Euiyong Park (University of Seoul) — Email: epark@uos.ac.kr — Online
+May 29  - Kyu-Hwan Lee (University of Connecticut) — Email: khlee@math.uconn.edu
+
+## Colloquium Organizers
+- Colloquium Chair: Qirui Li (qiruili@postech.ac.kr)
+- Co-organizer: Valentin Buciumas (buciumas@postech.ac.kr)
+- Faculty: Kyoung-Seog Lee (kyoungseog@postech.ac.kr)
 -----
 
 -->
