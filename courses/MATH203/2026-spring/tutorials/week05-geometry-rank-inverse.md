@@ -11,13 +11,21 @@
 
 Let $U$ be $m \times r$ with $\operatorname{rank}(U) = r$ and $V$ be $r \times m$ with $\operatorname{rank}(V) = r$.
 
-::: attention
-**Recall**: $UV$ is $m \times m$ with $\operatorname{rank}(UV) = r$ (since $\operatorname{Null}(U) = \{\mathbf{0}\}$, Lecture 6 Theorem 3 gives $\operatorname{Null}(UV) = \operatorname{Null}(V)$).
+**(a)** Show that $\operatorname{rank}(UV) = r$.
 
-Now flip the order: $VU$ is $r \times r$ (square). What is its rank?
+*Idea*: $U$ is left cancelable, so $\operatorname{Null}(UV) = \operatorname{Null}(V)$. Then use rank-nullity.
+
+::: details Proof
+Since $\operatorname{rank}(U) = r$ equals the number of columns of $U$, we have $\operatorname{Null}(U) = \{\mathbf{0}\}$ (left cancelable). By Lecture 6 Theorem 3, $\operatorname{Null}(U) \cap \operatorname{Col}(V) = \{\mathbf{0}\}$ implies $\operatorname{Null}(UV) = \operatorname{Null}(V)$.
+
+By rank-nullity on $V$ ($r \times m$): $\dim(\operatorname{Null}(V)) = m - r$.
+
+By rank-nullity on $UV$ ($m \times m$): $\operatorname{rank}(UV) = m - \dim(\operatorname{Null}(UV)) = m - (m - r) = r$. ∎
 :::
 
-**(a)** Prove the following rank formula:
+Now flip the order: $VU$ is $r \times r$ (square). What is its rank?
+
+**(b)** Prove the following rank formula:
 
 $$\operatorname{rank}(VU) = r - \dim(\operatorname{Null}(V) \cap \operatorname{Col}(U))$$
 
@@ -41,7 +49,7 @@ $$\operatorname{rank}(VU) = r - \dim(\operatorname{Null}(VU)) = r - \dim(\operat
 **Geometric picture**: $\operatorname{Null}(V) \cap \operatorname{Col}(U)$ is the "dead zone" — vectors that $U$ produces but $V$ kills. If the overlap is $\{\mathbf{0}\}$, then $VU$ is invertible.
 :::
 
-**(b)** Verify the formula for the following pair:
+**(c)** Verify the formula for the following pair:
 
 $$U = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 0 \end{pmatrix}, \qquad V = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
 
@@ -55,7 +63,7 @@ Prediction: $\operatorname{rank}(VU) = 2 - 1 = 1$.
 Verify: $VU = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$. Rank 1. ✓
 :::
 
-**(c)** Now change $V = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}$ (same $U$). What happens?
+**(d)** Now change $V = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}$ (same $U$). What happens?
 
 ::: details Solution
 $\operatorname{Null}(V) = \operatorname{span}\left\{\begin{pmatrix}0\\0\\1\end{pmatrix}\right\}$. This is not in $\operatorname{Col}(U)$, so the overlap is $\{\mathbf{0}\}$.
@@ -153,30 +161,6 @@ Cross-fill $A$ into $r$ rank-one pieces and $B$ into $s$ rank-one pieces. Then $
 $$\operatorname{rank}(A+B) \leq r + s = \operatorname{rank}(A) + \operatorname{rank}(B) \quad \square$$
 :::
 
-**(c)** (Sylvester's inequality) Let $A$ be $m \times n$, $B$ be $n \times p$. Prove: $\operatorname{rank}(AB) \geq \operatorname{rank}(A) + \operatorname{rank}(B) - n$.
-
-*Idea*: The rank drop from $B$ to $AB$ is controlled by $\dim(\operatorname{Null}(A) \cap \operatorname{Col}(B))$, which is at most $\dim(\operatorname{Null}(A)) = n - \operatorname{rank}(A)$.
-
-::: details Proof
-We have $\operatorname{rank}(AB) = \operatorname{rank}(B) - \dim(\operatorname{Null}(A) \cap \operatorname{Col}(B))$.
-
-(To see this: $\operatorname{Null}(B) \subseteq \operatorname{Null}(AB)$ by Lecture 6, and the "extra" null vectors in $\operatorname{Null}(AB) \setminus \operatorname{Null}(B)$ correspond exactly to vectors in $\operatorname{Col}(B) \cap \operatorname{Null}(A)$ via the map $\mathbf{x} \mapsto B\mathbf{x}$, by the same bijection argument as Problem 1.)
-
-Since $\operatorname{Null}(A) \cap \operatorname{Col}(B) \subseteq \operatorname{Null}(A)$:
-
-$$\dim(\operatorname{Null}(A) \cap \operatorname{Col}(B)) \leq \dim(\operatorname{Null}(A)) = n - \operatorname{rank}(A)$$
-
-Therefore:
-
-$$\operatorname{rank}(AB) \geq \operatorname{rank}(B) - (n - \operatorname{rank}(A)) = \operatorname{rank}(A) + \operatorname{rank}(B) - n \quad \square$$
-:::
-
-**Quick check**: If $A$ is $3 \times 5$ with rank 3 and $B$ is $5 \times 4$ with rank 4, what are the bounds on $\operatorname{rank}(AB)$?
-
-::: details Answer
-Upper: $\min\{3, 4\} = 3$. Lower (Sylvester): $3 + 4 - 5 = 2$. So $2 \leq \operatorname{rank}(AB) \leq 3$.
-:::
-
 ---
 
 ## Problem 6: $\operatorname{Null}(A^T A) = \operatorname{Null}(A)$
@@ -203,48 +187,17 @@ By rank-nullity, $\operatorname{rank}(A) = n - \dim(\operatorname{Null}(A)) = n 
 
 ---
 
-## Problem 7: $AB = 0$ and Rank
-
-Let $A$ be $m \times n$ and $B$ be $n \times p$ with $AB = 0$.
-
-**(a)** Prove: $\operatorname{rank}(A) + \operatorname{rank}(B) \leq n$.
-
-*Idea*: Show $\operatorname{Col}(B) \subseteq \operatorname{Null}(A)$, then take dimensions.
-
-::: details Proof
-If $AB = 0$, then for every column $\mathbf{b}_j$ of $B$: $A\mathbf{b}_j = \mathbf{0}$. So $\operatorname{Col}(B) \subseteq \operatorname{Null}(A)$.
-
-Taking dimensions:
-
-$$\operatorname{rank}(B) = \dim(\operatorname{Col}(B)) \leq \dim(\operatorname{Null}(A)) = n - \operatorname{rank}(A)$$
-
-Rearranging: $\operatorname{rank}(A) + \operatorname{rank}(B) \leq n$. ∎
-:::
-
-**(b)** Does $AB = 0$ imply $BA = 0$?
-
-::: details Answer
-No. $AB = 0$ means $\operatorname{Col}(B) \subseteq \operatorname{Null}(A)$. This says nothing about $\operatorname{Col}(A)$ vs $\operatorname{Null}(B)$.
-
-Counterexample: $A = \begin{pmatrix}0 & 1 \\ 0 & 0\end{pmatrix}$, $B = \begin{pmatrix}0 & 0 \\ 0 & 1\end{pmatrix}$. Then $AB = \begin{pmatrix}0 & 1 \\ 0 & 0\end{pmatrix} \cdot \begin{pmatrix}0 & 0 \\ 0 & 1\end{pmatrix} = \begin{pmatrix}0 & 1 \\ 0 & 0\end{pmatrix} \neq 0$.
-
-Hmm, let me fix: $A = \begin{pmatrix}0 & 1 \\ 0 & 0\end{pmatrix}$, $B = \begin{pmatrix}1 & 0 \\ 0 & 0\end{pmatrix}$. Then $AB = \begin{pmatrix}0 & 0 \\ 0 & 0\end{pmatrix} = 0$, but $BA = \begin{pmatrix}0 & 1 \\ 0 & 0\end{pmatrix} \neq 0$. ✓
-:::
-
----
-
 ## TA Notes
 
 ### Time allocation
 
 | Problem | Suggested Time | Priority |
 |---------|---------------|----------|
-| Problem 1 (rank of $VU$) | 12 min | Core — state the formula, sketch the proof, do one example |
+| Problem 1 (rank of $UV$ and $VU$) | 15 min | Core — (a) is warm-up, (b) is the main result |
 | Problems 2–3 (block diagonal, invertible factor) | 8 min | State and prove; can abbreviate if short on time |
-| Problem 4 ($\operatorname{Null} \cap \operatorname{Col}$) | 8 min | Let students try (a)–(c) before showing solution |
-| Problem 5 (rank inequalities) | 10 min | Focus on (a) and (c); (b) is quick |
+| Problem 4 ($\operatorname{Null} \cap \operatorname{Col}$) | 10 min | Let students try (a)–(c) before showing solution |
+| Problem 5 (rank inequalities) | 10 min | Let students attempt (a) first |
 | Problem 6 ($\operatorname{Null}(A^TA)$) | 7 min | Key trick: let students find the $\|\cdot\|^2$ idea |
-| Problem 7 ($AB = 0$) | 5 min | Quick if time remains |
 
 ### Common mistakes
 
