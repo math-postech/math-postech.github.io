@@ -1,4 +1,4 @@
-# Tutorial Suggestions: Week 5 — Geometry of Rank, Inverses, and Subspace Complements
+# Tutorial Suggestions: Week 5 — Geometry of Rank and Rank Inequalities
 
 > **For**: Teaching Assistants conducting tutorial sessions (Mar 26, 2026)
 > **Related Lectures**: [Lecture 5: Solving Equations and Null Space](../notes/solving-equations-null-space.md), [Lecture 6: Four Fundamental Subspaces](../notes/four-fundamental-subspaces.md)
@@ -9,17 +9,17 @@
 
 ## Overview
 
-This tutorial develops **geometric intuition** for rank and introduces **left/right inverses** as a bridge to next week's projection theory.
+This tutorial develops **geometric intuition** for rank and practices **rank inequalities** that students will need for Homework 2.
 
 **Key topics**:
 1. **Rank of $VU$**: Quantifying how $\operatorname{Null}(V) \cap \operatorname{Col}(U)$ controls the rank
-2. **Rank inequalities via cross-filling**: Block diagonal, block triangular, invertible factors
-3. **Left and right inverses**: Construction, non-uniqueness, and the correspondence with subspace complements
+2. **Rank inequalities via cross-filling**: Block diagonal, invertible factors
+3. **Practice problems**: Hands-on exercises aligned with HW2
 
 **Pedagogical goals**:
 - Build geometric intuition: rank drops when column space meets null space
 - Show cross-filling as a universal proof tool for rank identities
-- Preview the projection framework by understanding left inverses
+- Reinforce Lecture 5–6 concepts through concrete computation
 
 ---
 
@@ -87,7 +87,7 @@ Think of $\operatorname{Null}(V)$ as another subspace in $\mathbb{R}^m$.
 
 Their overlap $\operatorname{Null}(V) \cap \operatorname{Col}(U)$ is the "dead zone" — vectors that $U$ produces but $V$ annihilates.
 
-- If overlap = $\{\mathbf{0}\}$: no waste → $\operatorname{rank}(VU) = r$ → $VU$ is full rank (and invertible, by [Lecture 8, Theorem 4.4](../notes/cross-filling-projections.md))
+- If overlap = $\{\mathbf{0}\}$: no waste → $\operatorname{rank}(VU) = r$ → $VU$ is full rank (invertible!)
 - If overlap is $k$-dimensional: rank drops by exactly $k$
 :::
 
@@ -123,7 +123,7 @@ $\operatorname{Null}(V) = \operatorname{span}\left\{\begin{pmatrix}0\\0\\1\end{p
 
 ---
 
-## Topic 2: Rank Inequalities (18 min)
+## Topic 2: Rank Inequalities (8 min)
 
 ### Learning Goal
 
@@ -171,298 +171,145 @@ For the reverse: if $PA\mathbf{x} = \mathbf{0}$, left-cancel $P$ (invertible →
 
 So $\operatorname{Null}(PA) = \operatorname{Null}(A)$. Cross-filling counting: same null space dimension → same rank. ∎
 
-#### Part C: The $I - AB$ and $I - BA$ Trick (10 min)
+---
 
-This is a beautiful block-matrix argument that connects $I - AB$ and $I - BA$.
+## Practice Problems for HW2 (30 min)
 
-**Setup**: Let $A$ be $n \times m$ and $B$ be $m \times n$. Consider three block matrices, each $(n+m) \times (n+m)$:
+The remaining time is devoted to hands-on exercises that directly prepare students for Homework 2.
 
-$$L_1 = \begin{pmatrix} I_n & -A \\ 0 & I_m \end{pmatrix}, \quad M = \begin{pmatrix} I_n & A \\ B & I_m \end{pmatrix}, \quad L_2 = \begin{pmatrix} I_n & 0 \\ -B & I_m \end{pmatrix}$$
+### Practice 1: Finding $\operatorname{Null}(A) \cap \operatorname{Col}(B)$ (10 min)
 
-::: proposition
-**Identity 1**
-
-$$L_1 \cdot M \cdot L_2 = \begin{pmatrix} I_n - AB & 0 \\ 0 & I_m \end{pmatrix}$$
-:::
-
-**Verification** (just matrix multiplication):
-
-**Step 1**: $L_1 \cdot M$:
-
-$$\begin{pmatrix} I & -A \\ 0 & I \end{pmatrix}\begin{pmatrix} I & A \\ B & I \end{pmatrix} = \begin{pmatrix} I - AB & 0 \\ B & I \end{pmatrix}$$
-
-**Step 2**: multiply by $L_2$:
-
-$$\begin{pmatrix} I-AB & 0 \\ B & I \end{pmatrix}\begin{pmatrix} I & 0 \\ -B & I \end{pmatrix} = \begin{pmatrix} I-AB & 0 \\ 0 & I \end{pmatrix} \quad \checkmark$$
-
-::: proposition
-**Identity 2** (swap roles of $A$ and $B$)
-
-$$L_2 \cdot M \cdot L_1 = \begin{pmatrix} I_n & 0 \\ 0 & I_m - BA \end{pmatrix}$$
-:::
-
-**Verification** (exercise for students, same computation):
-
-$L_2 \cdot M = \begin{pmatrix} I & A \\ 0 & I - BA \end{pmatrix}$, then multiply by $L_1$ on the right. ✓
-
-::: attention
-**Key Observation**
-
-Both $L_1$ and $L_2$ are **invertible**: their inverses are
-
-$$L_1^{-1} = \begin{pmatrix} I & A \\ 0 & I \end{pmatrix}, \qquad L_2^{-1} = \begin{pmatrix} I & 0 \\ B & I \end{pmatrix}$$
-
-(Verify: $L_1 L_1^{-1} = I$ by direct multiplication.)
-
-The identities say: **the same matrix $M$ is sandwiched between invertible factors to produce either $I-AB$ or $I-BA$ (up to block diagonal placement)**.
-:::
-
-::: proposition
-**Consequence: $I - AB$ invertible $\iff$ $I - BA$ invertible**
-
-From Identity 1: $\begin{pmatrix}I-AB & 0 \\ 0 & I\end{pmatrix}$ is the product of $L_1$, $M$, $L_2$.
-
-- This product is invertible $\iff$ all three factors are invertible $\iff$ $M$ is invertible (since $L_1, L_2$ are always invertible).
-
-From Identity 2: $\begin{pmatrix}I & 0 \\ 0 & I-BA\end{pmatrix}$ is the product of $L_2$, $M$, $L_1$.
-
-- This product is invertible $\iff$ $M$ is invertible (same $M$!).
-
-Now, the block diagonal $\begin{pmatrix}I-AB & 0 \\ 0 & I\end{pmatrix}$ is invertible $\iff$ $I-AB$ is invertible. (Its inverse is $\begin{pmatrix}(I-AB)^{-1} & 0 \\ 0 & I\end{pmatrix}$.)
-
-Similarly, $\begin{pmatrix}I & 0 \\ 0 & I-BA\end{pmatrix}$ is invertible $\iff$ $I-BA$ is invertible.
-
-Therefore:
-
-$$I - AB \text{ invertible} \iff M \text{ invertible} \iff I - BA \text{ invertible} \quad \square$$
-:::
+*Prepares for HW2 Problem 2.1*
 
 ::: example
-**Example 2.2**
+**Exercise**
 
-$A = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$ ($2 \times 1$), $B = \begin{pmatrix} 3 & 1 \end{pmatrix}$ ($1 \times 2$).
+Let $A = \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 1 \end{pmatrix}$ and $B = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 0 \end{pmatrix}$.
 
-$AB = \begin{pmatrix} 3 & 1 \\ 6 & 2 \end{pmatrix}$ ($2 \times 2$), so $I_2 - AB = \begin{pmatrix} -2 & -1 \\ -6 & -1 \end{pmatrix}$, rank 2 → invertible ✓
-
-$BA = (3 \cdot 1 + 1 \cdot 2) = (5)$ ($1 \times 1$), so $I_1 - BA = (-4)$ → invertible ✓
-
-Both invertible, as predicted. ✓
+1. Find $\operatorname{Null}(A)$.
+2. Find $\operatorname{Col}(B)$.
+3. Determine whether $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\}$.
 :::
+
+**Solution**:
+
+1. $A\mathbf{x} = \mathbf{0}$: $x_1 + 2x_3 = 0$, $x_2 + x_3 = 0$. Free variable $x_3 = t$:
+$$\operatorname{Null}(A) = \operatorname{span}\left\{\begin{pmatrix}-2\\-1\\1\end{pmatrix}\right\}$$
+
+2. $\operatorname{Col}(B) = \operatorname{span}\left\{\begin{pmatrix}1\\0\\1\end{pmatrix}, \begin{pmatrix}0\\1\\0\end{pmatrix}\right\}$
+
+3. Check if $\begin{pmatrix}-2\\-1\\1\end{pmatrix} \in \operatorname{Col}(B)$: solve $c_1\begin{pmatrix}1\\0\\1\end{pmatrix} + c_2\begin{pmatrix}0\\1\\0\end{pmatrix} = \begin{pmatrix}-2\\-1\\1\end{pmatrix}$.
+
+   From row 1: $c_1 = -2$. From row 2: $c_2 = -1$. From row 3: $c_1 = 1$. Contradiction ($-2 \neq 1$).
+
+   Therefore $\operatorname{Null}(A) \cap \operatorname{Col}(B) = \{\mathbf{0}\}$. ✓
 
 ::: remark
-**What if we replace $I - AB$ by $\lambda I - AB$?**
+**Connection to Topic 1**: Since the intersection is trivial, $\operatorname{rank}(AB) = \operatorname{rank}(B) = 2$ (no "wasted" vectors).
 
-Just replace $A$ by $\frac{1}{\lambda}A$ (for $\lambda \neq 0$). Then:
-
-$$\lambda I - AB = \lambda\left(I - \frac{1}{\lambda}AB\right) \text{ invertible} \iff I - \frac{1}{\lambda}AB \text{ invertible} \iff I - BA\frac{1}{\lambda} \text{ invertible} \iff \lambda I - BA \text{ invertible}$$
-
-So: **$\lambda I - AB$ and $\lambda I - BA$ are invertible for the same values of $\lambda$**. This will be important when we study eigenvalues in Chapter 5!
+Students can verify: $AB = \begin{pmatrix}3 & 0 \\ 1 & 1\end{pmatrix}$, rank 2. ✓
 :::
 
 ---
 
-## Topic 3: Left and Right Inverses (20 min)
+### Practice 2: Proving Rank Inequalities (10 min)
 
-### Learning Goal
-
-Students understand that left inverses exist for thin full-rank matrices, are **not unique**, and the choice of left inverse corresponds to a choice of **subspace complement**.
-
-### Suggested Approach
-
-#### Step 1: When Do Inverses Exist? (3 min)
-
-::: attention
-**Key Principle**
-
-A **left inverse** of $U$ is a matrix $U_L$ such that $U_L U = I$.
-
-**Left inverse requires left cancelable**: If $U$ is not left cancelable, there exist $X \neq Y$ with $UX = UY$. But if a left inverse $U_L$ existed, then $X = U_L UX = U_L UY = Y$ — contradiction.
-
-Similarly, a **right inverse** of $V$ (i.e., $VV_R = I$) requires $V$ to be right cancelable.
-
-**Summary**:
-- Left inverse exists → $U$ must be left cancelable (rank = columns), typically **thin full rank**
-- Right inverse exists → $V$ must be right cancelable (rank = rows), typically **fat full rank**
-- Thin (not square) → has left inverse but **no right inverse** (since $\operatorname{Col}(UX) \subseteq \operatorname{Col}(U) \subsetneq \mathbb{R}^m$, so $UX = I_m$ is impossible)
-- Fat (not square) → has right inverse but **no left inverse** (dual argument)
-:::
-
-#### Step 2: Constructing a Left Inverse (5 min)
-
-::: proposition
-**Construction**
-
-Let $U$ be $m \times r$ with rank $r$. Choose **any** $r \times m$ matrix $V$ such that $VU$ is invertible. Then:
-
-$$U_L = (VU)^{-1}V$$
-
-is a left inverse of $U$.
-:::
-
-**Verification**: $U_L U = (VU)^{-1}V \cdot U = (VU)^{-1}(VU) = I_r$. ✓
-
-**When is $VU$ invertible?** By Topic 1: $\operatorname{rank}(VU) = r \iff \operatorname{Null}(V) \cap \operatorname{Col}(U) = \{\mathbf{0}\}$.
-
-So we just need $V$ whose null space doesn't overlap with $\operatorname{Col}(U)$. By [Lecture 8, Theorem 4.4](../notes/cross-filling-projections.md), $VU$ is then invertible.
+*Prepares for HW2 Problem 3.1–3.3*
 
 ::: example
-**Example 3.1**
+**Exercise A** (warm-up for P3.1)
 
-$U = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$ ($3 \times 2$, rank 2).
+Prove: $\operatorname{rank}(AB) \leq \operatorname{rank}(A)$.
 
-**Choice 1**: $V_1 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}$.
-
-$V_1 U = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I_2$ (already invertible!)
-
-$U_{L_1} = (I_2)^{-1} V_1 = V_1 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}$
-
-Check: $U_{L_1} U = I_2$ ✓. Note: $\operatorname{Null}(U_{L_1}) = \operatorname{span}\left\{\begin{pmatrix}0\\0\\1\end{pmatrix}\right\}$.
-
-**Choice 2**: $V_2 = \begin{pmatrix} 1 & 0 & -1 \\ 0 & 1 & -1 \end{pmatrix}$.
-
-$V_2 U = \begin{pmatrix} 0 & -1 \\ -1 & 0 \end{pmatrix}$, $(V_2 U)^{-1} = \begin{pmatrix} 0 & -1 \\ -1 & 0 \end{pmatrix}$
-
-$U_{L_2} = \begin{pmatrix} 0 & -1 \\ -1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 0 & -1 \\ 0 & 1 & -1 \end{pmatrix} = \begin{pmatrix} 0 & -1 & 1 \\ -1 & 0 & 1 \end{pmatrix}$
-
-Check: $U_{L_2} U = \begin{pmatrix} 0+0 & -1+1 \\ -1+0 & 0+1\end{pmatrix} = I_2$ ✓. Note: $\operatorname{Null}(U_{L_2}) = \operatorname{span}\left\{\begin{pmatrix}1\\1\\1\end{pmatrix}\right\}$.
-
-**Two different left inverses!** They differ because they have different null spaces.
+*Hint*: Use $\operatorname{Col}(AB) \subseteq \operatorname{Col}(A)$ from Lecture 6.
 :::
 
-#### Step 3: Uniqueness Given Null Space (7 min)
+Let students attempt this first (2 min), then discuss:
 
-The example above shows: different null spaces → different left inverses. Is this the **only** source of non-uniqueness?
-
-::: proposition
-**Theorem: Unique Left Inverse Given Complement**
-
-Let $U$ be $m \times r$ with rank $r$. Let $W$ be a subspace of $\mathbb{R}^m$ that is a **complement** of $\operatorname{Col}(U)$, meaning:
-
-1. $\operatorname{Col}(U) \cap W = \{\mathbf{0}\}$ (no overlap)
-2. Every vector in $\mathbb{R}^m$ can be written as $\mathbf{v} + \mathbf{w}$ with $\mathbf{v} \in \operatorname{Col}(U)$, $\mathbf{w} \in W$
-
-Then there is **exactly one** left inverse $U_L$ with $\operatorname{Null}(U_L) = W$.
-:::
-
-**Proof**:
-
-Suppose $U_1$ and $U_2$ are two left inverses of $U$ with the same null space $W$.
-
-Then $(U_1 - U_2)U = I - I = 0$.
-
-Take any $\mathbf{x} \in \mathbb{R}^m$ and decompose it: $\mathbf{x} = \mathbf{v} + \mathbf{w}$ where $\mathbf{v} \in \operatorname{Col}(U)$ and $\mathbf{w} \in W$.
-
-**On $\operatorname{Col}(U)$**: Write $\mathbf{v} = U\mathbf{c}$ for some $\mathbf{c}$. Then:
-$$U_1 \mathbf{v} = U_1 U\mathbf{c} = I\mathbf{c} = \mathbf{c} = U_2 U\mathbf{c} = U_2 \mathbf{v}$$
-
-**On $W$**: Since both have null space $W$:
-$$U_1 \mathbf{w} = \mathbf{0} = U_2 \mathbf{w}$$
-
-**Combine**: $U_1 \mathbf{x} = U_1(\mathbf{v} + \mathbf{w}) = \mathbf{c} + \mathbf{0} = U_2(\mathbf{v} + \mathbf{w}) = U_2 \mathbf{x}$.
-
-This holds for every $\mathbf{x}$, so $U_1 = U_2$. ∎
-
-::: attention
-**One-to-One Correspondence**
-
-$$\boxed{\text{Left inverses of } U \quad \longleftrightarrow \quad \text{Complements of } \operatorname{Col}(U)}$$
-
-Each complement $W$ determines exactly one left inverse (with null space $W$). Different complements give different left inverses.
-:::
-
-#### Step 4: The Moore-Penrose Choice (5 min)
-
-Among all complements of $\operatorname{Col}(U)$, there is one **canonical** choice: the **orthogonal complement**.
-
-From Lecture 6: $\operatorname{Col}(U) \perp \operatorname{Null}(U^T)$, and their dimensions add up: $r + (m-r) = m$. So $\operatorname{Null}(U^T)$ is a complement of $\operatorname{Col}(U)$ — the **perpendicular** one.
-
-::: proposition
-**The Moore-Penrose Left Inverse**
-
-The unique left inverse of $U$ with null space $\operatorname{Null}(U^T)$ is:
-
-$$U^+ = (U^T U)^{-1} U^T$$
-
-This is called the **(Moore-Penrose) pseudoinverse** of $U$.
-:::
-
-**Why $U^T U$ is invertible**: From Topic 1, $\operatorname{rank}(U^T U) = r - \dim(\operatorname{Null}(U^T) \cap \operatorname{Col}(U))$. But $\operatorname{Col}(U) \perp \operatorname{Null}(U^T)$ (Lecture 6), so $\operatorname{Null}(U^T) \cap \operatorname{Col}(U) = \{\mathbf{0}\}$. Therefore $\operatorname{rank}(U^T U) = r$, and $U^T U$ is invertible by [Lecture 8, Theorem 4.4](../notes/cross-filling-projections.md).
-
-**Verify it's a left inverse**: $U^+ U = (U^T U)^{-1} U^T U = I_r$ ✓
-
-**Verify null space**: $U^+ \mathbf{w} = (U^T U)^{-1} U^T \mathbf{w}$. If $\mathbf{w} \in \operatorname{Null}(U^T)$, then $U^T \mathbf{w} = \mathbf{0}$, so $U^+ \mathbf{w} = \mathbf{0}$. Therefore $\operatorname{Null}(U^T) \subseteq \operatorname{Null}(U^+)$. Since both have dimension $m - r$ (by cross-filling counting), they are equal. ✓
+**Solution**: $\operatorname{Col}(AB) \subseteq \operatorname{Col}(A)$ (Lecture 6, Theorem 1). Since a subspace contained in another has smaller or equal dimension: $\operatorname{rank}(AB) = \dim(\operatorname{Col}(AB)) \leq \dim(\operatorname{Col}(A)) = \operatorname{rank}(A)$. ∎
 
 ::: example
-**Example 3.2**
+**Exercise B** (warm-up for P3.2)
 
-Same $U = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$.
+Prove: $\operatorname{rank}(A + B) \leq \operatorname{rank}(A) + \operatorname{rank}(B)$.
 
-$U^T U = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$
-
-$(U^T U)^{-1} = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$
-
-$U^+ = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}\begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{pmatrix} = \frac{1}{3}\begin{pmatrix} 2 & -1 & 1 \\ -1 & 2 & 1 \end{pmatrix}$
-
-Check: $U^+ U = \frac{1}{3}\begin{pmatrix}2+0 & 0-1 \\ -1+0 & 0+2\end{pmatrix} = I_2$ ✓
-
-This left inverse is neither $U_{L_1}$ nor $U_{L_2}$ from Example 3.1 — it's the one orthogonal to $\operatorname{Col}(U)$.
+*Hint*: Use cross-filling — write each matrix as a sum of rank-one pieces.
 :::
+
+**Solution**: Cross-fill $A$ into $r$ rank-one pieces and $B$ into $s$ rank-one pieces. Then $A + B$ is a sum of $r + s$ rank-one pieces. A sum of $k$ rank-one matrices has rank at most $k$ (each piece adds at most 1 to the rank). Therefore $\operatorname{rank}(A+B) \leq r + s$. ∎
+
+::: example
+**Exercise C** (warm-up for P3.3 — Sylvester's inequality)
+
+Let $A$ be $m \times n$, $B$ be $n \times p$. Prove: $\operatorname{rank}(AB) \geq \operatorname{rank}(A) + \operatorname{rank}(B) - n$.
+
+*Hint*: From Lecture 6, $\operatorname{Null}(B) \subseteq \operatorname{Null}(AB)$, so $\dim(\operatorname{Null}(AB)) \geq \dim(\operatorname{Null}(B))$. But by how much can the null space grow?
+:::
+
+**Solution**: The key insight is that $\operatorname{Null}(AB)/\operatorname{Null}(B)$ corresponds (via $B$) to vectors in $\operatorname{Col}(B) \cap \operatorname{Null}(A)$.
+
+More precisely: $\operatorname{rank}(AB) = \operatorname{rank}(B) - \dim(\operatorname{Null}(A) \cap \operatorname{Col}(B))$.
+
+Since $\operatorname{Null}(A) \cap \operatorname{Col}(B) \subseteq \operatorname{Null}(A)$, we have $\dim(\operatorname{Null}(A) \cap \operatorname{Col}(B)) \leq n - \operatorname{rank}(A)$.
+
+Therefore: $\operatorname{rank}(AB) \geq \operatorname{rank}(B) - (n - \operatorname{rank}(A)) = \operatorname{rank}(A) + \operatorname{rank}(B) - n$. ∎
 
 ---
 
-## Challenging Problem (Remaining Time)
+### Practice 3: Four Subspaces and Orthogonality (10 min)
+
+*Prepares for HW2 Problems 4, 5, 6*
 
 ::: example
-**Challenge: Finding a Basis of $\operatorname{Col}(U) \cap \operatorname{Null}(V)$**
+**Exercise** (warm-up for P5)
 
-**Given**: $U = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix}$ ($4 \times 3$, rank 3), $\quad V = \begin{pmatrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 0 & -1 \end{pmatrix}$ ($2 \times 4$, rank 2)
+Let $A$ be any $m \times n$ real matrix. Show that $\operatorname{Null}(A^T A) = \operatorname{Null}(A)$.
 
-**Goal**: Find a basis for $\operatorname{Col}(U) \cap \operatorname{Null}(V)$.
-
-**Method** (from Topic 1 proof):
-
-**Step 1**: Compute $VU$:
-$$VU = \begin{pmatrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 0 & -1 \end{pmatrix}\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 & -1 \\ -1 & 0 & 0 \end{pmatrix}$$
-
-**Step 2**: Find $\operatorname{Null}(VU)$ by cross-filling $(VU \mid \mathbf{0})$:
-
-Pivot at $(1,1)$: row $(1, 0, -1)$, column $\begin{pmatrix}1\\-1\end{pmatrix}$.
-
-$R_1 = \frac{1}{1}\begin{pmatrix}1\\-1\end{pmatrix}(1\;\; 0\;\; {-1}) = \begin{pmatrix} 1 & 0 & -1 \\ -1 & 0 & 1\end{pmatrix}$
-
-Remainder: $\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$
-
-Pivot at $(2,3)$: gives equation $x_3 = 0$.
-
-From $R_1$: $x_1 - x_3 = 0 \Rightarrow x_1 = x_3 = 0$.
-
-Free variable: $x_2$. So $\operatorname{Null}(VU) = \operatorname{span}\left\{\begin{pmatrix}0\\1\\0\end{pmatrix}\right\}$.
-
-**Step 3**: Map through $U$:
-
-$$U\begin{pmatrix}0\\1\\0\end{pmatrix} = \begin{pmatrix}0\\1\\0\\1\end{pmatrix}$$
-
-**Answer**: $\operatorname{Col}(U) \cap \operatorname{Null}(V) = \operatorname{span}\left\{\begin{pmatrix}0\\1\\0\\1\end{pmatrix}\right\}$.
-
-**Verify**: $\begin{pmatrix}0\\1\\0\\1\end{pmatrix} \in \operatorname{Col}(U)$? Yes, $U\begin{pmatrix}0\\1\\0\end{pmatrix} = \begin{pmatrix}0\\1\\0\\1\end{pmatrix}$ ✓
-
-$\begin{pmatrix}0\\1\\0\\1\end{pmatrix} \in \operatorname{Null}(V)$? $V\begin{pmatrix}0\\1\\0\\1\end{pmatrix} = \begin{pmatrix}0\\0\end{pmatrix}$ ✓
-
-**Also**: $\operatorname{rank}(VU) = 3 - 1 = 2$, confirmed by the cross-filling above. ✓
+*Hint*: One direction is easy ($\operatorname{Null}(A) \subseteq \operatorname{Null}(A^TA)$). For the other, try computing $\|A\mathbf{x}\|^2$ when $A^TA\mathbf{x} = \mathbf{0}$.
 :::
+
+Let students work on this (3 min), then discuss:
+
+**Solution**:
+
+($\subseteq$ easy direction): If $A\mathbf{x} = \mathbf{0}$, then $A^TA\mathbf{x} = A^T\mathbf{0} = \mathbf{0}$.
+
+($\supseteq$ key direction): If $A^TA\mathbf{x} = \mathbf{0}$, multiply both sides on the left by $\mathbf{x}^T$:
+
+$$\mathbf{x}^T A^T A \mathbf{x} = 0 \implies (A\mathbf{x})^T(A\mathbf{x}) = 0 \implies \|A\mathbf{x}\|^2 = 0 \implies A\mathbf{x} = \mathbf{0}.$$
+
+Therefore $\operatorname{Null}(A^TA) = \operatorname{Null}(A)$. ∎
+
+::: remark
+**Why this matters**: By rank-nullity, same null space → same rank. So $\operatorname{rank}(A^TA) = \operatorname{rank}(A)$. This is HW2 Problem 5!
+:::
+
+::: example
+**Exercise** (warm-up for P6.1)
+
+Let $A$ be $m \times n$ and $B$ be $n \times p$. If $AB = 0$ (the zero matrix), show that $\operatorname{rank}(A) + \operatorname{rank}(B) \leq n$.
+
+*Hint*: What is the relationship between $\operatorname{Col}(B)$ and $\operatorname{Null}(A)$?
+:::
+
+**Solution**: If $AB = 0$, then for every column $\mathbf{b}_j$ of $B$: $A\mathbf{b}_j = \mathbf{0}$. So every column of $B$ is in $\operatorname{Null}(A)$, meaning $\operatorname{Col}(B) \subseteq \operatorname{Null}(A)$.
+
+Taking dimensions: $\operatorname{rank}(B) \leq \dim(\operatorname{Null}(A)) = n - \operatorname{rank}(A)$.
+
+Rearranging: $\operatorname{rank}(A) + \operatorname{rank}(B) \leq n$. ∎
 
 ---
 
 ## Time Management Recommendations
 
-| Topic | Suggested Time | Adjustment Strategy |
-|-------|---------------|---------------------|
-| Topic 1: Rank of $VU$ | 12 min | Can compress proof to sketch (state bijection, skip surjectivity detail) |
+| Topic | Suggested Time | Notes |
+|-------|---------------|-------|
+| Topic 1: Rank of $VU$ | 12 min | Can compress proof to sketch if needed |
 | Topic 2A: Block diagonal | 4 min | Can state without proof if short on time |
-| Topic 2B: Invertible factors | 4 min | **Essential** — used in Topic 2C and 3 |
-| Topic 2C: $I-AB$, $I-BA$ | 10 min | Can cut eigenvalue remark if short; the two identities + consequence are core |
-| Topic 3: Left/right inverses | 20 min | **Core** — if short on time, cut Moore-Penrose and state as preview |
-| Challenge | remaining | Skip if no time; assign as exercise |
+| Topic 2B: Invertible factors | 4 min | **Essential** — used in rank inequality proofs |
+| Practice 1: $\operatorname{Null}(A) \cap \operatorname{Col}(B)$ | 10 min | Let students attempt before showing solution |
+| Practice 2: Rank inequalities | 10 min | Focus on Exercises A and C |
+| Practice 3: $\operatorname{Null}(A^TA)$ and $AB=0$ | 10 min | Direct HW2 preparation |
 
 ---
 
@@ -474,17 +321,17 @@ $\begin{pmatrix}0\\1\\0\\1\end{pmatrix} \in \operatorname{Null}(V)$? $V\begin{pm
 
 **Fix**: $UV$ is $m \times n$ (big, not square). $VU$ is $r \times r$ (square, can be invertible). Only $VU$ *can* be invertible, and only when $\operatorname{Null}(V) \cap \operatorname{Col}(U) = \{\mathbf{0}\}$.
 
-### Mistake 2: "Left inverse is unique"
+### Mistake 2: Forgetting the transpose in rank inequalities
 
-**Symptom**: Computing one left inverse and assuming it's the only one.
+**Symptom**: Proving $\operatorname{rank}(AB) \leq \operatorname{rank}(A)$ but getting stuck on $\operatorname{rank}(AB) \leq \operatorname{rank}(B)$.
 
-**Fix**: Example 3.1 shows two different left inverses. Emphasize: you must specify the null space (= complement) to get uniqueness.
+**Fix**: Apply the column space argument to $(AB)^T = B^T A^T$: $\operatorname{Col}((AB)^T) \subseteq \operatorname{Col}(B^T)$, so $\operatorname{rank}(AB) = \operatorname{rank}((AB)^T) \leq \operatorname{rank}(B^T) = \operatorname{rank}(B)$.
 
-### Mistake 3: Thinking $U_L U = I$ implies $U U_L = I$
+### Mistake 3: Using inner product without realizing it
 
-**Symptom**: Treating left inverse as a two-sided inverse.
+**Symptom**: In the $\operatorname{Null}(A^TA) = \operatorname{Null}(A)$ proof, students may not see why $A^TA\mathbf{x} = 0$ implies $A\mathbf{x} = 0$.
 
-**Fix**: $U$ is $m \times r$, $U_L$ is $r \times m$. $U_L U = I_r$ is $r \times r$. $U U_L$ is $m \times m$ — it cannot be $I_m$ because $\operatorname{rank}(U U_L) \leq r < m$.
+**Fix**: The trick is $\mathbf{x}^T(A^TA\mathbf{x}) = (A\mathbf{x})^T(A\mathbf{x}) = \|A\mathbf{x}\|^2$. A vector with zero length must be zero. This only works over the reals!
 
 ---
 
@@ -493,25 +340,13 @@ $\begin{pmatrix}0\\1\\0\\1\end{pmatrix} \in \operatorname{Null}(V)$? $V\begin{pm
 1. **Rank formula**: "$U$ is $4 \times 2$ rank 2, $V$ is $2 \times 4$ rank 2. What are the possible values of $\operatorname{rank}(VU)$?"
    - Expected: $\operatorname{rank}(VU) = 2 - \dim(\operatorname{Null}(V) \cap \operatorname{Col}(U))$. Since $\operatorname{Null}(V)$ has dim 2 in $\mathbb{R}^4$ and $\operatorname{Col}(U)$ has dim 2 in $\mathbb{R}^4$, the overlap can be 0, 1, or 2. So rank can be 2, 1, or 0.
 
-2. **$I-AB$ trick**: "If $AB = I$ (i.e., $I - AB = 0$, not invertible), what does the trick tell us about $BA$?"
-   - Expected: $I - BA$ is also not invertible. So $BA$ has eigenvalue 1. But $BA$ might not equal $I$! (It does when $A, B$ are square.)
+2. **Rank inequality**: "If $A$ is $3 \times 5$ with rank 3 and $B$ is $5 \times 4$ with rank 4, what bounds do we have on $\operatorname{rank}(AB)$?"
+   - Expected: Upper bound: $\min\{3, 4\} = 3$. Lower bound (Sylvester): $3 + 4 - 5 = 2$. So $2 \leq \operatorname{rank}(AB) \leq 3$.
 
-3. **Left inverse**: "A $5 \times 3$ matrix $U$ has rank 3. How many left inverses does it have?"
-   - Expected: Infinitely many — one for each complement of $\operatorname{Col}(U)$ in $\mathbb{R}^5$.
-
-4. **Moore-Penrose**: "Why is $(U^T U)^{-1}U^T$ special among all left inverses?"
-   - Expected: It's the unique left inverse whose null space is $\operatorname{Null}(U^T) = \operatorname{Col}(U)^\perp$ — the orthogonal complement. Any other left inverse has a "tilted" null space.
+3. **Null space**: "If $AB = 0$, does $BA = 0$?"
+   - Expected: No! $AB = 0$ means $\operatorname{Col}(B) \subseteq \operatorname{Null}(A)$, but says nothing about $\operatorname{Col}(A)$ vs $\operatorname{Null}(B)$.
 
 ---
 
-## Connections to Future Material
-
-- **Lecture 7–8 (Projections)**: $UU_L$ is a projection ($P^2 = P$). Different left inverses give different projections onto $\operatorname{Col}(U)$. The Moore-Penrose choice gives the **orthogonal** projection.
-- **Lecture 8 (Theorem 4.4)**: Full rank square ⟺ invertible — the result we referenced but did not prove in this tutorial.
-- **Lecture 10 (Constructing Projections)**: The formula $P = B(AB)^{-1}A$ is exactly the left-inverse construction in disguise.
-- **Chapter 5 (Eigenvalues)**: The $\lambda I - AB$ / $\lambda I - BA$ equivalence means $AB$ and $BA$ share all nonzero eigenvalues.
-
----
-
-**Last Updated**: 2026-03-24
+**Last Updated**: 2026-03-25
 **Contact**: For questions about these suggestions, reach out to the course instructor or head TA.
