@@ -11,6 +11,7 @@ on:
       - 'colloquium/**'
       - 'seminar/**'
       - 'courses/**'
+      - 'public/**'
       - 'docs/**'
       - 'package.json'
       - 'package-lock.json'
