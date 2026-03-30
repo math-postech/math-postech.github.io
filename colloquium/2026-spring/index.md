@@ -24,7 +24,7 @@
 | May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces (Undetermined) |
 | May 15     | Minsung Kim (POSTECH)           | Rapid mixing for random walks on nilmanifolds |
 | May 22     | Euiyong Park (University of Seoul) | Monoidal categorifications for cluster algebras (Online) |
-| May 29     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
+| Jun. 5     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
 
 > **Online**: The talk will be held via Zoom. A Zoom link will be provided on this page before the talk.
 >
@@ -79,6 +79,8 @@ This is based on joint works with Jack H. Koolen, Chenhui Lv and Greg Markowsky.
 ### Apr. 3 - Hyung Tae Choi (Chung-Ang University)
 **Title:** Nonlinear $L_{1}$ Control and Set-invariance-based Approaches
 
+Zoom link: [https://us06web.zoom.us/j/4564461054?pwd=REDACTED&omn=82753130701](https://us06web.zoom.us/j/4564461054?pwd=REDACTED&omn=82753130701)
+
 **Abstract:** In this talk, we discuss the mathematical foundations and applications for nonlinear $L_1$ control, a framework for robust control of systems subject to disturbances, with broad relevance to nonlinear control systems such as robots, helicopters, and autonomous vehicles. We begin by giving a mathematical definition of nonlinear $L_1$ control and reviewing several recent developments in this area. Building on this framework, we present sufficient conditions for ensuring $L_1$ performance, as well as existence results for controllers that achieve such performance. These results are developed using, respectively, set invariance principles and set-valued analysis, which are the necessary mathematical backgrounds on these topics. We further introduce a recent barrier-function-based algorithm for the synthesis of $L_1$ state-feedback controllers. To illustrate the applicability of the theory, we present simulation results with helicopter dynamics. Finally, we conclude with several directions for future research.
 
 ---
@@ -125,7 +127,7 @@ This is joint work with Dmitry Dolgopyat and Spencer Durham.
 
 ---
 
-### May 29 - Kyu-Hwan Lee (University of Connecticut)
+### Jun. 5 - Kyu-Hwan Lee (University of Connecticut)
 **Title:** Advancing combinatorics and number theory with AI
 
 **Abstract:**
