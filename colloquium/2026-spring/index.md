@@ -726,7 +726,7 @@ Sincerely,
 Qirui Li
 --- END DRAFT ---
 
---- DRAFT: Apr. 3 Weekly Announcement --- SEND DATE: Mon 2026-03-30 ---
+--- DRAFT: Apr. 3 Weekly Announcement --- SENT: 2026-03-30, ID 19d3c69c0f6f6dcc ---
 From: Qirui Li <qiruili@postech.ac.kr>
 To: math-prof@postech.ac.kr
 Cc: htchoi@cau.ac.kr, bogwang.jeon@postech.ac.kr, kyoungseog@postech.ac.kr, kimminju159@postech.ac.kr, shinby9865@postech.ac.kr, www0559@postech.ac.kr
@@ -1229,7 +1229,7 @@ Track what has been sent so future agents don't duplicate.
 
 UPCOMING SEND SCHEDULE:
   ✓ Sat 2026-03-28 — Apr. 3 Food Preference to Hyung Tae Choi (ID 19d32159e2cd6235)
-  □ Mon 2026-03-30 — Apr. 3 Weekly Announcement
+  ✓ Mon 2026-03-30 — Apr. 3 Weekly Announcement (ID 19d3c69c0f6f6dcc)
   □ Fri 2026-04-03 — Apr. 3 Day-of Reminder
   □ Thu 2026-04-17 — Apr. 24 Bus Schedule Request to admins (IBS-CGP)
   □ Sat 2026-04-18 — Apr. 24 Food Preference to Byung Hee An
