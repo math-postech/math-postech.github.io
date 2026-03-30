@@ -24,7 +24,7 @@
 | May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces (Undetermined) |
 | May 15     | Minsung Kim (POSTECH)           | Rapid mixing for random walks on nilmanifolds |
 | May 22     | Euiyong Park (University of Seoul) | Monoidal categorifications for cluster algebras (Online) |
-| May 29     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
+| Jun. 5     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
 
 > **Online**: The talk will be held via Zoom. A Zoom link will be provided on this page before the talk.
 >
@@ -79,6 +79,8 @@ This is based on joint works with Jack H. Koolen, Chenhui Lv and Greg Markowsky.
 ### Apr. 3 - Hyung Tae Choi (Chung-Ang University)
 **Title:** Nonlinear $L_{1}$ Control and Set-invariance-based Approaches
 
+Zoom link: [https://us06web.zoom.us/j/4564461054?pwd=dE0cORLr3sTaDw0zMBd04E33va1EL5.1&omn=82753130701](https://us06web.zoom.us/j/4564461054?pwd=dE0cORLr3sTaDw0zMBd04E33va1EL5.1&omn=82753130701)
+
 **Abstract:** In this talk, we discuss the mathematical foundations and applications for nonlinear $L_1$ control, a framework for robust control of systems subject to disturbances, with broad relevance to nonlinear control systems such as robots, helicopters, and autonomous vehicles. We begin by giving a mathematical definition of nonlinear $L_1$ control and reviewing several recent developments in this area. Building on this framework, we present sufficient conditions for ensuring $L_1$ performance, as well as existence results for controllers that achieve such performance. These results are developed using, respectively, set invariance principles and set-valued analysis, which are the necessary mathematical backgrounds on these topics. We further introduce a recent barrier-function-based algorithm for the synthesis of $L_1$ state-feedback controllers. To illustrate the applicability of the theory, we present simulation results with helicopter dynamics. Finally, we conclude with several directions for future research.
 
 ---
@@ -125,7 +127,7 @@ This is joint work with Dmitry Dolgopyat and Spencer Durham.
 
 ---
 
-### May 29 - Kyu-Hwan Lee (University of Connecticut)
+### Jun. 5 - Kyu-Hwan Lee (University of Connecticut)
 **Title:** Advancing combinatorics and number theory with AI
 
 **Abstract:**
@@ -240,7 +242,13 @@ Apr. 3 - Hyung Tae Choi
   inviter: bogwang.jeon@postech.ac.kr (Bogwang Jeon)
   thread: QgrcJHsTkxcmGJZGGpSgwGfFmBZVFhXptBv
   talk_type: in-person
+  talk_language: English (confirmed 2026-03-29)
+  food_preference: no restrictions, prefers 한옥정
   sheet_id: 1GW_lMBdtRgK4xL_k-sVJkekUTPksvfg8b0lqbdDlgKY
+  zoom: https://us06web.zoom.us/j/4564461054?pwd=dE0cORLr3sTaDw0zMBd04E33va1EL5.1&omn=82753130701
+  zoom_id: 456 446 1054
+  zoom_pw: postech11
+  note: zoom link received from 장세영 on 2026-03-30
 
 Apr. 24 - Byung Hee An
   affiliation: Kyungpook National University (Math Education dept)
@@ -270,9 +278,9 @@ May 15 - Minsung Kim
   inviter: N/A (internal speaker)
   talk_type: in-person
   sheet_id: 17XXECPSJNv9nm6XsXgdB2XLwXSaMZxK18qogUIsZOUk
-  note: abstract received 2026-03-29
-        Kyu-Hwan Lee asked to swap to May 15; Valentin emailed Minsung
-        about swapping on 2026-03-24 — status unknown, may change
+  note: abstract received 2026-03-26 (title: Rapid mixing for random walks on nilmanifolds)
+        Swap DECLINED — Minsung cannot switch to May 29 (traveling that week)
+        Confirmed staying on May 15
 
 May 22 - Euiyong Park
   affiliation: University of Seoul
@@ -285,17 +293,21 @@ May 22 - Euiyong Park
   sheet_id: N/A (online talks don't need dinner sheets)
   note: need Zoom link before announcement
 
-May 29 - Kyu-Hwan Lee
+Jun. 5 - Kyu-Hwan Lee (RESCHEDULED from May 29)
   affiliation: University of Connecticut
   field: number_theory, representation, machine_learning
   email: khlee@math.uconn.edu
   inviter: buciumas@postech.ac.kr (Valentin Buciumas)
   thread: QgrcJHsNhNVBCsKFdsGbqTMHKsGQklWZNkV
   url: https://khlee-math.github.io/
-  talk_type: in-person (but he mentioned needing to travel back to US
-             that week — asked to swap to May 15; status pending)
+  talk_type: in-person
   sheet_id: 1Rh0-rZQsRLGh7mZU8cV3OHtqWKrmkhVaCkAaoY9xdgE
-  note: if swap happens, update dates in sheets and this database
+  note: moved from May 29 → Jun. 5 (exam week, but no Friday exams)
+        reason: personal issues, can't make May 29 in person
+        options were: May 29 online or Jun. 5 in-person
+        Valentin prefers in-person; Kyoung-Seog and Jinsu agreed (2026-03-28)
+        Valentin will host — no extra work needed from others
+        swap with Minsung was also attempted but declined
 
 ================================================================================
 §3  GOOGLE SHEETS (sign-up / dinner sheets)
@@ -313,7 +325,7 @@ Sheet links (all shareable — anyone with link can edit):
   Apr. 24 Byung Hee An:    https://docs.google.com/spreadsheets/d/1R-52EYGVkZZ4sT2Ox8ZPnG0JLCwf5NA7OqL52r0V7sg/edit
   May 1   Ziquan Yang:     https://docs.google.com/spreadsheets/d/1txP1A_a55gXuGKd8veuIgae4mUIuvPe_4t-bpPNhF4g/edit
   May 15  Minsung Kim:     https://docs.google.com/spreadsheets/d/17XXECPSJNv9nm6XsXgdB2XLwXSaMZxK18qogUIsZOUk/edit
-  May 29  Kyu-Hwan Lee:    https://docs.google.com/spreadsheets/d/1Rh0-rZQsRLGh7mZU8cV3OHtqWKrmkhVaCkAaoY9xdgE/edit
+  Jun. 5  Kyu-Hwan Lee:    https://docs.google.com/spreadsheets/d/1Rh0-rZQsRLGh7mZU8cV3OHtqWKrmkhVaCkAaoY9xdgE/edit
 
 Online talks (Mar. 20, May 22) do NOT have sheets — no dinner for online.
 
@@ -1104,15 +1116,15 @@ Time: 3pm(Korean Time)
 Venue: Online (Zoom)
 --- END DRAFT ---
 
-============ MAY 29 — KYU-HWAN LEE (in-person, PENDING SWAP) ============
+============ JUN. 5 — KYU-HWAN LEE (in-person, RESCHEDULED from May 29) ============
 
---- DRAFT: May 29 Food Preference --- SEND DATE: Sat 2026-05-23 ---
-NOTE: Kyu-Hwan Lee mentioned travel conflict — may swap to May 15 or go online.
-      VERIFY with user before sending. If swap happened, update all dates.
+--- DRAFT: Jun. 5 Food Preference --- SEND DATE: Sat 2026-05-30 ---
+NOTE: Rescheduled from May 29 to Jun. 5 (exam week, no Friday exams).
+      Valentin hosting. Kyoung-Seog & Jinsu approved move on 2026-03-28.
 From: Qirui Li <qiruili@postech.ac.kr>
 To: khlee@math.uconn.edu
 Cc: buciumas@postech.ac.kr, kyoungseog@postech.ac.kr, kimminju159@postech.ac.kr, shinby9865@postech.ac.kr, www0559@postech.ac.kr
-Subject: Food Preference for POSTECH colloquium dinner 05/29
+Subject: Food Preference for POSTECH colloquium dinner 06/05
 
 Dear Professor Lee,
 
@@ -1136,11 +1148,11 @@ Sincerely,
 Qirui Li
 --- END DRAFT ---
 
---- DRAFT: May 29 Weekly Announcement --- SEND DATE: Mon 2026-05-25 ---
+--- DRAFT: Jun. 5 Weekly Announcement --- SEND DATE: Mon 2026-06-01 ---
 From: Qirui Li <qiruili@postech.ac.kr>
 To: math-prof@postech.ac.kr
 Cc: khlee@math.uconn.edu, buciumas@postech.ac.kr, kyoungseog@postech.ac.kr, kimminju159@postech.ac.kr, shinby9865@postech.ac.kr, www0559@postech.ac.kr
-Subject: Colloquium 05-29 15:00 Kyu-Hwan Lee (University of Connecticut) Advancing combinatorics and number theory with AI
+Subject: Colloquium 06-05 15:00 Kyu-Hwan Lee (University of Connecticut) Advancing combinatorics and number theory with AI
 
 Hello everyone,
 
@@ -1154,23 +1166,23 @@ https://docs.google.com/spreadsheets/d/1Rh0-rZQsRLGh7mZU8cV3OHtqWKrmkhVaCkAaoY9x
 Best wishes,
 Qirui Li
 
-May 29 - Kyu-Hwan Lee (University of Connecticut)
+Jun. 5 - Kyu-Hwan Lee (University of Connecticut)
 Title: Advancing combinatorics and number theory with AI
 
 Abstract: In this talk, I will discuss how machine learning techniques and AI tools can be applied to datasets arising in combinatorics and number theory, with the goal of uncovering hidden structures, generating conjectures, and guiding mathematical exploration.
 
-Date: Friday, 2026/05/29
+Date: Friday, 2026/06/05
 Time: 3pm
 Venue: room 404
 
 NOTE for CC: Lee's inviter is buciumas (Valentin), so 6 people in CC.
 --- END DRAFT ---
 
---- DRAFT: May 29 Day-of Reminder --- SEND DATE: Fri 2026-05-29 morning ---
+--- DRAFT: Jun. 5 Day-of Reminder --- SEND DATE: Fri 2026-06-05 morning ---
 From: Qirui Li <qiruili@postech.ac.kr>
 To: math-prof@postech.ac.kr
 Cc: khlee@math.uconn.edu, buciumas@postech.ac.kr, kyoungseog@postech.ac.kr, kimminju159@postech.ac.kr, shinby9865@postech.ac.kr, www0559@postech.ac.kr
-Subject: Reminder: Colloquium 05-29 15:00 Kyu-Hwan Lee (University of Connecticut) — Advancing combinatorics and number theory with AI
+Subject: Reminder: Colloquium 06-05 15:00 Kyu-Hwan Lee (University of Connecticut) — Advancing combinatorics and number theory with AI
 
 Hello everyone,
 
@@ -1184,12 +1196,12 @@ https://docs.google.com/spreadsheets/d/1Rh0-rZQsRLGh7mZU8cV3OHtqWKrmkhVaCkAaoY9x
 Best wishes,
 Qirui Li
 
-May 29 - Kyu-Hwan Lee (University of Connecticut)
+Jun. 5 - Kyu-Hwan Lee (University of Connecticut)
 Title: Advancing combinatorics and number theory with AI
 
 Abstract: In this talk, I will discuss how machine learning techniques and AI tools can be applied to datasets arising in combinatorics and number theory, with the goal of uncovering hidden structures, generating conjectures, and guiding mathematical exploration.
 
-Date: Friday, 2026/05/29
+Date: Friday, 2026/06/05
 Time: 3pm
 Venue: Room 404, Mathematical Science Building, POSTECH
 --- END DRAFT ---
@@ -1238,14 +1250,14 @@ UPCOMING SEND SCHEDULE:
   □ Sat 2026-04-25 — May 1 Food Preference to Ziquan Yang (if in-person)
   □ Mon 2026-04-27 — May 1 Weekly Announcement (confirm in-person/online first)
   □ Fri 2026-05-01 — May 1 Day-of Reminder
-  □ Mon 2026-05-11 — May 15 Weekly Announcement (need abstract first, check swap)
+  □ Mon 2026-05-11 — May 15 Weekly Announcement (Minsung Kim, POSTECH internal)
   □ Fri 2026-05-15 — May 15 Day-of Reminder
   □ Thu 2026-05-14 — May 22 Zoom Link Request to 장세영
   □ Mon 2026-05-18 — May 22 Weekly Announcement (ONLINE, need Zoom link)
   □ Fri 2026-05-22 — May 22 Day-of Reminder (ONLINE)
-  □ Sat 2026-05-23 — May 29 Food Preference to Kyu-Hwan Lee (check swap)
-  □ Mon 2026-05-25 — May 29 Weekly Announcement
-  □ Fri 2026-05-29 — May 29 Day-of Reminder
+  □ Sat 2026-05-30 — Jun. 5 Food Preference to Kyu-Hwan Lee
+  □ Mon 2026-06-01 — Jun. 5 Weekly Announcement
+  □ Fri 2026-06-05 — Jun. 5 Day-of Reminder
 
 ================================================================================
 §12  COMMON PITFALLS & GOTCHAS
