@@ -68,6 +68,7 @@ Detailed teaching suggestions to help TAs prepare engaging tutorial sessions ali
 | **Week 3** | Mar 12 | Cancellation Properties and Rank Conditions | [View Details](./tutorials/week03-cancellation-rank.md) |
 | **Week 4** | Mar 19 | Composition Properties of Cancelable Matrices | [View Details](./tutorials/week04-cancelable-composition.md) |
 | **Week 5** | Mar 26 | Geometry of Rank, Inverses, and Subspace Complements | [View Details](./tutorials/week05-geometry-rank-inverse.md) |
+| **Week 6** | Apr 2 | Projection Structure | [View Details](./tutorials/week06-projection-structure.md) |
 
 ---
 
