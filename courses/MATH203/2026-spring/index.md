@@ -207,7 +207,7 @@ Lecture notes are organized by topic and will be added throughout the semester.
 - [Lecture 7: Linear Transformation and Projection](./notes/linear-transformation-and-projection.md) — Linear transformations, projection operators ($P^2=P$), sunlight-floor geometric model, interchanging property ($\operatorname{Col}(P) = \operatorname{Null}(I-P)$), disjoint property, orthogonal projections ($P^2=P, P=P^T \Leftrightarrow \operatorname{Col}(P) \perp \operatorname{Null}(P)$) — **[Slides](files/lecture07-slides.pdf)**
 - [Lecture 8: Cross-Filling Projections](./notes/cross-filling-projections.md) — **[Slides](files/lecture08-slides.pdf)** — Cross-filling a projection produces rank-1 projections automatically, $P=UV$ implies $VU=I$, rank(P) = trace(P), rank-1 characterization (any two of {rank=1, trace=1, $P^2=P$} imply third), $UV=I$ forces square matrices, full rank $\Leftrightarrow$ invertible
 - [Lecture 9: Compatible Projections](./notes/compatible-projections.md) — **[Slides](files/lecture09-slides.pdf)** — Compatible families ($P_iP_j=0$), projection decomposition theorem (rank condition $\Rightarrow$ automatic compatibility), cross-filling and inner cross-filling methods, diagonal cross-filling for orthogonal projections
-- [Lecture 10: Constructing Projections](./notes/constructing-projections.md) — Uniqueness theorem, construction formula $P = B(AB)^{-1}A$, orthogonal projection formula $P=B(B^TB)^{-1}B^T$, inner diagonal cross-filling, least squares
+- [Lecture 10: Constructing Projections](./notes/constructing-projections.md) — **[Slides](files/lecture10-slides.pdf)** — Uniqueness theorem, construction formula $P = B(AB)^{-1}A$, orthogonal projection formula $P=B(B^TB)^{-1}B^T$, inner diagonal cross-filling, least squares
 
 ---
 
