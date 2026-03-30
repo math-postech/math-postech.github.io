@@ -101,67 +101,7 @@ This is what makes Lecture 8's theorem ($P^2 = P \Rightarrow VU = I$) so remarka
 
 ---
 
-## Problem 3: Cross-Filling a Projection (Worked Example)
-
-Consider the projection from Lecture 8:
-
-$$P = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}$$
-
-**(a)** Verify $\operatorname{rank}(P) = \operatorname{trace}(P)$.
-
-::: details Solution
-$\operatorname{trace}(P) = 0 + 1 + 1 = 2$.
-
-$\operatorname{rank}(P) = 2$ (rows 2 and 3 are linearly independent; row 1 is zero).
-
-Equal! ✓
-:::
-
-**(b)** Cross-fill $P = UV$ and verify $VU = I_2$.
-
-::: details Solution
-Cross-fill at pivot $(2,2)$ with value $1$:
-
-$$R_1 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}\begin{pmatrix} -1 & 1 & 0 \end{pmatrix}$$
-
-Remainder $P - R_1 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix}$. Cross-fill at pivot $(3,3)$:
-
-$$R_2 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\begin{pmatrix} -1 & 0 & 1 \end{pmatrix}$$
-
-Product form:
-
-$$U = \begin{pmatrix} 0 & 0 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad V = \begin{pmatrix} -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}$$
-
-$$VU = \begin{pmatrix} -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}\begin{pmatrix} 0 & 0 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I_2 \quad ✓$$
-:::
-
-**(c)** Verify that the rank-1 pieces $R_1, R_2$ are each projections and satisfy $R_1 R_2 = 0$.
-
-::: details Solution
-$R_1^2 = \begin{pmatrix} 0 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}^2$: row 2 times column 1 gives $(-1)(0)+(1)(-1)+(0)(0) = -1$, row 2 times column 2 gives $(-1)(0)+(1)(1)+(0)(0) = 1$. So $R_1^2 = R_1$. ✓
-
-$R_2^2 = R_2$ similarly. ✓
-
-$R_1 R_2$: Row 2 of $R_1$ is $(-1, 1, 0)$. Applied to columns of $R_2$: $(-1)(0)+(1)(0)+(0)(-1) = 0$, etc. All entries zero. $R_1 R_2 = 0$. ✓
-
-This confirms Lecture 8's discovery: cross-filling a projection automatically produces a compatible family.
-:::
-
-**(d)** Is $P$ an orthogonal projection?
-
-::: details Solution
-$P^T = \begin{pmatrix} 0 & -1 & -1 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \neq P$.
-
-So $P$ is **not** an orthogonal projection — it is an oblique projection.
-
-$\operatorname{Col}(P) = \operatorname{span}\left\{\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\right\}$ (the $yz$-plane), $\operatorname{Null}(P) = \operatorname{span}\left\{\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}\right\}$.
-
-The null direction $(1,1,1)$ is not perpendicular to the $yz$-plane, confirming obliqueness.
-:::
-
----
-
-## Problem 4 (Challenge): A Characterization of Projections by Rank
+## Problem 3 (Challenge): A Characterization of Projections by Rank
 
 Prove: $\operatorname{rank}(I - P) + \operatorname{rank}(P) = n$ if and only if $P^2 = P$.
 
@@ -248,24 +188,22 @@ For non-projections, $\operatorname{rank}(I-P) + \operatorname{rank}(P) > n$ —
 
 | Problem | Suggested Time | Priority |
 |---------|---------------|----------|
-| Problem 1 (sum of projections) | 15 min | Core — the main result of this tutorial |
-| Problem 2 (rank-1 characterization + counterexample) | 12 min | Core — (a) is a warm-up proof, (b) shows the boundary |
-| Problem 3 (cross-filling worked example) | 10 min | Students compute $VU$, verify $R_i^2 = R_i$; reinforces Lecture 8 |
-| Problem 4 (rank characterization) | 13 min | Challenge — defer if short on time |
+| Problem 1 (sum of projections) | 20 min | Core — the main result of this tutorial |
+| Problem 2 (rank-1 characterization + counterexample) | 15 min | Core — (a) is a warm-up proof, (b) shows the boundary |
+| Problem 3 (rank characterization) | 15 min | Challenge — defer if short on time |
 
 ### Suggested flow
 
 1. **Start with Problem 2** as a warm-up — it reviews Lecture 8's Corollary 4.1 and the counterexample in (b) motivates "what makes projections special."
-2. **Problem 3** reinforces the $VU = I$ mechanism and compatible family through the Lecture 8 example. Let students do the cross-filling and compute $VU$ themselves. Part (d) gives a concrete oblique projection.
-3. **Problem 1** is the main result: students discover the compatible family condition. Let them expand $(P_1+P_2)^2$ themselves before showing the right/left multiply trick.
-4. **Problem 4** only if time permits. The ($\Leftarrow$) direction is a quick application of rank = trace. The ($\Rightarrow$) direction uses block matrix rank techniques from Lecture 9 slides and can be presented as a "preview" of the cross-filling philosophy applied to block matrices.
+2. **Problem 1** is the main result: students discover the compatible family condition. Let them expand $(P_1+P_2)^2$ themselves before showing the right/left multiply trick.
+3. **Problem 3** only if time permits. The ($\Leftarrow$) direction is a quick application of rank = trace. The ($\Rightarrow$) direction uses block matrix rank techniques from Lecture 9 slides and can be presented as a "preview" of the cross-filling philosophy applied to block matrices.
 
 ### Common mistakes
 
 - **Problem 1**: Students may stop at $P_1P_2 + P_2P_1 = 0$ and not realize this forces $P_1P_2 = 0$. The right/left multiply trick is the key insight. Emphasize that we need $\operatorname{char} \neq 2$.
 - **Problem 2(a)**: Students may try to verify $A^2 = A$ by brute force instead of using the $\mathbf{v}^T\mathbf{u} = 1$ shortcut. Remind them: for rank-1 matrices, everything reduces to a single scalar.
 - **Problem 2(b)**: The simplest counterexample is $I + N$ where $N$ is nilpotent (e.g., $\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$). If students struggle, suggest: "find a matrix with all diagonal entries 1 but $A^2 \neq A$."
-- **Problem 4**: The block rank equality $\operatorname{rank}\begin{pmatrix} I & A \\ B & C \end{pmatrix} = n + \operatorname{rank}(C - BA)$ is the key tool. Students may accept it on faith for now; it will be fully justified in later material on block elimination.
+- **Problem 3**: The block rank equality $\operatorname{rank}\begin{pmatrix} I & A \\ B & C \end{pmatrix} = n + \operatorname{rank}(C - BA)$ is the key tool. Students may accept it on faith for now; it will be fully justified in later material on block elimination.
 
 ---
 
