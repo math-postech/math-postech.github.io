@@ -210,6 +210,10 @@ Lecture notes are organized by topic and will be added throughout the semester.
 - [Lecture 9: Compatible Projections](./notes/compatible-projections.md) — **[Slides](files/lecture09-slides.pdf)** — Compatible families ($P_iP_j=0$), projection decomposition theorem (rank condition $\Rightarrow$ automatic compatibility), cross-filling and inner cross-filling methods, diagonal cross-filling for orthogonal projections
 - [Lecture 10: Constructing Projections](./notes/constructing-projections.md) — **[Slides](files/lecture10-slides.pdf)** — Uniqueness theorem, construction formula $P = B(AB)^{-1}A$, orthogonal projection formula $P=B(B^TB)^{-1}B^T$, inner diagonal cross-filling, least squares
 
+### Chapter 4: Applications
+
+- Lecture 11: Linear Regression — **[Slides](files/lecture11-slides.pdf)** — Data as geometry (measurements → point in $\mathbb{R}^n$, model → subspace), error = distance, best fit = orthogonal projection, normal equation via simultaneous row operations, cross-filling connection
+
 ---
 
 ## Support for Students with Disabilities
