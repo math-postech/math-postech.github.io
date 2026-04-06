@@ -252,16 +252,6 @@ This is the cross-filling alternative to Gram-Schmidt!
 5. **Problem 4**: Quick warm-up to recall diagonal cross-filling mechanics. Can be done on the board in 3 minutes.
 6. **Problem 5**: The main computational exercise. Let students work through (a)–(c) in pairs, verify (d) together. Emphasize: no Gram-Schmidt needed.
 
-### Midterm relevance
-
-This tutorial integrates several midterm topics:
-- **Cross-filling** (Ch1): the diagonal variant and inner cross-filling
-- **Left/right cancellation** (Ch2): left inverse exists ⟺ left cancelable ⟺ rank = columns
-- **Projections** (Ch3): $P^2 = P$, sunlight-floor model, orthogonal projections
-- **Construction formula** (Ch3): $P = B(AB)^{-1}A$ as a left-inverse construction
-
-Remind students: the midterm covers Chapters 1–3 (through §3.4). The construction formula (Lecture 10) is **not** on the midterm, but the underlying ideas (left inverses, projections) are.
-
 ### Common mistakes
 
 - **Confusing left and right inverses**: $LU = I$ (left inverse) vs $UR = I$ (right inverse). Left inverse for **thin** full-rank, right inverse for **fat** full-rank.
