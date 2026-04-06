@@ -3,7 +3,7 @@
 > **For**: Teaching Assistants conducting tutorial sessions (Apr 9, 2026)
 > **Related Lectures**: [Lecture 8: Cross-Filling Projections](../notes/cross-filling-projections.md), [Lecture 9: Compatible Projections](../notes/compatible-projections.md), [Lecture 10: Constructing Projections](../notes/constructing-projections.md)
 > **Duration**: 50 minutes
-> **Context**: This is the last tutorial before the midterm (Apr 13). The goal is to (1) connect projections with left/right inverses, and (2) review diagonal cross-filling as a computational tool. Both topics integrate key ideas from Chapters 1–3.
+> **Context**: The goal is to (1) connect projections with left/right inverses, emphasizing that a one-sided inverse is uniquely determined by a subspace, and (2) review diagonal cross-filling of orthogonal projections.
 
 ---
 
@@ -11,7 +11,7 @@
 
 ### Learning Goal
 
-Students understand that **every projection arises from a left inverse**, and conversely every left inverse produces a projection. Different left inverses of the same matrix give different projections onto the same column space — the choice of left inverse is the choice of "sunlight direction."
+Students understand that **every projection arises from a left inverse**, and conversely every left inverse produces a projection. The key principle: **a left inverse of $U$ is uniquely determined by its null space** — choosing a complement of $\operatorname{Col}(U)$ pins down exactly one left inverse.
 
 ### Problem 1: From Left Inverse to Projection (10 min)
 
@@ -62,46 +62,68 @@ $$P_2 = UL_2 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}\begin{pmatr
 :::
 
 ::: attention
-**The Key Correspondence**
+**One-Sided Inverses Are Determined by a Subspace**
 
-$$\boxed{\text{Left inverses of } U \quad \longleftrightarrow \quad \text{Projections onto } \operatorname{Col}(U)}$$
+$$\boxed{\text{Left inverses of } U \quad \longleftrightarrow \quad \text{Complements of } \operatorname{Col}(U)}$$
 
-- Every left inverse $L$ gives a projection $P = UL$ onto $\operatorname{Col}(U)$
-- The null space of $L$ determines the sunlight direction (= $\operatorname{Null}(P)$)
-- Different left inverses → same floor, different sunlight → different projections
+A left inverse $L$ of $U$ is **uniquely determined by its null space** $\operatorname{Null}(L)$.
+
+**Why?** Suppose $L_1$ and $L_2$ are two left inverses of $U$ with the same null space $W$. For any $\mathbf{x} \in \mathbb{R}^m$, decompose $\mathbf{x} = \mathbf{v} + \mathbf{w}$ where $\mathbf{v} \in \operatorname{Col}(U)$ and $\mathbf{w} \in W$:
+- On $\operatorname{Col}(U)$: write $\mathbf{v} = U\mathbf{c}$. Then $L_1\mathbf{v} = L_1 U\mathbf{c} = \mathbf{c} = L_2 U\mathbf{c} = L_2\mathbf{v}$.
+- On $W$: $L_1\mathbf{w} = \mathbf{0} = L_2\mathbf{w}$ (both kill $W$).
+
+So $L_1\mathbf{x} = L_2\mathbf{x}$ for all $\mathbf{x}$, hence $L_1 = L_2$.
+
+**The dual statement holds for right inverses**: a right inverse of a fat full-rank matrix $V$ is uniquely determined by its **column space** (the image).
+
+**Summary**: A one-sided inverse is not unique — but it becomes unique once you specify one subspace. The choice of that subspace is the **only** degree of freedom.
 :::
 
 ### Problem 2: From Projection to Left Inverse (8 min)
 
-This reverses the direction: **given a projection, extract a left inverse**.
+This reverses the direction: **given a projection, cross-fill it to extract a left inverse**.
 
-Let $P$ be a projection with $\operatorname{Col}(P) = \operatorname{Col}(U)$ where $U$ is $m \times r$ with rank $r$.
+Let $P = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
 
-**(a)** Cross-fill $P = UV$ with $VU = I_r$ (Lecture 8). Show that $V$ is a left inverse of $U$.
+**(a)** Verify that $P^2 = P$ and find $\operatorname{rank}(P)$.
 
 ::: details Solution
-$VU = I_r$ is exactly the definition of "V is a left inverse of U." ✓
+$$P^2 = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = P \quad ✓$$
 
-And indeed $P = UV$ gives $P = U \cdot V$, which is exactly the $P = UL$ construction from Problem 1.
+$\operatorname{rank}(P) = 2$ (columns 1 and 3 are independent).
 :::
 
-**(b)** What does this say about the relationship between the construction formula $P = B(AB)^{-1}A$ from Lecture 10 and left inverses?
+**(b)** Cross-fill $P$ to write $P = UV$ with $VU = I_2$.
 
 ::: details Solution
-In the formula $P = B(AB)^{-1}A$:
-- $B$ plays the role of $U$ (columns spanning the floor)
-- $(AB)^{-1}A$ plays the role of $L$ (a left inverse of $B$)
+**Pivot at $(1,1)$**, value 1. Column: $\begin{pmatrix}1\\1\\0\end{pmatrix}$, Row: $\begin{pmatrix}1&0&0\end{pmatrix}$.
 
-**Verify**: $(AB)^{-1}A \cdot B = (AB)^{-1}(AB) = I_r$ ✓
+$$R_1 = \begin{pmatrix}1\\1\\0\end{pmatrix}\begin{pmatrix}1&0&0\end{pmatrix} = \begin{pmatrix}1&0&0\\1&0&0\\0&0&0\end{pmatrix}$$
 
-So the construction formula is just: **choose a left inverse of $B$, then multiply**. The matrix $A$ determines **which** left inverse — and thus which sunlight direction ($\operatorname{Null}(A)$).
+Remainder: $\begin{pmatrix}0&0&0\\0&0&0\\0&0&1\end{pmatrix}$.
+
+**Pivot at $(3,3)$**, value 1. $R_2 = \begin{pmatrix}0\\0\\1\end{pmatrix}\begin{pmatrix}0&0&1\end{pmatrix}$.
+
+$$P = R_1 + R_2 = UV \quad \text{where } U = \begin{pmatrix}1&0\\1&0\\0&1\end{pmatrix},\ V = \begin{pmatrix}1&0&0\\0&0&1\end{pmatrix}$$
+
+Check: $VU = \begin{pmatrix}1&0&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0\\1&0\\0&1\end{pmatrix} = \begin{pmatrix}1&0\\0&1\end{pmatrix} = I_2$ ✓
+:::
+
+**(c)** What is $V$ in terms of left inverses? What subspace determines this choice?
+
+::: details Solution
+$V$ is a **left inverse** of $U$ (since $VU = I_2$).
+
+It is the unique left inverse with $\operatorname{Null}(V) = \operatorname{span}\left\{\begin{pmatrix}0\\1\\0\end{pmatrix}\right\}$.
+
+This null space is precisely $\operatorname{Null}(P)$ — the sunlight direction of the original projection. So **cross-filling a projection automatically recovers the left inverse corresponding to that projection's sunlight direction**.
 :::
 
 ### Problem 3: The Orthogonal Choice (12 min)
 
 Among all left inverses of $U$, one is special: $U^+ = (U^TU)^{-1}U^T$.
 
-**(a)** Verify $U^+$ is a left inverse of $U$ (for the same $U = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$).
+**(a)** Verify $U^+$ is a left inverse of $U$ (for the same $U = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}$ from Problem 1).
 
 ::: details Solution
 $U^TU = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$
@@ -143,90 +165,98 @@ The sunlight is perpendicular to the floor — this is why $P_\perp$ is the **or
 
 ---
 
-## Part B: Diagonal Cross-Filling Review (20 min)
+## Part B: Diagonal Cross-Filling an Orthogonal Projection (20 min)
 
 ### Learning Goal
 
-Students can carry out diagonal cross-filling by hand and connect it to inner diagonal cross-filling of $(B^TB)^{-1}$ for finding orthogonal bases.
+Students can diagonally cross-fill an orthogonal projection to find orthonormal bases for both $\operatorname{Col}(P)$ and $\operatorname{Null}(P)$.
 
-### Problem 4: Diagonal Cross-Filling Warm-Up (8 min)
+### Problem 4: Orthonormal Basis for $\operatorname{Col}(P)$ (12 min)
 
-Diagonally cross-fill the following symmetric matrix:
+Take the orthogonal projection $P_\perp$ from Problem 3:
 
-$$G = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$$
+$$P_\perp = \frac{1}{3}\begin{pmatrix} 2 & -1 & 1 \\ -1 & 2 & 1 \\ 1 & 1 & 2 \end{pmatrix}$$
 
-**(a)** Cross-fill at diagonal pivot $(1,1)$: pivot value = 2.
-
-::: details Solution
-Column 1: $\begin{pmatrix} 2 \\ 1 \end{pmatrix}$, Row 1: $\begin{pmatrix} 2 & 1 \end{pmatrix}$.
-
-$$R_1 = \frac{1}{2}\begin{pmatrix} 2 \\ 1 \end{pmatrix}\begin{pmatrix} 2 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 1/2 \end{pmatrix}$$
-
-Remainder: $G - R_1 = \begin{pmatrix} 0 & 0 \\ 0 & 3/2 \end{pmatrix} = R_2$.
-:::
-
-**(b)** Verify: $R_1$ and $R_2$ are both rank-1 and both symmetric.
-
-::: details Solution
-$R_1 = \frac{1}{2}\begin{pmatrix}2\\1\end{pmatrix}\begin{pmatrix}2 & 1\end{pmatrix}$: rank 1 ✓, symmetric ✓ (outer product of a vector with itself).
-
-$R_2 = \frac{3}{2}\begin{pmatrix}0\\1\end{pmatrix}\begin{pmatrix}0 & 1\end{pmatrix}$: rank 1 ✓, symmetric ✓.
-
-**Why is symmetry preserved?** Diagonal pivots produce rank-1 pieces of the form $\frac{1}{a_{kk}}\mathbf{c}\mathbf{c}^T$ (column = row transposed), so each piece is automatically symmetric.
-:::
-
-### Problem 5: Inner Diagonal Cross-Filling for Orthogonal Basis (12 min)
-
-Let $B = \begin{pmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{pmatrix}$ (full column rank). Find an **orthogonal basis** for $\operatorname{Col}(B)$ using inner diagonal cross-filling of $(B^TB)^{-1}$.
-
-**(a)** Compute $B^TB$ and $(B^TB)^{-1}$.
-
-::: details Solution
-$$B^TB = \begin{pmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$$
-
-$\det(B^TB) = 4 - 1 = 3$.
-
-$$(B^TB)^{-1} = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$$
-:::
-
-**(b)** Diagonally cross-fill $(B^TB)^{-1}$. At each step, read off the pivot column $\mathbf{d}_j$.
+**(a)** Diagonally cross-fill $P_\perp$.
 
 ::: details Solution
 **Step 1**: Pivot at $(1,1)$, value $\frac{2}{3}$.
 
-Column 1: $\mathbf{d}_1 = \frac{1}{3}\begin{pmatrix} 2 \\ -1 \end{pmatrix}$, proportional to $\begin{pmatrix} 2 \\ -1 \end{pmatrix}$.
+Column 1: $\frac{1}{3}\begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}$, Row 1: $\frac{1}{3}\begin{pmatrix} 2 & -1 & 1 \end{pmatrix}$.
 
-$$Q_1 = \frac{1}{2/3} \cdot \frac{1}{3}\begin{pmatrix} 2 \\ -1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \end{pmatrix} = \frac{1}{6}\begin{pmatrix} 4 & -2 \\ -2 & 1 \end{pmatrix}$$
+$$R_1 = \frac{1}{2/3} \cdot \frac{1}{3}\begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 & 1 \end{pmatrix} = \frac{1}{6}\begin{pmatrix} 4 & -2 & 2 \\ -2 & 1 & -1 \\ 2 & -1 & 1 \end{pmatrix}$$
 
-Remainder: $(B^TB)^{-1} - Q_1 = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} - \frac{1}{6}\begin{pmatrix} 4 & -2 \\ -2 & 1 \end{pmatrix} = \frac{1}{6}\begin{pmatrix} 0 & 0 \\ 0 & 3 \end{pmatrix} = Q_2$
+**Remainder**: $P_\perp - R_1 = \frac{1}{6}\begin{pmatrix} 0 & 0 & 0 \\ 0 & 3 & 3 \\ 0 & 3 & 3 \end{pmatrix} = R_2$
 
-**Step 2**: $\mathbf{d}_2 \propto \begin{pmatrix} 0 \\ 1 \end{pmatrix}$.
+**Step 2**: Pivot at $(2,2)$, value $\frac{1}{2}$.
+
+$$R_2 = \frac{1}{2}\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}\begin{pmatrix} 0 & 1 & 1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 1 & 1 \end{pmatrix} \quad ✓$$
+
+Remainder: zero. Done.
 :::
 
-**(c)** Compute $\mathbf{v}_1 = B\mathbf{d}_1$ and $\mathbf{v}_2 = B\mathbf{d}_2$.
+**(b)** Read off the direction vectors from $R_1$ and $R_2$. Are they orthogonal?
 
 ::: details Solution
-$$\mathbf{v}_1 = B\begin{pmatrix} 2 \\ -1 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 2 \\ -1 \end{pmatrix} = \begin{pmatrix} 1 \\ -1 \\ 2 \end{pmatrix}$$
+From $R_1$: $\mathbf{v}_1 \propto \begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}$ (the column at the pivot).
 
-$$\mathbf{v}_2 = B\begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}$$
+From $R_2$: $\mathbf{v}_2 \propto \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$.
+
+Check: $\mathbf{v}_1^T \mathbf{v}_2 = 0 - 1 + 1 = 0$ ✓ **Orthogonal!**
+
+**Why automatic?** $P_\perp$ is symmetric, so diagonal cross-filling produces symmetric rank-1 pieces $R_j = \frac{1}{\|\mathbf{v}_j\|^2}\mathbf{v}_j\mathbf{v}_j^T$, each of which is an orthogonal rank-1 projection. By the projection decomposition theorem, $R_1 R_2 = 0$, which forces $\mathbf{v}_1 \perp \mathbf{v}_2$.
 :::
 
-**(d)** Verify: $\mathbf{v}_1 \perp \mathbf{v}_2$ and both lie in $\operatorname{Col}(B)$.
+**(c)** Write down an **orthonormal** basis for $\operatorname{Col}(P_\perp)$.
 
 ::: details Solution
-$\mathbf{v}_1^T \mathbf{v}_2 = (1)(1) + (-1)(1) + (2)(0) = 0$ ✓
+Normalize:
 
-Both are of the form $B\mathbf{d}$, so they lie in $\operatorname{Col}(B)$ by construction. ✓
+$$\hat{\mathbf{v}}_1 = \frac{1}{\sqrt{6}}\begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}, \qquad \hat{\mathbf{v}}_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$$
 
-**Result**: $\left\{\begin{pmatrix}1\\-1\\2\end{pmatrix}, \begin{pmatrix}1\\1\\0\end{pmatrix}\right\}$ is an **orthogonal basis** for $\operatorname{Col}(B)$.
+These form an orthonormal basis for $\operatorname{Col}(P_\perp) = \operatorname{Col}(U)$.
+:::
+
+### Problem 5: Completing to a Full Orthonormal Basis (8 min)
+
+**(a)** Compute $I - P_\perp$ and cross-fill it.
+
+::: details Solution
+$$I - P_\perp = \frac{1}{3}\begin{pmatrix} 1 & 1 & -1 \\ 1 & 1 & -1 \\ -1 & -1 & 1 \end{pmatrix}$$
+
+This has rank 1, so it is already a single rank-1 piece:
+
+$$I - P_\perp = \frac{1}{3}\begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}\begin{pmatrix} 1 & 1 & -1 \end{pmatrix}$$
+
+Direction: $\mathbf{w} \propto \begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}$.
+:::
+
+**(b)** Verify: $\mathbf{w}$ is orthogonal to both $\mathbf{v}_1$ and $\mathbf{v}_2$.
+
+::: details Solution
+$\begin{pmatrix}1\\1\\-1\end{pmatrix}^T \begin{pmatrix}2\\-1\\1\end{pmatrix} = 2 - 1 - 1 = 0$ ✓
+
+$\begin{pmatrix}1\\1\\-1\end{pmatrix}^T \begin{pmatrix}0\\1\\1\end{pmatrix} = 0 + 1 - 1 = 0$ ✓
+:::
+
+**(c)** Write down the full orthonormal basis for $\mathbb{R}^3$.
+
+::: details Solution
+$$\left\{\frac{1}{\sqrt{6}}\begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix},\ \frac{1}{\sqrt{2}}\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix},\ \frac{1}{\sqrt{3}}\begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}\right\}$$
+
+The first two span $\operatorname{Col}(P_\perp)$, the third spans $\operatorname{Null}(P_\perp)$. These three subspaces are mutually orthogonal and together fill all of $\mathbb{R}^3$.
 :::
 
 ::: remark
-**Why Does This Work?**
+**The Recipe**
 
-The diagonal cross-filling $(B^TB)^{-1} = Q_1 + Q_2$ produces rank-1 pieces $R_j = BQ_jB^T$ that are rank-1 **orthogonal projections** forming a compatible family ($R_1R_2 = 0$). Compatible orthogonal projections have mutually orthogonal column spaces. The vectors $B\mathbf{d}_j$ span these column spaces — hence they are automatically orthogonal.
+To find orthonormal bases for both $\operatorname{Col}(P)$ and $\operatorname{Null}(P)$ of an orthogonal projection $P$:
 
-This is the cross-filling alternative to Gram-Schmidt!
+1. Diagonally cross-fill $P$ → orthogonal basis for $\operatorname{Col}(P)$
+2. Diagonally cross-fill $I - P$ → orthogonal basis for $\operatorname{Null}(P)$
+3. Together they give a full orthogonal basis for the ambient space
+
+Diagonal pivots on symmetric matrices produce symmetric rank-1 pieces $\frac{1}{\|\mathbf{v}\|^2}\mathbf{v}\mathbf{v}^T$, so orthogonality is **automatic** — guaranteed by the projection decomposition theorem.
 :::
 
 ---
@@ -238,24 +268,25 @@ This is the cross-filling alternative to Gram-Schmidt!
 | Part | Problem | Suggested Time | Priority |
 |------|---------|---------------|----------|
 | A | Problem 1 (left inverse → projection) | 10 min | Core — walk through (a)–(c), let students compute (d)–(e) |
-| A | Problem 2 (projection → left inverse) | 8 min | Core — the conceptual reverse direction |
+| A | Problem 2 (cross-fill projection → left inverse) | 8 min | Core — concrete computation, reinforce the correspondence |
 | A | Problem 3 (orthogonal choice) | 12 min | Core — (a)–(b) computation, (c) comparison table is the payoff |
-| B | Problem 4 (diagonal cross-filling warm-up) | 8 min | Review — quick computation practice |
-| B | Problem 5 (inner diagonal cross-filling) | 12 min | Core — the main computational technique to practice |
+| B | Problem 4 (diagonal cross-fill $P_\perp$) | 12 min | Core — the main computational exercise |
+| B | Problem 5 (complete to full orthonormal basis) | 8 min | Core — quick since $I - P_\perp$ is rank 1 |
 
 ### Suggested flow
 
 1. **Start with Problem 1(a)–(c)**: Set up the key idea — left inverse gives projection. Let students compute $P_1 = UL_1$ and verify $P_1^2 = P_1$. Emphasize that the proof only uses $LU = I$.
 2. **Problem 1(d)–(e)**: Students compute $P_2$ themselves, then compare. The punchline: same floor, different sunlight.
-3. **Problem 2**: Brief conceptual discussion connecting back to the construction formula from Lecture 10. This can be presented quickly.
-4. **Problem 3**: Compute $U^+$ and $P_\perp$. The comparison table in (c) is the key takeaway — emphasize "orthogonal = symmetric = sunlight ⊥ floor."
-5. **Problem 4**: Quick warm-up to recall diagonal cross-filling mechanics. Can be done on the board in 3 minutes.
-6. **Problem 5**: The main computational exercise. Let students work through (a)–(c) in pairs, verify (d) together. Emphasize: no Gram-Schmidt needed.
+3. **The attention box**: Pause here to state the uniqueness principle clearly: **a left inverse is pinned down by one subspace (its null space)**. This is the central message of Part A.
+4. **Problem 2**: Students cross-fill a concrete projection and discover the left inverse factorization. Quick but makes the reverse direction tangible.
+5. **Problem 3**: Compute $U^+$ and $P_\perp$. The comparison table in (c) is the key takeaway — emphasize "orthogonal = symmetric = sunlight ⊥ floor."
+6. **Problem 4**: Diagonal cross-fill $P_\perp$. Let students carry out Step 1, then check the remainder. Verify orthogonality of the direction vectors.
+7. **Problem 5**: Cross-fill $I - P_\perp$ (one step since it's rank 1), verify everything is orthogonal, write out the full orthonormal basis.
 
 ### Common mistakes
 
 - **Confusing left and right inverses**: $LU = I$ (left inverse) vs $UR = I$ (right inverse). Left inverse for **thin** full-rank, right inverse for **fat** full-rank.
-- **Thinking left inverse is unique**: It's not! The choice of null space determines which left inverse. The one-to-one correspondence with complements is the key insight.
+- **Thinking left inverse is unique**: It's not! But once you fix the null space, it becomes unique. The one-to-one correspondence with complements is the key insight.
 - **Forgetting why $UL$ is a projection**: Students may verify $P^2 = P$ by brute force instead of the clean argument $P^2 = U(LU)L = UIL = UL = P$. Emphasize the algebraic shortcut.
 - **Diagonal cross-filling pivot errors**: Students sometimes forget to divide by the pivot value when forming the rank-1 piece. Remind them: $R_k = \frac{1}{a_{kk}} \cdot (\text{column}) \cdot (\text{row})$.
 
