@@ -21,7 +21,7 @@
 | Mar. 27    | Jongyook Park (Kyungpook National University) | Clique–coclique methods and spectral bounds for strongly regular graphs |
 | Apr. 3     | Hyung Tae Choi (Chung-Ang University) | Nonlinear $L_{1}$ Control and Set-invariance-based Approaches |
 | Apr. 24    | Byung Hee An (Kyungpook National University) | Cluster structures of Legendrian cablings (IBS-CGP) |
-| May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces (Undetermined) |
+| May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces |
 | May 15     | Minsung Kim (POSTECH)           | Rapid mixing for random walks on nilmanifolds |
 | May 22     | Euiyong Park (University of Seoul) | Monoidal categorifications for cluster algebras (Online) |
 | Jun. 5     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
@@ -103,7 +103,7 @@ This is a joint work in progress with Youngjin Bae(INU).
 ---
 
 ### May 1 - Ziquan Yang (The Chinese University of Hong Kong)
-**Title:** Picard rank jumps for non ordinary K3 surfaces **(Undetermined)**
+**Title:** Picard rank jumps for non ordinary K3 surfaces
 
 **Abstract:** Suppose that f : X → S is a smooth proper family of varieties. The Noether-Lefschetz (NL) locus is the set of points over which the geometric fiber has a Picard rank larger than that of the geometric generic fiber. In short, it is the locus where the fibers acquire "more" divisors. Over C, much about the NL locus is known by studying Hodge theory. In particular, the NL locus for any non-isotrivial family of K3 surfaces is dense. In positive characteristics, the situation is much more delicate. In a previous work, Maulik-Shankar-Tang proved this when the family is generically ordinary. In this talk, I will present a joint work with Ruofan Jiang and Ananth Shankar that extends this to the non-ordinary case.
 
@@ -267,10 +267,9 @@ May 1 - Ziquan Yang
   email: zqyang@cuhk.edu.hk
   inviter: qiruili@postech.ac.kr (Qirui Li — the chair himself)
   url: https://sites.google.com/view/zqyang
-  talk_type: undetermined (may become online due to personal reasons)
+  talk_type: in-person (confirmed 2026-04-06)
   sheet_id: 1txP1A_a55gXuGKd8veuIgae4mUIuvPe_4t-bpPNhF4g
-  note: check with user closer to date whether this is in-person or online
-        if online, need Zoom link from 장세영 (www0559@postech.ac.kr)
+  note: confirmed in-person, room 404
 
 May 15 - Minsung Kim
   affiliation: POSTECH
@@ -903,24 +902,18 @@ Time: 3pm
 Venue: IBS Center for Geometry and Physics
 --- END DRAFT ---
 
-============ MAY 1 — ZIQUAN YANG (UNDETERMINED) ============
+============ MAY 1 — ZIQUAN YANG (IN-PERSON, CONFIRMED 2026-04-06) ============
 
---- DRAFT: May 1 — REQUIRES USER INPUT BEFORE SENDING ---
-Status: UNDETERMINED — must confirm with user whether in-person or online.
-If in-person:
+--- DRAFT: May 1 schedule ---
+Status: CONFIRMED in-person (room 404)
   → Food Preference: SEND DATE Sat 2026-04-25
   → Announcement: SEND DATE Mon 2026-04-27
   → Reminder: SEND DATE Fri 2026-05-01 morning
   → use sheet link: https://docs.google.com/spreadsheets/d/1txP1A_a55gXuGKd8veuIgae4mUIuvPe_4t-bpPNhF4g/edit
-If online:
-  → Request Zoom link from 장세영: SEND DATE Thu 2026-04-24
-  → Announcement: SEND DATE Mon 2026-04-27
-  → Reminder: SEND DATE Fri 2026-05-01 morning
-  → NO food preference, NO dinner sheet
 CC note: Yang's inviter is qiruili (the chair/sender), so only 5 people in CC:
   Cc: zqyang@cuhk.edu.hk, kyoungseog@postech.ac.kr, kimminju159@postech.ac.kr, shinby9865@postech.ac.kr, www0559@postech.ac.kr
 
---- DRAFT: May 1 Weekly Announcement (in-person version) --- SEND DATE: Mon 2026-04-27 ---
+--- DRAFT: May 1 Weekly Announcement --- SEND DATE: Mon 2026-04-27 ---
 From: Qirui Li <qiruili@postech.ac.kr>
 To: math-prof@postech.ac.kr
 Cc: zqyang@cuhk.edu.hk, kyoungseog@postech.ac.kr, kimminju159@postech.ac.kr, shinby9865@postech.ac.kr, www0559@postech.ac.kr
@@ -1247,8 +1240,8 @@ UPCOMING SEND SCHEDULE:
   □ Sat 2026-04-18 — Apr. 24 Food Preference to Byung Hee An
   □ Mon 2026-04-21 — Apr. 24 Weekly Announcement (IBS-CGP, include bus info)
   □ Fri 2026-04-24 — Apr. 24 Day-of Reminder (IBS-CGP, include bus info)
-  □ Sat 2026-04-25 — May 1 Food Preference to Ziquan Yang (if in-person)
-  □ Mon 2026-04-27 — May 1 Weekly Announcement (confirm in-person/online first)
+  □ Sat 2026-04-25 — May 1 Food Preference to Ziquan Yang
+  □ Mon 2026-04-27 — May 1 Weekly Announcement
   □ Fri 2026-05-01 — May 1 Day-of Reminder
   □ Mon 2026-05-11 — May 15 Weekly Announcement (Minsung Kim, POSTECH internal)
   □ Fri 2026-05-15 — May 15 Day-of Reminder
@@ -1287,9 +1280,8 @@ UPCOMING SEND SCHEDULE:
    Apr. 24 (Byung Hee An) is at IBS, not room 404. The email MUST mention
    this prominently. Do not use the standard "room 404" sentence.
 
-6. UNDETERMINED STATUS
-   May 1 (Ziquan Yang) — always ask user for latest status before sending.
-   Do not assume in-person or online.
+6. MAY 1 STATUS
+   May 1 (Ziquan Yang) — confirmed in-person (room 404) as of 2026-04-06.
 
 7. MAY 15/29 SWAP
    Kyu-Hwan Lee asked to swap May 29 → May 15. Valentin emailed Minsung
