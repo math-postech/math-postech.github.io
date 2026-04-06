@@ -21,7 +21,7 @@
 | Mar. 27    | Jongyook Park (Kyungpook National University) | Clique–coclique methods and spectral bounds for strongly regular graphs |
 | Apr. 3     | Hyung Tae Choi (Chung-Ang University) | Nonlinear $L_{1}$ Control and Set-invariance-based Approaches |
 | Apr. 24    | Byung Hee An (Kyungpook National University) | Cluster structures of Legendrian cablings (IBS-CGP) |
-| May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces (Undetermined) |
+| May 1      | Ziquan Yang (The Chinese University of Hong Kong) | Picard rank jumps for non ordinary K3 surfaces |
 | May 15     | Minsung Kim (POSTECH)           | Rapid mixing for random walks on nilmanifolds |
 | May 22     | Euiyong Park (University of Seoul) | Monoidal categorifications for cluster algebras (Online) |
 | Jun. 5     | Kyu-Hwan Lee (University of Connecticut) | Advancing combinatorics and number theory with AI |
@@ -103,7 +103,7 @@ This is a joint work in progress with Youngjin Bae(INU).
 ---
 
 ### May 1 - Ziquan Yang (The Chinese University of Hong Kong)
-**Title:** Picard rank jumps for non ordinary K3 surfaces **(Undetermined)**
+**Title:** Picard rank jumps for non ordinary K3 surfaces
 
 **Abstract:** Suppose that f : X → S is a smooth proper family of varieties. The Noether-Lefschetz (NL) locus is the set of points over which the geometric fiber has a Picard rank larger than that of the geometric generic fiber. In short, it is the locus where the fibers acquire "more" divisors. Over C, much about the NL locus is known by studying Hodge theory. In particular, the NL locus for any non-isotrivial family of K3 surfaces is dense. In positive characteristics, the situation is much more delicate. In a previous work, Maulik-Shankar-Tang proved this when the family is generically ordinary. In this talk, I will present a joint work with Ruofan Jiang and Ananth Shankar that extends this to the non-ordinary case.
 
