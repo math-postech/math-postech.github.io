@@ -69,6 +69,7 @@ Detailed teaching suggestions to help TAs prepare engaging tutorial sessions ali
 | **Week 4** | Mar 19 | Composition Properties of Cancelable Matrices | [View Details](./tutorials/week04-cancelable-composition.md) |
 | **Week 5** | Mar 26 | Geometry of Rank, Inverses, and Subspace Complements | [View Details](./tutorials/week05-geometry-rank-inverse.md) |
 | **Week 6** | Apr 2 | Projection Structure | [View Details](./tutorials/week06-projection-structure.md) |
+| **Week 7** | Apr 9 | Projections and Left/Right Inverses + Diagonal Cross-Filling Review | [View Details](./tutorials/week07-projection-inverse-review.md) |
 
 ---
 
