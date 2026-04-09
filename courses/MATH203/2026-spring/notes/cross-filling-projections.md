@@ -302,55 +302,55 @@ Done! ∎
 To check whether a rank-1 matrix is a projection, we only need to compute its trace. If the trace is 1, the projection property $A^2 = A$ is **automatic**.
 :::
 
-### 4.2 Key Lemma: $UV = I$ Forces Square Matrices
+### 4.2 The Reverse Question: What If $UV = I$?
 
-Here is a surprising rigidity result.
+In §2 we discovered: $P = UV$ with $P^2 = P$ forces $VU = I_r$. That went **projection → identity**.
+
+Now reverse: suppose we **start** with $UV = I_n$. What is $VU$?
 
 ::: proposition
-**Corollary 4.2 ($UV = I$ Forces Square)**
+**Theorem 4.2 ($VU$ Is Always a Projection)**
 
-Suppose $U$ is $n \times r$ and $V$ is $r \times n$ with $UV = I_n$ and $r \leq n$.
-
-Then $r = n$, and both $U$ and $V$ are square invertible matrices with $VU = UV = I_n$.
+If $U$ is $n \times r$ and $V$ is $r \times n$ with $UV = I_n$, then $(VU)^2 = VU$.
 :::
 
 **Proof**:
 
-**Step 1**: $VU$ is a projection.
+$$(VU)(VU) = V(UV)U = VI_nU = VU \qquad ∎$$
 
-$$(VU)(VU) = V(UV)U = VI_nU = VU$$
+The circle closes: **Projection → Identity → Projection**.
 
-So $VU$ is an $r \times r$ projection.
+**The rank is determined.** Since $VU$ is an $r \times r$ projection, by Theorem 3.1:
 
-**Step 2**: $I_r - VU$ is also a projection.
+$$\operatorname{rank}(VU) = \operatorname{trace}(VU) = \operatorname{trace}(UV) = \operatorname{trace}(I_n) = n$$
 
-$$(I_r - VU)^2 = I_r - 2VU + (VU)^2 = I_r - 2VU + VU = I_r - VU$$
+So $VU$ is an $r \times r$ projection of rank $n$. Since $\operatorname{rank} \leq \text{size}$, we must have $n \leq r$.
 
-**Step 3**: Compute the trace.
+**Three cases by shape.** With $U$ being $n \times r$, $V$ being $r \times n$, $UV = I_n$, and $n \leq r$:
 
-$$\operatorname{trace}(I_r - VU) = r - \operatorname{trace}(VU) = r - \operatorname{trace}(UV) = r - \operatorname{trace}(I_n) = r - n$$
-
-**Step 4**: Apply rank = trace.
-
-Since $I_r - VU$ is a projection, by Theorem 3.1:
-
-$$\operatorname{rank}(I_r - VU) = r - n$$
-
-Since $\operatorname{rank} \geq 0$: $r \geq n$. Combined with $r \leq n$: $r = n$.
-
-**Step 5**: Conclude.
-
-With $r = n$: $\operatorname{rank}(I_r - VU) = 0$, so $I_r - VU = 0$, giving $VU = I_n$.
-
-Therefore both $U$ and $V$ are $n \times n$ with $UV = VU = I_n$. ∎
+| Case | Shape | What happens |
+|------|-------|-------------|
+| $r < n$ | thin $\times$ fat | $\operatorname{rank}(VU) \leq r < n$ — contradicts $\operatorname{rank} = n$. **Impossible.** |
+| $r = n$ | square $\times$ square | $VU$ is a rank-$n$ projection on $\mathbb{R}^n$ — must be $I_n$. So $VU = I_n$. |
+| $r > n$ | fat $\times$ thin | $VU$ is a **genuine** rank-$n$ projection on $\mathbb{R}^r$. |
 
 ::: remark
-**Geometric Meaning**
+**Why the square case gives $VU = I_n$**
 
-You cannot have a "thin" matrix times a "fat" matrix equal the identity. If $UV = I$, both factors must be square and invertible. The identity matrix is too "rigid" to be factored into mismatched dimensions.
+When $r = n$, the projection $VU$ has $\operatorname{rank}(VU) = n$ on $\mathbb{R}^n$. Then $I_n - VU$ is also a projection with:
+
+$$\operatorname{rank}(I_n - VU) = \operatorname{trace}(I_n - VU) = n - n = 0$$
+
+So $I_n - VU = 0$, giving $VU = I_n$.
 :::
 
-An important special case:
+::: remark
+**The $r > n$ case is genuine**
+
+When $r > n$, $VU$ is an $r \times r$ projection of rank $n < r$ — a proper projection (not the identity). This means $UV = I_n$ does **not** force $VU = I_r$. The "one-sided implies two-sided" phenomenon is special to the **square** case.
+:::
+
+The square case yields an important corollary:
 
 ::: proposition
 **Proposition 4.3 (One-Sided Inverse $\implies$ Two-Sided for Square Matrices)**
@@ -358,7 +358,7 @@ An important special case:
 If $F$ and $V$ are both $n \times n$ and $FV = I_n$, then $VF = I_n$.
 :::
 
-**Proof**: Apply Corollary 4.2 with $r = n$: from $FV = I_n$ (with $F$ being $n \times n$ and $V$ being $n \times n$), we get $VF = I_n$. ∎
+**Proof**: This is the square case ($r = n$) of Theorem 4.2: from $FV = I_n$ (with $F$ being $n \times n$ and $V$ being $n \times n$), we get $VF = I_n$. ∎
 
 ::: remark
 **Comparison with Lecture 1**
@@ -390,7 +390,7 @@ $$U(VY) = I_n$$
 
 where $U$ is $n \times k$ and $VY$ is $k \times n$ with $k \leq n$.
 
-By Corollary 4.2: $k = n$. Therefore $\operatorname{rank}(X) = n$. ✓
+By Theorem 4.2 (the $r < n$ case is impossible): $k = n$. Therefore $\operatorname{rank}(X) = n$. ✓
 
 **$(\Longleftarrow)$ Full rank $\implies$ invertible**:
 
@@ -481,7 +481,7 @@ $$X^{-1} = V^{-1}U^{-1} = \begin{pmatrix} 1 & -1/2 \\ 0 & 1 \end{pmatrix}\begin{
 ::: remark
 **The Augmented Cross-Filling and Classical Row Reduction**
 
-The augmented cross-filling technique is analogous to the classical method of finding $X^{-1}$ by row-reducing $(X \mid I) \to (I \mid X^{-1})$. But here, the inverse emerges as a **by-product** of the cross-filling decomposition $X = UV$, and the proof of invertibility relies on the projection-theoretic Corollary 4.2 rather than on row-reduction theory.
+The augmented cross-filling technique is analogous to the classical method of finding $X^{-1}$ by row-reducing $(X \mid I) \to (I \mid X^{-1})$. But here, the inverse emerges as a **by-product** of the cross-filling decomposition $X = UV$, and the proof of invertibility relies on the projection-theoretic Theorem 4.2 (three cases) rather than on row-reduction theory.
 :::
 
 ---
@@ -499,9 +499,14 @@ The augmented cross-filling technique is analogous to the classical method of fi
 
 4. **Rank-1 Characterization** (Corollary 4.1): Any two of $\{\operatorname{rank}=1, \operatorname{trace}=1, A^2=A\}$ imply the third.
 
-5. **$UV = I$ Forces Square** (Corollary 4.2): If $UV = I$ with $U$ thin and $V$ fat (or equal size), both must be square with $VU = I$.
+5. **The Reverse Question** (§4.2): If $UV = I_n$ with $U$ being $n \times r$ and $V$ being $r \times n$, then $VU$ is always an $r \times r$ projection of rank $n$. Three cases by shape:
+   - $r < n$ (thin $\times$ fat): **impossible** — rank contradiction.
+   - $r = n$ (square $\times$ square): $VU = I_n$ — one-sided inverse $\Rightarrow$ two-sided.
+   - $r > n$ (fat $\times$ thin): $VU$ is a **genuine** projection on $\mathbb{R}^r$.
 
-6. **Full Rank $\iff$ Invertible** (Theorem 4.4): An $n \times n$ matrix is invertible if and only if it has rank $n$.
+6. **Orthogonal Projections** (§3.2): Diagonal cross-filling of an orthogonal projection produces orthonormal basis vectors for $\operatorname{Col}(P)$.
+
+7. **Full Rank $\iff$ Invertible** (Theorem 4.4): An $n \times n$ matrix is invertible if and only if it has rank $n$.
 :::
 
 ### Looking Ahead to Lecture 9

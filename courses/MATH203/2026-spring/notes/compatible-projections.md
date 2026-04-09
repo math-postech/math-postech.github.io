@@ -380,15 +380,15 @@ We will see the full details and worked examples in **Lecture 10**, after we der
 ::: success
 **Key Results from This Lecture**
 
-1. **Compatible Families** (§1): Projections $\{P_1, \ldots, P_k\}$ with $P_iP_j = 0$ — subsums are projections, vector decompositions are linearly independent.
+1. **Compatible Families** (§1): Projections $\{P_1, \ldots, P_k\}$ with $P_iP_j = 0$ — subsums are projections, vector decompositions are unique and linearly independent.
 
 2. **Projection Decomposition Theorem** (§3): If $P = \sum R_i$ with $\sum \operatorname{rank}(R_i) \leq \operatorname{rank}(P)$, then each $R_i$ is a projection and $R_iR_j = 0$ — **automatically**.
 
 3. **Cross-Filling** (§4.1): Special case of the theorem — cross-filling projections always produces compatible families.
 
-4. **Inner Cross-Filling** (§4.2): Decompose a factor inside $P$ — works when $\operatorname{rank}(P) = \operatorname{rank}(M_i)$.
+4. **Inner Cross-Filling** (§4.2): Decompose a factor inside $P = M_1 M_i M_k$ — the outer factors carry along. Works when $\operatorname{rank}(P) = \operatorname{rank}(M_i)$.
 
-5. **Diagonal Cross-Filling** (§4.3): For orthogonal projections, diagonal pivots preserve symmetry, producing orthogonal sub-projections.
+5. **Inner Diagonal Cross-Filling** (§4.3): For orthogonal projections $P = UMU^T$, diagonally cross-fill the small matrix $M$ to produce orthogonal sub-projections. Key case: $M = (B^TB)^{-1}$, which connects directly to the orthogonal projection formula.
 :::
 
 ### Looking Ahead to Lecture 10
