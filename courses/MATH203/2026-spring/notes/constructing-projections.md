@@ -452,14 +452,18 @@ The residual $\mathbf{b} - A\hat{\mathbf{x}} = (I - P)\mathbf{b}$ is orthogonal 
 
 2. **Construction Formula** (§4):
 $$P = B(AB)^{-1}A$$
-where $\operatorname{Col}(B) = W$, $\operatorname{Null}(A) = S$, and $W \cap S = \{\mathbf{0}\}$ (equivalently, $AB$ invertible).
+where $\operatorname{Col}(B) = W$, $\operatorname{Null}(A) = S$, and $W \cap S = \{\mathbf{0}\}$ (equivalently, $AB$ invertible). Here $B(AB)^{-1}$ and $(AB)^{-1}A$ are left/right inverses of each other.
 
 3. **Orthogonal Projection Formula** (§5): Set $A = B^T$ to get:
 $$P = B(B^TB)^{-1}B^T$$
 
-4. **Inner Diagonal Cross-Filling** (§6): Decompose $(B^TB)^{-1}$ instead of $P$ — much more efficient when $r \ll n$. Produces rank-1 orthogonal projections automatically.
+4. **Inner Diagonal Cross-Filling** (§6): Decompose $(B^TB)^{-1}$ instead of $P$ — much more efficient when $r \ll n$. Normalizing the columns produces an orthonormal basis for $\operatorname{Col}(B)$ without Gram–Schmidt.
 
-5. **Least Squares** (§7): The least squares solution is $\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b}$.
+5. **Cross-Filling the Inverse** (§6): Cross-fill the augmented matrix $(A \mid I)$ with pivots in $A$ — the inverse $A^{-1}$ emerges in the right half as a by-product.
+
+6. **Extending to Orthonormal Basis** (§6): Cross-fill both $P$ and $I - P$ to obtain a complete orthonormal basis for $\mathbb{R}^n$ — all by cross-filling.
+
+7. **Least Squares** (§7): The least squares solution is $\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b}$.
 :::
 
 ### Looking Ahead
