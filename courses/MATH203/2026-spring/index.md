@@ -93,7 +93,7 @@ This course develops linear algebra through a **non-standard pedagogical approac
 | Component | Weight | Date/Notes |
 |-----------|--------|------------|
 | Homework | 10% | Weekly assignments |
-| Midterm Exam | 40% | Mon Apr 13, 18:00-22:00 |
+| Midterm Exam | 40% | Mon Apr 13, 18:00-22:00, Main Auditorium |
 | Final Exam | 50% | Mon Jun 08, 18:00-22:00 |
 
 ### Attendance Policy
@@ -123,7 +123,7 @@ The textbook is only for the reference, we will follow our lecture notes in this
 |------|-------|
 | Feb 23 | Semester begins |
 | Mar 02 | *Holiday — Independence Movement Day* |
-| Apr 13 (Mon) | **Midterm Exam** 18:00–22:00 |
+| Apr 13 (Mon) | **Midterm Exam** 18:00–22:00, Main Auditorium |
 | Apr 13–17 | *Midterm week (no classes)* |
 | May 05 | *Children's Day (does not affect Mon/Wed classes)* |
 | May 25 | *Holiday — Buddha's Birthday* |
@@ -141,7 +141,7 @@ The textbook is only for the reference, we will follow our lecture notes in this
 | **Week 5** | 03-23 -- 03-26 | **Ch2 §2.3–2.4**: Four Subspaces, Basis & Dimension | Transpose, symmetric matrices. Four fundamental subspaces: Col(Aᵀ)⊥Null(A). **HW2 assigned.** |
 | **Week 6** | 03-30 -- 04-02 | **Ch2 §2.4–2.5, Ch3 §3.1**: Full Rank & Projections | Full rank ⟺ invertibility. Linear transformations. **Projection defined**: P²=P. The sunlight-and-floor model. Col(P), Null(P). |
 | **Week 7** | 04-06 -- 04-09 | **Ch3 §3.2–3.4**: Projection Theory + Review |  Theorems involving AB and BA. Cross-filling projections → rank-1 projections (automatic). Compatible families.  **Midterm review.** |
-| **Week 8** | 04-13 -- 04-16 | **MIDTERM WEEK** | **Midterm Exam: Mon 04-13, 18:00-22:00.** No classes this week. |
+| **Week 8** | 04-13 -- 04-16 | **MIDTERM WEEK** | **Midterm Exam: Mon 04-13, 18:00–22:00, Main Auditorium.** No classes this week. |
 
 **Midterm Exam Coverage**: Chapters 1–3 (through §3.4) — cross-filling, subspaces, rank, four fundamental subspaces, projection theory (P²=P, AB-BA theorems, compatible families).
 
