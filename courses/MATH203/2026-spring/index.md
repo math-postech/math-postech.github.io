@@ -215,6 +215,10 @@ Lecture notes are organized by topic and will be added throughout the semester.
 
 - Lecture 11: Linear Regression — **[Slides](files/lecture11-slides.pdf)** — Data as geometry (measurements → point in $\mathbb{R}^n$, model → subspace), error = distance, best fit = orthogonal projection, normal equation via simultaneous row operations, cross-filling connection
 
+### Chapter 5: Determinants
+
+- Lecture 12: Determinant — **[Slides](files/lecture12-slides.pdf)** — Cross-filling formula ($\det = a_1 \cdots a_n \cdot \det(S)$), zigzag loops and switching matrices, $\det(A^T) = \det(A)$, $\det(AB) = \det(A)\det(B)$ via block matrix deformation
+
 ---
 
 ## Support for Students with Disabilities
