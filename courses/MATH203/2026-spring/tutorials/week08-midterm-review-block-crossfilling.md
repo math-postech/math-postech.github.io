@@ -100,11 +100,16 @@ This equivalence tells us: **a matrix is a projection if and only if its floor a
 
 ### The Main Idea
 
-In ordinary cross-filling, we pick **one row and one column**, form a rank-1 piece, and divide by the **pivot** (a single number). What happens if we pick **$k$ rows and $k$ columns** at once?
+Recall that rank-1 cross-filling has **two formulas**:
 
-### Problem 3: Rank-$k$ Cross-Filling (10 min)
+- **Matrix formula**: the rank-1 piece $= \dfrac{1}{p} \cdot \mathbf{u} \cdot \mathbf{v}^T$ (column $\times$ row, divided by pivot)
+- **Entry formula**: each entry of the rank-1 piece $= \dfrac{u_i \cdot v_j}{p}$ (column entry $\times$ row entry, divided by pivot)
 
-In rank-1 cross-filling, we select one row and one column. The rank-1 piece uses the **full column** (all rows) and the **full row** (all columns), divided by the pivot. Block cross-filling is the same idea with $k$ rows and $k$ columns.
+What happens when we pick **$k$ rows and $k$ columns** at once? Both formulas generalize.
+
+### Sub-topic 1: The Matrix Formula — Rank-$k$ Piece (12 min)
+
+#### Problem 3: Computing a Rank-2 Piece
 
 Consider the $4 \times 4$ matrix:
 
@@ -131,19 +136,13 @@ $$UP^{-1} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} \cdot
 
 $$UP^{-1}V = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \frac{2}{3} & -\frac{1}{3} \\ -\frac{1}{3} & \frac{2}{3} \end{pmatrix} \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix} = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ 1 & 0 & 2 & 1 \\ 0 & 1 & 1 & 3 \end{pmatrix}$$
 
-The rank-2 piece equals $A$ itself! So the remainder is:
-
-$$A - UP^{-1}V = \begin{pmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix}$$
-
-The remainder is **zero**, so $A$ has rank 2.
-
-**Compare with rank-1**: In rank-1 cross-filling, a single entry $p$ is the pivot, and we compute $\frac{1}{p} \cdot (\text{column}) \cdot (\text{row})$. Here, $P^{-1}$ replaces $\frac{1}{p}$, the full column block $U$ replaces the column vector, and the full row block $V$ replaces the row vector. The structure is identical.
+The rank-2 piece equals $A$ itself! So the remainder is zero, meaning $A$ has rank 2.
 :::
 
-**(b)** What is the remainder in general? Show it relates to $D - CP^{-1}R$ where $C$ and $R$ are the parts of $U$ and $V$ outside the pivot block.
+**(b)** What is the remainder in general?
 
 ::: details Solution
-Write the full column block and row block in terms of the pivot block and the "extra" parts:
+Write the full column and row blocks in terms of the pivot block and the "extra" parts:
 
 $$U = \begin{pmatrix} P \\ C \end{pmatrix}, \quad V = \begin{pmatrix} P & R \end{pmatrix}$$
 
@@ -155,26 +154,91 @@ The original matrix partitions as $A = \begin{pmatrix} P & R \\ C & D \end{pmatr
 
 $$A - UP^{-1}V = \begin{pmatrix} 0 & 0 \\ 0 & D - CP^{-1}R \end{pmatrix}$$
 
-The quantity $D - CP^{-1}R$ is called the **Schur complement** of $P$ in $A$. It plays the same role as the "remainder entry" in ordinary cross-filling — if it's zero, the original matrix has the same rank as the pivot block.
+The quantity $D - CP^{-1}R$ is the **Schur complement** of $P$ in $A$. If it's zero, the matrix has the same rank as the pivot block.
+:::
+
+### Sub-topic 2: The Entry Formula (13 min)
+
+In rank-1 cross-filling, any single entry of the rank-1 piece can be computed directly:
+
+$$(\text{rank-1 piece})_{ij} = \frac{u_i \cdot v_j}{p}$$
+
+where $u_i$ is the $i$-th entry of the column, $v_j$ is the $j$-th entry of the row, and $p$ is the pivot. You don't need to build the whole rank-1 matrix — you can compute any entry individually.
+
+Block cross-filling has the same property. Each entry of $U \cdot P^{-1} \cdot V$ can be computed from the $i$-th row of $U$ and the $j$-th column of $V$:
+
+$$(\text{rank-}k\text{ piece})_{ij} = \mathbf{u}_i^T \cdot P^{-1} \cdot \mathbf{v}_j$$
+
+where $\mathbf{u}_i$ is the $i$-th row of $U$ (a $k$-vector — the entries of row $i$ at the selected columns) and $\mathbf{v}_j$ is the $j$-th column of $V$ (a $k$-vector — the entries of column $j$ at the selected rows).
+
+#### Problem 4: Entry Formula in Action
+
+Using the same matrix $A$ and the same pivot block $P$ from Problem 3, compute the $(3,4)$ entry of the rank-2 piece using the entry formula.
+
+::: details Solution
+Row 3 of $U$: $\mathbf{u}_3 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ (entries of row 3 at columns 1,2).
+
+Column 4 of $V$: $\mathbf{v}_4 = \begin{pmatrix} 5 \\ 7 \end{pmatrix}$ (entries of column 4 at rows 1,2).
+
+$$(\text{rank-2 piece})_{3,4} = \mathbf{u}_3^T \cdot P^{-1} \cdot \mathbf{v}_4 = \begin{pmatrix} 1 & 0 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} \cdot \begin{pmatrix} 5 \\ 7 \end{pmatrix}$$
+
+$$= \begin{pmatrix} 1 & 0 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 3 \\ 9 \end{pmatrix} = \begin{pmatrix} 1 & 0 \end{pmatrix} \cdot \begin{pmatrix} 1 \\ 3 \end{pmatrix} = 1$$
+
+Check: the $(3,4)$ entry of $A$ is indeed $1$. ✓
+
+**Compare with rank-1**: In rank-1 cross-filling, we compute $\frac{u_i \cdot v_j}{p}$ — two numbers multiplied, divided by a number. Here, we compute $\mathbf{u}_i^T \cdot P^{-1} \cdot \mathbf{v}_j$ — two vectors, "divided" by a matrix. The structure is the same.
+:::
+
+#### Problem 5: The Remainder Entry Formula
+
+The remainder also has an entry formula. In rank-1 cross-filling, the remainder at position $(i,j)$ is:
+
+$$a_{ij} - \frac{u_i \cdot v_j}{p}$$
+
+**(a)** What is the block version? Write the Schur complement entry $(D - CP^{-1}R)_{ij}$ using the entry formula.
+
+::: details Solution
+For a position $(i,j)$ outside the pivot block (i.e., $i$ is a non-selected row, $j$ is a non-selected column):
+
+$$\text{remainder}_{ij} = a_{ij} - \mathbf{u}_i^T \cdot P^{-1} \cdot \mathbf{v}_j$$
+
+where $\mathbf{u}_i$ is row $i$'s entries at the selected columns, $\mathbf{v}_j$ is column $j$'s entries at the selected rows, and $P$ is the pivot block.
+
+This is exactly $d - \frac{c \cdot r}{p}$ with vectors and a matrix replacing scalars.
+:::
+
+**(b)** Verify: compute the $(4,3)$ entry of the remainder for the matrix $A$ from Problem 3.
+
+::: details Solution
+$\mathbf{u}_4 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$ (row 4 at columns 1,2), $\;\mathbf{v}_3 = \begin{pmatrix} 5 \\ 4 \end{pmatrix}$ (column 3 at rows 1,2).
+
+$$\text{remainder}_{4,3} = a_{4,3} - \mathbf{u}_4^T \cdot P^{-1} \cdot \mathbf{v}_3 = 1 - \begin{pmatrix} 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} \cdot \begin{pmatrix} 5 \\ 4 \end{pmatrix}$$
+
+$$= 1 - \begin{pmatrix} 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 6 \\ 3 \end{pmatrix} = 1 - \begin{pmatrix} 0 & 1 \end{pmatrix} \cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} = 1 - 1 = 0$$
+
+The remainder is zero at this entry. ✓ (We already know the whole remainder is zero since $A$ has rank 2.)
 :::
 
 ::: attention
-**Block Cross-Filling Rule**
+**Block Cross-Filling: Two Formulas**
 
-Select $k$ rows and $k$ columns from an $n \times n$ matrix.
-
-| | Rank-1 cross-filling | Block cross-filling |
+| | Rank-1 | Block (rank-$k$) |
 |---|---|---|
-| **Pivot** | a number $p$ | a $k \times k$ matrix $P$ |
-| **Column** | full column ($n \times 1$) | full column block $U$ ($n \times k$) |
-| **Row** | full row ($1 \times n$) | full row block $V$ ($k \times n$) |
-| **Rank-$k$ piece** | $\frac{1}{p} \cdot \text{col} \cdot \text{row}$ | $U \cdot P^{-1} \cdot V$ |
-| **Remainder** | $d - \frac{cr}{p}$ | $D - CP^{-1}R$ |
+| **Pivot** | number $p$ | $k \times k$ matrix $P$ |
+| **Column** | vector $\mathbf{u}$ ($n \times 1$) | block $U$ ($n \times k$) |
+| **Row** | vector $\mathbf{v}^T$ ($1 \times n$) | block $V$ ($k \times n$) |
+| **Matrix formula** | $\dfrac{1}{p} \cdot \mathbf{u} \cdot \mathbf{v}^T$ | $U \cdot P^{-1} \cdot V$ |
+| **Entry formula** | $\dfrac{u_i \cdot v_j}{p}$ | $\mathbf{u}_i^T \cdot P^{-1} \cdot \mathbf{v}_j$ |
+| **Remainder entry** | $a_{ij} - \dfrac{u_i v_j}{p}$ | $a_{ij} - \mathbf{u}_i^T P^{-1} \mathbf{v}_j$ |
 
-The column block $U$ and row block $V$ include the pivot block itself, just as the column and row vectors in rank-1 cross-filling include the pivot entry.
+In every formula, $\frac{1}{p}$ is replaced by $P^{-1}$, scalar multiplication becomes matrix multiplication, and the structure is otherwise identical.
 :::
 
-### Problem 4: Block Cross-Filling for the Inverse — from Lecture 10 (7 min)
+---
+
+### Applications (optional, if time permits)
+
+#### Problem 6: Block Cross-Filling for the Inverse — from Lecture 10
 
 Recall the Lecture 10 trick: to cross-fill $A^{-1}$ without computing it, form the block matrix
 
@@ -182,7 +246,7 @@ $$M = \begin{pmatrix} A & I \\ I & 0 \end{pmatrix}$$
 
 and cross-fill with pivots in $A$.
 
-**(a)** Using the block cross-filling formula from Problem 3, do this in a single step: treat $A$ as the entire pivot block. What is the Schur complement?
+**(a)** Using the block cross-filling formula, do this in a single step: treat $A$ as the entire pivot block. What is the Schur complement?
 
 ::: details Solution
 Partition $M = \begin{pmatrix} P & R \\ C & D \end{pmatrix}$ where $P = A$, $R = I$, $C = I$, $D = 0$.
@@ -195,19 +259,17 @@ So the remainder is $\begin{pmatrix} 0 & 0 \\ 0 & -A^{-1} \end{pmatrix}$.
 Since $M = \begin{pmatrix} A & I \\ I & A^{-1} \end{pmatrix}$ has rank $r$ (we proved this in Lecture 10), the remainder must be zero when cross-filling completes. But this block formula shows the bottom-right **directly reveals** $-A^{-1}$, whether we do the cross-filling in one block step or $r$ individual steps.
 :::
 
-**(b)** Verify with a concrete example: $A = \begin{pmatrix} 3 & 3 \\ 3 & 5 \end{pmatrix}$.
+**(b)** Use the **entry formula** to see what happens at a specific position. What is the $(i,j)$ entry of the bottom-right remainder?
 
 ::: details Solution
-$$M = \begin{pmatrix} 3 & 3 & 1 & 0 \\ 3 & 5 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix}$$
+For position $(i,j)$ in the bottom-right block: $\mathbf{u}_i$ = column $i$ of $I$ = $\mathbf{e}_i$, and $\mathbf{v}_j$ = row $j$ of $I$ = $\mathbf{e}_j$. So:
 
-Schur complement of $A$: $0 - I \cdot A^{-1} \cdot I = -A^{-1}$.
+$$\text{remainder}_{ij} = 0 - \mathbf{e}_i^T \cdot A^{-1} \cdot \mathbf{e}_j = -(A^{-1})_{ij}$$
 
-$A^{-1} = \frac{1}{6}\begin{pmatrix} 5 & -3 \\ -3 & 3 \end{pmatrix}$, so the remainder bottom-right is $-\frac{1}{6}\begin{pmatrix} 5 & -3 \\ -3 & 3 \end{pmatrix}$.
-
-This matches what we computed step-by-step in Lecture 10 (two rank-1 slices summing to $A^{-1}$), but now we see the **whole picture at once** through the block formula.
+Each entry of $A^{-1}$ appears individually in the remainder — this is exactly what Lecture 10 showed step by step: each rank-1 cross-filling step reveals one "slice" of $A^{-1}$, and the entry formula tells you which entries of the slice are determined by which pivot column and row.
 :::
 
-### Problem 5: Block Cross-Filling for the Product — from Lecture 12 (8 min)
+#### Problem 7: Block Cross-Filling for the Product — from Lecture 12
 
 In Lecture 12, we proved $\det(AB) = \det(A)\det(B)$ by forming the block matrix
 
@@ -218,10 +280,10 @@ and cross-filling with pivots in $I$.
 **(a)** Using block cross-filling: treat $I$ (bottom-left) as the pivot block. What is the Schur complement?
 
 ::: details Solution
-Rearrange: we select the $n$ rows and $n$ columns where $I$ sits. The partition is:
-- Pivot block $P = I$ (bottom-left rows, left columns)
+We select the $n$ rows and $n$ columns where $I$ sits. The partition is:
+- Pivot block $P = I$ (bottom rows, left columns)
 - $C = A$ (top rows, left columns)
-- $R = B$ (bottom-left rows, right columns)
+- $R = B$ (bottom rows, right columns)
 - $D = 0$ (top rows, right columns)
 
 Schur complement: $D - CP^{-1}R = 0 - A \cdot I^{-1} \cdot B = -AB$.
@@ -231,7 +293,17 @@ So the remainder is $\begin{pmatrix} 0 & -AB \\ 0 & 0 \end{pmatrix}$.
 This is precisely what Lecture 12 showed: cross-filling the $I$ block makes $AB$ appear passively in the top-right!
 :::
 
-**(b)** Now use the **determinant** of the block triangular matrix to conclude:
+**(b)** Use the **entry formula** to see how $AB$ is built entry by entry.
+
+::: details Solution
+For position $(i,j)$ in the top-right block: $\mathbf{u}_i$ = row $i$ of $A$ (the top rows at the left columns) and $\mathbf{v}_j$ = column $j$ of $B$ (the bottom rows at the right columns). Since $P = I$:
+
+$$\text{rank-}n\text{ piece}_{ij} = \mathbf{u}_i^T \cdot I^{-1} \cdot \mathbf{v}_j = (\text{row } i \text{ of } A) \cdot (\text{column } j \text{ of } B) = (AB)_{ij}$$
+
+Each entry of $AB$ appears as a single entry-formula computation! This is the block cross-filling perspective on matrix multiplication itself: the product $AB$ is what you get when $I$ is the pivot block and $A$, $B$ are the column and row blocks.
+:::
+
+**(c)** Now use the **determinant** of the block triangular matrix to conclude:
 
 ::: details Solution
 $M = \begin{pmatrix} A & 0 \\ I & B \end{pmatrix}$ is block **lower** triangular.
@@ -255,10 +327,10 @@ Combining: $\det(A)\det(B) = \det(AB)$. $\square$
 | Block matrix | $\begin{pmatrix} A & I \\ I & 0 \end{pmatrix}$ | $\begin{pmatrix} A & 0 \\ I & B \end{pmatrix}$ |
 | Pivot block | $A$ | $I$ |
 | Passive block | bottom-right ($= 0$) | top-right ($= 0$) |
-| What appears | $-A^{-1}$ | $-AB$ |
-| Schur complement | $0 - I \cdot A^{-1} \cdot I = -A^{-1}$ | $0 - A \cdot I^{-1} \cdot B = -AB$ |
+| What appears (matrix formula) | $-A^{-1}$ | $-AB$ |
+| What appears (entry formula) | $-(A^{-1})_{ij} = -\mathbf{e}_i^T A^{-1} \mathbf{e}_j$ | $(AB)_{ij} = \mathbf{a}_i^T \cdot \mathbf{b}_j$ |
 
-**Common pattern**: Place the "known" block at the pivot position. The "unknown" block (inverse, product) materializes in the passive position through the Schur complement.
+**Common pattern**: Place the "known" block at the pivot position. The "unknown" block (inverse, product) materializes in the passive position — visible either as a whole matrix (Schur complement) or entry by entry (entry formula).
 :::
 
 ---
@@ -267,13 +339,13 @@ Combining: $\det(A)\det(B) = \det(AB)$. $\square$
 
 ### Time allocation
 
-| Part | Problem | Suggested Time | Priority |
-|------|---------|---------------|----------|
-| A | Problem 1 ($AB = I_n \Rightarrow \operatorname{rank}(BA) = n$) | 12 min | Core — walk through (a)–(c), emphasize the three-ingredient proof |
-| A | Problem 2 ($P^2 = P \Leftrightarrow$ disjoint columns) | 13 min | Core — both directions, students attempt (b) before reveal |
-| B | Problem 3 (block cross-filling formula) | 10 min | Core — the new concept, concrete computation |
-| B | Problem 4 (inverse via block) | 7 min | Core — connects to Lecture 10, quick with the formula |
-| B | Problem 5 (product via block) | 8 min | Core — connects to Lecture 12, the "aha" moment |
+| Part | Topic | Suggested Time | Priority |
+|------|-------|---------------|----------|
+| A | Problem 1 ($AB = I_n \Rightarrow \operatorname{rank}(BA) = n$) | 12 min | Core |
+| A | Problem 2 ($P^2 = P \Leftrightarrow$ disjoint columns) | 13 min | Core |
+| B1 | Problem 3 (matrix formula: rank-$k$ piece $= UP^{-1}V$) | 12 min | Core |
+| B2 | Problems 4–5 (entry formula + remainder entry) | 13 min | Core |
+| Apps | Problems 6–7 (Lecture 10/12 applications) | bonus | If time permits |
 
 ### Suggested flow
 
@@ -283,20 +355,22 @@ Combining: $\det(A)\det(B) = \det(AB)$. $\square$
 
 3. **Transition to Part B**: "Both of these problems used ideas we've built up. Now let's look at a technique that connects two different lectures — Lecture 10 (inverse) and Lecture 12 (determinant). The common thread is **block cross-filling**."
 
-4. **Problem 3**: This introduces the general formula. The concrete $4 \times 4$ example makes it tangible. Emphasize the analogy: "divide by the pivot" becomes "multiply by the inverse of the pivot block."
+4. **Sub-topic 1 (Problem 3)**: Introduce the matrix formula. The concrete $4 \times 4$ example makes it tangible. Emphasize: "divide by the pivot" becomes "multiply by the inverse of the pivot block." The rank-$k$ piece $= UP^{-1}V$ — same shape as $\frac{1}{p} \cdot \mathbf{u} \cdot \mathbf{v}^T$.
 
-5. **Problems 4 and 5**: These are retrospective — students now see the Lecture 10 and 12 tricks as instances of one idea. The comparison table in the attention box is the payoff.
+5. **Sub-topic 2 (Problems 4–5)**: Now zoom in to individual entries. Each entry is $\mathbf{u}_i^T P^{-1} \mathbf{v}_j$ — the vectors $\mathbf{u}_i$ and $\mathbf{v}_j$ replace the scalars $u_i$ and $v_j$, and $P^{-1}$ replaces $\frac{1}{p}$. The summary table is the payoff.
+
+6. **Applications (Problems 6–7)**: If time permits, show how Lectures 10 and 12 are both instances of this framework. The entry formula adds a new perspective: it shows how individual entries of $A^{-1}$ or $AB$ emerge from the block structure.
 
 ### Common mistakes
 
 - **Problem 1**: Students may try to prove $BA = I_m$ (which is false when $m \neq n$). Emphasize: we get $\operatorname{rank} = n$, not invertibility.
 - **Problem 2(b)**: Students may try to show $P\mathbf{x} - P^2\mathbf{x} \in \operatorname{Col}(P)$ by writing it as $P(\mathbf{x} - P\mathbf{x})$. This gives $\operatorname{Col}(P)$ membership but the other inclusion is trickier. The key observation is $P\mathbf{x} - P^2\mathbf{x} = (I-P)(P\mathbf{x})$ for $\operatorname{Col}(I-P)$ membership.
-- **Problem 3**: Students may confuse which block is $C$ and which is $R$. Remind them: $C$ = same Columns as pivot, remaining rows. $R$ = same Rows as pivot, remaining columns.
+- **Entry formula confusion**: Students may confuse $\mathbf{u}_i$ (row $i$ of the column block $U$, a $k$-vector) with $u_i$ (the $i$-th entry of a column vector). Emphasize: in rank-1, each "entry" of the column is a number; in block cross-filling, each "entry" of the column block is a $k$-vector.
 - **Block cross-filling**: Students may forget that $P^{-1}$ replaces $\frac{1}{p}$. If $P$ is not invertible, block cross-filling at this stage doesn't apply (just like rank-1 cross-filling fails when the pivot is zero).
 
 ### If time is short
 
-Drop Problem 3(a) computation and just state the block cross-filling formula. Go directly to Problems 4 and 5, which give the formula concrete meaning through the two applications students already know.
+Focus on Sub-topics 1 and 2 (Problems 3–5) — the two formulas are the main content. The applications (Problems 6–7) can be assigned as reading or covered in a future tutorial.
 
 ---
 
