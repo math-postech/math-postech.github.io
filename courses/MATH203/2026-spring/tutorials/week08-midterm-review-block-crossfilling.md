@@ -104,65 +104,74 @@ In ordinary cross-filling, we pick **one row and one column**, form a rank-1 pie
 
 ### Problem 3: Rank-$k$ Cross-Filling (10 min)
 
+In rank-1 cross-filling, we select one row and one column. The rank-1 piece uses the **full column** (all rows) and the **full row** (all columns), divided by the pivot. Block cross-filling is the same idea with $k$ rows and $k$ columns.
+
 Consider the $4 \times 4$ matrix:
 
 $$A = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ 1 & 0 & 2 & 1 \\ 0 & 1 & 1 & 3 \end{pmatrix}$$
 
-**(a)** Select the first two rows and first two columns as the "pivot block":
+**(a)** Select the first two rows and first two columns. Define:
 
-$$\text{Pivot block: } P = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}, \quad \text{Column block: } C = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad \text{Row block: } R = \begin{pmatrix} 5 & 5 \\ 4 & 7 \end{pmatrix}$$
+- **Pivot block** $P$: the $2 \times 2$ intersection of the selected rows and columns
+- **Column block** $U$: the selected two columns, **all** rows (a $4 \times 2$ matrix)
+- **Row block** $V$: the selected two rows, **all** columns (a $2 \times 4$ matrix)
 
-where $C$ consists of the selected two columns restricted to the remaining rows, and $R$ consists of the selected two rows restricted to the remaining columns.
+$$P = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}, \quad U = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad V = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix}$$
 
-Compute the "rank-2 piece": $\begin{pmatrix} P \\ C \end{pmatrix} P^{-1} \begin{pmatrix} P & R \end{pmatrix}$.
+Note: $U$ is $4 \times 2$ and $V$ is $2 \times 4$ — just like rank-1 where the column is $n \times 1$ and the row is $1 \times n$. The pivot block $P$ sits inside both $U$ and $V$ (it is the top part of $U$ and the left part of $V$).
+
+Compute the rank-2 piece: $U \cdot P^{-1} \cdot V$.
 
 ::: details Solution
 First: $P^{-1} = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$.
 
-The column factor is $\begin{pmatrix} P \\ C \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}$, and the row factor is $\begin{pmatrix} P & R \end{pmatrix} = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix}$.
+$$UP^{-1} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \frac{2}{3} & -\frac{1}{3} \\ -\frac{1}{3} & \frac{2}{3} \end{pmatrix}$$
 
-$$\begin{pmatrix} P \\ C \end{pmatrix} P^{-1} \begin{pmatrix} P & R \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} \cdot \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix}$$
+(Notice: the top block of $UP^{-1}$ is $PP^{-1} = I_2$, automatically.)
 
-First compute $\begin{pmatrix} P \\ C \end{pmatrix} P^{-1} = \begin{pmatrix} I_2 \\ C P^{-1} \end{pmatrix}$:
-$$CP^{-1} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$$
+$$UP^{-1}V = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \frac{2}{3} & -\frac{1}{3} \\ -\frac{1}{3} & \frac{2}{3} \end{pmatrix} \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix} = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ 1 & 0 & 2 & 1 \\ 0 & 1 & 1 & 3 \end{pmatrix}$$
 
-Then $P^{-1} \begin{pmatrix} P & R \end{pmatrix} = \begin{pmatrix} I_2 & P^{-1}R \end{pmatrix}$:
-$$P^{-1}R = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}\begin{pmatrix} 5 & 5 \\ 4 & 7 \end{pmatrix} = \frac{1}{3}\begin{pmatrix} 6 & 3 \\ 3 & 9 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix}$$
+The rank-2 piece equals $A$ itself! So the remainder is:
 
-So the rank-2 piece is:
-$$\begin{pmatrix} I_2 \\ CP^{-1} \end{pmatrix} \begin{pmatrix} P & R \end{pmatrix} = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ \frac{2}{3} & \frac{1}{3} & 2 & 1 \\ -\frac{1}{3} & \frac{2}{3} & 1 & 3 \end{pmatrix} \cdot \;\text{(Hmm, let's just compute it directly.)}$$
+$$A - UP^{-1}V = \begin{pmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix}$$
 
-Actually, the cleaner approach: the rank-$k$ piece matches $A$ exactly on the selected rows and columns. The **remainder** is:
-$$A - \text{(rank-2 piece)} = \begin{pmatrix} 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 2 - CP^{-1}R_{11} & 1 - CP^{-1}R_{12} \\ 0 & 0 & 1 - CP^{-1}R_{21} & 3 - CP^{-1}R_{22} \end{pmatrix}$$
+The remainder is **zero**, so $A$ has rank 2.
 
-The bottom-right block of the remainder is:
-$$\begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix} - CP^{-1}R = \begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix} - \begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$$
-
-The remainder is **zero**! This means $A$ has rank 2.
+**Compare with rank-1**: In rank-1 cross-filling, a single entry $p$ is the pivot, and we compute $\frac{1}{p} \cdot (\text{column}) \cdot (\text{row})$. Here, $P^{-1}$ replaces $\frac{1}{p}$, the full column block $U$ replaces the column vector, and the full row block $V$ replaces the row vector. The structure is identical.
 :::
 
-**(b)** What is the "bottom-right remainder" in general?
+**(b)** What is the remainder in general? Show it relates to $D - CP^{-1}R$ where $C$ and $R$ are the parts of $U$ and $V$ outside the pivot block.
 
 ::: details Solution
-If a matrix $A$ is partitioned as $A = \begin{pmatrix} P & R \\ C & D \end{pmatrix}$ where $P$ is the $k \times k$ invertible pivot block, then the remainder after a single block cross-filling step is:
+Write the full column block and row block in terms of the pivot block and the "extra" parts:
 
-$$\text{Remainder} = \begin{pmatrix} 0 & 0 \\ 0 & D - CP^{-1}R \end{pmatrix}$$
+$$U = \begin{pmatrix} P \\ C \end{pmatrix}, \quad V = \begin{pmatrix} P & R \end{pmatrix}$$
+
+where $C$ is the bottom part of the column block (remaining rows) and $R$ is the right part of the row block (remaining columns). Then:
+
+$$UP^{-1}V = \begin{pmatrix} P \\ C \end{pmatrix} P^{-1} \begin{pmatrix} P & R \end{pmatrix} = \begin{pmatrix} P & R \\ C & CP^{-1}R \end{pmatrix}$$
+
+The original matrix partitions as $A = \begin{pmatrix} P & R \\ C & D \end{pmatrix}$, so the remainder is:
+
+$$A - UP^{-1}V = \begin{pmatrix} 0 & 0 \\ 0 & D - CP^{-1}R \end{pmatrix}$$
 
 The quantity $D - CP^{-1}R$ is called the **Schur complement** of $P$ in $A$. It plays the same role as the "remainder entry" in ordinary cross-filling — if it's zero, the original matrix has the same rank as the pivot block.
-
-**Analogy with rank-1 cross-filling**: In rank-1 cross-filling, you divide by the pivot (a number). In block cross-filling, you divide by the **inverse of the pivot block** (a matrix). The formula $D - CP^{-1}R$ generalizes $d - \frac{c \cdot r}{p}$.
 :::
 
 ::: attention
 **Block Cross-Filling Rule**
 
-Select $k$ rows and $k$ columns. Let $P$ be their $k \times k$ intersection (the pivot block).
+Select $k$ rows and $k$ columns from an $n \times n$ matrix.
 
-$$\text{Rank-}k\text{ piece: column} \times P^{-1} \times \text{row}$$
+| | Rank-1 cross-filling | Block cross-filling |
+|---|---|---|
+| **Pivot** | a number $p$ | a $k \times k$ matrix $P$ |
+| **Column** | full column ($n \times 1$) | full column block $U$ ($n \times k$) |
+| **Row** | full row ($1 \times n$) | full row block $V$ ($k \times n$) |
+| **Rank-$k$ piece** | $\frac{1}{p} \cdot \text{col} \cdot \text{row}$ | $U \cdot P^{-1} \cdot V$ |
+| **Remainder** | $d - \frac{cr}{p}$ | $D - CP^{-1}R$ |
 
-$$\text{Remainder bottom-right: } D - CP^{-1}R$$
-
-This is exactly the same as rank-1 cross-filling, but with $P^{-1}$ replacing $\frac{1}{p}$.
+The column block $U$ and row block $V$ include the pivot block itself, just as the column and row vectors in rank-1 cross-filling include the pivot entry.
 :::
 
 ### Problem 4: Block Cross-Filling for the Inverse — from Lecture 10 (7 min)
