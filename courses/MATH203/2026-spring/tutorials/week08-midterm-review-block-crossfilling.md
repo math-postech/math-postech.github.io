@@ -100,205 +100,161 @@ This equivalence tells us: **a matrix is a projection if and only if its floor a
 
 ### The Main Idea
 
-Recall that rank-1 cross-filling has **two formulas**:
+In rank-1 cross-filling, picking one row and one column determines a rank-1 piece: column $\times$ row $\div$ pivot. **What happens when we pick $k$ rows and $k$ columns at once?** The next problems answer this — starting from a puzzle.
 
-- **Matrix formula**: the rank-1 piece $= \dfrac{1}{p} \cdot \mathbf{u} \cdot \mathbf{v}^T$ (column $\times$ row, divided by pivot)
-- **Entry formula**: each entry of the rank-1 piece $= \dfrac{u_i \cdot v_j}{p}$ (column entry $\times$ row entry, divided by pivot)
+### Sub-topic 1: The Matrix Formula — Rank-$k$ Piece (10 min)
 
-What happens when we pick **$k$ rows and $k$ columns** at once? Both formulas generalize.
+#### Problem 3: Complete the Matrix
 
-### Sub-topic 1: The Matrix Formula — Rank-$k$ Piece (12 min)
+The first two rows and first two columns of this $4 \times 4$ matrix are given, but the bottom-right block is hidden:
 
-#### Problem 3: Computing a Rank-2 Piece
+$$A = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ 1 & 0 & ? & ? \\ 0 & 1 & ? & ? \end{pmatrix}$$
 
-Consider the $4 \times 4$ matrix:
+**You are told that $A$ has rank $2$. Find the four missing entries.**
 
-$$A = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ 1 & 0 & 2 & 1 \\ 0 & 1 & 1 & 3 \end{pmatrix}$$
-
-**(a)** Select the first two rows and first two columns. Define:
-
-- **Pivot block** $P$: the $2 \times 2$ intersection of the selected rows and columns
-- **Column block** $U$: the selected two columns, **all** rows (a $4 \times 2$ matrix)
-- **Row block** $V$: the selected two rows, **all** columns (a $2 \times 4$ matrix)
-
-$$P = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}, \quad U = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}, \quad V = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix}$$
-
-Note: $U$ is $4 \times 2$ and $V$ is $2 \times 4$ — just like rank-1 where the column is $n \times 1$ and the row is $1 \times n$. The pivot block $P$ sits inside both $U$ and $V$ (it is the top part of $U$ and the left part of $V$).
-
-Compute the rank-2 piece: $U \cdot P^{-1} \cdot V$.
+**(a)** Since $\operatorname{rank}(A) = 2$, row 3 must be a linear combination of rows 1 and 2. Use columns 1 and 2 (which you can see) to find the coefficients, then fill in the missing entries of row 3.
 
 ::: details Solution
-First: $P^{-1} = \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$.
+$\text{row}_3 = \alpha \cdot \text{row}_1 + \beta \cdot \text{row}_2$. At columns 1 and 2:
 
-$$UP^{-1} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \frac{2}{3} & -\frac{1}{3} \\ -\frac{1}{3} & \frac{2}{3} \end{pmatrix}$$
+$$2\alpha + \beta = 1, \quad \alpha + 2\beta = 0$$
 
-(Notice: the top block of $UP^{-1}$ is $PP^{-1} = I_2$, automatically.)
+Solving: $\alpha = \frac{2}{3},\; \beta = -\frac{1}{3}$.
 
-$$UP^{-1}V = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \frac{2}{3} & -\frac{1}{3} \\ -\frac{1}{3} & \frac{2}{3} \end{pmatrix} \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix} = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ 1 & 0 & 2 & 1 \\ 0 & 1 & 1 & 3 \end{pmatrix}$$
-
-The rank-2 piece equals $A$ itself! So the remainder is zero, meaning $A$ has rank 2.
+Row 3 $= \frac{2}{3}(2, 1, 5, 5) - \frac{1}{3}(1, 2, 4, 7) = (1, 0, \mathbf{2}, \mathbf{1})$.
 :::
 
-**(b)** What is the remainder in general?
+**(b)** Do the same for row 4.
 
 ::: details Solution
-Write the full column and row blocks in terms of the pivot block and the "extra" parts:
+$2\alpha + \beta = 0, \quad \alpha + 2\beta = 1$
 
-$$U = \begin{pmatrix} P \\ C \end{pmatrix}, \quad V = \begin{pmatrix} P & R \end{pmatrix}$$
+Solving: $\alpha = -\frac{1}{3},\; \beta = \frac{2}{3}$.
 
-where $C$ is the bottom part of the column block (remaining rows) and $R$ is the right part of the row block (remaining columns). Then:
-
-$$UP^{-1}V = \begin{pmatrix} P \\ C \end{pmatrix} P^{-1} \begin{pmatrix} P & R \end{pmatrix} = \begin{pmatrix} P & R \\ C & CP^{-1}R \end{pmatrix}$$
-
-The original matrix partitions as $A = \begin{pmatrix} P & R \\ C & D \end{pmatrix}$, so the remainder is:
-
-$$A - UP^{-1}V = \begin{pmatrix} 0 & 0 \\ 0 & D - CP^{-1}R \end{pmatrix}$$
-
-The quantity $D - CP^{-1}R$ is the **Schur complement** of $P$ in $A$. If it's zero, the matrix has the same rank as the pivot block.
+Row 4 $= -\frac{1}{3}(2, 1, 5, 5) + \frac{2}{3}(1, 2, 4, 7) = (0, 1, \mathbf{1}, \mathbf{3})$.
 :::
 
-### Sub-topic 2: The Entry Formula (13 min)
+::: attention
+**What you just did is block cross-filling.**
 
-In rank-1 cross-filling, any single entry of the rank-1 piece can be computed directly:
+Name the three pieces:
 
-$$(\text{rank-1 piece})_{ij} = \frac{u_i \cdot v_j}{p}$$
+- **Pivot block** $P = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ — the $2 \times 2$ intersection of selected rows and columns
+- **Column block** $U = \begin{pmatrix} 2 & 1 \\ 1 & 2 \\ 1 & 0 \\ 0 & 1 \end{pmatrix}$ — all rows at the selected columns ($4 \times 2$)
+- **Row block** $V = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \end{pmatrix}$ — the selected rows, all columns ($2 \times 4$)
 
-where $u_i$ is the $i$-th entry of the column, $v_j$ is the $j$-th entry of the row, and $p$ is the pivot. You don't need to build the whole rank-1 matrix — you can compute any entry individually.
+The completed matrix is $A = U \cdot P^{-1} \cdot V$ — the **rank-$k$ piece**.
 
-Block cross-filling has the same property. Each entry of $U \cdot P^{-1} \cdot V$ can be computed from the $i$-th row of $U$ and the $j$-th column of $V$:
+This is the block version of "column $\times$ row $\div$ pivot": the scalar pivot $p$ is replaced by the pivot block $P$, and $\div p$ becomes $\times P^{-1}$.
+:::
 
-$$(\text{rank-}k\text{ piece})_{ij} = \mathbf{u}_i^T \cdot P^{-1} \cdot \mathbf{v}_j$$
+### Sub-topic 2: The Entry Formula (15 min)
 
-where $\mathbf{u}_i$ is the $i$-th row of $U$ (a $k$-vector — the entries of row $i$ at the selected columns) and $\mathbf{v}_j$ is the $j$-th column of $V$ (a $k$-vector — the entries of column $j$ at the selected rows).
+The matrix formula $UP^{-1}V$ builds the entire rank-$k$ piece at once. But sometimes you only need **one entry**. In rank-1 cross-filling, a single entry is $u_i \cdot v_j / p$. Is there a block version?
 
-#### Problem 4: Abstract Entry Formula — Block Letters
+#### Problem 4: Complete the Block Matrix
 
-Consider a $3 \times 3$ block matrix where the blocks are themselves matrices:
+A $6 \times 6$ matrix is partitioned into $2 \times 2$ blocks. The first row of blocks and the first column of blocks are known, but the four interior blocks are hidden:
 
-$$M = \begin{pmatrix} A_{11} & A_{12} & A_{13} \\ A_{21} & A_{22} & A_{23} \\ A_{31} & A_{32} & A_{33} \end{pmatrix}$$
+$$M = \begin{pmatrix} A_{11} & A_{12} & A_{13} \\ A_{21} & ? & ? \\ A_{31} & ? & ? \end{pmatrix}$$
 
-Here each $A_{ij}$ is a $2 \times 2$ matrix, so $M$ is $6 \times 6$ overall. Suppose we select the first two rows and first two columns as the pivot. Then $P = A_{11}$ (a $2 \times 2$ matrix).
+where each $A_{ij}$ is $2 \times 2$ and $A_{11}$ is invertible.
 
-**(a)** Using the entry formula, what is the rank-2 piece at each block position? Fill in the table:
+**Suppose $M$ has rank $2$. Express each $?$ in terms of the known blocks.**
 
-| | Col block 1 | Col block 2 | Col block 3 |
+*Hint*: Apply the same idea as Problem 3, but with block "rows" and block "columns."
+
+::: details Solution
+By the same logic as Problem 3: block-row 2 is a "combination" of block-row 1, with coefficients determined by the first block-column. Block-row $i$ at block-column $j$:
+
+$$\text{block } (i,j) = A_{i1} \cdot A_{11}^{-1} \cdot A_{1j}$$
+
+| | Col 1 | Col 2 | Col 3 |
 |---|---|---|---|
-| **Row block 1** | ? | ? | ? |
-| **Row block 2** | ? | ? | ? |
-| **Row block 3** | ? | ? | ? |
+| **Row 1** | $A_{11}$ | $A_{12}$ | $A_{13}$ |
+| **Row 2** | $A_{21}$ | $A_{21} A_{11}^{-1} A_{12}$ | $A_{21} A_{11}^{-1} A_{13}$ |
+| **Row 3** | $A_{31}$ | $A_{31} A_{11}^{-1} A_{12}$ | $A_{31} A_{11}^{-1} A_{13}$ |
 
-::: details Solution
-For block position $(i,j)$: $\mathbf{u}_i$ = the $i$-th row-block of $U$ = $A_{i1}$ (column 1 entries at row block $i$), and $\mathbf{v}_j$ = the $j$-th column-block of $V$ = $A_{1j}$ (row 1 entries at column block $j$).
+This is the **entry formula** for block cross-filling:
 
-The entry formula gives: block $(i,j)$ of the rank-2 piece $= A_{i1} \cdot A_{11}^{-1} \cdot A_{1j}$.
+$$(\text{rank-}k \text{ piece})_{ij} = \mathbf{u}_i^T \cdot P^{-1} \cdot \mathbf{v}_j$$
 
-| | Col block 1 | Col block 2 | Col block 3 |
-|---|---|---|---|
-| **Row block 1** | $A_{11} A_{11}^{-1} A_{11} = A_{11}$ | $A_{11} A_{11}^{-1} A_{12} = A_{12}$ | $A_{11} A_{11}^{-1} A_{13} = A_{13}$ |
-| **Row block 2** | $A_{21} A_{11}^{-1} A_{11} = A_{21}$ | $A_{21} A_{11}^{-1} A_{12}$ | $A_{21} A_{11}^{-1} A_{13}$ |
-| **Row block 3** | $A_{31} A_{11}^{-1} A_{11} = A_{31}$ | $A_{31} A_{11}^{-1} A_{12}$ | $A_{31} A_{11}^{-1} A_{13}$ |
-
-Notice: the pivot row and pivot column of the rank-2 piece **match the original matrix exactly** (the first row of blocks and first column of blocks are unchanged). This is the same as rank-1 cross-filling, where the pivot row and pivot column are always reproduced.
+where $\mathbf{u}_i$ is row $i$'s entries at the selected columns (a $k$-vector) and $\mathbf{v}_j$ is column $j$'s entries at the selected rows (a $k$-vector). The block-letter version makes the pattern visible: **row-side $\times$ pivot-inverse $\times$ column-side**.
 :::
 
-**(b)** What is the remainder at block position $(i,j)$ (for $i,j \geq 2$)?
+#### Problem 5: Find the Missing Entries
+
+Only the first two rows and first two columns of this $6 \times 6$ matrix are given:
+
+$$M = \begin{pmatrix} 1 & 1 & \cdot & \cdot & \cdot & \cdot \\ 0 & 2 & \cdot & \cdot & \cdot & \cdot \\ 2 & 1 & \cdot & \cdot & \cdot & \cdot \\ 1 & 3 & \cdot & \cdot & \cdot & \cdot \\ 3 & 0 & \cdot & \cdot & \cdot & \cdot \\ 1 & 2 & \cdot & \cdot & \cdot & \cdot \end{pmatrix}, \quad V = \begin{pmatrix} 1 & 1 & 3 & 0 & 2 & 1 \\ 0 & 2 & 1 & 4 & 0 & 3 \end{pmatrix}$$
+
+where $V$ gives the complete first two rows. **Suppose $M$ has rank $2$.**
+
+**(a)** Find $m_{3,4}$ without computing the full matrix.
 
 ::: details Solution
-$$\text{remainder at block } (i,j) = A_{ij} - A_{i1} \cdot A_{11}^{-1} \cdot A_{1j}$$
+$P = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}$, $\;P^{-1} = \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix}$.
 
-This is the block Schur complement formula, applied entry by entry. If we write it for all blocks at once:
-
-$$\text{Schur complement} = \begin{pmatrix} A_{22} - A_{21}A_{11}^{-1}A_{12} & A_{23} - A_{21}A_{11}^{-1}A_{13} \\ A_{32} - A_{31}A_{11}^{-1}A_{12} & A_{33} - A_{31}A_{11}^{-1}A_{13} \end{pmatrix}$$
-
-**Compare with rank-1**: In rank-1 cross-filling, the remainder entry is $a_{ij} - \frac{a_{i,\text{pivot}} \cdot a_{\text{pivot},j}}{a_{\text{pivot,pivot}}}$. Here it is $A_{ij} - A_{i1} A_{11}^{-1} A_{1j}$ — the same pattern with matrices replacing numbers.
-:::
-
-**(c)** What condition makes $M$ a rank-2 matrix (i.e., the Schur complement is all zero)?
-
-::: details Solution
-$M$ has rank 2 if and only if every block of the Schur complement is zero:
-
-$$A_{ij} = A_{i1} \cdot A_{11}^{-1} \cdot A_{1j} \quad \text{for all } i,j$$
-
-This means: **every block of $M$ is determined by the first row of blocks, the first column of blocks, and the pivot block**. Just like a rank-1 matrix where every entry $a_{ij} = \frac{u_i v_j}{p}$ is determined by one column, one row, and the pivot.
-:::
-
-#### Problem 5: Concrete Entry Formula — A $6 \times 6$ Matrix
-
-Consider the $6 \times 6$ matrix (select rows 1,2 and columns 1,2 as pivot):
-
-$$M = \begin{pmatrix} 1 & 1 & \cdot & \cdot & \cdot & \cdot \\ 0 & 2 & \cdot & \cdot & \cdot & \cdot \\ 2 & 1 & \cdot & \cdot & \cdot & \cdot \\ 1 & 3 & \cdot & \cdot & \cdot & \cdot \\ 3 & 0 & \cdot & \cdot & \cdot & \cdot \\ 1 & 2 & \cdot & \cdot & \cdot & \cdot \end{pmatrix}$$
-
-The dots are unknown. All we know is the first two columns (the column block $U$) and the first two rows (the row block $V$):
-
-$$P = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}, \quad U = \begin{pmatrix} 1 & 1 \\ 0 & 2 \\ 2 & 1 \\ 1 & 3 \\ 3 & 0 \\ 1 & 2 \end{pmatrix}, \quad V = \begin{pmatrix} 1 & 1 & 3 & 0 & 2 & 1 \\ 0 & 2 & 1 & 4 & 0 & 3 \end{pmatrix}$$
-
-**Suppose $M$ has rank 2.** Then $M = UP^{-1}V$ (the rank-2 piece is the entire matrix).
-
-**(a)** Compute $P^{-1}$.
-
-::: details Solution
-$$P^{-1} = \frac{1}{2}\begin{pmatrix} 2 & -1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix}$$
-:::
-
-**(b)** Use the entry formula to find the $(3,4)$ entry of $M$.
-
-::: details Solution
 $\mathbf{u}_3 = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$ (row 3 at columns 1,2), $\;\mathbf{v}_4 = \begin{pmatrix} 0 \\ 4 \end{pmatrix}$ (column 4 at rows 1,2).
 
-$$m_{3,4} = \mathbf{u}_3^T \cdot P^{-1} \cdot \mathbf{v}_4 = \begin{pmatrix} 2 & 1 \end{pmatrix} \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix} \begin{pmatrix} 0 \\ 4 \end{pmatrix} = \begin{pmatrix} 2 & -\frac{1}{2} \end{pmatrix} \begin{pmatrix} 0 \\ 4 \end{pmatrix} = -2$$
+$$m_{3,4} = \mathbf{u}_3^T P^{-1} \mathbf{v}_4 = \begin{pmatrix} 2 & 1 \end{pmatrix} \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix} \begin{pmatrix} 0 \\ 4 \end{pmatrix} = \begin{pmatrix} 2 & -\frac{1}{2} \end{pmatrix} \begin{pmatrix} 0 \\ 4 \end{pmatrix} = -2$$
 :::
 
-**(c)** Use the entry formula to find the $(5,6)$ entry of $M$.
+**(b)** Find $m_{5,6}$.
 
 ::: details Solution
-$\mathbf{u}_5 = \begin{pmatrix} 3 \\ 0 \end{pmatrix}$ (row 5 at columns 1,2), $\;\mathbf{v}_6 = \begin{pmatrix} 1 \\ 3 \end{pmatrix}$ (column 6 at rows 1,2).
+$\mathbf{u}_5 = \begin{pmatrix} 3 \\ 0 \end{pmatrix}$, $\;\mathbf{v}_6 = \begin{pmatrix} 1 \\ 3 \end{pmatrix}$.
 
-$$m_{5,6} = \mathbf{u}_5^T \cdot P^{-1} \cdot \mathbf{v}_6 = \begin{pmatrix} 3 & 0 \end{pmatrix} \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix} \begin{pmatrix} 1 \\ 3 \end{pmatrix} = \begin{pmatrix} 3 & -\frac{3}{2} \end{pmatrix} \begin{pmatrix} 1 \\ 3 \end{pmatrix} = 3 - \frac{9}{2} = -\frac{3}{2}$$
+$$m_{5,6} = \begin{pmatrix} 3 & 0 \end{pmatrix} \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix} \begin{pmatrix} 1 \\ 3 \end{pmatrix} = \begin{pmatrix} 3 & -\frac{3}{2} \end{pmatrix} \begin{pmatrix} 1 \\ 3 \end{pmatrix} = 3 - \frac{9}{2} = -\frac{3}{2}$$
 :::
 
-**(d)** Fill in the entire $6 \times 6$ matrix $M$.
+**(c)** Fill in the entire matrix.
 
 ::: details Solution
-Compute $UP^{-1}$:
-
-$$UP^{-1} = \begin{pmatrix} 1 & 1 \\ 0 & 2 \\ 2 & 1 \\ 1 & 3 \\ 3 & 0 \\ 1 & 2 \end{pmatrix} \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 2 & -\frac{1}{2} \\ 1 & 1 \\ 3 & -\frac{3}{2} \\ 1 & \frac{1}{2} \end{pmatrix}$$
-
-Then $M = (UP^{-1})V$:
+$UP^{-1} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 2 & -\frac{1}{2} \\ 1 & 1 \\ 3 & -\frac{3}{2} \\ 1 & \frac{1}{2} \end{pmatrix}$, then $M = (UP^{-1})V$:
 
 $$M = \begin{pmatrix} 1 & 1 & 3 & 0 & 2 & 1 \\ 0 & 2 & 1 & 4 & 0 & 3 \\ 2 & 1 & \frac{11}{2} & -2 & 4 & -\frac{1}{2} \\ 1 & 3 & 4 & 4 & 2 & 4 \\ 3 & 0 & \frac{15}{2} & -6 & 6 & -\frac{3}{2} \\ 1 & 2 & \frac{7}{2} & 2 & 2 & \frac{5}{2} \end{pmatrix}$$
-
-Every entry is determined by the first two rows and first two columns — because $M$ has rank 2. The entry formula lets you compute any single entry (like $m_{3,4} = -2$) without computing the whole matrix.
 :::
 
-#### Problem 6: The Remainder Entry Formula
+#### Problem 6: What If the Matrix Isn't Rank $k$?
 
-The remainder also has an entry formula. In rank-1 cross-filling, the remainder at position $(i,j)$ is:
+Go back to Problem 3's setup, but now the bottom-right block is different:
 
-$$a_{ij} - \frac{u_i \cdot v_j}{p}$$
+$$B = \begin{pmatrix} 2 & 1 & 5 & 5 \\ 1 & 2 & 4 & 7 \\ 1 & 0 & 3 & 2 \\ 0 & 1 & 2 & 5 \end{pmatrix}$$
 
-**(a)** What is the block version? Write the remainder entry using the entry formula.
+**(a)** Try to complete $B$ as a rank-2 matrix using the same method as Problem 3. What goes wrong?
 
 ::: details Solution
-For a position $(i,j)$ outside the pivot block (i.e., $i$ is a non-selected row, $j$ is a non-selected column):
+If $B$ had rank 2, the bottom-right block would have to be $\begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix}$ (the answer from Problem 3). But it's $\begin{pmatrix} 3 & 2 \\ 2 & 5 \end{pmatrix}$ — the predicted values don't match. So $B$ does **not** have rank 2.
 
+The difference between the actual and predicted values is the **remainder**:
+
+$$\begin{pmatrix} 3 & 2 \\ 2 & 5 \end{pmatrix} - \begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}$$
+:::
+
+**(b)** Write the general formula. If we partition any matrix as $\begin{pmatrix} P & R \\ C & D \end{pmatrix}$ with invertible pivot block $P$, what is the remainder?
+
+::: details Solution
+The rank-$k$ piece predicts the bottom-right block as $CP^{-1}R$. The remainder is:
+
+$$D - CP^{-1}R$$
+
+This is called the **Schur complement** of $P$. It measures how far the matrix is from being rank $k$.
+
+- Schur complement $= 0$: the matrix has rank $k$ (everything is determined by the selected rows and columns)
+- Schur complement $\neq 0$: there is "leftover" that the pivot block doesn't explain
+
+This is exactly the block version of "remainder $= d - cr/p$" from rank-1 cross-filling.
+:::
+
+**(c)** The remainder also has an entry formula. Write the remainder at a single position $(i,j)$.
+
+::: details Solution
 $$\text{remainder}_{ij} = a_{ij} - \mathbf{u}_i^T \cdot P^{-1} \cdot \mathbf{v}_j$$
 
-where $\mathbf{u}_i$ is row $i$'s entries at the selected columns, $\mathbf{v}_j$ is column $j$'s entries at the selected rows, and $P$ is the pivot block.
+Block version of $a_{ij} - u_i v_j / p$. Verify for $B$: at position $(3,3)$,
 
-This is exactly $d - \frac{c \cdot r}{p}$ with vectors and a matrix replacing scalars.
-:::
-
-**(b)** Verify: compute the $(4,3)$ entry of the remainder for the matrix $A$ from Problem 3.
-
-::: details Solution
-$\mathbf{u}_4 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$ (row 4 at columns 1,2), $\;\mathbf{v}_3 = \begin{pmatrix} 5 \\ 4 \end{pmatrix}$ (column 3 at rows 1,2).
-
-$$\text{remainder}_{4,3} = a_{4,3} - \mathbf{u}_4^T \cdot P^{-1} \cdot \mathbf{v}_3 = 1 - \begin{pmatrix} 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} \cdot \begin{pmatrix} 5 \\ 4 \end{pmatrix}$$
-
-$$= 1 - \begin{pmatrix} 0 & 1 \end{pmatrix} \cdot \frac{1}{3}\begin{pmatrix} 6 \\ 3 \end{pmatrix} = 1 - \begin{pmatrix} 0 & 1 \end{pmatrix} \cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} = 1 - 1 = 0$$
-
-The remainder is zero at this entry. ✓ (We already know the whole remainder is zero since $A$ has rank 2.)
+$$\text{remainder}_{3,3} = 3 - \begin{pmatrix} 1 & 0 \end{pmatrix} \frac{1}{3}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} \begin{pmatrix} 5 \\ 4 \end{pmatrix} = 3 - \begin{pmatrix} 1 & 0 \end{pmatrix} \begin{pmatrix} 2 \\ 1 \end{pmatrix} = 3 - 2 = 1 \;\checkmark$$
 :::
 
 ::: attention
@@ -425,10 +381,10 @@ Combining: $\det(A)\det(B) = \det(AB)$. $\square$
 |------|-------|---------------|----------|
 | A | Problem 1 ($AB = I_n \Rightarrow \operatorname{rank}(BA) = n$) | 12 min | Core |
 | A | Problem 2 ($P^2 = P \Leftrightarrow$ disjoint columns) | 13 min | Core |
-| B1 | Problem 3 (matrix formula: rank-$k$ piece $= UP^{-1}V$) | 10 min | Core |
-| B2 | Problem 4 (abstract entry formula with block letters) | 7 min | Core |
-| B2 | Problem 5 (concrete 6×6 entry formula) | 8 min | Core |
-| B2 | Problem 6 (remainder entry formula) | 5 min | Core — quick with the pattern established |
+| B1 | Problem 3 (complete a rank-2 matrix — discover the matrix formula) | 10 min | Core |
+| B2 | Problem 4 (complete a block matrix — discover the entry formula) | 5 min | Core |
+| B2 | Problem 5 (find missing entries of a 6×6 matrix) | 5 min | Core |
+| B2 | Problem 6 (what if it's not rank $k$? — remainder and Schur complement) | 5 min | Core |
 | Apps | Problems 7–8 (Lecture 10/12 applications) | bonus | If time permits |
 
 ### Suggested flow
@@ -439,26 +395,27 @@ Combining: $\det(A)\det(B) = \det(AB)$. $\square$
 
 3. **Transition to Part B**: "Both of these problems used ideas we've built up. Now let's look at a technique that connects two different lectures — Lecture 10 (inverse) and Lecture 12 (determinant). The common thread is **block cross-filling**."
 
-4. **Sub-topic 1 (Problem 3)**: Introduce the matrix formula. The concrete $4 \times 4$ example makes it tangible. Emphasize: "divide by the pivot" becomes "multiply by the inverse of the pivot block." The rank-$k$ piece $= UP^{-1}V$ — same shape as $\frac{1}{p} \cdot \mathbf{u} \cdot \mathbf{v}^T$.
+4. **Problem 3 — the key moment**: Put the $4 \times 4$ matrix with the missing block on the board. Ask: "This has rank 2 — what are the four missing numbers?" Give students 2–3 minutes. Some will try column reduction, others will guess. The insight is: rank 2 means row 3 is a combination of rows 1 and 2, and you can find the coefficients from the visible columns. After the class solves it, reveal the attention box: what they just did is $UP^{-1}V$.
 
-5. **Sub-topic 2 — Abstract (Problem 4)**: The $3 \times 3$ block-letter example. Students fill in the table: block $(i,j)$ of the rank-$k$ piece $= A_{i1} A_{11}^{-1} A_{1j}$. This makes the pattern visible without numerical clutter. The remainder formula $A_{ij} - A_{i1} A_{11}^{-1} A_{1j}$ is the key takeaway.
+5. **Problem 4 — abstract block version**: Now put the $3 \times 3$ block matrix with hidden blocks on the board. "Same game, but with block letters." Students should be faster now — they apply the same logic at the block level and discover $A_{i1} A_{11}^{-1} A_{1j}$.
 
-6. **Sub-topic 2 — Concrete (Problem 5)**: The $6 \times 6$ matrix with two rows and two columns given. Students practice the entry formula on specific entries before filling the whole matrix. This shows the computational power: you can find any single entry without building the entire rank-2 piece.
+6. **Problem 5 — numerical drill**: The $6 \times 6$ matrix. Students practice the entry formula on specific entries (a, b) before filling the whole matrix (c). This shows the computational power: any single entry without building the entire matrix.
 
-7. **Problem 6 (remainder)**: Quick — students already see the pattern from Problems 4–5.
+7. **Problem 6 — the twist**: "What if the matrix ISN'T rank 2?" Give the modified matrix $B$. Students try the same method and find the predicted values don't match — the remainder is born. Define Schur complement here, where the motivation is clear.
 
-8. **Applications (Problems 7–8)**: If time permits, show how Lectures 10 and 12 are both instances of this framework. The entry formula adds a new perspective: it shows how individual entries of $A^{-1}$ or $AB$ emerge from the block structure.
+8. **Applications (Problems 7–8)**: If time permits, show how Lectures 10 and 12 are both instances of this framework.
 
 ### Common mistakes
 
 - **Problem 1**: Students may try to prove $BA = I_m$ (which is false when $m \neq n$). Emphasize: we get $\operatorname{rank} = n$, not invertibility.
 - **Problem 2(b)**: Students may try to show $P\mathbf{x} - P^2\mathbf{x} \in \operatorname{Col}(P)$ by writing it as $P(\mathbf{x} - P\mathbf{x})$. This gives $\operatorname{Col}(P)$ membership but the other inclusion is trickier. The key observation is $P\mathbf{x} - P^2\mathbf{x} = (I-P)(P\mathbf{x})$ for $\operatorname{Col}(I-P)$ membership.
+- **Problem 3**: Some students may try to solve a $4 \times 4$ system or do column reduction. Redirect: "You know it's rank 2 — what does that tell you about each row?"
 - **Entry formula confusion**: Students may confuse $\mathbf{u}_i$ (row $i$ of the column block $U$, a $k$-vector) with $u_i$ (the $i$-th entry of a column vector). Emphasize: in rank-1, each "entry" of the column is a number; in block cross-filling, each "entry" of the column block is a $k$-vector.
-- **Block cross-filling**: Students may forget that $P^{-1}$ replaces $\frac{1}{p}$. If $P$ is not invertible, block cross-filling at this stage doesn't apply (just like rank-1 cross-filling fails when the pivot is zero).
+- **Problem 6**: Students may think the method "failed." Clarify: it succeeded — it told us the matrix is NOT rank 2, and the remainder measures how much is left over.
 
 ### If time is short
 
-Focus on Problems 3–4 (matrix formula + abstract entry formula). Skip Problem 5 (concrete 6×6) and Problem 6 (remainder) — students can do these as practice. The applications (Problems 7–8) can be assigned as reading or covered in a future tutorial.
+Focus on Problems 3 and 4 (discover matrix formula, then entry formula). Skip Problem 5 (students can practice on their own) and abbreviate Problem 6 to just part (a). The applications (Problems 7–8) can be assigned as reading.
 
 ---
 
