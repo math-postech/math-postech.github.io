@@ -214,11 +214,12 @@ Lecture notes are organized by topic and will be added throughout the semester.
 
 ### Chapter 4: Applications
 
-- Lecture 11: Linear Regression — **[Slides](files/lecture11-slides.pdf)** — Data as geometry (measurements → point in $\mathbb{R}^n$, model → subspace), error = distance, best fit = orthogonal projection, normal equation via simultaneous row operations, cross-filling connection
+- [Lecture 11: Linear Regression](./notes/linear-regression.md) — **[Slides](files/lecture11-slides.pdf)** — Data as geometry (measurements → point in $\mathbb{R}^n$, model → subspace), evaluation matrix $B_{ij}=f_j(x_i)$, error = distance, best fit = orthogonal projection, normal equation via simultaneous row operations, polynomial regression, cross-filling connection
 
 ### Chapter 5: Determinants
 
-- Lecture 12: Determinant — **[Slides](files/lecture12-slides.pdf)** — Cross-filling formula ($\det = a_1 \cdots a_n \cdot \det(S)$), zigzag loops and switching matrices, $\det(A^T) = \det(A)$, $\det(AB) = \det(A)\det(B)$ via block matrix deformation
+- [Lecture 12: Determinant](./notes/determinant.md) — **[Slides](files/lecture12-slides.pdf)** — Three axioms (multilinearity, alternating, normalization), $2\times 2$ formula, cross-filling formula ($\det = a_1 \cdots a_n \cdot \det(S)$), zigzag loops and switching matrices, $\det(A^T) = \det(A)$, $\det(AB) = \det(A)\det(B)$ via block matrix deformation
+- [Lecture 13: Laplace Expansion, Adjugate & Cramer's Rule](./notes/laplace-expansion.md) — **[Slides](files/lecture13-slides.pdf)** — Cofactors, Laplace expansion, cofactor orthogonality, adjugate $A^*A = (\det A)I$, inverse formula, invertibility criterion, Cramer's rule
 
 ---
 
