@@ -152,10 +152,10 @@ The textbook is only for the reference, we will follow our lecture notes in this
 
 | Week | Dates (Mon–Thu) | Topics | Content |
 |------|-----------------|--------|---------|
-| **Week 9** | 04-20 -- 04-23 | **Ch3 §3.5–3.7**: Constructing Projections | Uniqueness of projections. Oblique projection construction: P=B(AB)⁻¹A. Orthogonal projection: P=B(BᵀB)⁻¹Bᵀ. Inner diagonal cross-filling. Least squares. **HW3 assigned.** |
+| **Week 9** | 04-20 -- 04-23 | **Ch3 §3.5–3.7**: Constructing Projections | Uniqueness of projections. Oblique projection construction: P=B(AB)⁻¹A. Orthogonal projection: P=B(BᵀB)⁻¹Bᵀ. Inner diagonal cross-filling. Least squares.  |
 | **Week 10** | 04-27 -- 04-30 | **Ch4 §4.1–4.3**: Determinants | Geometric motivation. Four axioms (multilinear, alternating, normalized). Laplace expansion, cofactors. Adjugate: A\*A=(det A)I. |
 | **Week 11** | 05-04 -- 05-07 | **Ch4 §4.4–4.5**: Det Properties & Cayley-Hamilton | det(AB)=det(A)det(B). Inverse formula, Cramer's rule. Annihilating polynomials. **Cayley-Hamilton theorem**: det(tI−A) annihilates A. *(05-05 Children's Day, does not affect Mon/Wed classes)* |
-| **Week 12** | 05-11 -- 05-14 | **Ch5 §5.1–5.2**: Eigenvalues & Lagrange Interpolation | Characteristic polynomial, principal minors, eigenvalues. **Lagrange interpolation**: fᵢ(xⱼ)=δᵢⱼ. Value-table philosophy: g(A) depends only on g(λ₁),...,g(λₘ). **HW4 assigned.** |
+| **Week 12** | 05-11 -- 05-14 | **Ch5 §5.1–5.2**: Eigenvalues & Lagrange Interpolation | Characteristic polynomial, principal minors, eigenvalues. **Lagrange interpolation**: fᵢ(xⱼ)=δᵢⱼ. Value-table philosophy: g(A) depends only on g(λ₁),...,g(λₘ).  |
 | **Week 13** | 05-18 -- 05-21 | **Ch5 §5.3–5.4**: Spectral Decomposition | Complex numbers, simple-roots criterion for diagonalizability. **Spectral decomposition**: A=ΣλᵢPᵢ. Spectral formula: g(A)=Σg(λᵢ)Pᵢ. Eigenvectors from Pᵢ. |
 | **Week 14** | ~~05-25~~ -- 05-28 | **Ch5 §5.5–5.6**: Diagonalization & Applications | *~~05-25 Holiday~~*. From spectral decomposition to diagonalization (cross-fill Pᵢ). Applications: Aⁿ=ΣλᵢⁿPᵢ, eᴬ=ΣeᵡⁱPᵢ, linear recurrences, similarity. |
 | **Week 15** | 06-01 -- 06-04 | **Ch6 §6.1–6.5**: Normal Matrices, PD, SVD + Review | Hermitian transpose A\*=Āᵀ. Normal matrices. Nilpotent-normal lemma → normal⟹diagonalizable. Unitary diagonalization. Positive definite matrices (λᵢ>0, MᵀM form, pivots>0). **SVD**: A=Ω₁ΣΩ₂. **Final review.** |
@@ -182,8 +182,8 @@ There are **4 homework assignments** worth **10% of your final grade** (2.5% eac
 |-----|------------------|-------------------------------|----------------------------|--------|-----|
 | **HW1** | Week 1 (Feb 23) | Week 2 (Mar 5) | Week 4 (Mar 19) | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) · [Solutions](files/hw01-sol.pdf) |
 | **HW2** | Week 4 (Mar 16) | Week 5 (Mar 26) | Week 7 (Apr 9) | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) · [Solutions](files/hw02-sol.pdf) |
-| **HW3** | Week 8 (Apr 20) | Week 9 (Apr 23) | Week 11 (May 7) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
-| **HW4** | Week 11 (May 4) | Week 12 (May 14) | Week 14 (May 28) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
+| **HW3** | Week 8 (Apr 20) | Week 10 (Apr 30) | Week 12 (May 14) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
+| **HW4** | Week 11 (May 4) | Week 13 (May 21) | Week 15 (June 04) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
 
 *Homework PDFs will be posted as they become available.*
 
