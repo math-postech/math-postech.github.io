@@ -220,6 +220,7 @@ Lecture notes are organized by topic and will be added throughout the semester.
 
 - [Lecture 12: Determinant](./notes/determinant.md) — **[Slides](files/lecture12-slides.pdf)** — Three axioms (multilinearity, alternating, normalization), $2\times 2$ formula, cross-filling formula ($\det = a_1 \cdots a_n \cdot \det(S)$), zigzag loops and switching matrices, $\det(A^T) = \det(A)$, $\det(AB) = \det(A)\det(B)$ via block matrix deformation
 - [Lecture 13: Laplace Expansion, Adjugate & Cramer's Rule](./notes/laplace-expansion.md) — **[Slides](files/lecture13-slides.pdf)** — Cofactors, Laplace expansion, cofactor orthogonality, adjugate $A^*A = (\det A)I$, inverse formula, invertibility criterion, Cramer's rule
+- Lecture 14: Cayley–Hamilton Theorem — **[Slides](files/lecture14-slides.pdf)** — Annihilating polynomials, computing $A^n$, characteristic polynomial $\det(\lambda I - A)$, polynomial division (scalar and matrix), remainder theorem, adjugate proof of Cayley–Hamilton
 
 ---
 
