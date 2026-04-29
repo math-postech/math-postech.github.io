@@ -376,25 +376,25 @@ $$1 \cdot \begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} + 2 
 
 **The dream from §1 is real:** $A = \lambda_1 P_1 + \lambda_2 P_2 + \cdots + \lambda_m P_m$.
 
-### 5.7 $(A - \lambda_i I) \cdot P_{\lambda_i} = 0$ — by Value Tables
+### 5.7 $AP_{\lambda_i} = \lambda_i P_{\lambda_i}$ — by Value Tables
 
-**$\lambda_1 = 0$:** value table of $A - 0I = A$ is $(0, 1, 2)$.
+**$\lambda_1 = 0$:** value table of $A$ is $(0, 1, 2)$, value table of $0 \cdot P_0$ is $0 \cdot (1,0,0) = (0,0,0)$.
 
-$(0,1,2) \cdot (1,0,0) = (0,0,0) = 0$ ✓
+$(0,1,2) \cdot (1,0,0) = (0,0,0)$, so $AP_0 = 0 \cdot P_0$ ✓
 
-**$\lambda_2 = 1$:** value table of $A - I$ is $(0-1, 1-1, 2-1) = (-1, 0, 1)$.
+**$\lambda_2 = 1$:** value table of $A$ is $(0, 1, 2)$, value table of $1 \cdot P_1$ is $(0,1,0)$.
 
-$(-1,0,1) \cdot (0,1,0) = (0,0,0) = 0$ ✓
+$(0,1,2) \cdot (0,1,0) = (0,1,0)$, so $AP_1 = 1 \cdot P_1$ ✓
 
-**$\lambda_3 = 2$:** value table of $A - 2I$ is $(-2, -1, 0)$.
+**$\lambda_3 = 2$:** value table of $A$ is $(0, 1, 2)$, value table of $2 \cdot P_2$ is $2 \cdot (0,0,1) = (0,0,2)$.
 
-$(-2,-1,0) \cdot (0,0,1) = (0,0,0) = 0$ ✓
+$(0,1,2) \cdot (0,0,1) = (0,0,2)$, so $AP_2 = 2 \cdot P_2$ ✓
 
-**Why it works:** $(t - \lambda_i)$ is zero at $\lambda_i$, and $P_{\lambda_i}$ is zero everywhere **else**. Their product is zero at **every** eigenvalue $\implies (A - \lambda_i I) P_{\lambda_i} = 0$.
+**Why it works:** The value table of $A \cdot P_{\lambda_i}$ is entry-wise multiplication $(0,1,2) \cdot (e_i)$, which picks out $\lambda_i$ at position $i$ and $0$ elsewhere — exactly the value table of $\lambda_i P_{\lambda_i}$.
 
 ### 5.8 Eigenvectors: Just Read the Columns
 
-We showed: $(A - \lambda_i I) P_{\lambda_i} = 0$, i.e. $A P_{\lambda_i} = \lambda_i P_{\lambda_i}$.
+We showed: $A P_{\lambda_i} = \lambda_i P_{\lambda_i}$.
 
 Column by column: every **non-zero column** of $P_{\lambda_i}$ is an **eigenvector** for $\lambda_i$.
 
