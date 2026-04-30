@@ -182,7 +182,7 @@ There are **4 homework assignments** worth **10% of your final grade** (2.5% eac
 |-----|------------------|-------------------------------|----------------------------|--------|-----|
 | **HW1** | Week 1 (Feb 23) | Week 2 (Mar 5) | Week 4 (Mar 19) | Ch1: Matrix computation, cross-filling, solving systems | [PDF](files/hw01.pdf) · [Solutions](files/hw01-sol.pdf) |
 | **HW2** | Week 4 (Mar 16) | Week 5 (Mar 26) | Week 7 (Apr 9) | Ch2-3: Subspaces, basis & dimension, projections | [PDF](files/hw02.pdf) · [Solutions](files/hw02-sol.pdf) |
-| **HW3** | Week 8 (Apr 20) | Week 10 (Apr 30) | Week 12 (May 14) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) (TBA) |
+| **HW3** | Week 8 (Apr 20) | Week 10 (Apr 30) | Week 12 (May 14) | Ch4: Determinants, Cayley-Hamilton theorem | [PDF](files/hw03.pdf) |
 | **HW4** | Week 11 (May 4) | Week 13 (May 21) | Week 15 (June 04) | Ch5-6: Spectral decomposition, normal matrices, SVD | [PDF](files/hw04.pdf) (TBA) |
 
 *Homework PDFs will be posted as they become available.*
