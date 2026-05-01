@@ -107,6 +107,8 @@ This is a joint work in progress with Youngjin Bae(INU).
 
 **Slides:** [Download](/colloquium/2026-spring/files/yang-slides.pdf)
 
+**Zoom link:** [https://us06web.zoom.us/j/9450725725?pwd=MldrQkg3TURkOTEwQy92U1gzOHVUdz09](https://us06web.zoom.us/j/9450725725?pwd=MldrQkg3TURkOTEwQy92U1gzOHVUdz09)
+
 **Abstract:** Suppose that f : X → S is a smooth proper family of varieties. The Noether-Lefschetz (NL) locus is the set of points over which the geometric fiber has a Picard rank larger than that of the geometric generic fiber. In short, it is the locus where the fibers acquire "more" divisors. Over C, much about the NL locus is known by studying Hodge theory. In particular, the NL locus for any non-isotrivial family of K3 surfaces is dense. In positive characteristics, the situation is much more delicate. In a previous work, Maulik-Shankar-Tang proved this when the family is generically ordinary. In this talk, I will present a joint work with Ruofan Jiang and Ananth Shankar that extends this to the non-ordinary case.
 
 ---
