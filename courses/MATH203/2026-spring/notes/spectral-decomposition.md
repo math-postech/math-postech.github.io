@@ -133,6 +133,23 @@ So $g(A)$ depends only on the **remainder** $R(t)$. Since $R(t)$ has degree $< 3
 
 $$g(0), \quad g(1), \quad g(2) \qquad \text{(the values at the eigenvalues!)}$$
 
+Why exactly these three values? Because $0,1,2$ are the numbers that make the divisor
+
+$$t(t-1)(t-2)$$
+
+equal to zero. At these numbers, the quotient part disappears:
+
+$$
+g(\lambda)=Q(\lambda)\underbrace{\lambda(\lambda-1)(\lambda-2)}_{=0}+R(\lambda)=R(\lambda)
+\qquad (\lambda=0,1,2).
+$$
+
+So the value table of the remainder $R$ is not new data. It is copied directly from the value table of $g$ at the roots of the divisor:
+
+| $t$ | $0$ | $1$ | $2$ |
+|---|---|---|---|
+| $R(t)$ | $g(0)$ | $g(1)$ | $g(2)$ |
+
 If we can express $R$ in terms of these values, we get:
 
 $$g(A) = g(0) \cdot P_0 + g(1) \cdot P_1 + g(2) \cdot P_2$$
@@ -149,6 +166,14 @@ Start with what we know. Dividing $g(t)$ by **one** factor $(t - a)$:
 
 $$g(t) = Q(t) \cdot (t - a) + \underbrace{g(a)}_{\text{remainder}}$$
 
+The reason we test at $t=a$ is not arbitrary. It is exactly the number that kills the divisor:
+
+$$a-a=0.$$
+
+So the quotient term disappears:
+
+$$g(a)=Q(a)(a-a)+\text{remainder}=\text{remainder}.$$
+
 Rewrite:
 
 $$g(t) = Q(t) \cdot (t - a) + g(a) \cdot \underbrace{1}_{f_a(t)}$$
@@ -163,7 +188,35 @@ One point → one value determines the remainder.
 
 ### 3.2 $m = 2$: Two Points
 
-Dividing $g(t)$ by $(t - 1)(t - 2)$: remainder has degree $\leq 1$, determined by **two** values: $g(1)$ and $g(2)$.
+Dividing $g(t)$ by $(t - 1)(t - 2)$:
+
+$$
+g(t)=Q(t)(t-1)(t-2)+r(t),\qquad \deg r<2.
+$$
+
+The remainder has degree $\leq 1$. To find it, test exactly the numbers that kill the divisor:
+
+$$
+t=1,\qquad t=2.
+$$
+
+At $t=1$:
+
+$$
+g(1)=Q(1)\underbrace{(1-1)(1-2)}_{=0}+r(1)=r(1).
+$$
+
+At $t=2$:
+
+$$
+g(2)=Q(2)\underbrace{(2-1)(2-2)}_{=0}+r(2)=r(2).
+$$
+
+So the remainder has value table:
+
+| $t$ | $1$ | $2$ |
+|---|---|---|
+| $r(t)$ | $g(1)$ | $g(2)$ |
 
 Need **basis polynomials** that pick out each value:
 
@@ -178,7 +231,29 @@ Same shape as $m = 1$, but with **2 points** instead of 1.
 
 ### 3.3 $m = 3$: Three Points — at $0, 1, 2$
 
-Dividing $g(t)$ by $t(t-1)(t-2)$: remainder has degree $\leq 2$, determined by **three** values: $g(0)$, $g(1)$, $g(2)$.
+Dividing $g(t)$ by $t(t-1)(t-2)$:
+
+$$
+g(t)=Q(t)t(t-1)(t-2)+r(t),\qquad \deg r<3.
+$$
+
+The remainder has degree $\leq 2$. Test the three numbers that kill the divisor:
+
+$$
+t=0,\qquad t=1,\qquad t=2.
+$$
+
+Then
+
+$$
+r(0)=g(0),\qquad r(1)=g(1),\qquad r(2)=g(2).
+$$
+
+So the remainder has value table:
+
+| $t$ | $0$ | $1$ | $2$ |
+|---|---|---|---|
+| $r(t)$ | $g(0)$ | $g(1)$ | $g(2)$ |
 
 | | $\underbrace{\frac{(t-1)(t-2)}{2}}_{f_0(t)}$ | $\underbrace{-t(t-2)}_{f_1(t)}$ | $\underbrace{\frac{t(t-1)}{2}}_{f_2(t)}$ |
 |---|---|---|---|
@@ -225,6 +300,14 @@ For any polynomial $g(t)$ and distinct points $\lambda_1, \ldots, \lambda_m$:
 $$g(t) = Q(t)(t - \lambda_1) \cdots (t - \lambda_m) + g(\lambda_1) f_{\lambda_1}(t) + \cdots + g(\lambda_m) f_{\lambda_m}(t)$$
 :::
 
+The logic is:
+
+1. Divide by the product $(t-\lambda_1)\cdots(t-\lambda_m)$.
+2. The remainder has degree $<m$.
+3. Test at $t=\lambda_i$ because that is where the divisor becomes zero.
+4. Therefore $r(\lambda_i)=g(\lambda_i)$.
+5. Write the unique degree $<m$ polynomial with these values using the Lagrange basis.
+
 | Dividing by | Remainder determined by | Name |
 |---|---|---|
 | $(t - a)$ | **1** value: $g(a)$ | Remainder Thm (L14) |
@@ -268,9 +351,25 @@ $$\boxed{A^n = \begin{pmatrix} 2^{n-1} & 0 & 2^{n-1} \\ 0 & 1 & 0 \\ 2^{n-1} & 0
 ::: proposition
 **Theorem (Spectral Substitution)**
 
-If $\det(tI - A) = (t - \lambda_1) \cdots (t - \lambda_m)$ with **distinct** $\lambda_i$, then:
+If $A$ satisfies an annihilating polynomial with distinct roots,
+
+$$
+f(A)=0,\qquad f(t)=(t-\lambda_1)\cdots(t-\lambda_m),
+$$
+
+then for every polynomial $g(t)$:
 
 $$g(A) = g(\lambda_1) \cdot \underbrace{f_{\lambda_1}(A)}_{P_{\lambda_1}} + g(\lambda_2) \cdot \underbrace{f_{\lambda_2}(A)}_{P_{\lambda_2}} + \cdots + g(\lambda_m) \cdot \underbrace{f_{\lambda_m}(A)}_{P_{\lambda_m}}$$
+:::
+
+In the running example, this annihilating polynomial is the characteristic polynomial $t(t-1)(t-2)$ by Cayley–Hamilton.
+
+::: attention
+**Characteristic polynomial vs. actual requirement**
+
+The characteristic polynomial is a systematic way to find an annihilating polynomial. But the spectral-substitution formula requires an annihilating polynomial with distinct roots.
+
+If $\det(tI-A)$ already has distinct roots, we can use it directly. If it has repeated roots, we must check whether the repeated powers can be deleted and the square-free part still annihilates $A$. This criterion is developed further in the diagonalization lecture.
 :::
 
 $g(A)$ is completely determined by its **value table**: $(g(\lambda_1), g(\lambda_2), \ldots, g(\lambda_m))$.
@@ -334,9 +433,29 @@ The spectral projections play the role of **coordinate axes**.
 
 **Is $A$ a projection?** Value table: $(0, 1, 2)$. Square entry-wise: $(0, 1, 4) \neq (0, 1, 2)$. $A^2 \neq A$ ✗
 
-**Is $P_0 + P_1$ a projection?** Value table: $(1, 1, 0) + (0, 1, 0) = (1, 2, 0)$. Since $2^2 = 4 \neq 2$: not a projection.
+**Is $P_0 + P_1$ a projection?** Value table:
+
+$$(1,0,0)+(0,1,0)=(1,1,0).$$
+
+Square entry-wise:
+
+$$(1,1,0)^2=(1,1,0).$$
+
+Same! So $P_0+P_1$ is a projection. ✓
+
+This should make sense: adding compatible projections gives the projection onto the sum of their pieces.
 
 **Is $P_0 + P_2$ a projection?** Value table: $(1, 0, 0) + (0, 0, 1) = (1, 0, 1)$. Square: $(1, 0, 1)$. Same! $(P_0 + P_2)^2 = P_0 + P_2$ ✓
+
+**Is $P_0 + 2P_1$ a projection?** Value table:
+
+$$(1,0,0)+2(0,1,0)=(1,2,0).$$
+
+Square entry-wise:
+
+$$(1,2,0)^2=(1,4,0)\neq(1,2,0).$$
+
+Not a projection. ✗
 
 ::: proposition
 **Rule.** $g(A)$ is a projection $\iff$ every entry of its value table is **$0$ or $1$**.
@@ -534,7 +653,11 @@ Check: $a_0 = 0$, $a_1 = 1$, $a_2 = 3$, $a_3 = 7$ ✓
 
 2. **Lagrange Interpolation** (§3): Generalized Remainder Theorem. Dividing by $m$ linear factors, the remainder is determined by $m$ values. The Lagrange polynomials form a **basis** for the polynomial space (their value table is the identity matrix).
 
-3. **Spectral Decomposition** (§4): If $\det(tI - A) = (t - \lambda_1) \cdots (t - \lambda_m)$ with distinct $\lambda_i$:
+3. **Spectral Decomposition** (§4): If $A$ satisfies a distinct-root annihilating polynomial
+
+$$f(A)=0,\qquad f(t)=(t - \lambda_1) \cdots (t - \lambda_m),$$
+
+then:
 
 $$\boxed{A = \lambda_1 P_1 + \lambda_2 P_2 + \cdots + \lambda_m P_m}$$
 
