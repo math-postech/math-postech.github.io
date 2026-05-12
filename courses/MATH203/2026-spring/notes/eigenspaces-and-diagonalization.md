@@ -11,7 +11,15 @@ Lecture 15 built the spectral decomposition
 
 $$A = \lambda_1 P_1 + \lambda_2 P_2 + \cdots + \lambda_m P_m$$
 
-using Lagrange interpolation and value tables. The projections $P_i$ were computed as polynomials in $A$, but one question was left open:
+using Lagrange interpolation and value tables, under the real requirement:
+
+$$
+f(A)=0,\qquad f(t)=(t-\lambda_1)\cdots(t-\lambda_m)
+$$
+
+with distinct roots. The characteristic polynomial is only one systematic way to search for such an annihilating polynomial.
+
+The projections $P_i$ were computed as polynomials in $A$, but one question was left open:
 
 ::: attention
 **What does $P_i$ project onto?**
@@ -38,24 +46,18 @@ The lecture ends with the real restriction: diagonalization is controlled by the
 
 ### 1.1 Standing Assumption
 
-For the first part of the lecture, assume
+For the first part of the lecture, assume we already have a distinct-root annihilating polynomial:
 
-$$\det(tI-A)=(t-\lambda_1)(t-\lambda_2)\cdots(t-\lambda_m),$$
+$$
+f(A)=0,\qquad f(t)=(t-\lambda_1)(t-\lambda_2)\cdots(t-\lambda_m),
+$$
 
 where the roots $\lambda_1,\ldots,\lambda_m$ are distinct.
 
-More generally, this is the only kind of input the Lecture 15 method needs: if some polynomial
-
-$$h(t)=(t-\lambda_1)(t-\lambda_2)\cdots(t-\lambda_m)$$
-
-has distinct roots and satisfies
-
-$$h(A)=0,$$
-
-then Lagrange interpolation works. The reason is dimension: remainders modulo $h(t)$ have degree $<m$, so the possible remainders form an $m$-dimensional space. The $m$ Lagrange value functions at $\lambda_1,\ldots,\lambda_m$ form a basis for this space, so we can construct the projections.
+This includes the familiar case where $\det(tI-A)$ itself has distinct roots. It also includes the important repeated-root case where $\det(tI-A)$ has powers, but deleting the powers still gives an annihilating polynomial.
 
 ::: attention
-If we do not yet have any annihilating polynomial with distinct roots, then the spectral-projection method is not yet available. In that case we must first search for a simpler annihilating polynomial.
+If we do not yet have any annihilating polynomial with distinct roots, then the spectral-projection method is not yet available. In that case, first factor $\det(tI-A)$, delete repeated powers, and test whether the square-free part annihilates $A$.
 :::
 
 Then Lecture 15 gives spectral projections $P_1,\ldots,P_m$ such that
@@ -65,6 +67,12 @@ $$A=\lambda_1P_1+\lambda_2P_2+\cdots+\lambda_mP_m,$$
 and
 
 $$P_1+P_2+\cdots+P_m=I, \qquad P_iP_j=0 \text{ for } i\neq j, \qquad P_i^2=P_i.$$
+
+The value table of $P_i$ is the $i$-th standard basis vector:
+
+| Matrix | $t=\lambda_1$ | $\cdots$ | $t=\lambda_i$ | $\cdots$ | $t=\lambda_m$ |
+|---|---:|---:|---:|---:|---:|
+| $P_i$ | $0$ | $\cdots$ | $1$ | $\cdots$ | $0$ |
 
 So for every vector $\mathbf v$,
 
@@ -207,6 +215,12 @@ $$\boxed{\operatorname{Col}(P_i)=E_{\lambda_i}.}$$
 
 $$P_i\mathbf x=\mathbf x.$$
 
+Why? Write $\mathbf x=P_i\mathbf y$. Then
+
+$$
+P_i\mathbf x=P_i(P_i\mathbf y)=P_i^2\mathbf y=P_i\mathbf y=\mathbf x.
+$$
+
 Then
 
 $$A\mathbf x=A(P_i\mathbf x)=(AP_i)\mathbf x=(\lambda_iP_i)\mathbf x=\lambda_i\mathbf x.$$
@@ -217,11 +231,25 @@ So $\mathbf x\in E_{\lambda_i}$.
 
 $$g(A)\mathbf x=g(\lambda_i)\mathbf x.$$
 
+This is just repeated use of $A\mathbf x=\lambda_i\mathbf x$:
+
+$$
+A^k\mathbf x=\lambda_i^k\mathbf x,
+$$
+
+then combine the powers linearly.
+
 For $P_i=f_i(A)$, the value table has $f_i(\lambda_i)=1$. Therefore
 
 $$P_i\mathbf x=f_i(A)\mathbf x=f_i(\lambda_i)\mathbf x=\mathbf x.$$
 
 So $\mathbf x\in\operatorname{Col}(P_i)$.
+
+::: tip
+**Meaning**
+
+$P_i$ is not just some projection. It is the projection that extracts the $E_{\lambda_i}$-component of a vector.
+:::
 
 ### 2.3 Check on the Example
 
@@ -314,17 +342,71 @@ Each projection kills the other eigenspace.
 Eigenvectors with distinct eigenvalues are linearly independent.
 :::
 
-Reason: if
+This is exactly the same compatible-projection idea from [Lecture 9: Compatible Projections](./compatible-projections.md#compatible-families-of-projections): each projection extracts one component and kills all the others.
 
-$$\mathbf v_1+\mathbf v_3=0, \qquad \mathbf v_1\in E_1, \quad \mathbf v_3\in E_3,$$
+Let $\lambda_1,\ldots,\lambda_m$ be distinct eigenvalues, and let
 
-then applying $P_1$ gives
+$$
+\mathbf v_i\in E_{\lambda_i},\qquad \mathbf v_i\neq 0.
+$$
 
-$$P_1\mathbf v_1+P_1\mathbf v_3=\mathbf v_1+0=0.$$
+We prove
 
-So $\mathbf v_1=0$. Applying $P_3$ gives $\mathbf v_3=0$.
+$$
+\mathbf v_1,\ldots,\mathbf v_m
+$$
 
-The same argument works for any number of distinct eigenspaces: apply the projection that picks out one component and kills all the others.
+are linearly independent.
+
+Suppose
+
+$$
+c_1\mathbf v_1+c_2\mathbf v_2+\cdots+c_m\mathbf v_m=0.
+$$
+
+Call the left side the total vector:
+
+$$
+\mathbf w
+=c_1\mathbf v_1+c_2\mathbf v_2+\cdots+c_m\mathbf v_m
+=0.
+$$
+
+Now apply $P_i$. Because $P_i$ is the projection onto $E_{\lambda_i}$ and kills the other eigenspaces,
+
+$$
+P_i\mathbf v_i=\mathbf v_i,
+\qquad
+P_i\mathbf v_j=0 \quad (j\neq i).
+$$
+
+Therefore
+
+$$
+0=P_i\mathbf w
+=P_i(c_1\mathbf v_1+\cdots+c_i\mathbf v_i+\cdots+c_m\mathbf v_m)
+=c_i\mathbf v_i.
+$$
+
+Since $\mathbf v_i\neq 0$, we get
+
+$$
+c_i=0.
+$$
+
+This works for every $i$, so
+
+$$
+c_1=c_2=\cdots=c_m=0.
+$$
+
+Therefore the eigenvectors are linearly independent.
+
+::: tip
+**Projection proof pattern**
+
+To prove independence, do not solve a system. Sum the vectors into one total vector, then use the compatible projections to extract each component.
+:::
 
 ### 3.4 Unique Decomposition
 
@@ -377,6 +459,24 @@ $$a+bt+ct^2.$$
 This is a 3-dimensional space. Ordinary Lagrange interpolation at the two points $2$ and $5$ gives only two value functions. Two value functions cannot determine a general 3-dimensional remainder.
 
 So repeated roots are not harmless. We need a smaller annihilating polynomial with distinct roots.
+
+::: tip
+**The practical question**
+
+When
+
+$$
+\det(tI-A)=(t-\lambda_1)^{a_1}\cdots(t-\lambda_k)^{a_k},
+$$
+
+try the square-free part
+
+$$
+q(t)=(t-\lambda_1)\cdots(t-\lambda_k).
+$$
+
+If $q(A)=0$, then Lecture 15 applies using $q$, not the full characteristic polynomial.
+:::
 
 ### 4.2 Try Deleting the Repeated Power
 
@@ -457,60 +557,94 @@ This example is important: a repeated root in $\det(tI-B)$ can produce a higher-
 
 ## 5. Cross-Filling the Spectral Projections
 
-### 5.1 Cross-Fill $P_2$
+Cross-filling was developed in [Lecture 8: Cross-Filling Projections](./cross-filling-projections.md) and [Lecture 9: Compatible Projections](./compatible-projections.md#cross-filling-projections-revisited). We use only the output: a projection can be decomposed into compatible rank-1 projections, and the columns/rows of those rank-1 pieces give right/left eigenvectors.
 
-Cross-fill the rank-2 projection:
+### 5.1 Cross-Fill $P_2$ in One Display
 
-$$P_2=\begin{pmatrix}1&0&-1\\0&1&-1\\0&0&0\end{pmatrix}.$$
+The rank-2 projection $P_2$ decomposes into two rank-1 projections:
 
-It splits into two rank-1 projections:
-
-$$P_2=
-\underbrace{\begin{pmatrix}1\\0\\0\end{pmatrix}\begin{pmatrix}1&0&-1\end{pmatrix}}_{R_1}
+$$
+\underbrace{\begin{pmatrix}
+1&0&-1\\
+0&1&-1\\
+0&0&0
+\end{pmatrix}}_{P_2}
+=
+\underbrace{
+\underbrace{\begin{pmatrix}1\\0\\0\end{pmatrix}}_{\mathbf u_1}
+\underbrace{\begin{pmatrix}1&0&-1\end{pmatrix}}_{\mathbf v_1^T}
+}_{R_1}
 +
-\underbrace{\begin{pmatrix}0\\1\\0\end{pmatrix}\begin{pmatrix}0&1&-1\end{pmatrix}}_{R_2}.$$
-
-Equivalently,
-
-$$P_2=U_2V_2,$$
-
-where
-
-$$U_2=\begin{pmatrix}1&0\\0&1\\0&0\end{pmatrix}, \qquad
-V_2=\begin{pmatrix}1&0&-1\\0&1&-1\end{pmatrix}.$$
+\underbrace{
+\underbrace{\begin{pmatrix}0\\1\\0\end{pmatrix}}_{\mathbf u_2}
+\underbrace{\begin{pmatrix}0&1&-1\end{pmatrix}}_{\mathbf v_2^T}
+}_{R_2}
+=
+\underbrace{\begin{pmatrix}
+1&0\\
+0&1\\
+0&0
+\end{pmatrix}}_{U_2=(\mathbf u_1\;\mathbf u_2)}
+\underbrace{\begin{pmatrix}
+1&0&-1\\
+0&1&-1
+\end{pmatrix}}_{V_2=\begin{pmatrix}\mathbf v_1^T\\ \mathbf v_2^T\end{pmatrix}}.
+$$
 
 Check the inner product condition:
 
-$$V_2U_2=I_2.$$
+$$
+\underbrace{\begin{pmatrix}
+1&0&-1\\
+0&1&-1
+\end{pmatrix}}_{V_2}
+\underbrace{\begin{pmatrix}
+1&0\\
+0&1\\
+0&0
+\end{pmatrix}}_{U_2}
+=
+\begin{pmatrix}1&0\\0&1\end{pmatrix}
+=I_2.
+$$
 
-### 5.2 Cross-Fill $P_5$
+### 5.2 Cross-Fill $P_5$ in One Display
 
-The rank-1 projection is
+The rank-1 projection $P_5$ is already one rank-1 piece:
 
-$$P_5=\begin{pmatrix}0&0&1\\0&0&1\\0&0&1\end{pmatrix}
-=\underbrace{\begin{pmatrix}1\\1\\1\end{pmatrix}}_{U_5}
-\underbrace{\begin{pmatrix}0&0&1\end{pmatrix}}_{V_5}.$$
-
-Check:
-
-$$V_5U_5=1.$$
+$$
+\underbrace{\begin{pmatrix}
+0&0&1\\
+0&0&1\\
+0&0&1
+\end{pmatrix}}_{P_5}
+=
+\underbrace{\begin{pmatrix}1\\1\\1\end{pmatrix}}_{\mathbf u_5=U_5}
+\underbrace{\begin{pmatrix}0&0&1\end{pmatrix}}_{\mathbf v_5^T=V_5},
+\qquad
+\underbrace{\begin{pmatrix}0&0&1\end{pmatrix}}_{V_5}
+\underbrace{\begin{pmatrix}1\\1\\1\end{pmatrix}}_{U_5}
+=1.
+$$
 
 ### 5.3 Read Right and Left Eigenvectors
 
-Columns of $U_i$ are right eigenvectors:
+The columns are right eigenvectors, and the rows are left eigenvectors:
 
-$$B\begin{pmatrix}1\\0\\0\end{pmatrix}=2\begin{pmatrix}1\\0\\0\end{pmatrix}, \qquad
-B\begin{pmatrix}0\\1\\0\end{pmatrix}=2\begin{pmatrix}0\\1\\0\end{pmatrix},$$
+| Eigenvalue | Right eigenvectors from columns | Left eigenvectors from rows |
+|---|---|---|
+| $2$ | $\begin{pmatrix}1\\0\\0\end{pmatrix},\ \begin{pmatrix}0\\1\\0\end{pmatrix}$ | $\begin{pmatrix}1&0&-1\end{pmatrix},\ \begin{pmatrix}0&1&-1\end{pmatrix}$ |
+| $5$ | $\begin{pmatrix}1\\1\\1\end{pmatrix}$ | $\begin{pmatrix}0&0&1\end{pmatrix}$ |
 
-$$B\begin{pmatrix}1\\1\\1\end{pmatrix}=5\begin{pmatrix}1\\1\\1\end{pmatrix}.$$
+For example:
 
-Rows of $V_i$ are left eigenvectors:
-
-$$\begin{pmatrix}1&0&-1\end{pmatrix}B=2\begin{pmatrix}1&0&-1\end{pmatrix},$$
-
-$$\begin{pmatrix}0&1&-1\end{pmatrix}B=2\begin{pmatrix}0&1&-1\end{pmatrix},$$
-
-$$\begin{pmatrix}0&0&1\end{pmatrix}B=5\begin{pmatrix}0&0&1\end{pmatrix}.$$
+$$
+B\begin{pmatrix}1\\0\\0\end{pmatrix}
+=2\begin{pmatrix}1\\0\\0\end{pmatrix},
+\qquad
+\begin{pmatrix}1&0&-1\end{pmatrix}B
+=2\begin{pmatrix}1&0&-1\end{pmatrix}.
+$$
 
 ::: success
 Cross-filling a spectral projection gives eigenvectors without solving $(A-\lambda I)\mathbf x=0$.
@@ -518,19 +652,17 @@ Cross-filling a spectral projection gives eigenvectors without solving $(A-\lamb
 
 ### 5.4 Rank-1 Spectral Decomposition
 
-Since
+Since $P_2=R_1+R_2$, the spectral decomposition becomes one rank-1 sum:
 
-$$P_2=R_1+R_2,$$
-
-the spectral decomposition becomes
-
-$$B=2R_1+2R_2+5P_5.$$
-
-Explicitly,
-
-$$B=2\begin{pmatrix}1\\0\\0\end{pmatrix}\begin{pmatrix}1&0&-1\end{pmatrix}
-+2\begin{pmatrix}0\\1\\0\end{pmatrix}\begin{pmatrix}0&1&-1\end{pmatrix}
-+5\begin{pmatrix}1\\1\\1\end{pmatrix}\begin{pmatrix}0&0&1\end{pmatrix}.$$
+$$
+\underbrace{\begin{pmatrix}2&0&3\\0&2&3\\0&0&5\end{pmatrix}}_{B}
+=
+2\underbrace{\begin{pmatrix}1\\0\\0\end{pmatrix}\begin{pmatrix}1&0&-1\end{pmatrix}}_{R_1}
++
+2\underbrace{\begin{pmatrix}0\\1\\0\end{pmatrix}\begin{pmatrix}0&1&-1\end{pmatrix}}_{R_2}
++
+5\underbrace{\begin{pmatrix}1\\1\\1\end{pmatrix}\begin{pmatrix}0&0&1\end{pmatrix}}_{P_5}.
+$$
 
 This is the bridge from spectral projections to diagonalization.
 
@@ -545,6 +677,27 @@ The rank-1 decomposition
 $$B=2R_1+2R_2+5P_5$$
 
 can be written as one product by stacking columns and rows.
+
+The rule is:
+
+$$
+\lambda_1\mathbf u_1\mathbf v_1^T+\cdots+\lambda_n\mathbf u_n\mathbf v_n^T
+=
+\underbrace{\begin{pmatrix}|&|&&|\\ \mathbf u_1&\mathbf u_2&\cdots&\mathbf u_n\\ |&|&&|\end{pmatrix}}_{P}
+\underbrace{\begin{pmatrix}
+\lambda_1&&\\
+&\ddots&\\
+&&\lambda_n
+\end{pmatrix}}_{D}
+\underbrace{\begin{pmatrix}
+-\mathbf v_1^T-\\
+-\mathbf v_2^T-\\
+\vdots\\
+-\mathbf v_n^T-
+\end{pmatrix}}_{Q}.
+$$
+
+The columns go into $P$. The rows go into $Q$. The eigenvalues go into the diagonal matrix $D$.
 
 Let
 
@@ -571,6 +724,23 @@ $$Q=P^{-1}.$$
 So
 
 $$\boxed{B=PDP^{-1}.}$$
+
+::: attention
+**Why is $Q=P^{-1}$?**
+
+This is not a separate calculation. It comes from the projection partition:
+
+$$
+I=R_1+R_2+P_5
+=
+P
+\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}
+Q
+=PQ.
+$$
+
+So the same row/column data that decomposes $I$ gives the inverse relationship.
+:::
 
 ### 6.2 Meaning of the Three Matrices
 
