@@ -226,6 +226,7 @@ Lecture notes are organized by topic and will be added throughout the semester.
 - [Lecture 16: Eigenspaces and Diagonalization](./notes/eigenspaces-and-diagonalization.md) — **[Slides](files/lecture16-slides.pdf)** — Eigenspaces as projection column spaces, from spectral decomposition to diagonalization
 - [Lecture 17: Complex Numbers](./notes/complex-numbers.md) — **[Slides](files/lecture17-slides.pdf)** — Why complex numbers: pipeline breaks over $\mathbb{R}$, cubic formula forces $\sqrt{-1}$, complex plane, multiplication as rotation + scaling, polar form, De Moivre, conjugation and the philosophy of symmetry, Fundamental Theorem of Algebra, complex eigenvalues
 - Lecture 18: The Exponential Function — **[Slides](files/lecture18-slides.pdf)** — Definition of $e$ via compound interest, binomial expansion → power series, $y'=ky$ and differential equations, Euler's formula $e^{i\theta}=\cos\theta+i\sin\theta$ (geometric and series proofs), exponential of $d/dx$ = shift operator (Taylor's theorem IS binomial expansion), matrix exponential $e^{As}=\sum e^{\lambda_i s}P_i$, complex eigenvalues → rotation
+- Lecture 19: Normal Matrices — **[Slides](files/lecture19-slides.pdf)** — Hermitian inner product and conjugate transpose, normal matrices, nilpotent-normal lemma, normal $\Rightarrow$ diagonalizable, Hermitian spectral projections, orthogonal eigenspace decomposition, unitary diagonalization via diagonal cross-filling, and special normal matrices (Hermitian, skew-Hermitian, unitary).
 
 ---
 
