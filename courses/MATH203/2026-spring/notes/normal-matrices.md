@@ -1067,7 +1067,7 @@ $$
 The first projection gives the unit eigenvector
 
 $$
-\mathbf u_0=rac1{\sqrt3}\begin{pmatrix}1\\1\\1\end{pmatrix}.
+\mathbf u_0=\frac1{\sqrt3}\begin{pmatrix}1\\1\\1\end{pmatrix}.
 $$
 
 Cross-filling $P_{-3}$ gives two orthonormal eigenvectors spanning the $-3$ eigenspace. Stacking the one vector from $P_0$ and the two vectors from $P_{-3}$ produces a unitary matrix $\Omega$ such that
