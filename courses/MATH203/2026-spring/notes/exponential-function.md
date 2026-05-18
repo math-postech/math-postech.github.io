@@ -141,7 +141,7 @@ by the binomial theorem:
 
 $$
 \left(1+\frac{x}{n}\right)^n
-=1+rac{n}{1!}\frac{x}{n}
+=1+\frac{n}{1!}\frac{x}{n}
 +\frac{n(n-1)}{2!}\frac{x^2}{n^2}
 +\frac{n(n-1)(n-2)}{3!}\frac{x^3}{n^3}
 +\cdots.
@@ -588,7 +588,7 @@ $$
 with compatible spectral projections
 
 $$
-P_iP_j=0\ (i\neq j),
+P_iP_j=0\quad (i\neq j),
 \qquad
 P_i^2=P_i,
 \qquad
@@ -745,12 +745,10 @@ $$
 Substitution gives
 
 $$
-\boxed{
-e^{R\theta}=
-\begin{pmatrix}
+\boxed{e^{R\theta}=\begin{pmatrix}
 \cos\theta&-\sin\theta\\
 \sin\theta&\cos\theta
-\end{pmatrix}.}
+\end{pmatrix}}
 $$
 
 Thus the matrix exponential of the $90^\circ$ rotation generator produces rotation by angle $\theta$.
