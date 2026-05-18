@@ -38,10 +38,14 @@ The main result is:
 $$
 A\text{ normal}
 \quad\Longleftrightarrow\quad
-A\text{ is diagonalizable and every spectral projection }P_i\text{ satisfies }P_i^H=P_i.
+A\text{ is diagonalizable and all eigenspaces of }A\text{ are mutually Hermitian-orthogonal.}
 $$
 
-Equivalently, normal matrices are exactly the matrices whose eigenspaces are mutually Hermitian-orthogonal.
+This is the geometric form of the theorem. In projection language, it says equivalently that every spectral projection $P_i$ satisfies
+
+$$
+P_i^H=P_i.
+$$
 
 ---
 
@@ -396,7 +400,7 @@ The trace of the argument is:
 | $N=r_A(A)$ | radical polynomial plugged into $A$ |
 | $N$ is nilpotent | follows from Cayley--Hamilton and repeated powers |
 | $N$ is normal | polynomial output of a normal matrix |
-| normal + nilpotent collapses | proof below |
+| normal + nilpotent implies the zero matrix | proof below |
 | therefore $N=0$ | hence $r_A(A)=0$ |
 | therefore $A$ is diagonalizable | by the practical criterion |
 
@@ -774,23 +778,26 @@ For a normal matrix, all spectral projections are Hermitian projections.
 
 ---
 
-## 9. Hermitian Projections Give Perpendicular Eigenspaces
+## 9. Hermitian Spectral Projections Give Perpendicular Eigenspaces
 
-A projection always splits a vector:
-
-$$
-\mathbf v=P\mathbf v+(I-P)\mathbf v.
-$$
-
-If also $P^H=P$, then the two pieces are perpendicular:
+The goal here is not merely to prove that the column space of one projection is perpendicular to its null space.  The goal is stronger and more specific:
 
 $$
-\langle P\mathbf v,(I-P)\mathbf w\rangle_H
-=(P\mathbf v)^H(I-P)\mathbf w
-=\mathbf v^HP(I-P)\mathbf w=0.
+E_{\lambda_i}\perp_H E_{\lambda_j}
+\qquad(i\neq j).
 $$
 
-Now take two different spectral projections $P_i$ and $P_j$.
+Since spectral projections satisfy
+
+$$
+\operatorname{Im}(P_i)=E_{\lambda_i},
+$$
+
+this becomes the following question:
+
+> If $\mathbf v$ comes from the image of $P_i$ and $\mathbf w$ comes from the image of $P_j$, why is their Hermitian inner product zero?
+
+Take two different spectral projections $P_i$ and $P_j$.
 
 Let
 
@@ -910,49 +917,32 @@ $$
 
 ### 11.1 The AB/BA Reversal Mechanism
 
-The previous projection lecture proved the following mechanism.
+We use the projection-theoretic reversal theorem from [Lecture 8: Cross-Filling Projections](./cross-filling-projections.md#42-the-reverse-question-if-uv--i-what-about-vu).
 
-Suppose $A$ and $B$ are square and
-
-$$AB=I.$$
-
-Then the reversed product $BA$ is first a projection:
+::: proposition
+If $A$ and $B$ are square matrices and
 
 $$
-(BA)^2=B\underbrace{AB}_{I}A=BA.
+AB=I,
 $$
 
-Let
-
-$$Q=BA.$$
-
-Then $I-Q$ is also a projection. Moreover,
+then
 
 $$
-\operatorname{tr}(Q)=\operatorname{tr}(BA)=\operatorname{tr}(AB)=\operatorname{tr}(I)=n.
+BA=I.
 $$
+:::
 
-Therefore
+The proof in Lecture 8 is not an inverse shortcut. It is projection-theoretic:
 
-$$
-\operatorname{tr}(I-Q)=0.
-$$
+1. $AB=I$ implies $BA$ is a projection.
+2. Then $I-BA$ is also a projection.
+3. Trace reversal gives $\operatorname{tr}(BA)=\operatorname{tr}(AB)=\operatorname{tr}(I)$.
+4. Hence $\operatorname{tr}(I-BA)=0$.
+5. For projections, trace equals rank, so $\operatorname{rank}(I-BA)=0$.
+6. Therefore $I-BA=0$, hence $BA=I$.
 
-For a projection, trace equals rank, so
-
-$$
-\operatorname{rank}(I-Q)=0.
-$$
-
-Thus $I-Q=0$, hence $Q=I$.
-
-So in the square case:
-
-$$
-AB=I\quad\Longrightarrow\quad BA=I.
-$$
-
-The proof is projection-theoretic: reverse order gives a projection, and the complement has trace/rank zero.
+We will only apply this theorem here.
 
 ### 11.2 Stack the Blocks
 
