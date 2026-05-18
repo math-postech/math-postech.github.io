@@ -173,13 +173,43 @@ $$
 
 So zero singular values correspond to invisible input directions, i.e. null-space directions.
 
-If the nonzero output vectors $u_1,\ldots,u_r$ do not fill all of $\mathbb{R}^m$, complete them to an orthonormal basis:
+If the nonzero output vectors $u_1,\ldots,u_r$ do not fill all of $\mathbb{R}^m$, complete them by the projection-complement method from the previous projection lectures.
+
+Collect the known orthonormal vectors into a matrix:
 
 $$
-u_1,\ldots,u_r,u_{r+1},\ldots,u_m.
+B=\begin{pmatrix}
+|&|&&|\\
+u_1&u_2&\cdots&u_r\\
+|&|&&|
+\end{pmatrix}.
 $$
 
-This gives the full orthogonal matrix $U$.
+The orthogonal projection onto their span is
+
+$$
+P=BB^T.
+$$
+
+The complement projection is
+
+$$
+I-P.
+$$
+
+Now diagonal cross-fill the orthogonal projection $I-P$:
+
+$$
+I-P=w_{r+1}w_{r+1}^T+\cdots+w_mw_m^T.
+$$
+
+These vectors are the missing output axes:
+
+$$
+u_{r+1}=w_{r+1},\quad\ldots,\quad u_m=w_m.
+$$
+
+This is exactly the method from [Lecture 10: Constructing Projections](./constructing-projections.md): cross-fill the projection and its complement to obtain a complete orthonormal basis.
 
 ---
 
@@ -258,7 +288,11 @@ To compute a singular value decomposition:
    $$
    u_i=\frac{Av_i}{\sigma_i}.
    $$
-5. Complete the $u_i$'s to an orthonormal basis if needed.
+5. Complete the $u_i$'s by projection complement:
+   $$
+   B=(u_1\ \cdots\ u_r),\qquad P=BB^T,
+   $$
+   then diagonal cross-fill $I-P$ to get the missing orthonormal vectors.
 6. Conclude
    $$
    A=U\Sigma V^T.
