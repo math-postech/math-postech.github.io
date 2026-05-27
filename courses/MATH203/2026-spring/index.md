@@ -74,6 +74,7 @@ Detailed teaching suggestions to help TAs prepare engaging tutorial sessions ali
 | **Week 12** | May 14 | The Standard Route to Spectral Decomposition | [View Details](./tutorials/week12-spectral-decomposition.md) |
 | **Week 13** | May 21 | Complex Numbers, Exponentials, and Differential Equations | [View Details](./tutorials/week13-complex-exponential-differential-equations.md) |
 | **Week 14** | May 28 | Normal Matrices and Eigenvalue Geometry | [View Details](./tutorials/week14-normal-matrix-eigenvalue-geometry.md) |
+| **Week 15** | Jun 4 | SVD and Positive Semidefinite Geometry | [View Details](./tutorials/week15-svd-positive-definite.md) |
 
 ---
 
