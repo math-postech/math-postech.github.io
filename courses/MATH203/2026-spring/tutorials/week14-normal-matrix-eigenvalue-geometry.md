@@ -548,6 +548,34 @@ $$
 
 ::: remark
 This is the key collapse in the proof that normal matrices are diagonalizable. The radical polynomial output is nilpotent. Normality makes that output normal. Normal plus nilpotent forces zero.
+
+Conceptually, this is the Hermitian version of the previous transpose example. The previous problem built a nonzero nilpotent symmetric matrix over $\mathbb C$:
+
+$$
+N^T=N,
+\qquad
+N^2=0,
+\qquad
+N\neq0.
+$$
+
+So it is a counterexample to the false statement that every complex symmetric matrix is diagonalizable. This is exactly where isotropic vectors enter. In the transpose world, nilpotent normal matrices can survive because the bilinear form $u^Tv$ has nonzero isotropic vectors. In the Hermitian world, the product $u^Hu$ has no nonzero isotropic vectors:
+
+$$
+u^Hu=0
+\qquad\Longrightarrow\qquad
+u=0.
+$$
+
+This also explains why real symmetric matrices diagonalize. Over $\mathbb R$, the transpose product has no nonzero isotropic vectors:
+
+$$
+u^Tu=0
+\qquad\Longrightarrow\qquad
+u=0.
+$$
+
+But after extending to $\mathbb C$, the same transpose product $u^Tv$ gains isotropic vectors, for example $(1,i)^T$. That opens the door for nilpotent symmetric matrices and destroys diagonalization. The Hermitian product is the repair: it kills exactly the escape route used by transpose-normal nilpotents. This is why the Hermitian condition is tied to diagonalization. If a matrix class is going to force diagonalization, it must prevent hidden nilpotent pieces, and preventing those pieces means removing isotropic vectors from the inner-product table.
 :::
 
 ---
