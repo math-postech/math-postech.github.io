@@ -9,16 +9,17 @@
 
 ## 0. Session Goal
 
-This tutorial has six standard exercises.
+This tutorial has seven standard exercises.
 
 | Part | Standard exercise | Main lesson |
 |---|---|---|
 | A | read eigenvalue shapes | Hermitian / skew-Hermitian / unitary are geometric conditions |
 | B | solve $X^H=X^2$ | matrix equation becomes scalar equation $\overline\lambda=\lambda^2$ |
-| C | Cayley transform | skew-Hermitian matrices produce unitary matrices |
-| D | inverse Cayley transform | unitary matrices without $-1$ come from skew-Hermitian matrices |
-| E | real version | real skew-symmetric matrices produce real orthogonal matrices |
-| F | unitary diagonalization | non-real Hermitian matrix diagonalized by a unitary Fourier basis |
+| C | nilpotent normal checkpoint | why Hermitian conjugate is essential, not transpose |
+| D | Cayley transform | skew-Hermitian matrices produce unitary matrices |
+| E | inverse Cayley transform | unitary matrices without $-1$ come from skew-Hermitian matrices |
+| F | real version | real skew-symmetric matrices produce real orthogonal matrices |
+| G | unitary diagonalization | spectral projections, diagonal cross-filling, then stacking |
 
 The guiding principle is:
 
@@ -205,9 +206,355 @@ This curve consists of $0$ and the three cube roots of unity.
 
 ---
 
-## Part C: Cayley Transform from Skew-Hermitian to Unitary (12 min)
+## Part C: Why We Need Hermitian Conjugate, Not Transpose (10 min)
 
-### Problem 3. From a line to a circle
+### Problem 3. Transpose-normal nilpotents and isotropic vectors
+
+Over $\mathbb C$, construct a nonzero nilpotent matrix $N$ such that
+
+$$
+NN^T=N^TN.
+$$
+
+Do this through the following steps.
+
+1. Suppose $N$ is nilpotent and commutes with its transpose. Show that
+
+$$
+M:=NN^T
+$$
+
+is symmetric and nilpotent.
+
+2. From now on, suppose $M$ is symmetric:
+
+$$
+M=M^T.
+$$
+
+Show that if
+
+$$
+MM^T=0,
+$$
+
+then every column of $M$ is isotropic for the bilinear form
+
+$$
+\langle u,v\rangle_T=u^Tv.
+$$
+
+3. Show that
+
+$$
+MM^T=0
+$$
+
+if and only if all columns of $M$ are pairwise orthogonal isotropic vectors for $u^Tv$.
+
+4. Find a nonzero isotropic vector in $\mathbb C^2$.
+
+5. Find two nonzero isotropic vectors in $\mathbb C^2$ that are perpendicular to each other.
+
+6. Use them to construct a nonzero nilpotent matrix that is normal in the transpose sense.
+
+::: details Solution
+
+### Step 1: commuting with transpose creates a symmetric nilpotent
+
+Assume
+
+$$
+N^k=0
+$$
+
+for some $k$, and
+
+$$
+NN^T=N^TN.
+$$
+
+Set
+
+$$
+M=NN^T.
+$$
+
+First, $M$ is symmetric:
+
+$$
+M^T=(NN^T)^T=NN^T=M.
+$$
+
+Second, $M$ is nilpotent. Since $N$ commutes with $N^T$, we have
+
+$$
+M^k=(NN^T)^k=N^k(N^T)^k=0.
+$$
+
+So the transpose-normal nilpotent problem produces a symmetric nilpotent matrix.
+
+### Step 2: $MM^T=0$ means columns are isotropic
+
+Write the columns of $M$ as
+
+$$
+M=\begin{pmatrix}|&|&&|\\
+m_1&m_2&\cdots&m_n\\
+|&|&&|
+\end{pmatrix}.
+$$
+
+Then
+
+$$
+M^TM=
+\begin{pmatrix}
+m_1^Tm_1&m_1^Tm_2&\cdots&m_1^Tm_n\\
+m_2^Tm_1&m_2^Tm_2&\cdots&m_2^Tm_n\\
+\vdots&\vdots&\ddots&\vdots\\
+m_n^Tm_1&m_n^Tm_2&\cdots&m_n^Tm_n
+\end{pmatrix}.
+$$
+
+Because $M=M^T$, the equation
+
+$$
+MM^T=0
+$$
+
+is the same as
+
+$$
+M^TM=0.
+$$
+
+Therefore the diagonal entries give
+
+$$
+m_j^Tm_j=0
+$$
+
+for every $j$. Thus every column is isotropic.
+
+### Step 3: the full meaning is pairwise orthogonal isotropic columns
+
+The same table says more. The equation
+
+$$
+M^TM=0
+$$
+
+is equivalent to
+
+$$
+m_i^Tm_j=0
+\qquad
+\text{for all }i,j.
+$$
+
+So
+
+$$
+MM^T=0
+$$
+
+if and only if the columns of $M$ are pairwise orthogonal for $u^Tv$. In particular, each column is isotropic because the case $i=j$ gives
+
+$$
+m_i^Tm_i=0.
+$$
+
+Thus the transpose-normal nilpotent phenomenon is exactly the existence of mutually orthogonal isotropic columns.
+
+### Step 4: an isotropic vector in $\mathbb C^2$
+
+Take
+
+$$
+u=\begin{pmatrix}1\\ i\end{pmatrix}.
+$$
+
+Then
+
+$$
+u^Tu=1+i^2=0.
+$$
+
+So $u$ is nonzero isotropic for the bilinear form $u^Tv$.
+
+### Step 5: two perpendicular isotropic vectors
+
+In $\mathbb C^2$, the orthogonal complement of this isotropic vector contains the vector itself:
+
+$$
+u^Tu=0.
+$$
+
+So the two perpendicular isotropic vectors can be chosen as
+
+$$
+u_1=u,
+\qquad
+u_2=u.
+$$
+
+This repetition is allowed for building a nonzero rank-one table. The point is that the vector is orthogonal to itself.
+
+### Step 6: construct the transpose-normal nilpotent
+
+Use the isotropic vector to form
+
+$$
+N=uu^T.
+$$
+
+Explicitly,
+
+$$
+N=
+\begin{pmatrix}1\\ i\end{pmatrix}
+\begin{pmatrix}1&i\end{pmatrix}
+=
+\begin{pmatrix}
+1&i\\
+i&-1
+\end{pmatrix}.
+$$
+
+This matrix is symmetric:
+
+$$
+N^T=N.
+$$
+
+Therefore
+
+$$
+NN^T=N^TN.
+$$
+
+And it is nilpotent because
+
+$$
+N^2=(uu^T)(uu^T)=u(u^Tu)u^T=0.
+$$
+
+Thus
+
+$$
+\boxed{N\neq0,
+\qquad
+N^2=0,
+\qquad
+NN^T=N^TN.}
+$$
+
+:::
+
+::: remark
+This is why transpose is not enough over $\mathbb C$. The transpose table $u^Tv$ has nonzero isotropic vectors, so symmetric nilpotents can survive. Hermitian conjugation replaces $u^Tv$ by $u^Hu$, and then no nonzero vector is isotropic.
+:::
+
+### Problem 4. Why nilpotent normal matrices collapse
+
+Assume $N$ is normal:
+
+$$
+NN^H=N^HN,
+$$
+
+and nilpotent:
+
+$$
+N^m=0
+$$
+
+for some $m\ge1$. Prove that
+
+$$
+N=0.
+$$
+
+::: details Solution
+
+Choose $m$ minimal such that
+
+$$
+N^m=0.
+$$
+
+Suppose $m>1$. Put
+
+$$
+M=N^{m-1}.
+$$
+
+Then
+
+$$
+M\neq0,
+\qquad
+M^2=0.
+$$
+
+Since $N$ is normal, every polynomial in $N$ is normal, so $M$ is normal:
+
+$$
+MM^H=M^HM.
+$$
+
+Now use $M^2=0$. Compute
+
+$$
+(M^HM)^2
+=M^HMM^HM
+=M^H(MM^H)M.
+$$
+
+Because $M$ is normal,
+
+$$
+MM^H=M^HM.
+$$
+
+Therefore
+
+$$
+(M^HM)^2
+=M^H(M^HM)M
+=(M^H)^2M^2=0.
+$$
+
+But $M^HM$ is Hermitian positive semidefinite. If a positive semidefinite matrix has square zero, then it is zero. Hence
+
+$$
+M^HM=0.
+$$
+
+The diagonal entries of $M^HM$ are the squared lengths of the columns of $M$. Therefore every column of $M$ is zero, so
+
+$$
+M=0.
+$$
+
+This contradicts the minimality of $m$. Hence $m=1$, and
+
+$$
+\boxed{N=0.}
+$$
+
+:::
+
+::: remark
+This is the key collapse in the proof that normal matrices are diagonalizable. The radical polynomial output is nilpotent. Normality makes that output normal. Normal plus nilpotent forces zero.
+:::
+
+---
+
+## Part D: Cayley Transform from Skew-Hermitian to Unitary (10 min)
+
+### Problem 5. From a line to a circle
 
 Let $X$ be skew-Hermitian:
 
@@ -317,9 +664,9 @@ $$
 
 ---
 
-## Part D: Inverse Cayley Transform (10 min)
+## Part E: Inverse Cayley Transform (8 min)
 
-### Problem 4. From a unitary matrix back to a skew-Hermitian matrix
+### Problem 6. From a unitary matrix back to a skew-Hermitian matrix
 
 Let $U$ be unitary and assume $-1$ is not an eigenvalue of $U$. Define
 
@@ -411,9 +758,9 @@ breaks at $\mu=-1$. So the inverse Cayley transform covers unitary matrices whos
 
 ---
 
-## Part E: Real Skew-Symmetric to Real Orthogonal (10 min)
+## Part F: Real Skew-Symmetric to Real Orthogonal (7 min)
 
-### Problem 5. The real version
+### Problem 7. The real version
 
 Let $S$ be a real skew-symmetric matrix:
 
@@ -508,9 +855,9 @@ So the Cayley transform turns the real skew-symmetric generator into a real rota
 
 ---
 
-## Part F: A Non-Trivial Unitary Diagonalization (12 min)
+## Part G: A Non-Trivial Unitary Diagonalization (10 min)
 
-### Problem 6. Diagonalize a normal matrix by spectral projections
+### Problem 8. Diagonalize a normal matrix by spectral projections
 
 Consider
 
@@ -715,12 +1062,13 @@ So understanding normal matrices is part of understanding the mathematics used t
 
 | Time | Activity | Target |
 |---:|---|---|
-| 0–7 min | Problem 1 | eigenvalue-shape table |
-| 7–15 min | Problem 2 | solve $X^H=X^2$ by scalar eigenvalue equation |
-| 15–25 min | Problem 3 | Cayley transform gives unitary matrices |
-| 25–33 min | Problem 4 | inverse Cayley transform |
-| 33–40 min | Problem 5 | real skew-symmetric gives real orthogonal |
-| 40–50 min | Problem 6 | non-trivial unitary diagonalization |
+| 0–6 min | Problem 1 | eigenvalue-shape table |
+| 6–13 min | Problem 2 | solve $X^H=X^2$ by scalar eigenvalue equation |
+| 13–25 min | Problems 3–4 | transpose counterexample and nilpotent-normal collapse |
+| 25–33 min | Problem 5 | Cayley transform gives unitary matrices |
+| 33–39 min | Problem 6 | inverse Cayley transform |
+| 39–43 min | Problem 7 | real skew-symmetric gives real orthogonal |
+| 43–50 min | Problem 8 | unitary diagonalization by projections |
 
 ::: tip
 The central picture is:
