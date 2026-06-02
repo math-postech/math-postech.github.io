@@ -19,15 +19,20 @@ All are welcome to attend.
 | Date       | Speaker | Topic | Notes |
 |------------|---------|-------|-------|
 | Feb. 24    | Qirui Li | Introduction and Schedule Overview | Room 404 |
-| Mar. 3     | Tom Huh | Classical Satake Isomorphism | |
+| Mar. 3     | Tom Huh | Classical Satake Isomorphism | Room 404 |
 | Mar. 10    | Yuchan Lee | Motivation on the Geometric Satake Isomorphism | |
 | Mar. 17    | Jiwan Jung | Affine Grassmannians | |
 | Mar. 24    | Jungtaek Hong | Schubert Stratification of Affine Grassmannians | |
-| Apr. 7     | Yuchan Lee | Convolution of Perverse Sheaves | |
-| Apr. 14    | Jungtaek Hong | Geometric Satake: Statement and Tannakian Formalism | |
-| Apr. 28    | Jungtaek Hong | Geometric Satake: Proof (Neutrality and Fiber Functor) | |
-| May 12     | Yuchan Lee | Categorical Traces and Local Shtukas | |
-| Jun. 2     | Qirui Li | Categorical Traces and Towards Categorical Langlands | [Slides](/seminar/number-theory-2026-spring/files/lecture10-slides.pdf) |
+| Mar. 31    | Jiwan Jung | Perverse Sheaves on the Affine Grassmannian and the Road to Geometric Satake | |
+| Apr. 7     | Yuchan Lee | Convolution in the Satake Category | |
+| Apr. 14    | —       | No seminar (midterm week) | |
+| Apr. 21    | Jungtaek Hong | Proof of the Geometric Satake: Part 1 | |
+| Apr. 28    | —       | No seminar (business trips) | |
+| May 5      | —       | No seminar (national holiday) | |
+| May 12     | Tom Huh | Proof of the Geometric Satake: Part 2 | |
+| May 19     | Yuchan Lee | Application of the Geometric Satake Correspondence to the Arithmetic on Shimura Varieties | |
+| May 26     | —       | No seminar | |
+| Jun. 2     | Qirui Li | Connecting the Geometric Satake to Categorical Langlands | Final lecture. Room 213. [Slides](/seminar/number-theory-2026-spring/files/lecture10-slides.pdf) |
 
 ## Tentative Plan
 
