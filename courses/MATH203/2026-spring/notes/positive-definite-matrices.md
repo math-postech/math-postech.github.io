@@ -166,13 +166,21 @@ A=M^TM
 x^TAx=x^TM^TMx=\|Mx\|^2\ge0.
 $$
 
-If $M$ has full column rank, then $x\ne0$ implies $Mx\ne0$, hence
+For positive definite, the strengthened existence statement is
+
+$$
+\boxed{
+A\text{ is positive definite}
+\quad\Longleftrightarrow\quad
+A=M^TM\text{ for some full-column-rank }M.
+}
+$$
+
+Indeed, if $M$ has full column rank, then $x\ne0$ implies $Mx\ne0$, hence
 
 $$
 x^TM^TMx=\|Mx\|^2>0.
 $$
-
-In particular, if $M$ is square and full rank, then $M^TM$ is positive definite.
 
 The converse follows from the eigenvalue criterion below.
 
