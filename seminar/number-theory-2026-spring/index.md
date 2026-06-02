@@ -23,7 +23,11 @@ All are welcome to attend.
 | Mar. 10    | Yuchan Lee | Motivation on the Geometric Satake Isomorphism | |
 | Mar. 17    | Jiwan Jung | Affine Grassmannians | |
 | Mar. 24    | Jungtaek Hong | Schubert Stratification of Affine Grassmannians | |
-|            |         |       |       |
+| Apr. 7     | Yuchan Lee | Convolution of Perverse Sheaves | |
+| Apr. 14    | Jungtaek Hong | Geometric Satake: Statement and Tannakian Formalism | |
+| Apr. 28    | Jungtaek Hong | Geometric Satake: Proof (Neutrality and Fiber Functor) | |
+| May 12     | Yuchan Lee | Categorical Traces and Local Shtukas | |
+| Jun. 2     | Qirui Li | Categorical Traces and Towards Categorical Langlands | [Slides](/seminar/number-theory-2026-spring/files/lecture10-slides.pdf) |
 
 ## Tentative Plan
 
@@ -206,3 +210,4 @@ Our learning path follows a logical progression from classical foundations to mo
 - **[Introduction](./notes/introduction)** (Feb 24) - Overview of geometric Satake equivalence: motivation, main theorem, key concepts, and learning path
 - **[Classical Satake Isomorphism](./notes/classical-satake)** (Mar 3) - Root datum review, Satake transform (split and quasi-split cases), modular character, examples for GL_n, Sp_4, SU_3, and D^x
 - **[Motivation on the Geometric Satake Isomorphism](./notes/geometric-motivation)** (Mar 10) - Affine Grassmannian, Schubert stratification, perverse sheaves, function-sheaf dictionary
+- **Categorical Traces and Towards Categorical Langlands** (Jun 2) - Classical Satake as unramified LLC, affine flag variety, categorical trace, Hecke eigensheaves, Geometric Langlands conjecture, Fargues--Scholze — **[Slides](/seminar/number-theory-2026-spring/files/lecture10-slides.pdf)**
