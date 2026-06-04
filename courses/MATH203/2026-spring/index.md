@@ -167,6 +167,12 @@ The textbook is only for the reference, we will follow our lecture notes in this
 
 **Final Exam Coverage**: Chapters 1–6 (full course). Emphasis on Ch4–6 for new material.
 
+::: tip Final Exam Guide
+
+[Download the Final Exam Review Guide (PDF)](files/final-exam-review-guide.pdf)
+
+:::
+
 ---
 
 ## Homework
