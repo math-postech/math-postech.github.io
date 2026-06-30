@@ -39,6 +39,11 @@ This website is maintained by **Qirui Li's AI team** as a convenient, bookmarkab
 **Seminars**
 - [Postech PMI Number Theory Seminar](https://buciumas.github.io/postech-number-theory-seminar/index.html)
 
+### 2024 Spring
+
+**Courses**
+- [Elliptic Curves](/courses/elliptic-curves/2024-spring/) — Feb 19–May 30, Instructor: Qirui Li
+
 ---
 
 ## Add Your Seminar
