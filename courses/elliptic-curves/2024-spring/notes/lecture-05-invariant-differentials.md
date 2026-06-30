@@ -2,76 +2,97 @@
 
 > **Student notes**: global PDF pp. 34–43  
 > **Date in notes**: Mar 5, 2024  
-> **Theme**: An elliptic curve has a one-dimensional space of global differentials, and it is invariant under translation.
+> **Theme**: The one-dimensional space of global differentials on an elliptic curve is fixed by translations.
 
 ---
 
 ## Overview
 
-This lecture studies the canonical differential on an elliptic curve and proves that global differentials are translation-invariant.
+This lecture studies the canonical differential on an elliptic curve. The concrete formula is
 
-The topological picture over $\mathbb C$ is that an elliptic curve is a torus. Translation should preserve the unique holomorphic one-form up to scalar; the algebraic proof shows the scalar is actually $1$.
+$$
+\omega=\frac{dx}{2y+a_1x+a_3}
+=
+\frac{dy}{3x^2+2a_2x+a_4-a_1y}.
+$$
+
+The structural result is
+
+$$
+t_P^*\omega=\omega
+\qquad\text{for every }P\in E.
+$$
+
+::: remark
+**Student-note emphasis**
+
+The notes compare smooth elliptic curves with cuspidal singular cubics. The smooth case has a nowhere-vanishing regular differential; singular curves reveal why the smoothness hypothesis is not cosmetic.
+:::
 
 ---
 
-## 1. Review of the Elliptic Curve Setup
+## 1. Differentials on a Smooth Curve
 
-Let $(C,O)$ be an elliptic curve. From the previous lecture,
-
-$$
-C\cong\operatorname{Pic}^0(C),
-\qquad
-P\longmapsto \mathcal L((P)-(O)).
-$$
-
-This identification gives the group law.
-
-Examples in the notes compare:
+::: definition
+Let $C$ be a smooth curve. The sheaf of differentials $\Omega_C$ can be defined from the diagonal embedding
 
 $$
-y^2=x^3+x
+\Delta:C\hookrightarrow C\times C
 $$
 
-with the cuspidal singular cubic
+by
 
 $$
-y^2=x^3.
+\Omega_C=\mathcal I_\Delta/\mathcal I_\Delta^2.
+$$
+:::
+
+::: theorem
+For a smooth projective curve $C$ of genus $g$,
+
+$$
+\dim H^0(C,\Omega_C)=g.
+$$
+:::
+
+::: corollary
+If $E$ is an elliptic curve, then
+
+$$
+\dim H^0(E,\Omega_E)=1.
 $$
 
-After removing the singular point, the latter behaves like $\mathbb G_a$ rather than a genuine elliptic curve.
+Thus every nonzero global differential is unique up to scalar.
+:::
+
+::: remark
+**Idea**
+
+For $E(\mathbb C)\cong\mathbb C/\Lambda$, the differential is $dz$. Algebraically, $H^0(E,\Omega_E)$ is the replacement for the one-dimensional space spanned by $dz$.
+:::
 
 ---
 
-## 2. The Sheaf of Differentials
-
-For a smooth projective curve $C$, the sheaf of differentials is
-
-$$
-\Omega_C=\mathcal I/\mathcal I^2|_{\Delta(C)},
-$$
-
-where $\Delta:C\to C\times C$ is the diagonal.
-
-For an elliptic curve, since $g=1$,
-
-$$
-\dim H^0(C,\Omega_C)=1.
-$$
-
-So every nonzero global differential is unique up to scalar.
-
----
-
-## 3. Explicit Differential in Weierstrass Form
+## 2. The Explicit Weierstrass Differential
 
 Let
 
 $$
-C:
- y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6.
+E:\quad
+y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6.
 $$
 
-Differentiate the defining equation:
+::: lemma
+On $E$, the differentials $dx$ and $dy$ satisfy
+
+$$
+(2y+a_1x+a_3)dy
+=
+(3x^2+2a_2x+a_4-a_1y)dx.
+$$
+:::
+
+**Proof.** Differentiate the defining equation:
 
 $$
 2y\,dy+a_1x\,dy+a_1y\,dx+a_3\,dy
@@ -79,82 +100,119 @@ $$
 3x^2\,dx+2a_2x\,dx+a_4\,dx.
 $$
 
-The standard invariant differential is
+Move the $a_1y\,dx$ term to the right. $\square$
+
+::: proposition
+The differential
 
 $$
-\omega=\frac{dx}{2y+a_1x+a_3}.
+\omega=\frac{dx}{2y+a_1x+a_3}
 $$
 
-Equivalently, using the equation above,
+is a regular global differential on $E$. Equivalently,
 
 $$
-\omega=\frac{dy}{3x^2+2a_2x+a_4-a_1y}.
+\omega=
+\frac{dy}{3x^2+2a_2x+a_4-a_1y}.
 $$
+:::
 
-The denominator cancels exactly where $dx$ vanishes. Smoothness ensures that $dx$ and $dy$ do not vanish in the incompatible way that would make this ill-defined.
+**Proof.** The displayed lemma shows the two local formulas agree wherever both denominators make sense. If the denominator $2y+a_1x+a_3$ vanishes, then the equation forces $dx$ to vanish to the same order unless the curve is singular. The alternate $dy$ expression covers this locus. Similarly, if the second denominator vanishes, the first expression covers it. Smoothness says the two partial derivatives of the Weierstrass equation cannot vanish simultaneously on $E$. Therefore the formulas glue to a regular differential. $\square$
+
+::: attention
+The denominator is not an arbitrary trick. It is exactly the partial derivative of the defining equation with respect to $y$.
+:::
 
 ---
 
-## 4. Translation Pullback
+## 3. Translation Pullback
 
-For $P\in C$, let
+For $P\in E$, let
 
 $$
-t_P:C\longrightarrow C,
+t_P:E\to E,
 \qquad
-Q\longmapsto Q+P.
+Q\mapsto Q+P.
 $$
 
-Translation is an automorphism of the curve. Therefore it induces an isomorphism
-
-$$
-t_P^*\Omega_C\cong\Omega_C.
-$$
-
-Since $H^0(C,\Omega_C)$ is one-dimensional, there exists a scalar $\lambda(P)$ such that
+::: lemma
+For every $P\in E$, there is a scalar $\lambda(P)\in k^\times$ such that
 
 $$
 t_P^*\omega=\lambda(P)\omega.
 $$
+:::
 
-This gives a map
+**Proof.** Translation is an automorphism of the smooth curve $E$, so it pulls regular differentials to regular differentials. Since $H^0(E,\Omega_E)$ is one-dimensional and $\omega\ne0$, the pullback must be a scalar multiple of $\omega$. $\square$
+
+::: proposition
+The function $P\mapsto\lambda(P)$ is a morphism
 
 $$
-\lambda:C\longrightarrow \mathbb G_m.
+\lambda:E\to\mathbb G_m.
 $$
+:::
+
+**Explanation.** Translation depends algebraically on $P$. Pulling back $\omega$ along the addition map
+
+$$
+m:E\times E\to E
+$$
+
+and comparing with a chosen basis of the one-dimensional vector space $H^0(E,\Omega_E)$ gives a regular invertible scalar function on $E$.
 
 ---
 
-## 5. Why the Scalar is Constant
+## 4. Translation Invariance
 
-The image of $\lambda$ is projective because $C$ is projective. But the only connected projective subgroup of $\mathbb G_m$ is the trivial subgroup.
-
-Therefore
-
-$$
-\lambda(P)=1
-$$
-
-for all $P\in C$.
-
-Thus
+::: theorem
+For every $P\in E$,
 
 $$
 t_P^*\omega=\omega.
 $$
+:::
 
-Every global differential on an elliptic curve is invariant under translation.
+**Proof.** From the previous section, $\lambda:E\to\mathbb G_m$ is a morphism. Because $E$ is projective, the image of $E$ under any morphism to an affine variety is complete. The only complete connected subvariety of $\mathbb G_m$ is a point. Hence $\lambda$ is constant.
+
+At $P=O$, translation is the identity, so
+
+$$
+\lambda(O)=1.
+$$
+
+Therefore $\lambda(P)=1$ for all $P$, and $t_P^*\omega=\omega$. $\square$
+
+::: remark
+**Idea**
+
+Over $\mathbb C$, this is just the statement that translation on $\mathbb C/\Lambda$ preserves $dz$. The algebraic proof replaces analytic coordinates by projectivity plus the one-dimensionality of global differentials.
+:::
 
 ---
 
-## 6. Conceptual Meaning
+## 5. Smooth vs Singular Behavior
 
-This is the algebraic version of the analytic fact that a complex elliptic curve
+::: example
+For the cuspidal cubic
 
 $$
-\mathbb C/\Lambda
+y^2=x^3,
 $$
 
-has differential $dz$, and translation preserves $dz$.
+the smooth locus is closer to $\mathbb G_a$ than to a compact torus.
+:::
 
-The invariant differential is one of the main structural tools in the later study of isogenies and ramification.
+At the cusp, the differential behavior degenerates. This is why the canonical differential story belongs to smooth elliptic curves, not arbitrary cubic equations.
+
+::: tip
+**Lecture takeaway**
+
+The invariant differential is the bridge from geometry to isogeny theory:
+
+$$
+f^*\omega_2=c\,\omega_1.
+$$
+
+Later, the scalar $c$ detects separability and Frobenius behavior.
+:::

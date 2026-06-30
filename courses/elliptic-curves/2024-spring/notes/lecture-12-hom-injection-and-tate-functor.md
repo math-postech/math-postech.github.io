@@ -1,13 +1,13 @@
 # Lecture 12: The Hom Injection and the Tate Functor
 
 > **Student notes**: global PDF pp. 110–118  
-> **Theme**: The Tate module functor is faithful: an isogeny is detected by its action on Tate modules.
+> **Theme**: The Tate-module functor is faithful: a homomorphism of elliptic curves is detected by its action on Tate modules.
 
 ---
 
 ## Overview
 
-The main theorem of this lecture is the injectivity of the natural map
+The main theorem is the injectivity of
 
 $$
 \operatorname{Hom}(E_1,E_2)\otimes\mathbb Z_\ell
@@ -15,205 +15,174 @@ $$
 \operatorname{Hom}_{\mathbb Z_\ell}(T_\ell E_1,T_\ell E_2).
 $$
 
-The student notes do not treat this as a black box. They record the proof strategy:
+The proof recorded in the student notes has a concrete mechanism:
 
-1. first prove that a morphism acting as zero on $T_\ell E$ must be zero after enough divisibility reasoning;
-2. use finite generation of Hom groups;
-3. use the idea that maps zero on $\ell^m$-torsion factor through $[\ell^m]$;
-4. use a divisibility argument to force all coefficients to vanish.
+1. if a map kills $\ell^m$-torsion, it factors through $[\ell^m]$;
+2. if it kills all Tate-level data, it is divisible by all powers of $\ell$;
+3. finite generation of Hom groups forces such an element to be zero.
 
 ---
 
 ## 1. The Natural Map
 
-Given
+::: proposition
+Every homomorphism $\phi:E_1\to E_2$ induces a $\mathbb Z_\ell$-linear map
 
 $$
-\phi:E_1\to E_2,
+T_\ell\phi:T_\ell E_1\to T_\ell E_2.
 $$
+:::
 
-we get compatible maps
-
-$$
-E_1[\ell^n]\to E_2[\ell^n]
-$$
-
-because
+**Proof.** For $P\in E_1[\ell^n]$,
 
 $$
 [\ell^n]\phi(P)=\phi([\ell^n]P)=0.
 $$
 
-Passing to inverse limits gives
+Thus $\phi(P)\in E_2[\ell^n]$. Compatibility with the transition maps $[\ell]$ gives a map on inverse limits. $\square$
 
-$$
-T_\ell\phi:T_\ell E_1\to T_\ell E_2.
-$$
-
-Thus we have a group homomorphism
+This defines
 
 $$
 \operatorname{Hom}(E_1,E_2)\to
 \operatorname{Hom}_{\mathbb Z_\ell}(T_\ell E_1,T_\ell E_2).
 $$
 
-Extending scalars gives the map in the theorem.
+Tensoring with $\mathbb Z_\ell$ gives the stated map.
 
 ---
 
-## 2. Key Lemma: Zero on Torsion Implies Factorization
+## 2. Factorization Through Multiplication
 
-### Lemma
-
-If an isogeny or homomorphism
+::: lemma
+If a homomorphism
 
 $$
 \phi:E_1\to E_2
 $$
 
-is zero on $E_1[\ell^m]$, then $\phi$ factors through $[\ell^m]$:
+kills $E_1[\ell^m]$, then there exists a homomorphism $\lambda:E_1\to E_2$ such that
 
 $$
-\phi=\lambda\circ[\ell^m]
+\phi=\lambda\circ[\ell^m].
 $$
+:::
 
-for some homomorphism
-
-$$
-\lambda:E_1\to E_2.
-$$
-
-### Explanation
-
-The quotient of $E_1$ by the finite subgroup $E_1[\ell^m]$ is exactly the target of the isogeny $[\ell^m]$:
+**Proof.** The isogeny $[\ell^m]:E_1\to E_1$ has kernel $E_1[\ell^m]$. If $\phi$ kills this kernel, then $\phi$ is constant on the fibers of $[\ell^m]$. Therefore $\phi$ descends to the quotient
 
 $$
-E_1/E_1[\ell^m]\cong E_1.
+E_1/E_1[\ell^m].
 $$
 
-If $\phi$ kills $E_1[\ell^m]$, then it is constant on the fibers of $[\ell^m]$. Therefore it descends to the quotient.
+But this quotient is canonically the target of $[\ell^m]$, again isomorphic to $E_1$. Hence there is a map $\lambda:E_1\to E_2$ with $\phi=\lambda\circ[\ell^m]$. $\square$
 
-This gives the desired factorization.
+::: remark
+**Student-note idea**
+
+This is the algebraic version of “a function constant on fibers factors through the quotient.”
+:::
 
 ---
 
 ## 3. Injectivity Before Tensoring
 
-Suppose
+::: theorem
+The map
 
 $$
-T_\ell\phi=0.
+\operatorname{Hom}(E_1,E_2)\to
+\operatorname{Hom}_{\mathbb Z_\ell}(T_\ell E_1,T_\ell E_2)
 $$
 
-Then for every $m$, the map $\phi$ kills $E_1[\ell^m]$. By the lemma,
+is injective.
+:::
+
+**Proof.** Suppose $T_\ell\phi=0$. Then for every $m$, $\phi$ kills $E_1[\ell^m]$. By the factorization lemma,
 
 $$
 \phi=\lambda_m\circ[\ell^m]
 $$
 
-for every $m$.
+for every $m$. Thus $\phi$ is divisible by $\ell^m$ inside $\operatorname{Hom}(E_1,E_2)$ for every $m$.
 
-Therefore $\phi$ is divisible by $\ell^m$ inside $\operatorname{Hom}(E_1,E_2)$ for every $m$.
+The group $\operatorname{Hom}(E_1,E_2)$ is a finitely generated torsion-free abelian group. In such a group, the only element divisible by all powers of $\ell$ is zero. Hence $\phi=0$. $\square$
 
-But $\operatorname{Hom}(E_1,E_2)$ is a finitely generated free abelian group. The only element divisible by all powers of $\ell$ is zero.
-
-Hence
-
-$$
-\phi=0.
-$$
-
-This proves injectivity of
+::: lemma
+If $M$ is a finitely generated free abelian group, then
 
 $$
-\operatorname{Hom}(E_1,E_2)\to
-\operatorname{Hom}(T_\ell E_1,T_\ell E_2).
+\bigcap_{m\ge0}\ell^m M=\{0\}.
 $$
+:::
+
+**Proof.** Choose a $\mathbb Z$-basis. If a nonzero vector has coordinates with greatest common divisor $d$, it cannot be divisible by $\ell^m$ for $m>v_\ell(d)$. $\square$
 
 ---
 
 ## 4. Injectivity After Tensoring
 
-Now suppose
-
-$$
-\sum_i a_i\phi_i
-$$
-
-maps to zero in the Tate-module Hom space after tensoring with $\mathbb Z_\ell$.
-
-The student notes use the following finite-generation argument. Choose a finitely generated subgroup
-
-$$
-M\subset \operatorname{Hom}(E_1,E_2)
-$$
-
-containing the relevant $\phi_i$. Let
-
-$$
-M^{\operatorname{div}}
-=
-\{\phi\in M: [\ell^m]\phi\in M\text{ for some }m\}.
-$$
-
-The notes observe that $M^{\operatorname{div}}$ is still finitely generated and has the same rank as $M$.
-
-Choose a $\mathbb Z$-basis
-
-$$
-\psi_1,\ldots,\psi_r
-$$
-
-of such a saturated lattice. If a combination maps to zero mod $\ell^m$ on Tate modules, then it is divisible by $\ell^m$ in the saturated lattice.
-
-Writing
-
-$$
-\lambda=b_1\psi_1+\cdots+b_r\psi_r,
-$$
-
-divisibility by every $\ell^m$ forces every $b_i$ to be divisible by every $\ell^m$, hence
-
-$$
-b_i=0.
-$$
-
-Therefore the original element is zero.
-
-This proves the injectivity of
+::: theorem
+The scalar-extended map
 
 $$
 \operatorname{Hom}(E_1,E_2)\otimes\mathbb Z_\ell
 \hookrightarrow
-\operatorname{Hom}_{\mathbb Z_\ell}(T_\ell E_1,T_\ell E_2).
+\operatorname{Hom}_{\mathbb Z_\ell}(T_\ell E_1,T_\ell E_2)
 $$
+
+is injective.
+:::
+
+**Proof.** Let
+
+$$
+x\in\operatorname{Hom}(E_1,E_2)\otimes\mathbb Z_\ell
+$$
+
+map to zero. Choose a $\mathbb Z$-basis $\psi_1,\ldots,\psi_r$ of the finitely generated group $\operatorname{Hom}(E_1,E_2)$. Write
+
+$$
+x=\sum_i a_i\psi_i,\qquad a_i\in\mathbb Z_\ell.
+$$
+
+Modulo $\ell^m$, the vanishing of $T_\ell x$ implies that the corresponding integral combination acts trivially on $E_1[\ell^m]$. By the factorization lemma, that combination is divisible by $\ell^m$ in the Hom group. In coordinates, every coefficient is divisible by $\ell^m$.
+
+This holds for every $m$, so every $a_i=0$ in $\mathbb Z_\ell$. Hence $x=0$. $\square$
+
+::: attention
+This proves faithfulness, not fullness. Not every $\mathbb Z_\ell$-linear map between Tate modules comes from an elliptic-curve homomorphism.
+:::
 
 ---
 
 ## 5. Why Surjectivity Is Harder
 
-The student notes explicitly flag that injectivity is not the full story.
+The student notes flag the missing condition: maps on Tate modules must respect additional structures.
 
-To conclude that a map on Tate modules comes from an isogeny, one needs additional structure. In particular, the target should be restricted to maps compatible with the symplectic/Weil-pairing structure.
+At minimum, the Weil pairing imposes a symplectic constraint:
 
-This is the beginning of Tate's theorem philosophy:
+$$
+e_\ell(T_\ell\phi x,y)=e_\ell(x,T_\ell\widehat\phi y).
+$$
 
-> homomorphisms of elliptic curves should be recovered from Galois-compatible homomorphisms of Tate modules.
+Over finite fields, the full Tate theorem says one must also impose Galois compatibility.
 
-The full theorem requires more arithmetic input. The course notes here only establish the structural mechanism.
+::: theorem
+**Tate philosophy**
 
----
+Arithmetic homomorphisms of elliptic curves should be recovered from Galois-compatible homomorphisms of Tate modules.
+:::
 
-## 6. Consequence for Endomorphisms
+::: tip
+**Lecture takeaway**
 
-Taking $E_1=E_2=E$, we get
+The injection lets us study endomorphisms as matrices:
 
 $$
 \operatorname{End}(E)\otimes\mathbb Z_\ell
 \hookrightarrow
-\operatorname{End}_{\mathbb Z_\ell}(T_\ell E).
+M_2(\mathbb Z_\ell).
 $$
 
-Therefore every endomorphism can be studied by a $2\times2$ matrix over $\mathbb Z_\ell$.
-
-This is the entry point to trace and determinant.
+The next step is to read trace and determinant from these matrices.
+:::
