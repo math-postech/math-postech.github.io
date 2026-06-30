@@ -8,163 +8,255 @@
 
 ## Overview
 
-This lecture turns the previous Riemann–Roch construction into the group structure of an elliptic curve.
+The previous lecture constructed a plane cubic model from a genus-one curve with a marked point. This lecture explains why that marked point turns the curve into an abelian group.
 
-The key idea is:
+The central identification is
 
 $$
 C \cong \operatorname{Pic}^0(C),
 \qquad
-P\longmapsto \mathcal L((P)-(O)).
+P\longmapsto \mathcal O_C((P)-(O)).
 $$
 
-For a genus-one curve with base point $O$, every degree-zero line bundle is represented by a unique point. This makes addition in $\operatorname{Pic}^0(C)$ into addition of points on $C$.
+The group law is not guessed from the cubic picture. It is first defined in $\operatorname{Pic}^0(C)$, then translated back to points.
+
+::: remark
+**Student-note emphasis**
+
+The student notes spend time on the Picard interpretation before drawing the chord-and-tangent rule. This matters: the picture is a consequence of divisor theory, not the definition.
+:::
 
 ---
 
-## 1. Review: Riemann–Roch in Genus One
+## 1. Genus-One Riemann--Roch Review
 
-Let $C$ be a smooth projective curve of genus $1$, and let $O\in C$ be the marked point.
+Let $C$ be a smooth projective curve of genus $1$, and let $O\in C$.
 
-Riemann–Roch gives, for every positive-degree divisor $D$,
+::: theorem
+For every divisor $D$ on $C$ with $\deg D>0$,
 
 $$
 \ell(D)=\deg D.
 $$
+:::
 
-Applying this to $nO$ gives:
-
-$$
-\ell(O)=1,
-\quad
-\ell(2O)=2,
-\quad
-\ell(3O)=3,
-\quad
-\ell(6O)=6.
-$$
-
-Thus we obtain functions $x,y$ with pole orders $2$ and $3$ at $O$, and the seven functions
+**Proof.** Riemann--Roch gives
 
 $$
-1,x,y,x^2,xy,x^3,y^2
+\ell(D)-\ell(K-D)=\deg D+1-g.
 $$
 
-satisfy one cubic relation.
+Since $g=1$, this becomes
+
+$$
+\ell(D)-\ell(K-D)=\deg D.
+$$
+
+The canonical divisor has degree $2g-2=0$. If $\deg D>0$, then $\deg(K-D)<0$, hence no nonzero rational function can have divisor at least $D-K$. Thus $\ell(K-D)=0$, so $\ell(D)=\deg D$. $\square$
+
+::: corollary
+For the marked point $O$,
+
+$$
+\ell(O)=1,\qquad \ell(2O)=2,\qquad \ell(3O)=3.
+$$
+
+Hence there exist functions $x,y$ with pole orders $2$ and $3$ at $O$, and they satisfy a Weierstrass relation.
+:::
+
+::: remark
+**Idea**
+
+The point $O$ is the place where the affine coordinates are allowed to have poles. The functions $x$ and $y$ should be read as controlled poles at $O$, not as arbitrary coordinates.
+:::
 
 ---
 
-## 2. Elliptic Curve Equation
+## 2. The Picard Map
 
-An elliptic curve is a pair $(C,O)$ with $C$ smooth projective of genus $1$ and $O\in C$.
-
-Riemann–Roch gives a Weierstrass equation
-
-$$
-y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6.
-$$
-
-The coefficients of $y^2$ and $x^3$ may be normalized to $1$ in the usual Weierstrass form, while smoothness excludes the singular discriminant case.
-
----
-
-## 3. The Picard Description of Points
-
-Define
+::: definition
+Let $(C,O)$ be a genus-one curve with marked point. Define
 
 $$
 \phi:C\longrightarrow \operatorname{Pic}^0(C),
 \qquad
-P\longmapsto \mathcal L((P)-(O)).
+P\longmapsto [\mathcal O_C((P)-(O))].
+$$
+:::
+
+::: theorem
+The map $\phi$ is a bijection.
+:::
+
+**Proof.**
+
+First prove surjectivity. Let $\mathcal L$ be a degree-zero line bundle. It is represented by a divisor $D$ with $\deg D=0$. Then $D+O$ has degree $1$, so Riemann--Roch gives
+
+$$
+\ell(D+O)=1.
 $$
 
-For a genus-one curve this map is an isomorphism.
-
-Surjectivity: every degree-zero divisor class has a representative of the form $(P)-(O)$.
-
-Injectivity: if
+Thus there is a nonzero section of $\mathcal O_C(D+O)$, equivalently an effective divisor $P$ of degree $1$ linearly equivalent to $D+O$. Therefore
 
 $$
-(P)-(O)\sim(Q)-(O),
+D+O\sim P,
+\qquad
+D\sim P-O.
 $$
 
-then $(P)\sim(Q)$, hence there is a rational function with divisor $(P)-(Q)$. Riemann–Roch forces $P=Q$.
+So $\mathcal L\cong \mathcal O_C((P)-(O))$.
 
-Thus the curve itself is its degree-zero Picard group.
+For injectivity, suppose
+
+$$
+\mathcal O_C((P)-(O))\cong \mathcal O_C((Q)-(O)).
+$$
+
+Then $(P)\sim(Q)$. If $P\ne Q$, there is a rational function $f$ with
+
+$$
+\operatorname{div}(f)=(P)-(Q).
+$$
+
+This would give a nonconstant function with at most one pole, namely at $Q$. Hence $\ell(Q)\ge2$. But $\deg Q=1$, so Riemann--Roch gives $\ell(Q)=1$, a contradiction. Hence $P=Q$. $\square$
+
+::: remark
+**Why this is the group law source**
+
+The group structure already exists on $\operatorname{Pic}^0(C)$ by tensor product. The theorem says every degree-zero line bundle has a unique point representative, so tensor product becomes an operation on points.
+:::
 
 ---
 
-## 4. Definition of Addition
+## 3. Definition of Addition
 
-Addition is transported from tensor product of line bundles:
+::: definition
+For $P,Q\in C$, define $P+Q$ to be the unique point satisfying
 
 $$
-\mathcal L((P)-(O))\otimes\mathcal L((Q)-(O))
+\mathcal O_C((P)-(O))\otimes \mathcal O_C((Q)-(O))
 \cong
-\mathcal L((P+Q)-(O)).
+\mathcal O_C((P+Q)-(O)).
 $$
 
 Equivalently,
 
 $$
-P+Q
+(P)+(Q)-2(O)\sim (P+Q)-(O).
 $$
+:::
 
-is the unique point such that
+::: proposition
+The point $O$ is the identity element and every point has an inverse.
+:::
 
-$$
-(P)-(O)+(Q)-(O)\sim(P+Q)-(O).
-$$
-
-The identity element is $O$.
-
-The inverse $-P$ is determined by
+**Proof.** For the identity,
 
 $$
-(P)+(-P)-2(O)\sim 0.
+\mathcal O_C((P)-(O))\otimes\mathcal O_C((O)-(O))
+\cong
+\mathcal O_C((P)-(O)).
 $$
+
+Thus $P+O=P$.
+
+For the inverse, the inverse of $\mathcal O_C((P)-(O))$ in $\operatorname{Pic}^0(C)$ is $\mathcal O_C((O)-(P))$. By the bijection $C\cong\operatorname{Pic}^0(C)$, there is a unique point $Q$ such that
+
+$$
+\mathcal O_C((Q)-(O))\cong \mathcal O_C((O)-(P)).
+$$
+
+Then $P+Q=O$, and $Q$ is denoted $-P$. $\square$
+
+::: theorem
+With this operation, $C$ is an abelian group.
+:::
+
+**Proof.** The operation is transported from tensor product in $\operatorname{Pic}^0(C)$. Tensor product of line bundles is associative and commutative up to canonical isomorphism, and $\mathcal O_C$ is the identity. Transporting this structure through the bijection $\phi$ gives associativity, commutativity, identity, and inverses on $C$. $\square$
+
+::: attention
+The group law is intrinsic. The plane cubic picture depends on the chosen Weierstrass embedding, but the Picard definition does not.
+:::
 
 ---
 
-## 5. Chord-and-Tangent Rule
+## 4. Chord-and-Tangent Rule
 
-In the plane cubic model, a line intersects the cubic in three points counted with multiplicity.
+Now suppose $C$ is embedded as a smooth plane cubic with $O$ the point at infinity.
 
-If the line meets $C$ at $P,Q,R$, then the line function has divisor
-
-$$
-(P)+(Q)+(R)-3(O).
-$$
-
-Since this divisor is principal,
+::: lemma
+If a line $L$ meets $C$ at $P,Q,R$ counted with multiplicity, then
 
 $$
-(P)-(O)+(Q)-(O)+(R)-(O)\sim 0.
+(P)+(Q)+(R)-3(O)
 $$
 
-Therefore
+is a principal divisor on $C$.
+:::
+
+**Proof.** The linear equation defining $L$ restricts to a rational function on $C$. Its zeros are exactly the intersection points $P,Q,R$, counted with intersection multiplicity. Since $L$ has degree $1$, it has a pole of order $3$ at the point at infinity in the cubic embedding. Hence
+
+$$
+\operatorname{div}(L|_C)=(P)+(Q)+(R)-3(O).
+$$
+$\square$
+
+::: theorem
+If a line meets $C$ in $P,Q,R$, then
 
 $$
 P+Q+R=O.
 $$
 
-So if $R$ is the third intersection of the line through $P,Q$, then
+Equivalently,
 
 $$
 P+Q=-R.
 $$
+:::
 
-This is the geometric addition law.
+**Proof.** The lemma says
+
+$$
+(P)+(Q)+(R)-3(O)\sim0.
+$$
+
+Rewrite this as
+
+$$
+((P)-(O))+((Q)-(O))+((R)-(O))\sim0.
+$$
+
+Under $C\cong\operatorname{Pic}^0(C)$, addition of divisor classes is addition of points. Therefore $P+Q+R=O$. $\square$
+
+::: remark
+**Tangent case**
+
+If $P=Q$, the line is the tangent line at $P$. The same divisor computation still works because intersection multiplicity records the repeated point. Thus doubling is obtained by tangent-and-reflect.
+:::
 
 ---
 
-## 6. Singular Comparisons
+## 5. Singular Comparisons
 
-The notes compare smooth elliptic curves with singular cubics.
+::: example
+For a nodal cubic, the smooth locus behaves like $\mathbb G_m$.
+:::
 
-For example:
+The line-through-points construction still produces a group law on the smooth locus, but the identity and inverse structure reflect the normalization of the nodal curve, not a smooth genus-one Picard variety.
 
-- a nodal cubic behaves like $\mathbb G_m$ after removing the singular point;
-- a cuspidal cubic behaves like $\mathbb G_a$ after removing the singular point.
+::: example
+For a cuspidal cubic, the smooth locus behaves like $\mathbb G_a$.
+:::
 
-This comparison explains why smoothness matters. Singular cubics still carry group-like structures on their smooth loci, but they are not elliptic curves.
+This explains why smoothness is essential in the definition of an elliptic curve. Singular cubics have group-like smooth loci, but they do not have the same Picard/Riemann--Roch geometry as a smooth genus-one curve.
+
+::: tip
+**Lecture takeaway**
+
+The chord-and-tangent rule is the visible shadow of one algebraic fact:
+
+$$
+C \cong \operatorname{Pic}^0(C).
+$$
+:::

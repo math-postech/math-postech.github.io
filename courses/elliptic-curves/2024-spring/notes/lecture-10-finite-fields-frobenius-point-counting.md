@@ -2,116 +2,185 @@
 
 > **Student notes**: begins around global PDF p. 98  
 > **Prep source**: `lecture11.md`  
-> **Theme**: Frobenius is the operator whose eigenvalues control point counts over finite fields.
+> **Theme**: Frobenius is the endomorphism whose trace controls point counts.
 
 ---
 
 ## Overview
 
-The course shifts to elliptic curves over finite fields. The central operator is Frobenius.
-
-For $E/\mathbb F_q$,
+Let $E/\mathbb F_q$ be an elliptic curve. The arithmetic question is:
 
 $$
-\operatorname{Frob}_q:E\longrightarrow E,
+\#E(\mathbb F_q)=?
+$$
+
+The geometric answer is to use Frobenius:
+
+$$
+\operatorname{Frob}_q:E\to E,
 \qquad
-(x,y)\longmapsto(x^q,y^q).
+(x,y)\mapsto(x^q,y^q).
 $$
 
-The fixed points of Frobenius are exactly the rational points.
-
----
-
-## 1. Frobenius and Rational Points
-
-A point $P\in E(\overline{\mathbb F}_q)$ lies in $E(\mathbb F_q)$ exactly when
-
-$$
-\operatorname{Frob}_q(P)=P.
-$$
-
-Thus
+Then
 
 $$
 E(\mathbb F_q)=\ker(1-\operatorname{Frob}_q).
 $$
 
-For an isogeny, the size of the kernel is measured by degree, so
+---
+
+## 1. Frobenius Fixed Points
+
+::: definition
+The $q$-power Frobenius endomorphism is
+
+$$
+\operatorname{Frob}_q(P)=P^{(q)}
+$$
+
+on coordinates.
+:::
+
+::: proposition
+A geometric point $P\in E(\overline{\mathbb F}_q)$ lies in $E(\mathbb F_q)$ if and only if
+
+$$
+\operatorname{Frob}_q(P)=P.
+$$
+:::
+
+**Proof.** A coordinate lies in $\mathbb F_q$ exactly when it is fixed by $a\mapsto a^q$. Applying this to the coordinates of $P$ gives the claim. $\square$
+
+::: corollary
+
+$$
+E(\mathbb F_q)=\ker(1-\operatorname{Frob}_q).
+$$
+:::
+
+---
+
+## 2. Counting by Degree
+
+::: proposition
+The endomorphism $1-\operatorname{Frob}_q$ is separable, and
 
 $$
 \#E(\mathbb F_q)=\deg(1-\operatorname{Frob}_q).
 $$
+:::
+
+**Proof idea.** The kernel of $1-\operatorname{Frob}_q$ is exactly the rational-point group. The differential of Frobenius is zero in characteristic $p$, while the differential of the identity is the identity. Hence the differential of $1-\operatorname{Frob}_q$ is nonzero, so the map is separable. For a separable isogeny, the number of geometric kernel points equals the degree. $\square$
+
+::: remark
+This is the first major point-counting conversion:
+
+$$
+\text{count points}
+\quad\rightsquigarrow\quad
+\text{compute degree of an endomorphism}.
+$$
+:::
 
 ---
 
-## 2. Trace of Frobenius
+## 3. Trace of an Endomorphism
 
-For an endomorphism $\phi$ of an elliptic curve, define its trace by the relation
+::: definition
+For an endomorphism $\phi$ of an elliptic curve, define its trace by
 
 $$
-\deg(1-\phi)=1-\operatorname{tr}(\phi)+\deg\phi.
+\operatorname{tr}(\phi)=1+\deg\phi-\deg(1-\phi).
 $$
+:::
 
-For Frobenius, $\deg(\operatorname{Frob}_q)=q$, hence
+::: proposition
+For Frobenius,
 
 $$
 \#E(\mathbb F_q)=q+1-\operatorname{tr}(\operatorname{Frob}_q).
 $$
+:::
 
-This is the elliptic-curve form of the Lefschetz trace formula.
+**Proof.** Frobenius has degree $q$. By definition,
+
+$$
+\operatorname{tr}(\operatorname{Frob}_q)
+=
+1+q-\deg(1-\operatorname{Frob}_q).
+$$
+
+Using $\deg(1-\operatorname{Frob}_q)=\#E(\mathbb F_q)$ gives the formula. $\square$
+
+::: remark
+**Preparation-note motivation**
+
+This is the elliptic-curve shadow of the Lefschetz trace formula: fixed points are counted by traces of an operator.
+:::
 
 ---
 
-## 3. Hasse Bound
+## 4. Hasse Bound
 
-The notes record the estimate
-
-$$
-\left|\#E(\mathbb F_q)-(q+1)\right|\le 2\sqrt q.
-$$
-
-Equivalently, if
+::: theorem
+Let
 
 $$
-a_q=q+1-\#E(\mathbb F_q),
+a_q=\operatorname{tr}(\operatorname{Frob}_q).
 $$
 
-then
+Then
 
 $$
 |a_q|\le 2\sqrt q.
 $$
 
-The eigenvalues of Frobenius should have complex absolute value $\sqrt q$.
+Equivalently,
+
+$$
+\left|\#E(\mathbb F_q)-(q+1)\right|\le2\sqrt q.
+$$
+:::
+
+**Proof idea.** The degree pairing on $\operatorname{End}(E)$ is positive definite. Applying the Cauchy inequality to $1$ and $\operatorname{Frob}_q$ gives
+
+$$
+\operatorname{tr}(\operatorname{Frob}_q)^2\le4\deg(\operatorname{Frob}_q)=4q.
+$$
+
+Taking square roots gives the bound. $\square$
+
+::: attention
+The proof uses the positivity of degree. This is why the previous lecture’s endomorphism pairing is not optional background.
+:::
 
 ---
 
-## 4. Motivation for the Zeta Function
+## 5. Zeta Function Motivation
 
-Counting points over all finite extensions gives a generating function:
+::: definition
+The zeta function of $E/\mathbb F_q$ is
 
 $$
 Z(E/\mathbb F_q,t)
 =
 \exp\left(\sum_{n\ge1}\#E(\mathbb F_{q^n})\frac{t^n}{n}\right).
 $$
+:::
 
-The motivating question is:
-
-> How does Frobenius package all the numbers $\#E(\mathbb F_{q^n})$?
-
-The answer is via the characteristic polynomial of Frobenius.
-
----
-
-## 5. Why Tate Modules Enter
-
-To speak about eigenvalues of Frobenius, we need a linear representation of endomorphisms.
-
-The Tate module provides exactly this:
+::: proposition
+If $\alpha,\beta$ are the Frobenius eigenvalues, then
 
 $$
-T_\ell E
+\#E(\mathbb F_{q^n})=q^n+1-\alpha^n-\beta^n.
 $$
+:::
 
-turns torsion points into a free $\mathbb Z_\ell$-module on which Frobenius acts linearly.
+**Explanation.** Rational points over $\mathbb F_{q^n}$ are fixed points of $\operatorname{Frob}_q^n$. The trace of $\operatorname{Frob}_q^n$ is $\alpha^n+\beta^n$, while its degree is $q^n$.
+
+::: tip
+**Lecture takeaway**
+
+Frobenius packages all finite-field point counts. To make “eigenvalues of Frobenius” rigorous, the course next introduces Tate modules.
+:::

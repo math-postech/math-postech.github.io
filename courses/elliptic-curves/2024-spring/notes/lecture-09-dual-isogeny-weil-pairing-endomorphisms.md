@@ -2,30 +2,29 @@
 
 > **Student notes**: begins around global PDF p. 75  
 > **Date in notes**: Mar 19, 2024  
-> **Theme**: Dual isogenies, the Weil pairing, and the algebraic structure of $\operatorname{End}(E)$.
+> **Theme**: Dual isogenies produce a positive degree form, which strongly restricts endomorphism algebras.
 
 ---
 
 ## Overview
 
-This lecture starts from the dual isogeny and develops a positive definite pairing on homomorphism groups. It then explains why the endomorphism algebra of an elliptic curve is highly restricted.
+This lecture has three linked goals:
+
+1. construct and use the dual isogeny;
+2. turn degree into a positive definite quadratic form;
+3. explain why $\operatorname{End}(E)$ is highly restricted.
+
+The Weil pairing enters as the torsion-level refinement of the same duality.
 
 ---
 
 ## 1. Dual Isogeny
 
-Let
+::: theorem
+Let $\phi:E_1\to E_2$ be an isogeny of degree $n$. There exists a unique isogeny
 
 $$
-\phi:E_1\longrightarrow E_2
-$$
-
-be an isogeny of degree $n$.
-
-The dual isogeny is an isogeny
-
-$$
-\widehat\phi:E_2\longrightarrow E_1
+\widehat\phi:E_2\to E_1
 $$
 
 such that
@@ -35,84 +34,167 @@ $$
 \qquad
 \phi\circ\widehat\phi=[n]_{E_2}.
 $$
+:::
 
-The notes interpret $\phi$ by pushforward of line bundles and $\widehat\phi$ by pullback.
+**Proof idea.** Use the Picard identification $E\simeq\operatorname{Pic}^0(E)$. Pullback gives
+
+$$
+\phi^*:\operatorname{Pic}^0(E_2)\to\operatorname{Pic}^0(E_1).
+$$
+
+Transporting this map through the identifications with $E_2$ and $E_1$ defines $\widehat\phi$. The norm-pullback identity for divisors gives
+
+$$
+\widehat\phi\circ\phi=[\deg\phi],
+$$
+
+and symmetry gives the other composition identity. $\square$
+
+::: remark
+**Idea**
+
+The dual isogeny is not an inverse unless $\deg\phi=1$. It is an inverse up to multiplication by the degree.
+:::
 
 ---
 
-## 2. A Positive Definite Pairing
+## 2. Degree as a Quadratic Form
 
-For homomorphisms between elliptic curves, define
+::: definition
+For $\phi,\psi\in\operatorname{Hom}(E_1,E_2)$, define
 
 $$
 \langle \phi,\psi\rangle
 =
 \deg(\phi+\psi)-\deg\phi-\deg\psi.
 $$
+:::
 
-This is symmetric and positive definite after passing to the appropriate real vector space.
+::: proposition
+This pairing is symmetric and bilinear after extending scalars to $\operatorname{Hom}(E_1,E_2)\otimes\mathbb Q$.
+:::
 
-It is the elliptic-curve analogue of an inner product and controls the possible algebraic structure of homomorphism groups.
+**Proof idea.** The degree function satisfies a parallelogram identity because it comes from a symmetric line bundle and the cube theorem:
+
+$$
+\deg(\phi+\psi)+\deg(\phi-\psi)=2\deg\phi+2\deg\psi.
+$$
+
+The polarization identity then gives a symmetric bilinear form. $\square$
+
+::: theorem
+The form $\langle-,-\rangle$ is positive definite on $\operatorname{Hom}(E_1,E_2)\otimes\mathbb R$.
+:::
+
+**Proof.** If $\phi\ne0$, then $\phi$ is an isogeny onto its image and has positive degree. Thus the quadratic form $q(\phi)=\deg\phi$ is positive away from zero. The associated bilinear form is positive definite because $q$ satisfies the parallelogram law. $\square$
 
 ---
 
-## 3. Endomorphism Algebra
+## 3. Endomorphism Algebra Restrictions
 
-There is an injection
+::: proposition
+The natural map
 
 $$
-\mathbb Z\hookrightarrow \operatorname{End}(E),
+\mathbb Z\to\operatorname{End}(E),
 \qquad
-n\longmapsto [n].
+n\mapsto[n],
 $$
 
-After tensoring with $\mathbb R$,
+is injective.
+:::
+
+**Proof.** If $[n]=0$ for $n\ne0$, then $\deg[n]=n^2>0$, contradiction because the zero morphism has degree $0$. $\square$
+
+::: theorem
+The real algebra
 
 $$
 \operatorname{End}(E)\otimes_\mathbb Z\mathbb R
 $$
 
-is a finite-dimensional real algebra with:
-
-- an involution $\phi\mapsto\widehat\phi$;
-- a positive definite symmetric bilinear form.
-
-The notes state the resulting classification shape:
+is isomorphic to one of
 
 $$
-\operatorname{End}(E)\otimes\mathbb R
-\in
-\{\mathbb R,\ \mathbb C,\ \mathbb H\},
+\mathbb R,\qquad \mathbb C,\qquad \mathbb H,
 $$
 
 where $\mathbb H$ is the Hamilton quaternion algebra.
+:::
 
----
+**Explanation.** The positive definite degree form rules out nilpotents and indefinite behavior. The dual isogeny gives a positive involution. Finite-dimensional real division algebras with such positivity are restricted to $\mathbb R$, $\mathbb C$, and $\mathbb H$.
 
-## 4. Characteristic Dependence
-
-In characteristic zero, the endomorphism algebra is commutative:
+::: remark
+In characteristic zero, only the commutative cases occur:
 
 $$
 \operatorname{End}(E)\otimes\mathbb Q
+=
+\mathbb Q
+\quad\text{or an imaginary quadratic field}.
 $$
 
-is either $\mathbb Q$ or an imaginary quadratic field.
+In positive characteristic, the quaternionic case occurs for supersingular elliptic curves.
+:::
 
-In positive characteristic, the quaternionic case can occur, especially for supersingular elliptic curves.
+---
 
-The student notes emphasize using differentials to detect separability. If an endomorphism has zero pullback on invariant differentials, inseparability is present.
+## 4. Differential Test for Separability
+
+::: lemma
+Let $\phi:E\to E'$ be an isogeny. If
+
+$$
+\phi^*\omega_{E'}=0,
+$$
+
+then $\phi$ is inseparable. If $\phi$ is separable, then $\phi^*\omega_{E'}\ne0$.
+:::
+
+**Proof.** A separable map induces a nonzero map on differentials of function fields. A purely inseparable map in characteristic $p$ behaves locally like $u\mapsto u^p$, whose differential is zero. Since invariant differentials span the global differential space, the displayed condition detects the inseparable part. $\square$
+
+::: remark
+This is why Frobenius behaves differently from multiplication by $\ell\ne p$ on Tate modules and torsion.
+:::
 
 ---
 
 ## 5. Weil Pairing Motivation
 
-For a finite subgroup such as $E[n]$, the Weil pairing packages torsion information as roots of unity:
+::: definition
+For $n$ prime to the characteristic, the Weil pairing is a map
 
 $$
-e_n:E[n]\times E[n]\longrightarrow \mu_n.
+e_n:E[n]\times E[n]\to\mu_n.
+$$
+:::
+
+::: theorem
+The Weil pairing is bilinear, alternating, nondegenerate, and compatible with isogeny duals:
+
+$$
+e_n(\phi P,Q)=e_n(P,\widehat\phi Q).
+$$
+:::
+
+**Proof idea.** For $P\in E[n]$, choose a divisor $D_P$ representing $(P)-(O)$ and a rational function $f_P$ with
+
+$$
+\operatorname{div}(f_P)=nD_P.
 $$
 
-The notes build this through rational functions attached to divisors and show that the value is independent of choices after imposing the correct relations.
+Evaluating such functions against divisors representing the second torsion point gives a root of unity. Weil reciprocity proves independence of choices and bilinearity. Compatibility with $\widehat\phi$ follows from the pullback/pushforward relation for divisors. $\square$
 
-The conceptual role is that the Weil pairing turns torsion into a symplectic object. This becomes important for Tate modules and Galois representations.
+::: tip
+**Lecture takeaway**
+
+Duality appears in three forms:
+
+$$
+\widehat\phi\circ\phi=[\deg\phi],
+\qquad
+\deg(\phi)\text{ is positive},
+\qquad
+e_n(\phi P,Q)=e_n(P,\widehat\phi Q).
+$$
+:::

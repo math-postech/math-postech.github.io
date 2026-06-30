@@ -2,237 +2,230 @@
 
 > **Student notes**: global PDF pp. 105–109, with later references on pp. 116–118  
 > **Prep sources**: `lecture12.md`, `lecture13.md`, `lecture14.md`  
-> **Theme**: The Tate module is the inverse-limit object that turns torsion points into linear algebra; the Weil pairing supplies the missing symplectic structure.
+> **Theme**: The Tate module turns the compatible tower of torsion points into rank-two linear algebra.
 
 ---
 
 ## Overview
 
-The finite-field discussion ended with Frobenius point-counting:
-
-$$
-\#E(\mathbb F_q)=\deg(1-\operatorname{Frob}_q).
-$$
-
-To understand this degree as a determinant, we need a linear object on which endomorphisms of $E$ act. The Tate module is that object.
-
-The student notes emphasize three questions:
-
-1. What is an inverse limit?
-2. What is the structure of $E[\ell^n]$?
-3. Why are Tate modules useful?
-
-The answer is that $T_\ell E$ is a stable bookkeeping device for all $\ell^n$-torsion, and it is compatible with isogenies, Frobenius, Galois action, and the Weil pairing.
-
----
-
-## 1. Inverse Limits: The General Definition
-
-A directed graph or category can be used as an indexing category. A diagram in a category $\mathcal C$ is a functor
-
-$$
-D:I\longrightarrow\mathcal C.
-$$
-
-The inverse limit is the universal object receiving compatible maps to the objects of the diagram.
-
-For the tower
-
-$$
-\cdots \longrightarrow A_3\longrightarrow A_2\longrightarrow A_1,
-$$
-
-the inverse limit is concretely
-
-$$
-\varprojlim A_n
-=
-\left\{(a_1,a_2,a_3,\ldots): a_n\in A_n,\ f_n(a_{n+1})=a_n\right\}.
-$$
-
-So an element of an inverse limit is a coherent sequence of approximations.
-
----
-
-## 2. Definition of the Tate Module
-
-Let $E/k$ be an elliptic curve, and let $\ell\ne\operatorname{char}k$ be a prime.
-
-The $\ell^n$-torsion subgroup is
-
-$$
-E[\ell^n]=\ker([\ell^n]:E\to E).
-$$
-
-The transition maps are multiplication by $\ell$:
-
-$$
-E[\ell^{n+1}]\xrightarrow{[\ell]}E[\ell^n].
-$$
-
-The $\ell$-adic Tate module is
+The finite-field lectures need a linear space on which Frobenius acts. The Tate module supplies this object:
 
 $$
 T_\ell E=\varprojlim_n E[\ell^n].
 $$
 
-Thus an element of $T_\ell E$ is a sequence
+For $\ell\ne\operatorname{char}k$ and $k$ algebraically closed,
 
 $$
-(P_1,P_2,P_3,\ldots)
+T_\ell E\cong\mathbb Z_\ell^2.
 $$
 
-where
+The Weil pairing adds the symplectic structure:
 
 $$
+T_\ell E\times T_\ell E\to\mathbb Z_\ell(1).
+$$
+
+---
+
+## 1. Inverse Limits
+
+::: definition
+For a tower
+
+$$
+\cdots\to A_3\to A_2\to A_1,
+$$
+
+the inverse limit is
+
+$$
+\varprojlim A_n
+=
+\{(a_1,a_2,\ldots):a_n\in A_n,\ f_n(a_{n+1})=a_n\}.
+$$
+:::
+
+::: remark
+**Student-note explanation**
+
+An element of an inverse limit is not one torsion point. It is a compatible choice of torsion points at every level.
+:::
+
+::: example
+The standard tower
+
+$$
+\cdots\to\mathbb Z/\ell^3\mathbb Z
+\to\mathbb Z/\ell^2\mathbb Z
+\to\mathbb Z/\ell\mathbb Z
+$$
+
+has inverse limit $\mathbb Z_\ell$.
+:::
+
+---
+
+## 2. Tate Module of an Elliptic Curve
+
+::: definition
+Let $E/k$ be an elliptic curve and $\ell\ne\operatorname{char}k$. Define
+
+$$
+E[\ell^n]=\ker([\ell^n]:E\to E).
+$$
+
+The $\ell$-adic Tate module is
+
+$$
+T_\ell E=\varprojlim_n E[\ell^n],
+$$
+
+where the transition maps are multiplication by $\ell$.
+:::
+
+Thus an element is a sequence
+
+$$
+(P_1,P_2,\ldots),
+\qquad
 P_n\in E[\ell^n],
 \qquad
 [\ell]P_{n+1}=P_n.
 $$
 
----
-
-## 3. Do Not Confuse $T_\ell E$ with $E[\ell^\infty]$
-
-The notes explicitly warn that there is another object:
+::: attention
+Do not confuse $T_\ell E$ with
 
 $$
-E[\ell^\infty]=\varinjlim_n E[\ell^n],
+E[\ell^\infty]=\varinjlim_n E[\ell^n].
 $$
 
-where the direct system is given by inclusions
-
-$$
-E[\ell]\hookrightarrow E[\ell^2]\hookrightarrow E[\ell^3]\hookrightarrow\cdots.
-$$
-
-This is not the Tate module.
-
-- $E[\ell^\infty]$ is a torsion group.
-- $T_\ell E$ is an inverse-limit lattice.
-
-The Tate module behaves like a linearized tangent object for the tower of torsion points.
+The first is an inverse-limit $\mathbb Z_\ell$-module. The second is a torsion group.
+:::
 
 ---
 
-## 4. Structure of $E[\ell^n]$
+## 3. Structure of $\ell^n$-Torsion
 
-Assume $k$ is algebraically closed and $\ell\ne\operatorname{char}k$.
-
-Then multiplication by $\ell^n$ is separable of degree $\ell^{2n}$, and
-
-$$
-E[\ell^n]\cong \mathbb Z/\ell^n\mathbb Z\oplus\mathbb Z/\ell^n\mathbb Z.
-$$
-
-Therefore
+::: theorem
+If $k$ is algebraically closed and $\ell\ne\operatorname{char}k$, then
 
 $$
-T_\ell E\cong\mathbb Z_\ell\oplus\mathbb Z_\ell.
+E[\ell^n]\cong
+\mathbb Z/\ell^n\mathbb Z\oplus
+\mathbb Z/\ell^n\mathbb Z.
 $$
+:::
 
-So $T_\ell E$ is a free $\mathbb Z_\ell$-module of rank $2$.
-
-### Proof Sketch
-
-Since $\ell\ne\operatorname{char}k$, the differential of $[\ell^n]$ is multiplication by $\ell^n$, hence nonzero. Therefore $[\ell^n]$ is separable.
-
-For an isogeny, separability means the number of geometric kernel points equals the degree. Since
+**Proof.** Since $\ell\ne\operatorname{char}k$, the differential of $[\ell^n]$ is multiplication by $\ell^n$, hence nonzero. Therefore $[\ell^n]$ is separable. Its degree is
 
 $$
-\deg[\ell^n]=\ell^{2n},
+\deg[\ell^n]=\ell^{2n}.
 $$
 
-we get exactly $\ell^{2n}$ torsion points. The finite abelian group structure compatible with multiplication by $\ell$ is then
+For a separable isogeny, the number of geometric kernel points equals the degree, so $E[\ell^n]$ has $\ell^{2n}$ points. The compatibility of the multiplication tower and the fact that $E[\ell]$ has rank two over $\mathbb F_\ell$ force the full group to be
 
 $$
 (\mathbb Z/\ell^n\mathbb Z)^2.
 $$
+$\square$
 
-Passing to the inverse limit gives $\mathbb Z_\ell^2$.
+::: corollary
+
+$$
+T_\ell E\cong\mathbb Z_\ell^2.
+$$
+:::
+
+**Proof.** Taking inverse limits of
+
+$$
+(\mathbb Z/\ell^n\mathbb Z)^2
+$$
+
+under reduction maps gives $\mathbb Z_\ell^2$. $\square$
+
+---
+
+## 4. Functoriality
+
+::: proposition
+Every homomorphism $\phi:E_1\to E_2$ induces a $\mathbb Z_\ell$-linear map
+
+$$
+T_\ell\phi:T_\ell E_1\to T_\ell E_2.
+$$
+:::
+
+**Proof.** If $P\in E_1[\ell^n]$, then
+
+$$
+[\ell^n]\phi(P)=\phi([\ell^n]P)=0.
+$$
+
+So $\phi(P)\in E_2[\ell^n]$. These maps commute with the transition maps $[\ell]$, hence pass to the inverse limit. $\square$
+
+::: remark
+This is the key linearization step:
+
+$$
+\text{elliptic curve homomorphism}
+\quad\mapsto\quad
+2\times2\ \ell\text{-adic matrix}.
+$$
+:::
 
 ---
 
 ## 5. Weil Pairing at Finite Level
 
-For each $n$, the Weil pairing is a nondegenerate alternating pairing
+::: theorem
+For $\ell\ne\operatorname{char}k$, the Weil pairing gives a perfect alternating pairing
 
 $$
-e_{\ell^n}:E[\ell^n]\times E[\ell^n]\longrightarrow \mu_{\ell^n}.
+e_{\ell^n}:E[\ell^n]\times E[\ell^n]\to\mu_{\ell^n}.
 $$
+:::
 
 It satisfies:
-
-1. **Bilinearity**:
 
 $$
 e_{\ell^n}(P_1+P_2,Q)=e_{\ell^n}(P_1,Q)e_{\ell^n}(P_2,Q),
 $$
 
-and similarly in the second variable.
-
-2. **Alternating behavior**:
-
 $$
-e_{\ell^n}(P,P)=1.
+e_{\ell^n}(P,P)=1,
 $$
 
-3. **Nondegeneracy**: if $e_{\ell^n}(P,Q)=1$ for all $Q$, then $P=0$.
+and if $e_{\ell^n}(P,Q)=1$ for all $Q$, then $P=0$.
 
-4. **Compatibility in $n$**: the pairings commute with the transition maps in the torsion tower.
-
-The student notes record this compatibility as a diagram involving
-
-$$
-E[\ell^{n+1}]\times E[\ell^{n+1}]\to \mu_{\ell^{n+1}}
-$$
-
-and
-
-$$
-E[\ell^n]\times E[\ell^n]\to \mu_{\ell^n}.
-$$
-
----
-
-## 6. Weil Pairing on the Tate Module
-
-Passing to the inverse limit gives a pairing
-
-$$
-T_\ell E\times T_\ell E\longrightarrow T_\ell\mathbb G_m\cong\mathbb Z_\ell(1).
-$$
-
-After choosing compatible roots of unity, this is a symplectic form on the rank-two $\mathbb Z_\ell$-module $T_\ell E$.
-
-This is why the student notes say:
-
-> To conclude that an injection is also surjective, we need a symplectic structure on $T_\ell E$.
-
-The Tate module is not merely a free module; it carries a nondegenerate alternating form.
-
----
-
-## 7. Why the Pairing Matters
-
-Suppose an isogeny $\phi:E_1\to E_2$ induces a map
-
-$$
-T_\ell\phi:T_\ell E_1\to T_\ell E_2.
-$$
-
+::: proposition
 The Weil pairing is compatible with dual isogenies:
 
 $$
 e_{\ell^n}(\phi P,Q)=e_{\ell^n}(P,\widehat\phi Q).
 $$
+:::
 
-So the adjoint of $T_\ell\phi$ with respect to the Weil pairing is $T_\ell\widehat\phi$.
+**Proof idea.** Construct the pairing using functions whose divisors are multiples of torsion divisors. Pullback by $\phi$ and pushforward by $\widehat\phi$ are adjoint on divisors. Weil reciprocity then gives the displayed identity. $\square$
 
-This compatibility is the structural reason that determinants and degrees match later:
+---
+
+## 6. Tate-Module Pairing
+
+::: theorem
+Passing to inverse limits gives a nondegenerate alternating pairing
 
 $$
-\det(T_\ell\phi)=\deg\phi.
+T_\ell E\times T_\ell E\to T_\ell\mathbb G_m\cong\mathbb Z_\ell(1).
 $$
+:::
 
-The next lecture proves the Hom-injection and explains why isogenies can be recovered from their Tate-module actions.
+**Proof.** The finite pairings $e_{\ell^n}$ are compatible with the transition maps in both torsion and roots of unity. Therefore compatible sequences of torsion points pair to compatible sequences of roots of unity. Nondegeneracy at every finite level gives nondegeneracy in the inverse limit. $\square$
+
+::: tip
+**Lecture takeaway**
+
+The Tate module is not just $\mathbb Z_\ell^2$. It is $\mathbb Z_\ell^2$ equipped with a canonical alternating form. This is why determinants, dual isogenies, and degrees match.
+:::

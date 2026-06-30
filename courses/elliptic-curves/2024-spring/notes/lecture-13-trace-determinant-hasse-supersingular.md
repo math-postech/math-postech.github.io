@@ -1,119 +1,132 @@
 # Lecture 13: Trace, Determinant, Hasse Bound, and Supersingular Behavior
 
 > **Student notes**: global PDF pp. 117–130  
-> **Theme**: Tate modules convert endomorphisms into $2\times2$ linear operators whose trace and determinant recover the arithmetic of elliptic curves.
+> **Prep sources**: `lecture13.md`, `lecture14.md`  
+> **Theme**: Tate modules turn endomorphisms into matrices whose trace and determinant control point counts and supersingular behavior.
 
 ---
 
 ## Overview
 
-This lecture explains the payoff of the Tate-module construction.
-
-For $\phi\in\operatorname{End}(E)$ and $\ell\ne\operatorname{char}k$, the action of $\phi$ on $T_\ell E$ has:
+For $\ell\ne\operatorname{char}k$, an endomorphism $\phi\in\operatorname{End}(E)$ acts on
 
 $$
-\operatorname{Tr}(T_\ell\phi)=\phi+\widehat\phi,
+T_\ell E\cong\mathbb Z_\ell^2.
 $$
 
-and
+The main identifications are
 
 $$
-\det(T_\ell\phi)=\deg\phi=\phi\widehat\phi.
+\det(T_\ell\phi)=\deg\phi,
+\qquad
+\operatorname{Tr}(T_\ell\phi)=\operatorname{tr}(\phi).
 $$
 
-This gives the characteristic polynomial
+For Frobenius, these become the characteristic polynomial
 
 $$
-T^2-\operatorname{Tr}(\phi)T+\deg\phi.
+T^2-a_qT+q
 $$
 
-For Frobenius, this becomes the source of point-counting and the Hasse bound.
-
----
-
-## 1. Trace and Determinant from Dual Isogeny
-
-Recall the dual isogeny $\widehat\phi$ satisfies
+and the point-count formula
 
 $$
-\widehat\phi\circ\phi=[\deg\phi].
-$$
-
-The notes review two identities:
-
-$$
-\phi+\widehat\phi=[\operatorname{integer}],
-$$
-
-and
-
-$$
-\phi\widehat\phi=[\deg\phi].
-$$
-
-On the Tate module, $T_\ell\phi$ is a $2\times2$ matrix. Its determinant is characterized by the induced action on the top exterior power:
-
-$$
-\bigwedge^2 T_\ell E.
-$$
-
-Compatibility with the Weil pairing gives
-
-$$
-\det(T_\ell\phi)=\deg\phi.
-$$
-
-The trace is the integer represented by
-
-$$
-\phi+\widehat\phi.
-$$
-
-Thus
-
-$$
-\operatorname{Tr}(T_\ell\phi)=\phi+\widehat\phi.
+\#E(\mathbb F_q)=q+1-a_q.
 $$
 
 ---
 
-## 2. Characteristic Polynomial
+## 1. Determinant Equals Degree
 
-The characteristic polynomial of $T_\ell\phi$ is
+::: theorem
+Let $\phi:E\to E$ be an isogeny and $\ell\ne\operatorname{char}k$. Then
 
 $$
-P_\phi(T)=T^2-(\phi+\widehat\phi)T+\phi\widehat\phi.
+\det(T_\ell\phi)=\deg\phi
+$$
+
+as an element of $\mathbb Z_\ell$.
+:::
+
+**Proof.** The Weil pairing gives a perfect alternating form
+
+$$
+T_\ell E\times T_\ell E\to\mathbb Z_\ell(1).
+$$
+
+Compatibility with the dual isogeny says
+
+$$
+e(T_\ell\phi x,y)=e(x,T_\ell\widehat\phi\, y).
 $$
 
 Since
 
 $$
-\phi\widehat\phi=\deg\phi,
+\widehat\phi\circ\phi=[\deg\phi],
 $$
 
-we write
+the adjoint relation implies that the multiplier on the top exterior power is $\deg\phi$. For a rank-two module, the multiplier on $\bigwedge^2T_\ell E$ is exactly the determinant. Hence $\det(T_\ell\phi)=\deg\phi$. $\square$
 
-$$
-P_\phi(T)=T^2-\operatorname{Tr}(\phi)T+\deg\phi.
-$$
-
-The notes then prove the discriminant is nonpositive:
-
-$$
-\Delta=\operatorname{Tr}(\phi)^2-4\deg\phi\le0.
-$$
+::: remark
+This is why the student notes emphasize the symplectic form: without the Weil pairing, the determinant-degree equality would look accidental.
+:::
 
 ---
 
-## 3. Proof of the Discriminant Inequality
+## 2. Trace and Characteristic Polynomial
 
-Use the positive definite pairing on endomorphisms:
+::: definition
+The trace of an endomorphism $\phi$ is the integer $\operatorname{tr}(\phi)$ characterized by
 
 $$
-\langle \alpha,\beta\rangle=\deg(\alpha+\beta)-\deg\alpha-\deg\beta.
+\deg(1-\phi)=1-\operatorname{tr}(\phi)+\deg\phi.
+$$
+:::
+
+::: theorem
+The characteristic polynomial of $T_\ell\phi$ is
+
+$$
+P_\phi(T)=T^2-\operatorname{tr}(\phi)T+\deg\phi.
+$$
+:::
+
+**Proof.** The determinant term is $\deg\phi$ by the previous theorem. For a $2\times2$ operator $A$,
+
+$$
+\det(I-A)=1-\operatorname{Tr}(A)+\det(A).
 $$
 
-The Cauchy inequality gives
+Apply this to $A=T_\ell\phi$. Since $\det(I-T_\ell\phi)$ matches $\deg(1-\phi)$, comparison with the defining equation for $\operatorname{tr}(\phi)$ gives
+
+$$
+\operatorname{Tr}(T_\ell\phi)=\operatorname{tr}(\phi).
+$$
+
+Therefore the characteristic polynomial has the displayed form. $\square$
+
+---
+
+## 3. Hasse Inequality from Positivity
+
+::: theorem
+For every endomorphism $\phi$,
+
+$$
+\operatorname{tr}(\phi)^2\le4\deg\phi.
+$$
+:::
+
+**Proof.** Use the positive definite pairing
+
+$$
+\langle \alpha,\beta\rangle
+=
+\deg(\alpha+\beta)-\deg\alpha-\deg\beta.
+$$
+
+For $\alpha=1$ and $\beta=\phi$, Cauchy's inequality gives
 
 $$
 \langle 1,\phi\rangle^2
@@ -121,187 +134,198 @@ $$
 \langle 1,1\rangle\langle \phi,\phi\rangle.
 $$
 
-But the left side is essentially $\operatorname{Tr}(\phi)^2$, and the right side is $4\deg\phi$. Hence
+Now
 
 $$
-\operatorname{Tr}(\phi)^2\le4\deg\phi.
+\langle 1,\phi\rangle=\operatorname{tr}(\phi),
+\qquad
+\langle 1,1\rangle=2,
+\qquad
+\langle \phi,\phi\rangle=2\deg\phi
 $$
 
-So
+because $\deg[2]=4$ and $\deg(2\phi)=4\deg\phi$. Therefore
 
 $$
-\Delta\le0.
+\operatorname{tr}(\phi)^2\le4\deg\phi.
 $$
+$\square$
 
-This means the eigenvalues of $T_\ell\phi$ are either real equal or complex conjugates.
-
----
-
-## 4. Consequence: Absolute Values of Eigenvalues
-
-Let $\alpha,\beta$ be the complex roots of
+::: corollary
+If $\alpha,\beta$ are the complex roots of
 
 $$
-T^2-\operatorname{Tr}(\phi)T+\deg\phi.
+T^2-\operatorname{tr}(\phi)T+\deg\phi,
 $$
 
-Then
-
-$$
-\alpha\beta=\deg\phi.
-$$
-
-Because the discriminant is nonpositive, the roots have the same complex absolute value. Therefore
+then
 
 $$
 |\alpha|=|\beta|=\sqrt{\deg\phi}.
 $$
+:::
 
-The notes state this as an immediate observation:
-
-> eigenvalues of $\phi$ have the same complex absolute value equal to $\sqrt{\deg\phi}$.
+**Proof.** The discriminant is nonpositive by the theorem, so the roots are either equal real roots or complex conjugates. Their product is $\deg\phi$, hence both have absolute value $\sqrt{\deg\phi}$. $\square$
 
 ---
 
-## 5. Frobenius and the Hasse Bound
+## 4. Frobenius and the Hasse Bound
 
-Now take
+::: theorem
+Let $E/\mathbb F_q$ and let
 
 $$
-\phi=\operatorname{Frob}_q.
+a_q=\operatorname{tr}(\operatorname{Frob}_q).
 $$
 
 Then
 
 $$
-\deg\operatorname{Frob}_q=q.
+\#E(\mathbb F_q)=q+1-a_q
 $$
 
-Let
-
-$$
-a_q=\operatorname{Tr}(\operatorname{Frob}_q).
-$$
-
-The characteristic polynomial is
-
-$$
-T^2-a_qT+q.
-$$
-
-The point-count formula is
-
-$$
-\#E(\mathbb F_q)=q+1-a_q.
-$$
-
-The trace inequality gives
+and
 
 $$
 |a_q|\le2\sqrt q.
 $$
+:::
 
-Therefore
+**Proof.** The fixed-point formula gives
+
+$$
+\#E(\mathbb F_q)=\deg(1-\operatorname{Frob}_q).
+$$
+
+By definition of trace and $\deg\operatorname{Frob}_q=q$,
+
+$$
+\deg(1-\operatorname{Frob}_q)=1-a_q+q.
+$$
+
+The inequality follows from
+
+$$
+a_q^2\le4\deg(\operatorname{Frob}_q)=4q.
+$$
+$\square$
+
+::: remark
+This is the Hasse bound:
 
 $$
 \left|\#E(\mathbb F_q)-(q+1)\right|\le2\sqrt q.
 $$
-
-This is the Hasse bound.
+:::
 
 ---
 
-## 6. Why Frobenius Eigenvalues Count Points Over All Extensions
+## 5. Counts Over Extensions and Zeta Function
 
-Let $\alpha,\beta$ be the eigenvalues of Frobenius. Then the eigenvalues of $\operatorname{Frob}_q^n$ are
+::: proposition
+If $\alpha,\beta$ are the Frobenius eigenvalues, then
 
 $$
-\alpha^n,\beta^n.
+\#E(\mathbb F_{q^n})=q^n+1-\alpha^n-\beta^n.
 $$
+:::
 
-So
+**Proof.** Points over $\mathbb F_{q^n}$ are fixed by $\operatorname{Frob}_q^n$. The degree of this endomorphism is $q^n$, and the trace on the Tate module is $\alpha^n+\beta^n$. Therefore
 
 $$
 \#E(\mathbb F_{q^n})
-=q^n+1-\alpha^n-\beta^n.
+=
+\deg(1-\operatorname{Frob}_q^n)
+=
+1-(\alpha^n+\beta^n)+q^n.
 $$
+$\square$
 
-This is why the student notes say the zeta function captures the eigenvalues of Frobenius.
-
-The zeta function packages these counts:
+::: definition
 
 $$
 Z(E/\mathbb F_q,t)
-=\exp\left(\sum_{n\ge1}\#E(\mathbb F_{q^n})\frac{t^n}{n}\right).
+=
+\exp\left(\sum_{n\ge1}\#E(\mathbb F_{q^n})\frac{t^n}{n}\right).
 $$
+:::
+
+::: remark
+The preparation notes say “log of determinant gives trace.” This is the reason the zeta function is written with an exponential generating series: traces of Frobenius powers become logarithms of characteristic-polynomial factors.
+:::
 
 ---
 
-## 7. The Case $\ell=\operatorname{char}k$
+## 6. The Case $\ell=p$
 
-The previous arguments assumed $\ell\ne\operatorname{char}k$.
+Let $p=\operatorname{char}k$. The previous Tate-module construction used $\ell\ne p$. The $p$-power torsion behaves differently.
 
-The notes then ask what happens for $\ell=p=\operatorname{char}k$.
-
-This is where ordinary and supersingular behavior appears.
-
-For $E[p^n]$, the reduced part can behave in two ways:
-
-1. **Ordinary case**:
+::: theorem
+Over an algebraically closed field of characteristic $p$, the reduced $p^n$-torsion of an elliptic curve has one of two forms:
 
 $$
-E[p^n]^{\operatorname{red}}\cong\mathbb Z/p^n\mathbb Z.
+E[p^n]^{\operatorname{red}}\cong\mathbb Z/p^n\mathbb Z
 $$
 
-2. **Supersingular case**:
+for ordinary curves, or
 
 $$
-E[p^n]^{\operatorname{red}}=0.
+E[p^n]^{\operatorname{red}}=0
 $$
 
-The notes flag the terminology:
+for supersingular curves.
+:::
 
-> supersingular elliptic curves are not singular smoothness-wise.
+**Explanation.** The multiplication-by-$p$ map factors into Frobenius and Verschiebung:
 
-They are smooth curves, but their $p$-torsion group scheme is extremely nonreduced.
+$$
+[p]=V\circ F.
+$$
+
+Frobenius has zero differential. The behavior of Verschiebung determines whether there is an étale part in $E[p]$. If the étale part survives, the curve is ordinary; if not, the curve is supersingular.
+
+::: definition
+An elliptic curve in characteristic $p$ is **supersingular** if its geometric $p$-torsion has no nontrivial reduced points:
+
+$$
+E[p](\bar k)=0.
+$$
+:::
+
+::: remark
+This matches the preparation-note slogan: supersingularity is detected by the interaction of Frobenius, Verschiebung, and differentials.
+:::
 
 ---
 
-## 8. Frobenius, Verschiebung, and $p$-torsion
+## 7. Endomorphism Consequences
 
-In characteristic $p$, Frobenius has zero differential.
-
-The dual isogeny of Frobenius is called Verschiebung:
-
-$$
-\widehat{\operatorname{Frob}}=V.
-$$
-
-Their composition satisfies
+::: theorem
+For a supersingular elliptic curve in characteristic $p$,
 
 $$
-V\circ\operatorname{Frob}=[p].
+\operatorname{End}(E)\otimes\mathbb Q
 $$
 
-The notes draw the picture:
+is a quaternion algebra.
+:::
 
-- $\ker(\operatorname{Frob})$ corresponds to infinitesimal connected behavior;
-- $\ker(V)$ records the étale/reduced part.
+**Explanation.** Supersingularity creates extra endomorphisms coming from Frobenius and inseparable structure. The positive involution from dual isogeny still restricts the algebra, and the noncommutative possibility in the classification is the quaternion case.
 
-Thus the structure of $E[p]$ is controlled by how Frobenius and Verschiebung split the multiplication-by-$p$ map.
+::: tip
+**Lecture takeaway**
 
----
+The final course picture is:
 
-## 9. Conceptual Summary
-
-The final lecture sequence shows the full pipeline:
-
-1. Torsion points produce Tate modules.
-2. Tate modules turn isogenies into linear maps.
-3. Weil pairing supplies the symplectic form.
-4. Dual isogeny gives trace and determinant.
-5. Frobenius trace gives point counts.
-6. The Hasse bound follows from positivity of the degree pairing.
-7. In characteristic $p$, $p$-torsion separates ordinary and supersingular elliptic curves.
-
-This is exactly the bridge from elliptic curves to Galois representations, zeta functions, and modularity.
+$$
+\text{geometry of }E
+\to
+\text{endomorphisms}
+\to
+\text{Tate-module matrices}
+\to
+\text{trace/determinant}
+\to
+\text{point counts}.
+$$
+:::
