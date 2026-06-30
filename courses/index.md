@@ -2,6 +2,10 @@
 
 POSTECH Mathematics Department Course Pages
 
+## 2024 Spring
+
+- [Elliptic Curves](/courses/elliptic-curves/2024-spring/)
+
 ## 2026 Spring
 
 - [MATH203: Applied Linear Algebra](/courses/MATH203/2026-spring/)
